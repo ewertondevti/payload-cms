@@ -685,6 +685,23 @@ export interface Form {
             blockName?: string | null;
             blockType: 'customtextarea';
           }
+        | {
+            title: string;
+            fields?:
+              | {
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'group';
+          }
+        | {
+            label?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'title';
+          }
       )[]
     | null;
   submitButtonLabel?: string | null;
@@ -1603,6 +1620,25 @@ export interface FormsSelect<T extends boolean = true> {
               disabled?: T;
               readOnly?: T;
               hideLabel?: T;
+              id?: T;
+              blockName?: T;
+            };
+        group?:
+          | T
+          | {
+              title?: T;
+              fields?:
+                | T
+                | {
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        title?:
+          | T
+          | {
+              label?: T;
               id?: T;
               blockName?: T;
             };

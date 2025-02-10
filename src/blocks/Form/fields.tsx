@@ -17,6 +17,7 @@ import { SelectWithApi } from './SelectWithAPI'
 import { State } from './State'
 import { Text } from './Text'
 import { Textarea } from './Textarea'
+import { Title } from './Title'
 
 export const fields = {
   customMessage: CustomMessage,
@@ -40,4 +41,5 @@ export const fields = {
   preLoadExample1: PreLoadExample1,
   birthdate: Birthdate,
   customtextarea: Textarea,
+  title: Title,
 }

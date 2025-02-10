@@ -40,12 +40,14 @@ import { BirthdateBlock } from './blocks/Form/Birthdate/BirthdateBlock'
 import { CustomTextfieldBlock } from './blocks/Form/CostumTextfield/CustomTextfieldBlock'
 import { CustomMessageBlock } from './blocks/Form/CustomMessage/CustomMessageBlock'
 import { CustomNumberBlock } from './blocks/Form/CustomNumber/CustomNumberBlock'
+import { GroupBlock } from './blocks/Form/Group/GroupBlock'
 import { NationalityBlock } from './blocks/Form/Nationality/NationalityBlock'
 import { NifBlock } from './blocks/Form/Nif/NifBlock'
 import { PhoneNumberBlock } from './blocks/Form/PhoneNumber/PhoneNumberBlock'
 import { PreLoadExample1Block } from './blocks/Form/PreloadExample1/PreLoadExample1'
 import { RadioButtonBlock } from './blocks/Form/RadioButtonGroup/RadioButtonGroupBlock'
 import { TextAreaBlock } from './blocks/Form/Textarea/TextAreaBlock'
+import { TitleBlock } from './blocks/Form/Title/TitleBlock'
 import { Areas } from './collections/Areas'
 import { LifeCycles } from './collections/LifeCycles'
 import { Services } from './collections/Services'
@@ -205,6 +207,8 @@ export default buildConfig({
         PreLoadExample1Block,
         BirthdateBlock,
         TextAreaBlock,
+        GroupBlock,
+        TitleBlock,
       },
       formOverrides: {
         fields: ({ defaultFields }) => {
