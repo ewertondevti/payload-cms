@@ -46,6 +46,7 @@ import { NifBlock } from './blocks/Form/Nif/NifBlock'
 import { PhoneNumberBlock } from './blocks/Form/PhoneNumber/PhoneNumberBlock'
 import { PreLoadExample1Block } from './blocks/Form/PreloadExample1/PreLoadExample1'
 import { RadioButtonBlock } from './blocks/Form/RadioButtonGroup/RadioButtonGroupBlock'
+import { SelectWithApiBlock } from './blocks/Form/SelectWithAPI/SelectWithApiBlock'
 import { TextAreaBlock } from './blocks/Form/Textarea/TextAreaBlock'
 import { TitleBlock } from './blocks/Form/Title/TitleBlock'
 import { Areas } from './collections/Areas'
@@ -198,7 +199,6 @@ export default buildConfig({
         CustomMessageBlock,
         CustomNumberBlock,
         NifBlock,
-        // SelectWithApiBlock,
         RadioButtonBlock,
         CustomTextfieldBlock,
         AdressBlock: AddressBlock,
@@ -209,6 +209,7 @@ export default buildConfig({
         TextAreaBlock,
         GroupBlock,
         TitleBlock,
+        SelectWithApiBlock,
       },
       formOverrides: {
         fields: ({ defaultFields }) => {

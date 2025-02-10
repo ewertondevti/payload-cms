@@ -702,6 +702,17 @@ export interface Form {
             blockName?: string | null;
             blockType: 'title';
           }
+        | {
+            name: string;
+            label?: string | null;
+            placeholder?: string | null;
+            width?: number | null;
+            apidomain?: string | null;
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'selectWithApi';
+          }
       )[]
     | null;
   submitButtonLabel?: string | null;
@@ -1639,6 +1650,18 @@ export interface FormsSelect<T extends boolean = true> {
           | T
           | {
               label?: T;
+              id?: T;
+              blockName?: T;
+            };
+        selectWithApi?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              placeholder?: T;
+              width?: T;
+              apidomain?: T;
+              required?: T;
               id?: T;
               blockName?: T;
             };

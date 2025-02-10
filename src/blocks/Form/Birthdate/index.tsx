@@ -9,6 +9,7 @@ export const Birthdate: FC<
   RadioButtonsProps & UseFormReturn & { errors: FieldErrors<FieldValues> }
 > = ({ width, watch, register, required, ...props }) => {
   const selectOption = watch('birthdate-or-year-registration')
+  console.log('🚀 ~ selectOption:', selectOption)
 
   const dateProps: InputDateProps & UseFormReturn = {
     ...props,
@@ -43,8 +44,8 @@ export const Birthdate: FC<
   }
 
   return (
-    <Width width={width}>
-      <div className="grid xs:grid-cols-4 md:grid-cols-8 xl:grid-cols-12 gap-x-32">
+    <Width width={100}>
+      <div className="flex gap-[32px]">
         <RadioButtons
           {...props}
           name="birthdate-or-year-registration"
@@ -54,7 +55,7 @@ export const Birthdate: FC<
           register={register}
         />
 
-        {selectOption === '1' && (
+        {!!selectOption && (
           <DatePicker {...dateProps} {...register(props.name, { required })} width={50} />
         )}
 
