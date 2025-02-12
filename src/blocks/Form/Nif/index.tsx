@@ -1,43 +1,32 @@
-// import type { NifBlock } from '@/blocks/Form/Nif/NifBlock'
+import type { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form'
 
-export interface NifField {
-  blockName?: string
-  blockType: 'nif'
-  defaultValue?: string
-  label?: string
-  name: string
-  required?: boolean
-  width?: number,
-//   disabled: boolean
-}
-
-import type { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form'
-
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import React from 'react'
 
-import { Error } from '../Error'
-import { Width } from '../Width'
 import { InputText } from '@ama-pt/agora-design-system'
+import { Width } from '../Width'
 
-export const Nif: React.FC<
-  NifField & {
-    errors: Partial<
-      FieldErrorsImpl<{
-        [x: string]: any
-      }>
-    >
-    register: UseFormRegister<FieldValues>
-  }
-> = ({ name, defaultValue, errors, label, register, required: requiredFromProps, width, 
-    // disabled 
+export type NifProps = UseFormReturn & {
+  errors: FieldErrors<FieldValues>
+  width: number
+  name: string
+  label: string
+  required: boolean
+  placeholder: string
+}
+
+export const Nif: React.FC<NifProps> = ({
+  name,
+  errors,
+  label,
+  register,
+  width,
+  placeholder,
+  required,
 }) => {
   return (
     <Width width={width}>
       {/* <Label htmlFor={name}>{label}</Label> */}
       <InputText
-        defaultValue={defaultValue}
         id={name}
         label={label}
         type="text"
@@ -45,13 +34,14 @@ export const Nif: React.FC<
         maxLength={9}
         hasError={errors[name] ? true : false}
         feedbackText={errors[name]?.message?.toString()}
-        required={requiredFromProps}
+        placeholder={placeholder}
+        required={required}
         // disabled={disabled}
         {...register(name, {
           // required: requiredFromProps,
           // pattern: { value: /^[0-9]{9}$/, message: 'NIF Inválido' },
           // validate: (value, formValues) => value === '1'
-          required: requiredFromProps ? 'Campo de preenchimento obrigatório.' : false,
+          required: required ? 'Campo de preenchimento obrigatório.' : false,
           validate: {
             isNif: (value) => {
               var valido = false

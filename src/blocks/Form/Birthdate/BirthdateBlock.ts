@@ -44,30 +44,6 @@ export const BirthdateBlock: Block = {
         },
       ],
     },
-    {
-      type: 'array',
-      name: 'options',
-      label: 'Options',
-      labels: {
-        singular: 'option',
-        plural: 'options',
-      },
-      fields: [
-        {
-          name: 'label',
-          type: 'text',
-          label: 'Text',
-          required: true,
-          localized: true,
-        },
-        {
-          name: 'value',
-          type: 'text',
-          label: 'Value',
-          required: true,
-        },
-      ],
-    },
     required,
   ],
   labels: {

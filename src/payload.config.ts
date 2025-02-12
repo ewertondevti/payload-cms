@@ -35,12 +35,14 @@ import { revalidateRedirects } from './hooks/revalidateRedirects'
 
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 import { searchFields } from '@/search/fieldOverrides'
-import { AddressBlock } from './blocks/Form/Address/AdressBlock'
+import { AddressBlock } from './blocks/Form/Address/AddressBlock'
 import { BirthdateBlock } from './blocks/Form/Birthdate/BirthdateBlock'
+import { BirthplaceBlock } from './blocks/Form/Birthplace/BirthplaceBlock'
 import { CustomTextfieldBlock } from './blocks/Form/CostumTextfield/CustomTextfieldBlock'
 import { CustomMessageBlock } from './blocks/Form/CustomMessage/CustomMessageBlock'
 import { CustomNumberBlock } from './blocks/Form/CustomNumber/CustomNumberBlock'
 import { GroupBlock } from './blocks/Form/Group/GroupBlock'
+import { IdentificationDataBlock } from './blocks/Form/IdentificationData/IdentificationDataBlock'
 import { NationalityBlock } from './blocks/Form/Nationality/NationalityBlock'
 import { NifBlock } from './blocks/Form/Nif/NifBlock'
 import { PhoneNumberBlock } from './blocks/Form/PhoneNumber/PhoneNumberBlock'
@@ -210,6 +212,8 @@ export default buildConfig({
         GroupBlock,
         TitleBlock,
         SelectWithApiBlock,
+        IdentificationDataBlock,
+        BirthplaceBlock,
       },
       formOverrides: {
         fields: ({ defaultFields }) => {

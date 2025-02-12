@@ -15,7 +15,7 @@ export async function BirthCertificate() {
     overrideAccess: false,
     where: {
       id: {
-        equals: 1,
+        equals: 2,
       },
     },
   })

@@ -13,6 +13,7 @@ type Props = {
 }
 
 export const BirthCertificateForm: FC<Props> = ({ form }) => {
+  console.log(form)
   const [currentStep, setCurrentStep] = useState(2)
   const [formValues, setFormValues] = useState<any>()
 

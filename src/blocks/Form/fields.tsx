@@ -1,10 +1,12 @@
 import { Address } from './Address'
 import { Birthdate } from './Birthdate'
+import { Birthplace } from './Birthplace'
 import { Checkbox } from './Checkbox'
 import { Country } from './Country'
 import { CustomMessage } from './CustomMessage'
 import { CustomNumber } from './CustomNumber'
 import { Email } from './Email'
+import { IdentificationData } from './IdentificationData'
 import { Message } from './Message'
 import { Nationality } from './Nationality'
 import { Nif } from './Nif'
@@ -40,6 +42,8 @@ export const fields = {
   radioButtons: RadioButtons,
   preLoadExample1: PreLoadExample1,
   birthdate: Birthdate,
+  birthplace: Birthplace,
   customtextarea: Textarea,
   title: Title,
+  identificationData: IdentificationData,
 }

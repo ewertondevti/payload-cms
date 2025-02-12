@@ -9,7 +9,6 @@ export const Birthdate: FC<
   RadioButtonsProps & UseFormReturn & { errors: FieldErrors<FieldValues> }
 > = ({ width, watch, register, required, ...props }) => {
   const selectOption = watch('birthdate-or-year-registration')
-  console.log('🚀 ~ selectOption:', selectOption)
 
   const dateProps: InputDateProps & UseFormReturn = {
     ...props,
@@ -53,6 +52,10 @@ export const Birthdate: FC<
           width={50}
           watch={watch}
           register={register}
+          options={[
+            { label: 'Data exata', value: 'exact-date' },
+            { label: 'Ano', value: 'year' },
+          ]}
         />
 
         {!!selectOption && (
