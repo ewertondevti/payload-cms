@@ -1,7 +1,7 @@
 import configPromise from '@payload-config'
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
-import { ApplicantIdentificationForm } from './ApplicantIdentificationForm'
+import { IdentificationForm } from './ApplicantIdentificationForm'
 
 export async function ApplicantIdentification() {
  const payload = await getPayload({
@@ -25,5 +25,5 @@ export async function ApplicantIdentification() {
 
  if (!currForm) return notFound()
 
- return <ApplicantIdentificationForm form={currForm} />
+ return <IdentificationForm form={currForm} />
 }
