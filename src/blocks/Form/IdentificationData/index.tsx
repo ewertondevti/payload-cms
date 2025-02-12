@@ -59,7 +59,7 @@ export const IdentificationData: FC<IdentificationDataProps> = (props) => {
   ) : (
     <div className="flex flex-wrap gap-[8px]">
       <label className="input-text-label">
-        Nif <small>(Optional)</small>
+        Nif <span className="text-[#64718B]">(Optional)</span>
       </label>
     </div>
   )

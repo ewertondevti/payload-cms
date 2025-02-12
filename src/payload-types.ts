@@ -659,13 +659,6 @@ export interface Form {
         | {
             name: string;
             label?: string | null;
-            options?:
-              | {
-                  label: string;
-                  value: string;
-                  id?: string | null;
-                }[]
-              | null;
             required?: boolean | null;
             id?: string | null;
             blockName?: string | null;
@@ -1620,13 +1613,6 @@ export interface FormsSelect<T extends boolean = true> {
           | {
               name?: T;
               label?: T;
-              options?:
-                | T
-                | {
-                    label?: T;
-                    value?: T;
-                    id?: T;
-                  };
               required?: T;
               id?: T;
               blockName?: T;

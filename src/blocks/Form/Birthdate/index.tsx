@@ -10,6 +10,9 @@ export const Birthdate: FC<
 > = ({ width, watch, register, required, ...props }) => {
   const selectOption = watch('birthdate-or-year-registration')
 
+  const endDate = new Date()
+  endDate.setDate(endDate.getDate() - 1)
+
   const dateProps: InputDateProps & UseFormReturn = {
     ...props,
 
@@ -38,8 +41,28 @@ export const Birthdate: FC<
     feedbackText: `Obrigatório preencher "${props.label}"`,
     hasError: !!props.errors[props.name],
 
+    endDate,
+
     watch,
     register,
+  }
+
+  const getErrorMessage = () => {
+    const error = props.errors['year-registration']
+
+    switch (error?.type) {
+      case 'required':
+        return `Obrigatório preencher "${props.label}"`
+
+      case 'min':
+        return 'Ano mínimo 1900'
+
+      case 'max':
+        return 'Ano máximo é 2025'
+
+      default:
+        return
+    }
   }
 
   return (
@@ -66,9 +89,16 @@ export const Birthdate: FC<
           <Width width={50}>
             <InputNumber
               {...props}
-              {...register('year-registration', { required })}
+              {...register('year-registration', {
+                required,
+                min: 1900,
+                max: new Date().getFullYear(),
+              })}
               label="Ano de nascimento"
               placeholder="Indique o ano de nascimento"
+              feedbackState="danger"
+              feedbackText={getErrorMessage()}
+              hasError={!!props.errors['year-registration']}
             />
           </Width>
         )}
