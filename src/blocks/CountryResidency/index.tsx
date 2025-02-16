@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { UseFormReturn, FieldValues } from 'react-hook-form'
 import { InputSearch, InputText } from '@ama-pt/agora-design-system'
 import { InputSelect } from '@/components/ui/inputSelect'
@@ -14,30 +14,36 @@ type AddressFormProps = {
  postalCode: {
   placeholder: string
   required: boolean
+  label: string
  }
  locality: {
   placeholder: string
   required: boolean
+  label: string
  }
  address: {
   placeholder: string
   required: boolean
+  label: string
  }
  numberLot: {
   placeholder: string
   required: boolean
+  label: string
  }
  floor: {
   placeholder: string
   required: boolean
+  label: string
  }
  door: {
   placeholder: string
   required: boolean
+  label: string
  }
 } & UseFormReturn<FieldValues>;
 
-export const AddressForm: React.FC<AddressFormProps> = ({
+export const CountryResidencyForm: React.FC<AddressFormProps> = ({
  country,
  postalCode,
  locality,
@@ -51,21 +57,6 @@ export const AddressForm: React.FC<AddressFormProps> = ({
  formState: { errors },
 }) => {
  const [selectedCountry, setSelectedCountry] = useState(getValues('country') || 'PT')
-
- useEffect(() => {
-  if (country) {
-   setValue('country', country.placeholder || 'PT');
-  } else {
-   setValue('country', 'PT');
-  }
-
-  if (postalCode) setValue('postalCode', postalCode.placeholder);
-  if (locality) setValue('locality', locality.placeholder);
-  if (address) setValue('address', address.placeholder);
-  if (numberLot) setValue('numberLot', numberLot.placeholder);
-  if (floor) setValue('floor', floor.placeholder);
-  if (door) setValue('door', door.placeholder);
- }, [country, postalCode, locality, address, numberLot, floor, door, setValue]);
 
  const handleCountryChange = (option: string) => {
   setSelectedCountry(option)
@@ -97,7 +88,8 @@ export const AddressForm: React.FC<AddressFormProps> = ({
        <div>
         <InputSearch
          id="postalCode"
-         label="Código Postal"
+         label={postalCode.label}
+         placeholder={postalCode.placeholder}
          {...register('postalCode', { required: true })}
          hasError={!!errors.postalCode}
          feedbackState="danger"
@@ -107,7 +99,8 @@ export const AddressForm: React.FC<AddressFormProps> = ({
        <div>
         <InputText
          id="locality"
-         label="Localidade"
+         label={locality.label}
+         placeholder={locality.placeholder}
          {...register('locality', { required: true })}
          hasError={!!errors.locality}
          feedbackState="danger"
@@ -119,7 +112,8 @@ export const AddressForm: React.FC<AddressFormProps> = ({
       <div className="grid grid-cols-1">
        <InputText
         id="address"
-        label="Morada"
+        label={address.label}
+        placeholder={address.placeholder}
         {...register('address', { required: true })}
         hasError={!!errors.address}
         feedbackState="danger"
@@ -131,7 +125,8 @@ export const AddressForm: React.FC<AddressFormProps> = ({
        <div>
         <InputText
          id="numberLot"
-         label="Número / Lote"
+         label={numberLot.label}
+         placeholder={numberLot.placeholder}
          {...register('numberLot', { required: true })}
          hasError={!!errors.numberLot}
          feedbackState="danger"
@@ -141,14 +136,16 @@ export const AddressForm: React.FC<AddressFormProps> = ({
        <div>
         <InputText
          id="floor"
-         label="Andar (Opcional)"
+         label={floor.label}
+         placeholder={floor.placeholder}
          {...register('floor')}
         />
        </div>
        <div>
         <InputText
          id="door"
-         label="Porta (Opcional)"
+         label={door.label}
+         placeholder={door.placeholder}
          {...register('door')}
         />
        </div>
@@ -159,8 +156,8 @@ export const AddressForm: React.FC<AddressFormProps> = ({
       <div className="grid grid-cols-1">
        <InputText
         id="address"
-        label="Morada"
-        placeholder="Indique a morada atual"
+        label={address.label}
+        placeholder={address.placeholder}
         {...register('address', { required: true })}
         hasError={!!errors.address}
         feedbackState="danger"

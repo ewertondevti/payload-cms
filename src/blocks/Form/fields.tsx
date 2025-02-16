@@ -1,5 +1,4 @@
-import { AddressForm } from '../CountryResidency'
-import { CountryResidencyBlock } from '../CountryResidency/CountryResidencyBlock'
+import { CountryResidencyForm } from '../CountryResidency'
 import { Address } from './Address'
 import { Birthdate } from './Birthdate'
 import { Birthplace } from './Birthplace'
@@ -39,7 +38,7 @@ export const fields = {
   selectWithApi: SelectWithApi,
   customtext: Text,
   address: Address,
-  countryresidency: AddressForm,
+  countryresidency: CountryResidencyForm,
   nationality: Nationality,
   phoneNumber: PhoneNumber,
   radioButtons: RadioButtons,

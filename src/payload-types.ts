@@ -665,7 +665,9 @@ export interface Form {
             blockType: 'birthdate';
           }
         | {
-            country?: {
+            country: {
+              label: string;
+              width?: ('100%' | '50%' | '33%' | '25%') | null;
               placeholder?: string | null;
               options?:
                 | {
@@ -676,27 +678,39 @@ export interface Form {
                 | null;
               required?: boolean | null;
             };
-            postalCode?: {
+            postalCode: {
+              label: string;
+              width?: ('100%' | '50%' | '33%' | '25%') | null;
               placeholder?: string | null;
               required?: boolean | null;
             };
-            locality?: {
+            locality: {
+              label: string;
+              width?: ('100%' | '50%' | '33%' | '25%') | null;
               placeholder?: string | null;
               required?: boolean | null;
             };
-            address?: {
+            address: {
+              label: string;
+              width?: ('100%' | '50%' | '33%' | '25%') | null;
               placeholder?: string | null;
               required?: boolean | null;
             };
-            numberLot?: {
+            numberLot: {
+              label: string;
+              width?: ('100%' | '50%' | '33%' | '25%') | null;
               placeholder?: string | null;
               required?: boolean | null;
             };
-            floor?: {
+            floor: {
+              label: string;
+              width?: ('100%' | '50%' | '33%' | '25%') | null;
               placeholder?: string | null;
               required?: boolean | null;
             };
-            door?: {
+            door: {
+              label: string;
+              width?: ('100%' | '50%' | '33%' | '25%') | null;
               placeholder?: string | null;
               required?: boolean | null;
             };
@@ -1663,6 +1677,8 @@ export interface FormsSelect<T extends boolean = true> {
               country?:
                 | T
                 | {
+                    label?: T;
+                    width?: T;
                     placeholder?: T;
                     options?:
                       | T
@@ -1676,36 +1692,48 @@ export interface FormsSelect<T extends boolean = true> {
               postalCode?:
                 | T
                 | {
+                    label?: T;
+                    width?: T;
                     placeholder?: T;
                     required?: T;
                   };
               locality?:
                 | T
                 | {
+                    label?: T;
+                    width?: T;
                     placeholder?: T;
                     required?: T;
                   };
               address?:
                 | T
                 | {
+                    label?: T;
+                    width?: T;
                     placeholder?: T;
                     required?: T;
                   };
               numberLot?:
                 | T
                 | {
+                    label?: T;
+                    width?: T;
                     placeholder?: T;
                     required?: T;
                   };
               floor?:
                 | T
                 | {
+                    label?: T;
+                    width?: T;
                     placeholder?: T;
                     required?: T;
                   };
               door?:
                 | T
                 | {
+                    label?: T;
+                    width?: T;
                     placeholder?: T;
                     required?: T;
                   };
