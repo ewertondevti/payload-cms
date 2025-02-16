@@ -1,44 +1,142 @@
-import { Block, Field } from 'payload'
+import { Block, Field } from 'payload';
 
-const name: Field = {
- name: 'name',
+const placeholderField: Field = {
+ name: 'placeholder',
  type: 'text',
- label: "name (lowercase, no special characters)",
- required: true,
- defaultValue: 'pais',
-}
+ label: 'Placeholder',
+ defaultValue: '',
+};
 
-const label: Field = {
- name: 'label',
- type: 'text',
- label: 'Label',
- localized: true,
- defaultValue: 'País de residência',
-}
+const requiredField: Field = {
+ name: 'required',
+ type: 'checkbox',
+ label: 'Required ?',
+ defaultValue: true,
+};
 
 export const CountryResidencyBlock: Block = {
- slug: 'country-residency',
+ slug: 'countryresidency',
+ labels: {
+  singular: 'Residência',
+  plural: 'Residências',
+ },
  fields: [
   {
-   type: 'row',
+   name: 'country',
+   type: 'group',
    fields: [
     {
-     ...name,
-     admin: {
-      width: '50%',
-     },
+     ...placeholderField,
+     label: 'Placeholder do País',
+     defaultValue: 'Selecione o país',
     },
     {
-     ...label,
-     admin: {
-      width: '50%',
-     },
+     name: 'options',
+     type: 'array',
+     label: 'Opções do País',
+     fields: [
+      {
+       name: 'label',
+       type: 'text',
+       required: true,
+      },
+      {
+       name: 'value',
+       type: 'text',
+       required: true,
+      },
+     ],
+    },
+    {
+     ...requiredField,
+    },
+   ],
+  },
+  {
+   name: 'postalCode',
+   type: 'group',
+   fields: [
+    {
+     ...placeholderField,
+     label: 'Placeholder do Código Postal',
+     defaultValue: '0000-000',
+    },
+    {
+     ...requiredField,
+    },
+   ],
+  },
+  {
+   name: 'locality',
+   type: 'group',
+   fields: [
+    {
+     ...placeholderField,
+     label: 'Placeholder da Localidade',
+     defaultValue: 'Insira a localidade',
+    },
+    {
+     ...requiredField,
+    },
+   ],
+  },
+  {
+   name: 'address',
+   type: 'group',
+   fields: [
+    {
+     ...placeholderField,
+     label: 'Placeholder da Morada',
+     defaultValue: 'Insira a morada',
+    },
+    {
+     ...requiredField,
+    },
+   ],
+  },
+  {
+   name: 'numberLot',
+   type: 'group',
+   fields: [
+    {
+     ...placeholderField,
+     label: 'Placeholder do Número / Lote',
+     defaultValue: 'Insira o número ou lote',
+    },
+    {
+     ...requiredField,
+    },
+   ],
+  },
+  {
+   name: 'floor',
+   type: 'group',
+   fields: [
+    {
+     ...placeholderField,
+     label: 'Placeholder do Andar',
+     defaultValue: 'Insira o andar (opcional)',
+    },
+    {
+     ...requiredField,
+     defaultValue: false,
+    },
+   ],
+  },
+  {
+   name: 'door',
+   type: 'group',
+   fields: [
+    {
+     ...placeholderField,
+     label: 'Placeholder da Porta',
+     defaultValue: 'Insira a porta (opcional)',
+    },
+    {
+     ...requiredField,
+     defaultValue: false,
     },
    ],
   },
  ],
- labels: {
-  plural: 'Moradas',
-  singular: 'Morada',
- },
-}
+};

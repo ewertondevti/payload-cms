@@ -1,9 +1,12 @@
 import configPromise from '@payload-config'
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
-import IdentificationForm from './ApplicantIdentificationForm'
+import React from 'react';
+import { NoAuthForm } from './noAuthForm/intex';
 
-export async function ApplicantIdentification() {
+
+
+export async function NoAuthPayload() {
  const payload = await getPayload({
   config: configPromise,
  })
@@ -22,8 +25,9 @@ export async function ApplicantIdentification() {
 
 
  const currForm = data?.docs?.[0]
+ console.log("Dados do formulário selecionado:", currForm)
 
  if (!currForm) return notFound()
 
- return <IdentificationForm form={currForm} />
+ return <NoAuthForm form={currForm} />
 }

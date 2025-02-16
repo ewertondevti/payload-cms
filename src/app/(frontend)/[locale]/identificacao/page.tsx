@@ -1,7 +1,8 @@
+
 import React from 'react'
 import { ApplicantIdentification } from '@/components/ApplicantIdentification';
 
-const Identificacao = () => {
+const Identificacao: React.FC = () => {
  return (<div>
   <ApplicantIdentification />
  </div>)

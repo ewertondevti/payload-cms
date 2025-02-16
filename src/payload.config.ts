@@ -56,6 +56,7 @@ import { LifeCycles } from './collections/LifeCycles'
 import { Services } from './collections/Services'
 import { myRouteHandler } from './endpoints/my-route/route'
 import localization from './i18n/localization'
+import { CountryResidencyBlock } from './blocks/CountryResidency/CountryResidencyBlock'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -208,6 +209,7 @@ export default buildConfig({
         PhoneNumberBlock,
         PreLoadExample1Block,
         BirthdateBlock,
+        CountryResidencyBlock,
         TextAreaBlock,
         GroupBlock,
         TitleBlock,

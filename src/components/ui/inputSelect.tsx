@@ -25,6 +25,7 @@ type InputSelectProps = {
   icon?: string
   hasError?: boolean
   required?: boolean
+  className?: string;
   disabled?: boolean
   onChange?: ((option: string) => void) | undefined
 }
@@ -36,6 +37,7 @@ export const InputSelect: React.FC<InputSelectProps> = ({
   label,
   options,
   searchable,
+  className,
   placeholder,
   visibleCount = 4,
   searchNoResultsText,
@@ -89,6 +91,7 @@ export const InputSelect: React.FC<InputSelectProps> = ({
     })
     setDropdownOptions(newSections)
   }
+  console.log("🔎 Valor recebido pelo InputSelect:", value);
 
   return (
     <>
@@ -115,6 +118,7 @@ export const InputSelect: React.FC<InputSelectProps> = ({
         allSelectedLabel={allSelectedLabel}
         dropdownAriaLabel={dropdownAriaLabel}
         icon={icon}
+        className={className}
         hasError={hasError}
         required={required}
         onChange={onInputSelectChange}

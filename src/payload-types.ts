@@ -665,6 +665,46 @@ export interface Form {
             blockType: 'birthdate';
           }
         | {
+            country?: {
+              placeholder?: string | null;
+              options?:
+                | {
+                    label: string;
+                    value: string;
+                    id?: string | null;
+                  }[]
+                | null;
+              required?: boolean | null;
+            };
+            postalCode?: {
+              placeholder?: string | null;
+              required?: boolean | null;
+            };
+            locality?: {
+              placeholder?: string | null;
+              required?: boolean | null;
+            };
+            address?: {
+              placeholder?: string | null;
+              required?: boolean | null;
+            };
+            numberLot?: {
+              placeholder?: string | null;
+              required?: boolean | null;
+            };
+            floor?: {
+              placeholder?: string | null;
+              required?: boolean | null;
+            };
+            door?: {
+              placeholder?: string | null;
+              required?: boolean | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'countryresidency';
+          }
+        | {
             name: string;
             label?: string | null;
             defaultValue?: string | null;
@@ -1614,6 +1654,61 @@ export interface FormsSelect<T extends boolean = true> {
               name?: T;
               label?: T;
               required?: T;
+              id?: T;
+              blockName?: T;
+            };
+        countryresidency?:
+          | T
+          | {
+              country?:
+                | T
+                | {
+                    placeholder?: T;
+                    options?:
+                      | T
+                      | {
+                          label?: T;
+                          value?: T;
+                          id?: T;
+                        };
+                    required?: T;
+                  };
+              postalCode?:
+                | T
+                | {
+                    placeholder?: T;
+                    required?: T;
+                  };
+              locality?:
+                | T
+                | {
+                    placeholder?: T;
+                    required?: T;
+                  };
+              address?:
+                | T
+                | {
+                    placeholder?: T;
+                    required?: T;
+                  };
+              numberLot?:
+                | T
+                | {
+                    placeholder?: T;
+                    required?: T;
+                  };
+              floor?:
+                | T
+                | {
+                    placeholder?: T;
+                    required?: T;
+                  };
+              door?:
+                | T
+                | {
+                    placeholder?: T;
+                    required?: T;
+                  };
               id?: T;
               blockName?: T;
             };
