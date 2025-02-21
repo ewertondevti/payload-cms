@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image'
 
 import {
   Area,
@@ -17,7 +18,6 @@ import {
   NavigationLinkProps,
   NavigationRoot,
   NavigationRootProps,
-  RelatedNavigationLink,
   Search,
   SearchInputContainer,
   SearchRelatedLink,
@@ -29,10 +29,12 @@ import {
   useBreakpointScreenValues,
   useWindowSize,
 } from '@ama-pt/agora-design-system'
+import { redirect } from 'next/navigation'
+import LOGO from 'public/irn-logo.png'
 import { ReactElement, useMemo, useState } from 'react'
 
-const LOGO = '/api/media/file/irn-logo.png'
-const LOGO_DARK = '/api/media/file/irn-logo-white.png'
+//const LOGO = '/api/media/file/IRN.png'
+const LOGO_DARK = '/api/media/file/IRN.png'
 const PT_FLAG =
   'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPG1hc2sgaWQ9Im1hc2swXzk2MjJfMjcxMyIgc3R5bGU9Im1hc2stdHlwZTphbHBoYSIgbWFza1VuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeD0iMCIgeT0iMCIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IndoaXRlIi8+CjwvbWFzaz4KPGcgbWFzaz0idXJsKCNtYXNrMF85NjIyXzI3MTMpIj4KPHBhdGggZD0iTTMyIDE2QzMyIDcuMTYzNDQgMjQuODM2NiAwIDE2IDBWMzJDMjQuODM2NiAzMiAzMiAyNC44MzY2IDMyIDE2WiIgZmlsbD0iI0UyMDAxMSIvPgo8cGF0aCBkPSJNMCAxNkMwIDcuMTYzNDQgNy4xNjM0NCAwIDE2IDBWMzJDNy4xNjM0NCAzMiAwIDI0LjgzNjYgMCAxNloiIGZpbGw9IiMwMDYxMzQiLz4KPC9nPgo8L3N2Zz4K'
 const EN_FLAG =
@@ -58,9 +60,14 @@ const Header = (headerProps: HeaderProps) => {
   }
 
   const [selectedArea, setSelectedArea] = useState('area-1')
+
   const handleAreaChange = (val: string) => {
     setSelectedArea(val)
+    if (val == 'area-2') {
+      handleRedirect()
+    }
   }
+
   const activeNavigationItems = useMemo(() => {
     let ret: Array<ReactElement<NavigationRootProps | NavigationLinkProps>> = []
 
@@ -71,6 +78,7 @@ const Header = (headerProps: HeaderProps) => {
           linksAriaLabel="Main links list"
           relatedLinksAriaLabel="Related links list"
           label="Cidadão"
+          aria-current="page"
         >
           <NavigationLink
             hasIcon
@@ -79,51 +87,7 @@ const Header = (headerProps: HeaderProps) => {
             trailingIcon="agora-line-arrow-right-circle"
             trailingIconHover="agora-solid-arrow-right-circle"
           >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
-              Casamento
-            </a>
-          </NavigationLink>
-          <NavigationLink
-            hasIcon
-            leadingIcon="agora-line-calendar"
-            leadingIconHover="agora-solid-calendar"
-            trailingIcon="agora-line-arrow-right-circle"
-            trailingIconHover="agora-solid-arrow-right-circle"
-          >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
-              Divórcio e Segaração
-            </a>
-          </NavigationLink>
-          <NavigationLink
-            hasIcon
-            leadingIcon="agora-line-calendar"
-            leadingIconHover="agora-solid-calendar"
-            trailingIcon="agora-line-arrow-right-circle"
-            trailingIconHover="agora-solid-arrow-right-circle"
-          >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
-              Documentos
-            </a>
-          </NavigationLink>
-          <NavigationLink
-            hasIcon
-            leadingIcon="agora-line-calendar"
-            leadingIconHover="agora-solid-calendar"
-            trailingIcon="agora-line-arrow-right-circle"
-            trailingIconHover="agora-solid-arrow-right-circle"
-          >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
-              Nacionalidade
-            </a>
-          </NavigationLink>
-          <NavigationLink
-            hasIcon
-            leadingIcon="agora-line-calendar"
-            leadingIconHover="agora-solid-calendar"
-            trailingIcon="agora-line-arrow-right-circle"
-            trailingIconHover="agora-solid-arrow-right-circle"
-          >
-            <a href="http://localhost:3000/lifecycles/cvc" target="_blank" rel="noreferrer">
+            <a href="/Nascimento" rel="noreferrer">
               Nascimento
             </a>
           </NavigationLink>
@@ -134,8 +98,30 @@ const Header = (headerProps: HeaderProps) => {
             trailingIcon="agora-line-arrow-right-circle"
             trailingIconHover="agora-solid-arrow-right-circle"
           >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
+            <a href="#" rel="noreferrer">
               Óbito
+            </a>
+          </NavigationLink>
+          <NavigationLink
+            hasIcon
+            leadingIcon="agora-line-calendar"
+            leadingIconHover="agora-solid-calendar"
+            trailingIcon="agora-line-arrow-right-circle"
+            trailingIconHover="agora-solid-arrow-right-circle"
+          >
+            <a href="#" rel="noreferrer">
+              Casamento
+            </a>
+          </NavigationLink>
+          <NavigationLink
+            hasIcon
+            leadingIcon="agora-line-calendar"
+            leadingIconHover="agora-solid-calendar"
+            trailingIcon="agora-line-arrow-right-circle"
+            trailingIconHover="agora-solid-arrow-right-circle"
+          >
+            <a href="#" rel="noreferrer">
+              Nacionalidade
             </a>
           </NavigationLink>
         </NavigationRoot>,
@@ -152,7 +138,7 @@ const Header = (headerProps: HeaderProps) => {
             trailingIcon="agora-line-arrow-right-circle"
             trailingIconHover="agora-solid-arrow-right-circle"
           >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
+            <a href="#" rel="noreferrer">
               Area 1 - Menu 1 - Link 1
             </a>
           </NavigationLink>
@@ -163,7 +149,7 @@ const Header = (headerProps: HeaderProps) => {
             trailingIcon="agora-line-arrow-right-circle"
             trailingIconHover="agora-solid-arrow-right-circle"
           >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
+            <a href="#" rel="noreferrer">
               Area 1 - Menu 1 - Link 2
             </a>
           </NavigationLink>
@@ -174,7 +160,7 @@ const Header = (headerProps: HeaderProps) => {
             trailingIcon="agora-line-arrow-right-circle"
             trailingIconHover="agora-solid-arrow-right-circle"
           >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
+            <a href="#" rel="noreferrer">
               Area 1 - Menu 1 - Link 3
             </a>
           </NavigationLink>
@@ -185,7 +171,7 @@ const Header = (headerProps: HeaderProps) => {
             trailingIcon="agora-line-arrow-right-circle"
             trailingIconHover="agora-solid-arrow-right-circle"
           >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
+            <a href="#" rel="noreferrer">
               Area 1 - Menu 1 - Link 4
             </a>
           </NavigationLink>
@@ -196,23 +182,23 @@ const Header = (headerProps: HeaderProps) => {
             trailingIcon="agora-line-arrow-right-circle"
             trailingIconHover="agora-solid-arrow-right-circle"
           >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
+            <a href="#" rel="noreferrer">
               Area 1 - Menu 1 - Link 5
             </a>
           </NavigationLink>
         </NavigationRoot>,
         <NavigationLink key={3}>
-          <a href="http://www.example.com" target="_blank" rel="noreferrer" aria-current="page">
+          <a href="#" rel="noreferrer">
             Prédios
           </a>
         </NavigationLink>,
         <NavigationLink key={4}>
-          <a href="http://www.example.com" target="_blank" rel="noreferrer">
+          <a href="#" rel="noreferrer">
             Veículos
           </a>
         </NavigationLink>,
         <NavigationLink key={5}>
-          <a href="http://www.example.com" target="_blank" rel="noreferrer">
+          <a href="#" rel="noreferrer">
             Serviços Complementares
           </a>
         </NavigationLink>,
@@ -225,7 +211,7 @@ const Header = (headerProps: HeaderProps) => {
           key={6}
           linksAriaLabel="Main links list"
           relatedLinksAriaLabel="Related links list"
-          label="Area 2 - Menu 1"
+          label="Nascimento"
         >
           <NavigationLink
             hasIcon
@@ -234,8 +220,8 @@ const Header = (headerProps: HeaderProps) => {
             trailingIcon="agora-line-arrow-right-circle"
             trailingIconHover="agora-solid-arrow-right-circle"
           >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
-              Area 2 - Menu 1 - Link 1
+            <a href="#" rel="noreferrer">
+              Certidões
             </a>
           </NavigationLink>
           <NavigationLink
@@ -245,8 +231,8 @@ const Header = (headerProps: HeaderProps) => {
             trailingIcon="agora-line-arrow-right-circle"
             trailingIconHover="agora-solid-arrow-right-circle"
           >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
-              Area 2 - Menu 1 - Link 2
+            <a href="/Pedidos" rel="noreferrer">
+              Registo e Declarações
             </a>
           </NavigationLink>
           <NavigationLink
@@ -256,78 +242,10 @@ const Header = (headerProps: HeaderProps) => {
             trailingIcon="agora-line-arrow-right-circle"
             trailingIconHover="agora-solid-arrow-right-circle"
           >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
-              Area 2 - Menu 1 - Link 3
+            <a href="#" rel="noreferrer">
+              Declarações
             </a>
           </NavigationLink>
-          <NavigationLink
-            hasIcon
-            leadingIcon="agora-line-calendar"
-            leadingIconHover="agora-solid-calendar"
-            trailingIcon="agora-line-arrow-right-circle"
-            trailingIconHover="agora-solid-arrow-right-circle"
-          >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
-              Area 2 - Menu 1 - Link 4
-            </a>
-          </NavigationLink>
-          <NavigationLink
-            hasIcon
-            leadingIcon="agora-line-calendar"
-            leadingIconHover="agora-solid-calendar"
-            trailingIcon="agora-line-arrow-right-circle"
-            trailingIconHover="agora-solid-arrow-right-circle"
-          >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
-              Area 2 - Menu 1 - Link 5
-            </a>
-          </NavigationLink>
-
-          <RelatedNavigationLink
-            hasIcon
-            trailingIcon="agora-line-arrow-right-circle"
-            trailingIconHover="agora-solid-arrow-right-circle"
-          >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
-              Area 2 - Menu 1 - Relate Link 1
-            </a>
-          </RelatedNavigationLink>
-          <RelatedNavigationLink
-            hasIcon
-            trailingIcon="agora-line-arrow-right-circle"
-            trailingIconHover="agora-solid-arrow-right-circle"
-          >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
-              Area 2 - Menu 1 - Relate Link 2
-            </a>
-          </RelatedNavigationLink>
-          <RelatedNavigationLink
-            hasIcon
-            trailingIcon="agora-line-arrow-right-circle"
-            trailingIconHover="agora-solid-arrow-right-circle"
-          >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
-              Area 2 - Menu 1 - Relate Link 3
-            </a>
-          </RelatedNavigationLink>
-          <RelatedNavigationLink
-            hasIcon
-            trailingIcon="agora-line-arrow-right-circle"
-            trailingIconHover="agora-solid-arrow-right-circle"
-          >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
-              Area 2 - Menu 1 - Relate Link 4
-            </a>
-          </RelatedNavigationLink>
-          <RelatedNavigationLink
-            hasIcon
-            trailingIcon="agora-line-arrow-right-circle"
-            trailingIconHover="agora-solid-arrow-right-circle"
-          >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
-              Area 2 - Menu 1 - Relate Link 5
-            </a>
-          </RelatedNavigationLink>
         </NavigationRoot>,
         <NavigationRoot
           key={7}
@@ -342,7 +260,7 @@ const Header = (headerProps: HeaderProps) => {
             trailingIcon="agora-line-arrow-right-circle"
             trailingIconHover="agora-solid-arrow-right-circle"
           >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
+            <a href="#" rel="noreferrer">
               Area 2 - Menu 1 - Link 1
             </a>
           </NavigationLink>
@@ -353,7 +271,7 @@ const Header = (headerProps: HeaderProps) => {
             trailingIcon="agora-line-arrow-right-circle"
             trailingIconHover="agora-solid-arrow-right-circle"
           >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
+            <a href="#" rel="noreferrer">
               Area 2 - Menu 1 - Link 2
             </a>
           </NavigationLink>
@@ -364,7 +282,7 @@ const Header = (headerProps: HeaderProps) => {
             trailingIcon="agora-line-arrow-right-circle"
             trailingIconHover="agora-solid-arrow-right-circle"
           >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
+            <a href="#" rel="noreferrer">
               Area 2 - Menu 1 - Link 3
             </a>
           </NavigationLink>
@@ -375,7 +293,7 @@ const Header = (headerProps: HeaderProps) => {
             trailingIcon="agora-line-arrow-right-circle"
             trailingIconHover="agora-solid-arrow-right-circle"
           >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
+            <a href="#" rel="noreferrer">
               Area 2 - Menu 1 - Link 4
             </a>
           </NavigationLink>
@@ -386,23 +304,23 @@ const Header = (headerProps: HeaderProps) => {
             trailingIcon="agora-line-arrow-right-circle"
             trailingIconHover="agora-solid-arrow-right-circle"
           >
-            <a href="http://www.example.com" target="_blank" rel="noreferrer">
+            <a href="#" rel="noreferrer">
               Area 2 - Menu 1 - Link 5
             </a>
           </NavigationLink>
         </NavigationRoot>,
         <NavigationLink key={8}>
-          <a href="http://www.example.com" target="_blank" rel="noreferrer" aria-current="page">
-            Area 2 - Direct Link 1
+          <a href="/Catalogo/ListaServicos" rel="noreferrer" aria-current="page">
+            Catálogo
           </a>
         </NavigationLink>,
         <NavigationLink key={9}>
-          <a href="http://www.example.com" target="_blank" rel="noreferrer">
+          <a href="#" rel="noreferrer">
             Area 2 - Direct Link 2
           </a>
         </NavigationLink>,
         <NavigationLink key={10}>
-          <a href="http://www.example.com" target="_blank" rel="noreferrer">
+          <a href="#" rel="noreferrer">
             Area 2 - Direct Link 3
           </a>
         </NavigationLink>,
@@ -411,14 +329,16 @@ const Header = (headerProps: HeaderProps) => {
 
     return ret
   }, [selectedArea])
+
+  const handleRedirect = () => {
+    redirect('/AreaReservada')
+  }
   return (
     <header className="sticky top-0 z-sticky">
       <HeaderV2 {...headerArgs}>
         <Brand>
           <Logo>
-            <a href={process.env.NEXT_PUBLIC_SERVER_URL} rel="noreferrer">
-              <img src={headerArgs.darkMode ? LOGO_DARK : LOGO} alt="Logo alternative text" />
-            </a>
+            <Image src={LOGO} alt="Logo alternative text" height={48} />
           </Logo>
           <Institutional>Consigo em cada Registo</Institutional>
         </Brand>
@@ -457,27 +377,27 @@ const Header = (headerProps: HeaderProps) => {
                   Vero laborum quis ratione. Cum ea praesentium temporibus sint maiores!
                 </SearchRelatedLinksTitle>
                 <SearchRelatedLink>
-                  <a target="_blank" rel="noreferrer" href="https://www.example.com">
+                  <a rel="noreferrer" href="https://www.example.com">
                     Related Link 1
                   </a>
                 </SearchRelatedLink>
                 <SearchRelatedLink>
-                  <a target="_blank" rel="noreferrer" href="https://www.example.com">
+                  <a rel="noreferrer" href="https://www.example.com">
                     Related Link 2
                   </a>
                 </SearchRelatedLink>
                 <SearchRelatedLink>
-                  <a target="_blank" rel="noreferrer" href="https://www.example.com">
+                  <a rel="noreferrer" href="https://www.example.com">
                     Related Link 3
                   </a>
                 </SearchRelatedLink>
                 <SearchRelatedLink>
-                  <a target="_blank" rel="noreferrer" href="https://www.example.com">
+                  <a rel="noreferrer" href="https://www.example.com">
                     Related Link 4
                   </a>
                 </SearchRelatedLink>
                 <SearchRelatedLink>
-                  <a target="_blank" rel="noreferrer" href="https://www.example.com">
+                  <a rel="noreferrer" href="https://www.example.com">
                     Related Link 5
                   </a>
                 </SearchRelatedLink>
@@ -487,11 +407,14 @@ const Header = (headerProps: HeaderProps) => {
 
           <Unauthenticated>
             <UnauthenticatedLink
+              style={{ paddingTop: '0 !important' }}
               hasIcon
               leadingIcon="agora-line-user"
               leadingIconHover="agora-solid-user"
             >
-              <a target="_blank" rel="noreferrer" href="https://www.example.com">
+              {/* <a rel="noreferrer" href="/api/auth/signin"> */}
+              {/* <a rel="noreferrer" href="/Authentication"> */}
+              <a rel="noreferrer" href="../api/auth/signin">
                 <span>Login</span>
               </a>
             </UnauthenticatedLink>

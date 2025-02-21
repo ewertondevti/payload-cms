@@ -1,0 +1,35 @@
+.lista-servicos #header {
+    justify-content: space-between;
+    color: #021C51;
+}
+
+ #header h2 {
+    color: #021C51;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.lista-servicos #header .links {
+    justify-content: space-between;
+}
+
+.lista-servicos #header .icon,
+.lista-servicos#breadcrumb .icon { 
+    fill: #323232 !important;
+}
+
+.lista-servicos #header .links a {
+    margin-left: 12;
+    text-decoration-line: none;
+    color: #323232
+}
+
+.lista-servicos .custom-table thead tr {
+    background: #021C51 !important;
+}
+
+.lista-servicos .custom-table thead tr th .table-header-cell,
+.lista-servicos .custom-table thead tr th .table-header-cell .icon {
+    color: white !important;
+    fill: white;
+}

@@ -15,6 +15,10 @@ import { slugField } from '@/fields/slug'
 import { authenticated } from '../../access/authenticated'
 import { anyone } from '../../access/anyone'
 import FormServiceStepBlock from '@/blocks/FormServiceStepBlock/FormServiceStepBlock'
+import PaymentServiceStepBlock from '@/blocks/Payment/PaymentServiceStepBlock'
+import SubmissionServiceStepBlock from '@/blocks/Submission/SubmissionServiceStepBlock'
+import SummaryServiceStepBlock from '@/blocks/Summary/SummaryServiceStepBlock'
+import ExemploServiceStepBlock from '@/blocks/ExemploServiceStep/ExemploServiceStepBlock'
 
 export const Services: CollectionConfig = {
   slug: 'services',
@@ -69,15 +73,23 @@ export const Services: CollectionConfig = {
           ],
         },
         {
-            name: 'steps',
-            label: 'Steps',
-            fields: [
-              {
-                name: 'steps',
-                type: 'blocks',
-                blocks: [ContentServiceStepsBlock, FormServiceStepBlock], // adicionar o FormServiceStepsBlock
-              },
-            ],
+          name: 'steps',
+          label: 'Steps',
+          fields: [
+            {
+              name: 'steps',
+              type: 'blocks',
+              blocks: [
+                ContentServiceStepsBlock,
+                FormServiceStepBlock,
+                PaymentServiceStepBlock,
+                SubmissionServiceStepBlock,
+                SummaryServiceStepBlock,
+
+                ExemploServiceStepBlock,
+              ],
+            },
+          ],
         },
         {
           name: 'relatedservices',
@@ -115,24 +127,25 @@ export const Services: CollectionConfig = {
               label: 'Schedulable',
             },
             {
-                name: 'informationPreloadAPI',
-                label: 'Information Preload API',
-                type: 'text',
-                required: false,
-                admin: {
-                  description: 'URL of the API that will preload information that can be used in the form.',
-                  placeholder: 'https://api.example.com/preload',
-                },
+              name: 'informationPreloadAPI',
+              label: 'Information Preload API',
+              type: 'text',
+              required: false,
+              admin: {
+                description:
+                  'URL of the API that will preload information that can be used in the form.',
+                placeholder: 'https://api.example.com/preload',
+              },
             },
             {
-                name: 'formSubmissionBusinessValidationAPI',
-                label: 'Form Submission Business Validation API',
-                type: 'text',
-                required: false,
-                admin: {
-                  description: 'URL of the API that will validate the form submission.',
-                  placeholder: 'https://api.example.com/validate',
-                },
+              name: 'formSubmissionBusinessValidationAPI',
+              label: 'Form Submission Business Validation API',
+              type: 'text',
+              required: false,
+              admin: {
+                description: 'URL of the API that will validate the form submission.',
+                placeholder: 'https://api.example.com/validate',
+              },
             },
             {
               name: 'formSubmissionURL',
@@ -142,7 +155,7 @@ export const Services: CollectionConfig = {
               admin: {
                 description: 'URL of the API that will receive the form submission.',
                 placeholder: 'https://api.example.com/submit',
-              }
+              },
             },
           ],
         },
@@ -175,6 +188,6 @@ export const Services: CollectionConfig = {
         },
       ],
     },
-    ...slugField()
+    ...slugField(),
   ],
 }

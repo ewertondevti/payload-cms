@@ -21,6 +21,14 @@ export const RadioButtons: FC<
 > = ({ label, name, options, required, width, errors, register, setValue, ...props }) => {
   return (
     <Width width={width ?? 50}>
+      <style>
+        {`
+          legend {
+            margin-bottom: 8px !important;
+          }
+        `}
+      </style>
+
       <RadioButtonGroup
         {...props}
         {...register(name, { required: false })}

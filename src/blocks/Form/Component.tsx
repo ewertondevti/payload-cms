@@ -33,9 +33,9 @@ export type FormBlockType = {
 
 export const FormBlock: React.FC<
   {
-    id?: string,
-    stepIndex: number,
-    onSubmitOverride: (data: Data) => void,
+    id?: string
+    stepIndex: number
+    onSubmitOverride?: (data: Data) => void
     showSubmitButton: boolean
   } & FormBlockType
 > = (props) => {
@@ -46,12 +46,13 @@ export const FormBlock: React.FC<
     introContent,
     onSubmitOverride,
     showSubmitButton = true,
-    stepIndex
+    stepIndex,
   } = props
 
   const formMethods = useForm({
     defaultValues: buildInitialFormState(formFromProps?.fields),
   })
+
   const {
     control,
     formState: { errors },
@@ -65,58 +66,55 @@ export const FormBlock: React.FC<
   const router = useRouter()
   const t = useTranslations()
 
-    let onSubmit;
+  let onSubmit
 
-    // console.log("onSubmitOverride", onSubmitOverride)
+  // console.log("onSubmitOverride", onSubmitOverride)
 
-    if (onSubmitOverride)
-    {
-        onSubmit = useCallback((data: Data) => {
+  if (onSubmitOverride) {
+    onSubmit = useCallback(
+      (data: Data) => {
+        // console.log('onSubmitOverride');
 
-            // console.log('onSubmitOverride');
+        // console.log("data:", data)
+        // console.log("hasSubmitted:", hasSubmitted)
 
-            // console.log("data:", data)
-            // console.log("hasSubmitted:", hasSubmitted)
+        if (!hasSubmitted) {
+          onSubmitOverride(data)
+        }
 
-            if (!hasSubmitted)
-            {
-                onSubmitOverride(data);
-            }
-
-            setIsLoading(false)    
-            setHasSubmitted(false); // Ensure form submission state is managed
-            setError(undefined); // Ensure error state is cleared
-
-        }, [onSubmitOverride])
-      }
-    else
-    {
-        onSubmit = useCallback(
-        (data: Data) => {
+        setIsLoading(false)
+        setHasSubmitted(false) // Ensure form submission state is managed
+        setError(undefined) // Ensure error state is cleared
+      },
+      [onSubmitOverride],
+    )
+  } else {
+    onSubmit = useCallback(
+      (data: Data) => {
         let loadingTimerID: ReturnType<typeof setTimeout>
         const submitForm = async () => {
-            setError(undefined)
+          setError(undefined)
 
-            const dataToSend = Object.entries(data).map(([name, value]) => ({
+          const dataToSend = Object.entries(data).map(([name, value]) => ({
             field: name,
             value,
-            }))
+          }))
 
-            // delay loading indicator by 1s
-            loadingTimerID = setTimeout(() => {
+          // delay loading indicator by 1s
+          loadingTimerID = setTimeout(() => {
             setIsLoading(true)
-            }, 1000)
+          }, 1000)
 
-            try {
+          try {
             const req = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/form-submissions`, {
-                body: JSON.stringify({
+              body: JSON.stringify({
                 form: formID,
                 submissionData: dataToSend,
-                }),
-                headers: {
+              }),
+              headers: {
                 'Content-Type': 'application/json',
-                },
-                method: 'POST',
+              },
+              method: 'POST',
             })
 
             const res = await req.json()
@@ -124,46 +122,46 @@ export const FormBlock: React.FC<
             clearTimeout(loadingTimerID)
 
             if (req.status >= 400) {
-                setIsLoading(false)
+              setIsLoading(false)
 
-                setError({
+              setError({
                 message: res.errors?.[0]?.message || 'Internal Server Error',
                 status: res.status,
-                })
+              })
 
-                return
+              return
             }
 
             setIsLoading(false)
             setHasSubmitted(true)
 
             if (confirmationType === 'redirect' && redirect) {
-                const { url } = redirect
+              const { url } = redirect
 
-                const redirectUrl = url
+              const redirectUrl = url
 
-                if (redirectUrl) router.push(redirectUrl)
+              if (redirectUrl) router.push(redirectUrl)
             }
-            } catch (err) {
+          } catch (err) {
             console.warn(err)
             setIsLoading(false)
             setError({
-                message: 'Something went wrong.',
+              message: 'Something went wrong.',
             })
-            }
+          }
         }
 
         void submitForm()
-        },
-        [router, formID, redirect, confirmationType],
-        )
-    }
+      },
+      [router, formID, redirect, confirmationType],
+    )
+  }
 
-    // console.log("stepIndex", stepIndex)
-    // console.log("formID", formID)
+  // console.log("stepIndex", stepIndex)
+  // console.log("formID", formID)
 
   return (
-    <div className="container my-16">
+    <div className="container">
       <FormProvider {...formMethods}>
         {enableIntro && introContent && !hasSubmitted && (
           <RichText className="mb-8" content={introContent} enableGutter={false} />
@@ -174,16 +172,16 @@ export const FormBlock: React.FC<
         {isLoading && !hasSubmitted && <p>{t('loading')}</p>}
         {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
         {true && (
-          <form key={"form"} id={formID} onSubmit={handleSubmit(onSubmit)} noValidate>
+          <form key={'form'} id={formID} onSubmit={handleSubmit(onSubmit)} noValidate>
             <>
-            <div className="mb-4 last:mb-0">
+            <div className="flex flex-col gap-16">
               {formFromProps &&
                 formFromProps.fields &&
                 formFromProps.fields?.map((field, index) => {
                   const Field: React.FC<any> = fields?.[field.blockType]
                   if (Field) {
                     return (
-                      <div className="mb-6 last:mb-0" key={index + "_" + stepIndex}>
+                      <div className="last:mb-0" key={index + "_" + stepIndex}>
                         <Field
                           form={formFromProps}
                           {...field}
@@ -199,11 +197,11 @@ export const FormBlock: React.FC<
                 })}
             </div>
 
-            {showSubmitButton && (
-            <Button form={formID} type="submit" variant="default">
-              {submitButtonLabel}
-            </Button>
-            )}
+              {showSubmitButton && (
+                <Button form={formID} type="submit" variant="default">
+                  {submitButtonLabel}
+                </Button>
+              )}
             </>
           </form>
         )}

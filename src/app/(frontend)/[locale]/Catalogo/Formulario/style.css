@@ -1,0 +1,46 @@
+.formulario-catalogo .accordion-header {
+    display: flex;
+    max-height: 10px !important;
+    min-height: 10px !important;
+    height: 10px !important;
+    align-items: baseline !important;
+    padding-bottom: 60px !important;
+    width: 350px !important;
+    border: solid 1px #9C9C9C;
+    border-radius: 8px;
+}
+
+.formulario-catalogo .accordion-header>.icon {
+    top: 6;
+}
+
+.formulario-catalogo h3 {
+    color: #021C51 !important;
+    font-size: 26px !important;
+    font-weight: 600;
+}
+
+
+.selection {
+    justify-content: space-between;
+    align-items: center;
+    border: solid 1px #9C9C9C;
+    padding: 5 8;
+    margin: 5;
+    max-height: 39px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.formulario-catalogo .agora-accordion .accordion-body.accordion-body-block {
+    padding: 0;
+    background: #FAFAFA;
+}
+
+.formulario-catalogo .bg-color-1 {
+    background: #FAFAFA;
+}
+
+.formulario-catalogo .custom-accordion .accordion-header {
+    width: 590px !important;
+}

@@ -31,6 +31,14 @@ export const Text: React.FC<TextProps> = ({
 }) => {
   return (
     <Width width={width}>
+      <style>
+        {`
+          .input-label-wrapper {
+            margin-bottom: 8px !important;
+          }
+        `}
+      </style>
+
       <InputText
         {...props}
         {...register(props.name!, {

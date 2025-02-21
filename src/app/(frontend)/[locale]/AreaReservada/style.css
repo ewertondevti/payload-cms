@@ -1,0 +1,65 @@
+.reserved-area h3 {
+    color: #021C51;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.reserved-area h1 {
+    color: #021C51;
+    font-weight: bold;
+    font-size: 36px;
+}
+
+.reserved-area .subtitle {
+    color: #757575;
+    font-size: 14px;
+}
+
+.reserved-area .title {
+    margin-bottom: 70px;
+}
+
+.grid-container {
+    display: grid !important;
+    grid-template-columns: auto auto auto auto;
+    gap: 32px;
+}
+
+.reserved-area .avaagora-avatar,
+.reserved-area .agora-container {
+    min-width: 100px !important;
+    width: 100px !important;
+    min-height: 100px !important;
+    height: 100px !important;
+}
+
+.reserved-area .avatar-initials {
+    font-size: 48px !important;
+    color: #021C51 !important;
+}
+
+.icon-color-1{
+    fill: #021C51 !important;
+}
+
+.reserved-area .agora-pill{
+    color: #021C51;
+}
+
+
+
+@media (min-width: 1280px) {
+    .reserved-area .actions .filledCard .agora-card-collection {
+        max-height: 200px !important;
+        min-height: 200px !important;
+    }
+    .reserved-area .actions .agora-card-collection .card-info .anchor-container {
+        position: absolute !important;
+        right: 0 !important;
+    }
+    .reserved-area .agora-pill{
+        min-width: 100px;
+        padding: 7px 15px;
+        margin-left: 5px;
+    }
+}

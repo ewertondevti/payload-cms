@@ -19,7 +19,6 @@ import {
 import path from 'path'
 import { buildConfig } from 'payload'
 import sharp from 'sharp' // editor-import
-import { fileURLToPath } from 'url'
 
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { Page, Post } from 'src/payload-types'
@@ -35,19 +34,26 @@ import { revalidateRedirects } from './hooks/revalidateRedirects'
 
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 import { searchFields } from '@/search/fieldOverrides'
+import { fileURLToPath } from 'url'
 import { AddressBlock } from './blocks/Form/Address/AddressBlock'
+import { BirthCertificateBlock } from './blocks/Form/BirthCertificateData/BirthCertificateDataBlock'
 import { BirthdateBlock } from './blocks/Form/Birthdate/BirthdateBlock'
 import { BirthplaceBlock } from './blocks/Form/Birthplace/BirthplaceBlock'
+import { ContactBlock } from './blocks/Form/ContactData/ContactDataBlock'
 import { CustomTextfieldBlock } from './blocks/Form/CostumTextfield/CustomTextfieldBlock'
 import { CustomMessageBlock } from './blocks/Form/CustomMessage/CustomMessageBlock'
 import { CustomNumberBlock } from './blocks/Form/CustomNumber/CustomNumberBlock'
+import { DropdownBlock } from './blocks/Form/Dropdown/DropdownBlock'
 import { GroupBlock } from './blocks/Form/Group/GroupBlock'
+import { HeaderBlock } from './blocks/Form/Header/HeaderBlock'
+import { IdBlock } from './blocks/Form/IdData/IdDataBlock'
 import { IdentificationDataBlock } from './blocks/Form/IdentificationData/IdentificationDataBlock'
 import { NationalityBlock } from './blocks/Form/Nationality/NationalityBlock'
 import { NifBlock } from './blocks/Form/Nif/NifBlock'
 import { PhoneNumberBlock } from './blocks/Form/PhoneNumber/PhoneNumberBlock'
 import { PreLoadExample1Block } from './blocks/Form/PreloadExample1/PreLoadExample1'
 import { RadioButtonBlock } from './blocks/Form/RadioButtonGroup/RadioButtonGroupBlock'
+import { RequestorBlock } from './blocks/Form/RequestorData/RequestorDataBlock'
 import { SelectWithApiBlock } from './blocks/Form/SelectWithAPI/SelectWithApiBlock'
 import { TextAreaBlock } from './blocks/Form/Textarea/TextAreaBlock'
 import { TitleBlock } from './blocks/Form/Title/TitleBlock'
@@ -203,7 +209,13 @@ export default buildConfig({
         NifBlock,
         RadioButtonBlock,
         CustomTextfieldBlock,
-        AdressBlock: AddressBlock,
+        AddressBlock,
+        BirthCertificateBlock,
+        ContactBlock,
+        IdBlock,
+        RequestorBlock,
+        HeaderBlock,
+        DropdownBlock,
         NationalityBlock,
         PhoneNumberBlock,
         PreLoadExample1Block,

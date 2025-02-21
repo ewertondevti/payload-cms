@@ -1,0 +1,43 @@
+.filledCard .agora-card-collection {
+    max-height: 300px !important;
+    min-height: 250px !important;
+}
+
+.filledCard .agora-card-collection .custom-svg-container {
+    padding-bottom: 32px !important;
+    padding-top: 32px !important;
+}
+
+/* 
+.FilledCard .actions .agora-card-collection .card-info {
+    display: flex !important;
+    justify-content: center;
+    text-align: left;
+} */
+/* 
+.FilledCard .actions .agora-card-collection .card-info .anchor-container{
+    position: absolute;
+    top: 0;
+    right: 0;
+} 
+
+
+
+.FilledCard .actions .custom-svg-container {
+    max-height: 100px !important;
+}
+
+.custom-card {
+    display: inline-flex;
+    background-color: #002B82;
+    max-height: 100px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+@media (min-width: 1280px) {
+    .FilledCard .agora-card-collection {
+        min-height: 50px !important;
+        max-height: 60px !important;
+    }
+} */

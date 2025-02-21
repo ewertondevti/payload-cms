@@ -1,0 +1,52 @@
+.sidebar-catalog {
+    background-color: #021C51;
+    width: 234px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#menu {
+    position: relative;
+    bottom: 30%;
+    flex-direction: column;
+    height: 200px;
+    margin: 8;
+}
+
+#menu .icon,
+#settings .icon {
+    fill: white;
+    height: 30px;
+    width: 30px;
+    margin: 32;
+}
+
+.sidebar-catalog #settings {
+    position: absolute;
+    top: 100%;
+    flex-direction: column;
+    height: 200px;
+    margin: 8;
+    margin-top: 64;
+}
+
+.sidebar-catalog .catalogo-logo {
+    position: absolute;
+    left: 30px;
+    top: 20px;
+
+}
+
+.sidebar-catalog .catalogo {
+    margin: 48px;
+}
+
+.sidebar-catalog .catalogo h1 {
+    color: #373536;
+    font-size: 24px;
+    margin-bottom: 5px;
+
+}

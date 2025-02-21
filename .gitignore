@@ -11,6 +11,11 @@
 
 /.vscode/*
 
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+
 # testing
 /coverage
 
@@ -41,5 +46,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# media files
-/public/media/*
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+ 

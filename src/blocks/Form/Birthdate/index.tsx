@@ -67,6 +67,14 @@ export const Birthdate: FC<
 
   return (
     <Width width={100}>
+      <style>
+        {`
+          .agora-input-select-label {
+            margin-bottom: 8px !important;
+          }
+        `}
+      </style>
+
       <div className="flex gap-[32px]">
         <RadioButtons
           {...props}

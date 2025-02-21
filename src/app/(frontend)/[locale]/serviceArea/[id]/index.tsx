@@ -1,8 +1,12 @@
 'use client'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState, useRef } from 'react'
 import { StepperBlock } from '@/blocks/Stepper/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
+import PaymentBlock from '@/blocks/Payment/Component'
+import SubmissionBlock from '@/blocks/Submission/Component'
+import SummaryBlock from '@/blocks/Summary/Component'
+import { useLoaderDialogContext } from '@ama-pt/agora-design-system'
 import {
   getUserServiceOrder,
   getServiceOrderById,
@@ -13,7 +17,7 @@ import {
   getGetStepInfoServiceOrder,
   postCreateStepServiceOrder,
   postUpdateStepServiceOrder,
-//   submitSteps,
+  //   submitSteps,
   updateStepsByArgs,
   getStepsByArgs,
 } from '@/app/(frontend)/api'
@@ -22,16 +26,30 @@ import { Data, TypedLocale } from 'payload'
 import { redirect } from 'next/navigation'
 import { FormProvider, useForm } from 'react-hook-form'
 import { buildInitialFormState } from '@/blocks/Form/buildInitialFormState'
+import { handlePaymentSubmit } from '@/helpers/paymentHelpers'
+import { useToast } from '@/hooks/useToast'
 // import { useSearchParams } from 'next/navigation'
+
+import { serviceStepComponents } from './serviceStepComponents'
+
+
 
 type BlockTypeProps = {
   content: string
   form: string
+  payment: string
+  submission: string
+  summary: string
+  exemplo: string
 }
 
 const BlockType: BlockTypeProps = {
   content: 'content-service-steps',
   form: 'form-service-steps',
+  payment: 'payment-service-steps',
+  submission: 'submission-service-steps',
+  summary: 'summary-service-steps',
+  exemplo: 'exemplo1ServiceSteps',
 }
 
 type Args = {
@@ -44,6 +62,7 @@ type Args = {
 }
 
 export default function ServiceStep({ params }: Args) {
+  const { showLoader, hideLoader } = useLoaderDialogContext()
   const [blockType, setBlockType] = useState(false)
   const [steps, setSteps]: any = useState(undefined)
   const [stepIndex, setStepIndex] = useState(0)
@@ -52,8 +71,25 @@ export default function ServiceStep({ params }: Args) {
   const [serviceOrder, setServiceOrder]: any = useState({})
   const [isNew, setIsNew] = useState(true)
   const [previousStepId, setPreviousStepId] = useState(0)
-
-
+  const [paymentMethod, setPaymentMethod] = useState('')
+  const [showLoading, setShowLoading] = useState(false)
+  const [paymentStatus, setPaymentStatus] = useState('')
+  const validateFields = useRef<(() => Promise<boolean>) | null>(null)
+  const { showCustomToast } = useToast()
+  const [data, setData] = useState({
+    mensagem: {
+      codigo: 0,
+      descricao: '',
+      idMensagemExterna: '',
+    },
+    dadosPesquisa: {
+      entidadeNumero: '',
+      referencia: '',
+      montante: '',
+      transaccaoId: '',
+      dataExpiracao: new Date(),
+    },
+  })
 
   const formMethods = useForm({
     defaultValues: buildInitialFormState(steps?.steps[stepIndex]?.form?.fields),
@@ -65,31 +101,12 @@ export default function ServiceStep({ params }: Args) {
     register,
   } = formMethods
 
-
   useEffect(() => {
     handleGetServiceContent()
   }, [])
 
-  // const [formData, setFormData] = useState([])
-
-  // useEffect(() => {
-  //     // Example JSON data
-  //     const jsonData = '{"submissionData":[{"field":"texto","value":"aaaaa"}]}';
-  //     const parsedData = JSON.parse(jsonData);
-
-  //     // Update form state with parsed data
-  //     const updatedFormData = {};
-  //     parsedData.submissionData.forEach(item => {
-  //       updatedFormData[item.field] = item.value;
-  //     });
-
-  //     setFormData(updatedFormData);
-  //   }, []);
-
-  //   const router = useRouter()
-  //   const searchParams = useSearchParams()
   const userId = 'user1'
-  //   const serviceId = searchParams.get("id")
+
   type StepsProps = {
     id: number
     userId: string
@@ -99,72 +116,45 @@ export default function ServiceStep({ params }: Args) {
     stepStatus: string //'default' | 'disabled' | 'current' | 'done' | 'draft' | 'error'
   }
 
-//   const handleFillSavedFields = async (stepIndex: number) => {
-//     const ids: any = await params
-
-//     // TODO: experiencia retirar
-//     return
-
-//     let stepData: any = await getGetStepInfoServiceOrder({
-//       userId,
-//       serviceId: ids.id,
-//       stepIndex,
-//       orderId: serviceOrder?.id,
-//     })
-
-//     setStepData(stepData)
-
-//     if (stepData) {
-//       try {
-//         const parsedFormData = JSON.parse(stepData.formdata)
-//         steps.steps[stepIndex]?.form?.fields.forEach((field: any) => {
-//           const campo = parsedFormData?.filter((f: any) => f.field === field.name)
-
-//           if (campo?.length > 0) {
-//             field.defaultValue = campo[0].value
-//             field.value = campo[0].value
-//           }
-//           // blocos compostos
-//         })
-//         setSteps({ ...steps })
-//       } catch (error) {
-//         console.error('Erro ao parsear formdata:', error)
-//       }
-//     }
-//   }
-
   const handleGetServiceContent = async () => {
-    const ids: any = await params
-    const user = 'user1'
+    setShowLoading(true)
+    try {
+      const ids: any = await params
+      const user = 'user1'
 
-    // Get services Orders
-    const userServiceOrder = await getUserServiceOrder({ userId: user, serviceId: ids.id })
+      // Get services Orders
+      const userServiceOrder = await getUserServiceOrder({ userId: user, serviceId: ids.id })
 
-    // if exists gets the order and the service steps
-    if (userServiceOrder) {
-      //   const serviceOrders = await getServiceOrderById(+ids?.id) // modify the '1' to the correct param
-      const serviceOrders = await getServiceOrderById(userServiceOrder.id)
-      setServiceOrder(serviceOrders)
-      setIsNew(false)
-    } else {
-      // if not
-      const newOrder = {
-        userId: user,
-        serviceId: ids?.id,
-        stepId: `${stepIndex}`,
-        statusText: 'string',
-        status: `O`,
-        paymentText: 'string',
-        payment: 'W',
+      // if exists gets the order and the service steps
+      if (userServiceOrder) {
+        //   const serviceOrders = await getServiceOrderById(+ids?.id) // modify the '1' to the correct param
+        const serviceOrders = await getServiceOrderById(userServiceOrder.id)
+        setServiceOrder(serviceOrders)
+        setIsNew(false)
+      } else {
+        // if not
+        const newOrder = {
+          userId: user,
+          serviceId: ids?.id,
+          stepId: `${stepIndex}`,
+          statusText: 'string',
+          status: `O`,
+          paymentText: 'string',
+          payment: 'W',
+        }
+        setIsNew(true)
+        let resultado = await postNewServiceOrder(newOrder)
+
+        setServiceOrder(resultado)
       }
-      setIsNew(true)
-      let resultado = postNewServiceOrder(newOrder)
-
-      setServiceOrder(resultado)
+      const serviceSteps: any = await getServiceStepsById(ids?.id)
+      setSteps(serviceSteps?.steps)
+      setPreviousStepId(stepIndex)
+    } catch (error) {
+      console.error('Error fetching service content:', error)
+    } finally {
+      setShowLoading(false)
     }
-    const serviceSteps: any = await getServiceStepsById(ids?.id)
-    setSteps(serviceSteps?.steps)
-    setPreviousStepId(stepIndex)
   }
 
   const changeToNextStep = (nextStep: any) => {
@@ -173,7 +163,7 @@ export default function ServiceStep({ params }: Args) {
     // console.log("changeToNextStep serviceOrder:", serviceOrder)
 
     // console.log("steps.steps[stepIndex]?.form?.fields: ", steps?.steps[stepIndex]?.form?.fields)
-    
+
     const updateOrder = {
       id: serviceOrder?.id,
       userId: serviceOrder?.userId,
@@ -195,7 +185,7 @@ export default function ServiceStep({ params }: Args) {
     // } else {
     // }
 
-    // console.log("nextStep", nextStep)
+    console.log("nextStep", nextStep)
 
     // const indexBeforeChange = stepIndex
 
@@ -224,23 +214,20 @@ export default function ServiceStep({ params }: Args) {
     }
 
     const argsSteps = await getStepsByArgs(
-    //   `${previousStepId}`,
+      //   `${previousStepId}`,
       stepIndex.toString(),
       serviceOrder?.serviceId,
       serviceOrder?.userId,
       serviceOrder?.id,
     )
 
-    if (argsSteps)
-    {
+    if (argsSteps) {
       await updateStepsByArgs({ ...stepsToSubmit })
-    }
-    else
-    {
+    } else {
       setPreviousStepId(stepIndex)
       const data = await postCreateStepServiceOrder(stepsToSubmit)
     }
-    
+
     // await submitSteps(stepsToSubmit)
 
     // setStepIndex(0)
@@ -248,43 +235,32 @@ export default function ServiceStep({ params }: Args) {
     redirect('/services/details/' + serviceOrder?.serviceId)
   }
 
-//   const handleSubmitForm = () => {
-//     const stepsToSubmit = {
-//       userId: serviceOrder?.userId,
-//       serviceId: serviceOrder?.serviceId,
-//       step: `${stepIndex}`,
-//       formData: 'string', //substituir pelo conteudo do formulário
-//     }
-//     submitSteps(stepsToSubmit)
-//   }
-
   let richText
   if (steps?.steps[stepIndex]?.blockType == BlockType.content) {
     richText = { richText: { root: steps?.steps[stepIndex]?.content.root }, size: 'full' }
   }
 
-  const onSubmitStep = useCallback(    
+  const onSubmitStep = useCallback(
     async (data: Data) => {
-   
-        // console.log("onSubmitStep", stepIndex)
-        // console.log("serviceOrder", serviceOrder)
+      console.log('data: ', data)
+      // console.log("onSubmitStep", stepIndex)
+      // console.log("serviceOrder", serviceOrder)
 
       const dataToSend = Object.entries(data).map(([name, value]) => ({
         field: name,
         value,
       }))
 
-      let serviceId = serviceOrder.serviceId
+      let serviceId = serviceOrder?.serviceId
       let stepData = await getGetStepInfoServiceOrder({
         userId,
         serviceId,
         stepIndex,
         orderId: serviceOrder?.id,
       })
-    //   console.log(stepData)
+      //   console.log(stepData)
 
-      if (!stepData)
-      {
+      if (!stepData) {
         const newStepOrder = {
           userId: userId,
           orderId: serviceOrder?.id,
@@ -305,9 +281,7 @@ export default function ServiceStep({ params }: Args) {
         // }
 
         // submitSteps(stepsToSubmit)
-      }
-      else
-      {
+      } else {
         const updatedStepOrder = {
           id: stepData.id,
           userId: userId,
@@ -322,10 +296,91 @@ export default function ServiceStep({ params }: Args) {
         postUpdateStepServiceOrder(updatedStepOrder)
       }
 
+      await handleGetServiceContent()
+
       stepIndex !== steps.steps.length - 1 && changeToNextStep(stepIndex + 1)
     },
     [stepIndex, steps, serviceOrder, serviceOrder?.id, userId],
   )
+
+  const StepRenderer = (blockType: string) => {
+    switch (blockType) {
+      case BlockType.content:
+        return <ContentBlock blockType="content" columns={[richText]} />
+      case BlockType.payment:
+        return (
+          <FormProvider {...formMethods}>
+          <PaymentBlock
+            setPaymentMethod={setPaymentMethod}
+            validateFields={validateFields}
+            userId={userId}
+            serviceId={serviceOrder?.serviceId}
+            orderId={serviceOrder?.id}
+            services={[{ description: steps.steps[2]?.title, value: '10' }]}
+          />
+          </FormProvider>
+        )
+      case BlockType.submission:
+        return (
+          <SubmissionBlock
+            data={data}
+            paymentMethod={paymentMethod}
+            paymentStatus={paymentStatus}
+            services={[{ description: steps.steps[2]?.title, value: '10' }]}
+            userId={userId}
+            serviceId={serviceOrder?.serviceId}
+            orderId={serviceOrder?.id}
+            requestNumber="125 678 554"
+          />
+        )
+        case BlockType.summary:
+        return (
+          <SummaryBlock
+            services={steps.steps[2]?.title}
+            userId={userId}
+            serviceId={serviceOrder?.serviceId}
+            orderId={serviceOrder?.id}
+          />
+        )
+      default:
+
+          // No caso de ser dinâmico:
+          const ServiceStepComponent: React.FC<any> = serviceStepComponents?.[blockType]
+          
+          if (ServiceStepComponent) {
+            return (
+              <FormProvider {...formMethods}>
+                <ServiceStepComponent
+                  {...steps.steps[stepIndex]}
+                  {...formMethods}
+                  control={control}
+                  errors={errors}
+                  register={register}
+                  // changeToNextStep={changeToNextStep}
+                  // handleSaveAndExit={handleSaveAndExit}
+                  stepIndex={stepIndex}
+                  steps={steps}
+                  blockType={blockType}
+                />
+              </FormProvider>
+            )
+          }
+
+        return <div></div>
+    }
+  }
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [stepIndex])
+
+  useEffect(() => {
+    if (showLoading) {
+      showLoader({})
+    } else {
+      hideLoader()
+    }
+  }, [showLoading])
 
   return (
     <>
@@ -335,37 +390,28 @@ export default function ServiceStep({ params }: Args) {
           handleNextStep={(stepId: number) => changeToNextStep(stepId)}
           currentStep={stepIndex}
         />
-        {steps && (
-          <div>
-            {steps.steps[stepIndex]?.blockType == BlockType.content ? (
-              <ContentBlock blockType={'content'} columns={[richText]} />
-            ) : (
-                <div></div>
-            )}
-          </div>
-        )}
-    
+        {steps && <div>{StepRenderer(steps.steps[stepIndex]?.blockType)}</div>}
+
         <FormBlock
-            enableIntro={false}
-            form={steps?.steps[stepIndex]?.form}
-            // onSubmitOverride={onSubmitStep}
-            onSubmitOverride={onSubmitStep}
-            showSubmitButton={false}
-            stepIndex={stepIndex}
-            />
+          enableIntro={false}
+          form={steps?.steps[stepIndex]?.form}
+          // onSubmitOverride={onSubmitStep}
+          onSubmitOverride={onSubmitStep}
+          showSubmitButton={false}
+          stepIndex={stepIndex}
+        />
       </div>
 
-
       {steps && (
-        <div className="flex my-16">
+        <div className="flex my-16 px-8">
           <div
-            className="flex mt-12"
+            className="flex"
             style={{ display: 'flex-around', justifyContent: 'center', width: '100%' }}
           >
-            {stepIndex != 0 && (
+            {stepIndex !== 0 && steps.steps[stepIndex]?.blockType !== BlockType.submission && (
               <>
                 <Button
-                  children={'Anterior'}
+                  children="Anterior"
                   hasIcon={true}
                   onClick={() => changeToNextStep(stepIndex - 1)}
                   leadingIcon="agora-line-arrow-left-circle"
@@ -373,46 +419,36 @@ export default function ServiceStep({ params }: Args) {
                 />
                 <Button
                   style={{ marginLeft: 20, marginRight: 20 }}
-                  children={'Guardar e Sair'}
+                  children="Guardar e Sair"
                   appearance="outline"
                   hasIcon={false}
                   onClick={() => handleSaveAndExit()}
                 />
-
-                {steps.steps[stepIndex]?.blockType == BlockType.content ? (
-                  <Button
-                    children={'Cancelar'}
-                    appearance="outline"
-                    variant="danger"
-                    hasIcon={false}
-                    //   onClick={() => {
-                    //     handleCancelOrder()
-                    //   }}
-                  />
-                ) : (
-                  <Button
-                    children={'Cancelar'}
-                    appearance="outline"
-                    variant="danger"
-                    hasIcon={false}
-                    form={steps.steps[stepIndex]?.form?.id}
-                    type="reset"
-                    //   onClick={() => {
-                    //     handleCancelOrder()
-                    //   }}
-                  />
-                )}
+                <Button
+                  children="Cancelar"
+                  appearance="outline"
+                  variant="danger"
+                  hasIcon={false}
+                  form={
+                    steps.steps[stepIndex]?.blockType === BlockType.content
+                      ? undefined
+                      : steps.steps[stepIndex]?.form?.id
+                  }
+                  type={
+                    steps.steps[stepIndex]?.blockType === BlockType.content ? undefined : 'reset'
+                  }
+                />
               </>
             )}
           </div>
 
-          <div className="flex mt-12 " style={{ justifyContent: 'flex-end', paddingRight: 50 }}>
+          <div className="flex" style={{ justifyContent: 'flex-end', paddingRight: 50 }}>
             {/* No caso de já estar steps com informação, será continuar em vez de começar */}
-
-            {steps.steps[stepIndex]?.blockType == BlockType.content ? (
+            { ((steps.steps[stepIndex]?.blockType == BlockType.content) ||
+               (steps.steps[stepIndex]?.blockType == BlockType.summary) || 
+               (steps.steps[stepIndex]?.blockType == BlockType.exemplo)
+              ) ? (
               <Button
-                //    form={steps.steps[stepIndex]?.form?.id}
-                //    type="submit"
                 children={
                   stepIndex == 0
                     ? steps && !isNew
@@ -423,9 +459,6 @@ export default function ServiceStep({ params }: Args) {
                       : 'Seguinte'
                 }
                 hasIcon={true}
-                //   onSubmit={() => {
-                //     onSubmitStep
-                //   }}
                 onClick={() => {
                   stepIndex !== steps.steps.length - 1 && changeToNextStep(stepIndex + 1)
 
@@ -436,10 +469,57 @@ export default function ServiceStep({ params }: Args) {
                 leadingIcon="agora-line-arrow-right-circle"
                 leadingIconHover="agora-solid-arrow-right-circle"
               />
+            ) : steps.steps[stepIndex]?.blockType === BlockType.submission ? (
+              <Button
+                children="Ir para Área Reservada"
+                hasIcon={true}
+                onClick={() => redirect('/AreaReservada')}
+                leadingIcon="agora-line-arrow-right-circle"
+                leadingIconHover="agora-solid-arrow-right-circle"
+              />
+            ) : steps.steps[stepIndex]?.blockType === BlockType.payment ? (
+              <Button
+                form={steps.steps[stepIndex]?.form?.id}
+                children="Seguinte"
+                hasIcon={true}
+                type="submit"
+                onClick={async () => {
+                  if (!paymentMethod.length) {
+                    showCustomToast(
+                      {
+                        id: +new Date(),
+                        title: 'Selecione um tipo de pagamento',
+                        description:
+                          'Para prosseguir é necessário selecionar um método de pagamento.',
+                        type: 'failure',
+                        closeLabel: 'Close toast',
+                      },
+                      5000,
+                    )
+                  } else {
+                    handleSubmit((data) => {
+                      onSubmitStep(data)
+                      handlePaymentSubmit(
+                        paymentMethod,
+                        setShowLoading,
+                        setData,
+                        setPaymentStatus,
+                        stepIndex,
+                        steps,
+                        changeToNextStep,
+                        showCustomToast,
+                      )
+                    })()
+                  }
+                }}
+                leadingIcon="agora-line-arrow-right-circle"
+                leadingIconHover="agora-solid-arrow-right-circle"
+              />
+            // ) : steps.steps[stepIndex]?.blockType === BlockType.exemplo ? (
+            //   <></>
             ) : (
               <Button
                 form={steps.steps[stepIndex]?.form?.id}
-                // form="F1"
                 type="submit"
                 children={
                   stepIndex == 0
@@ -451,14 +531,6 @@ export default function ServiceStep({ params }: Args) {
                       : 'Seguinte'
                 }
                 hasIcon={true}
-                //   onSubmit={() => {
-                //     onSubmitStep
-                //   }}
-                //   onClick={() => {
-                //         onSubmitStep
-                //         stepIndex !== steps.steps.length - 1 && changeToNextStep(stepIndex + 1)
-                //         }
-                //     }
                 leadingIcon="agora-line-arrow-right-circle"
                 leadingIconHover="agora-solid-arrow-right-circle"
               />

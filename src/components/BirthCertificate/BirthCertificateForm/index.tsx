@@ -95,7 +95,6 @@ export const BirthCertificateForm: FC<Props> = ({ form }) => {
                   key="form"
                   onSubmit={handleSubmit(onSubmit)}
                   className="flex flex-wrap box-border gap-[32px] w-[800px]"
-                  noValidate
                 >
                   {form.fields?.map((field) => {
                     const Field: FC<any> = fields[field.blockType]

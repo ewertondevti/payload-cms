@@ -101,7 +101,7 @@ export const SelectWithApi: FC<SelectWithAPIProps> = ({
           }
 
           .agora-input-select-label {
-            margin-bottom: 2rem !important;
+            margin-bottom: 8px !important;
           }
         `}
       </style>

@@ -1,0 +1,374 @@
+.bg-color-1 {
+    background-color: #FAFAFA;
+}
+
+#titles h3{
+    color: #021C51 !important;
+    font-size: 26px !important;.bg-color-1 {
+        background-color: #FAFAFA;
+    }
+    
+    #titles h3{
+        color: #021C51 !important;
+        font-size: 26px !important;
+        font-weight: 600;
+    }
+    
+    #service-details h6 {
+        color: #021C51 !important;
+        font-size: 16px !important;
+        font-weight: 600;
+    }
+    
+    #estrutura .agora-input-text{
+        margin-top: 50px;
+    
+    }
+    
+    #service-details .icon-m{    
+        fill: #323232 ;
+    }
+    
+    .about-section {
+        height: 60px;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .about-section .version,
+    .about-section .history {
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    /* .about-section .version p {
+        margin-right: 40px;
+    } */
+    
+    .about-section .history p {
+        margin-right: 10px;
+    }
+    
+    .about-section .history .icon {
+        fill: #323232;
+    }
+    
+    .details .agora-input-text {
+        max-width: 50%;
+    }
+    
+    .details .description {
+        min-width: 50vw;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .catalog-structure {
+        justify-content: space-between;
+        max-width: 70%;
+    }
+    
+    .catalog-structure .inputs {
+        justify-content: space-between;
+    }
+    
+    #service-details  .agora-input-select-control,
+    #service-details  .input-wrapper,
+    #service-details  .agora-input-text,
+    #service-details  .agora-input-number {
+        height: 35px !important;
+        margin-top: 5;
+    }
+    .inputs .agora-input-text{
+        min-width: 16vw;
+    }
+    
+    #service-details  .input-number-controls {
+        visibility: hidden;
+    }
+    
+    #service-details  .agora-input-number,
+    #caracteristicas-servico .agora-input-text {
+        max-width: 89px;
+    }
+    
+    #service-details  .agora-date-picker .input-wrapper {
+        width: 200px;
+    }
+    
+    .states {
+        justify-content: space-around;
+    }
+    
+    .dates,
+    .activation {
+        align-items: center;
+    }
+    
+    
+    
+    .activation .mark {
+        border-color: #D0D8DF !important;
+        max-width: 20px !important;
+        max-height: 20px !important;
+        min-width: 10px !important;
+        min-height: 10px !important;
+    }
+    
+    #chkbx .mark {
+        border-radius: 20px;
+    }
+    
+    .dates p {
+        margin-right: 10;
+    }
+    
+    .justify-component {
+        justify-content: space-between;
+    }
+    
+    .align-center {
+        align-items: center !important;
+    }
+    
+    .prazos {
+        justify-content: space-between !important;
+    }
+    
+    strong {
+        font-weight: 600 !important;
+    }
+    
+    .toggles .agora-btn {
+        background-color: white;
+        color: #373536;
+        border: solid 1px #373536;
+        border-radius: 30px;
+        min-width: 110px;
+        margin-left: 16px;
+        padding: 0;
+        min-height: 20px !important;
+        max-height: 20px !important;
+        height: 20px !important;
+    }
+    
+    
+    .toggles .agora-btn:hover {
+        background-color: #373536;
+        color: white;
+    }
+    
+    .custom-toogle-1, .custom-toogle-2{
+        min-height: 30px !important;
+        max-height: 40px !important;
+        width: 60 !important;
+        padding: 0;
+        margin:0;
+    }
+    
+    .custom-toogle-1{
+        border-top-left-radius: 30px ;
+        border-bottom-left-radius: 30px ;
+    }
+    
+    .custom-toogle-2{
+        border-top-right-radius: 30px ;
+        border-bottom-right-radius: 30px ;
+    }
+    
+    @media (min-width: 1280px) {
+        .details .description .agora-input-text {
+            min-width: 50vw !important;
+        }
+    
+        #isencoes .agora-input-select-control-wrapper,
+        .servico .agora-input-select-control-wrapper {
+            min-width: 580px !important;
+            max-width: 580px !important;
+            width: 100vw !important;
+        }
+    
+        #documentos .agora-input-select {
+            min-width: 500px !important;
+            max-width: 500px !important;
+            width: 100vw !important;
+        }
+    }
+    font-weight: 600;
+}
+
+#service-details h6 {
+    color: #021C51 !important;
+    font-size: 16px !important;
+    font-weight: 600;
+}
+
+
+#service-details .icon-m{    
+    fill: #323232 ;
+}
+
+.about-section {
+    height: 60px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about-section .version,
+.about-section .history {
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* .about-section .version p {
+    margin-right: 40px;
+} */
+
+.about-section .history p {
+    margin-right: 10px;
+}
+
+.about-section .history .icon {
+    fill: #323232;
+}
+
+.details .agora-input-text {
+    max-width: 50%;
+}
+
+.details .description {
+    min-width: 60vw;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.catalog-structure {
+    justify-content: space-between;
+}
+
+.catalog-structure .inputs {
+    justify-content: space-between;
+}
+
+#service-details  .agora-input-select-control,
+#service-details  .input-wrapper,
+#service-details  .agora-input-text,
+#service-details  .agora-input-number {
+    height: 35px !important;
+    margin-top: 5;
+}
+.inputs .agora-input-text{
+    min-width: 15vw;
+}
+
+#service-details  .input-number-controls {
+    visibility: hidden;
+}
+
+#service-details  .agora-input-number,
+#caracteristicas-servico .agora-input-text {
+    max-width: 89px;
+}
+
+#service-details  .agora-date-picker .input-wrapper {
+    width: 200px;
+}
+
+.states {
+    justify-content: space-around;
+}
+
+.dates,
+.activation {
+    align-items: center;
+}
+
+
+
+.activation .mark {
+    border-color: #D0D8DF !important;
+    max-width: 20px !important;
+    max-height: 20px !important;
+    min-width: 10px !important;
+    min-height: 10px !important;
+}
+
+#chkbx .mark {
+    border-radius: 20px;
+}
+
+.dates p {
+    margin-right: 10;
+}
+
+.justify-component {
+    justify-content: space-between;
+}
+
+.align-center {
+    align-items: center !important;
+}
+
+.prazos {
+    justify-content: space-between !important;
+}
+
+strong {
+    font-weight: 600 !important;
+}
+
+.toggles .agora-btn {
+    background-color: white;
+    color: #373536;
+    border: solid 1px #373536;
+    border-radius: 30px;
+    min-width: 110px;
+    margin-left: 16px;
+    padding: 0;
+    min-height: 20px !important;
+    max-height: 20px !important;
+    height: 20px !important;
+}
+
+
+.toggles .agora-btn:hover {
+    background-color: #373536;
+    color: white;
+}
+
+.custom-toogle-1, .custom-toogle-2{
+    min-height: 30px !important;
+    max-height: 40px !important;
+    width: 60 !important;
+    padding: 0;
+    margin:0;
+}
+
+.custom-toogle-1{
+    border-top-left-radius: 30px ;
+    border-bottom-left-radius: 30px ;
+}
+
+.custom-toogle-2{
+    border-top-right-radius: 30px ;
+    border-bottom-right-radius: 30px ;
+}
+
+@media (min-width: 1280px) {
+    .details .description .agora-input-text {
+        min-width: 50vw !important;
+    }
+
+    #isencoes .agora-input-select-control-wrapper,
+    .servico .agora-input-select-control-wrapper {
+        min-width: 580px !important;
+        max-width: 580px !important;
+        width: 100vw !important;
+    }
+
+    #documentos .agora-input-select {
+        min-width: 500px !important;
+        max-width: 500px !important;
+        width: 100vw !important;
+    }
+}

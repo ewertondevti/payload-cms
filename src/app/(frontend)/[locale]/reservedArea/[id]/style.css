@@ -1,0 +1,67 @@
+.reserved-area h3 {
+    color: #021C51;
+    font-weight: bold;
+    font-size: 26px;
+}
+.reserved-area .subtitle {
+    color: #757575;
+    font-size: 14px;
+}
+
+.reserved-area .title {
+    margin-bottom: 70px;
+}
+.user-area .avatar-name h2 {
+    font-weight: bold;
+    color: #021C51;
+    font-size: 48px;
+}
+
+.grid-container {
+    display: grid !important;
+    grid-template-columns: auto auto auto auto;
+    gap: 32px;
+}
+
+.label-container {
+    color: #021C51 !important;
+}
+
+@media (min-width: 1280px){
+   .actions .agora-card-collection {
+        display: flow;
+        min-height: 100px !important;
+        min-width: 400px !important;
+    }
+    .actions .agora-card-collection .anchor-container{
+        position: relative;
+        margin-top: -20%;
+        margin-left: 100%;
+    }
+    .actions .agora-card-collection .custom-svg-container{
+       padding-top: 32px !important;
+       padding-bottom: 32px !important;
+    }
+}
+
+.agora-avatar{
+    background-color: #E5EEFF !important;
+  
+}
+.avatar-initials{
+    font-size: 5rem !important;
+    color: #021C51 !important;
+}
+
+.custom-pill{
+    justify-content: space-around;
+    color: white;
+    width: 40%;
+    background-color: #E5EEFF;
+    border-radius: 30px;
+    padding: 10px;
+    margin: 10px;
+}
+.custom-pill p {
+    color: #0D4C75;
+}

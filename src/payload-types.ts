@@ -636,6 +636,56 @@ export interface Form {
             label?: string | null;
             id?: string | null;
             blockName?: string | null;
+            blockType: 'birthCertificateData';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'contactData';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'idData';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'requestorData';
+          }
+        | {
+            main: boolean;
+            title: string;
+            subtitle?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'header';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            options?:
+              | {
+                  label: string;
+                  value: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'dropdown';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            id?: string | null;
+            blockName?: string | null;
             blockType: 'nationality';
           }
         | {
@@ -681,9 +731,218 @@ export interface Form {
         | {
             title: string;
             fields?:
-              | {
-                  id?: string | null;
-                }[]
+              | (
+                  | {
+                      richText?: {
+                        root: {
+                          type: string;
+                          children: {
+                            type: string;
+                            version: number;
+                            [k: string]: unknown;
+                          }[];
+                          direction: ('ltr' | 'rtl') | null;
+                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                          indent: number;
+                          version: number;
+                        };
+                        [k: string]: unknown;
+                      } | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'customMessage';
+                    }
+                  | {
+                      name: string;
+                      label?: string | null;
+                      defaultValue?: string | null;
+                      placeholder?: string | null;
+                      min?: number | null;
+                      max?: number | null;
+                      required?: boolean | null;
+                      disabled?: boolean | null;
+                      readOnly?: boolean | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'customNumber';
+                    }
+                  | {
+                      name: string;
+                      label?: string | null;
+                      width?: number | null;
+                      defaultValue?: string | null;
+                      required?: boolean | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'nif';
+                    }
+                  | {
+                      name: string;
+                      label?: string | null;
+                      options?:
+                        | {
+                            label: string;
+                            value: string;
+                            id?: string | null;
+                          }[]
+                        | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'radioButtons';
+                    }
+                  | {
+                      name: string;
+                      label?: string | null;
+                      defaultValue?: string | null;
+                      placeholder?: string | null;
+                      icon?: string | null;
+                      width?: number | null;
+                      minLength?: number | null;
+                      maxLength?: number | null;
+                      pattern?: string | null;
+                      errorMessage?: string | null;
+                      required?: boolean | null;
+                      disabled?: boolean | null;
+                      readOnly?: boolean | null;
+                      hideLabel?: boolean | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'customtext';
+                    }
+                  | {
+                      name: string;
+                      label?: string | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'address';
+                    }
+                  | {
+                      name: string;
+                      label?: string | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'birthCertificateData';
+                    }
+                  | {
+                      name: string;
+                      label?: string | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'contactData';
+                    }
+                  | {
+                      name: string;
+                      label?: string | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'idData';
+                    }
+                  | {
+                      name: string;
+                      label?: string | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'requestorData';
+                    }
+                  | {
+                      main: boolean;
+                      title: string;
+                      subtitle?: string | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'header';
+                    }
+                  | {
+                      name: string;
+                      label?: string | null;
+                      options?:
+                        | {
+                            label: string;
+                            value: string;
+                            id?: string | null;
+                          }[]
+                        | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'dropdown';
+                    }
+                  | {
+                      name: string;
+                      label?: string | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'nationality';
+                    }
+                  | {
+                      name: string;
+                      label?: string | null;
+                      placeholder?: string | null;
+                      searchInputPlaceholder?: string | null;
+                      required?: boolean | null;
+                      readOnly?: boolean | null;
+                      searchable?: boolean | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'phoneNumber';
+                    }
+                  | {
+                      simulatePreload?: boolean | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'preLoadExample1';
+                    }
+                  | {
+                      name: string;
+                      label?: string | null;
+                      required?: boolean | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'birthdate';
+                    }
+                  | {
+                      name: string;
+                      label?: string | null;
+                      defaultValue?: string | null;
+                      placeholder?: string | null;
+                      width?: number | null;
+                      required?: boolean | null;
+                      disabled?: boolean | null;
+                      readOnly?: boolean | null;
+                      hideLabel?: boolean | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'customtextarea';
+                    }
+                  | {
+                      label?: string | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'title';
+                    }
+                  | {
+                      name: string;
+                      label?: string | null;
+                      placeholder?: string | null;
+                      width?: number | null;
+                      apidomain?: string | null;
+                      required?: boolean | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'selectWithApi';
+                    }
+                  | {
+                      nifIsVisible?: boolean | null;
+                      nifIsRequired?: boolean | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'identificationData';
+                    }
+                  | {
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'birthplace';
+                    }
+                )[]
               | null;
             id?: string | null;
             blockName?: string | null;
@@ -870,6 +1129,45 @@ export interface Service {
               id?: string | null;
               blockName?: string | null;
               blockType: 'form-service-steps';
+            }
+          | {
+              title: string;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'payment-service-steps';
+            }
+          | {
+              title: string;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'submission-service-steps';
+            }
+          | {
+              title: string;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'summary-service-steps';
+            }
+          | {
+              title: string;
+              content: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              };
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'exemplo1ServiceSteps';
             }
         )[]
       | null;
@@ -1393,6 +1691,35 @@ export interface ServicesSelect<T extends boolean = true> {
                     id?: T;
                     blockName?: T;
                   };
+              'payment-service-steps'?:
+                | T
+                | {
+                    title?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              'submission-service-steps'?:
+                | T
+                | {
+                    title?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              'summary-service-steps'?:
+                | T
+                | {
+                    title?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              exemplo1ServiceSteps?:
+                | T
+                | {
+                    title?: T;
+                    content?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
             };
       };
   relatedservices?:
@@ -1580,6 +1907,62 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        birthCertificateData?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              id?: T;
+              blockName?: T;
+            };
+        contactData?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              id?: T;
+              blockName?: T;
+            };
+        idData?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              id?: T;
+              blockName?: T;
+            };
+        requestorData?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              id?: T;
+              blockName?: T;
+            };
+        header?:
+          | T
+          | {
+              main?: T;
+              title?: T;
+              subtitle?: T;
+              id?: T;
+              blockName?: T;
+            };
+        dropdown?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              options?:
+                | T
+                | {
+                    label?: T;
+                    value?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         nationality?:
           | T
           | {
@@ -1639,7 +2022,223 @@ export interface FormsSelect<T extends boolean = true> {
               fields?:
                 | T
                 | {
-                    id?: T;
+                    customMessage?:
+                      | T
+                      | {
+                          richText?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    customNumber?:
+                      | T
+                      | {
+                          name?: T;
+                          label?: T;
+                          defaultValue?: T;
+                          placeholder?: T;
+                          min?: T;
+                          max?: T;
+                          required?: T;
+                          disabled?: T;
+                          readOnly?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    nif?:
+                      | T
+                      | {
+                          name?: T;
+                          label?: T;
+                          width?: T;
+                          defaultValue?: T;
+                          required?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    radioButtons?:
+                      | T
+                      | {
+                          name?: T;
+                          label?: T;
+                          options?:
+                            | T
+                            | {
+                                label?: T;
+                                value?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                    customtext?:
+                      | T
+                      | {
+                          name?: T;
+                          label?: T;
+                          defaultValue?: T;
+                          placeholder?: T;
+                          icon?: T;
+                          width?: T;
+                          minLength?: T;
+                          maxLength?: T;
+                          pattern?: T;
+                          errorMessage?: T;
+                          required?: T;
+                          disabled?: T;
+                          readOnly?: T;
+                          hideLabel?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    address?:
+                      | T
+                      | {
+                          name?: T;
+                          label?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    birthCertificateData?:
+                      | T
+                      | {
+                          name?: T;
+                          label?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    contactData?:
+                      | T
+                      | {
+                          name?: T;
+                          label?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    idData?:
+                      | T
+                      | {
+                          name?: T;
+                          label?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    requestorData?:
+                      | T
+                      | {
+                          name?: T;
+                          label?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    header?:
+                      | T
+                      | {
+                          main?: T;
+                          title?: T;
+                          subtitle?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    dropdown?:
+                      | T
+                      | {
+                          name?: T;
+                          label?: T;
+                          options?:
+                            | T
+                            | {
+                                label?: T;
+                                value?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                    nationality?:
+                      | T
+                      | {
+                          name?: T;
+                          label?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    phoneNumber?:
+                      | T
+                      | {
+                          name?: T;
+                          label?: T;
+                          placeholder?: T;
+                          searchInputPlaceholder?: T;
+                          required?: T;
+                          readOnly?: T;
+                          searchable?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    preLoadExample1?:
+                      | T
+                      | {
+                          simulatePreload?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    birthdate?:
+                      | T
+                      | {
+                          name?: T;
+                          label?: T;
+                          required?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    customtextarea?:
+                      | T
+                      | {
+                          name?: T;
+                          label?: T;
+                          defaultValue?: T;
+                          placeholder?: T;
+                          width?: T;
+                          required?: T;
+                          disabled?: T;
+                          readOnly?: T;
+                          hideLabel?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    title?:
+                      | T
+                      | {
+                          label?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    selectWithApi?:
+                      | T
+                      | {
+                          name?: T;
+                          label?: T;
+                          placeholder?: T;
+                          width?: T;
+                          apidomain?: T;
+                          required?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    identificationData?:
+                      | T
+                      | {
+                          nifIsVisible?: T;
+                          nifIsRequired?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    birthplace?:
+                      | T
+                      | {
+                          id?: T;
+                          blockName?: T;
+                        };
                   };
               id?: T;
               blockName?: T;

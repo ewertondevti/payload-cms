@@ -77,7 +77,7 @@ export default async function Page({ params: paramsPromise }: Args) {
               </p>
             </div>
             <div className="absolute top-0 right-0  min-w-[360px] w-[488px] mb-20">
-              <CardHeroIndex title={'Nesta Página'} index={cardarray} />
+              <CardHeroIndex title={'Nesta Página'} index={cardarray[0]} />
             </div>
           </div>
         </div>

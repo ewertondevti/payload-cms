@@ -31,13 +31,13 @@ type Args = {
 }
 
 export default async function ServiceStepPage({ params: paramsPromise }: Args) {
-    // const { id, locale } = await paramsPromise
+  // const { id, locale } = await paramsPromise
 
   return (
     <>
       <PageClient />
       <div className="container mt-16 mb-16">
-        <ServiceStep params={paramsPromise}  />
+        <ServiceStep params={paramsPromise} />
       </div>
     </>
   )

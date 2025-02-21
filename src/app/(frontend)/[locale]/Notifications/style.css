@@ -1,0 +1,58 @@
+.notification h1 {
+    color: #021C51;
+    font-weight: bold;
+    font-size: 36px;
+}
+.notification h4 {
+    color: #021C51;
+    font-weight: bold;  
+}
+
+.notification h3 {
+    color: #021C51;
+    font-weight: bold;
+    font-size: 20px; 
+}
+
+
+.notification .subtitle {
+    color: #757575;
+    font-size: 16px;
+}
+
+.notification .title {
+    margin-bottom: 70px;
+}
+
+.no-bold {
+    font-weight: 400 !important;
+}
+
+.transparent-block {
+    min-width: 300px;
+}
+
+.accordion{
+    border-bottom: solid 1px #757575;
+    max-height: 100px;
+}
+
+.accordion.accordion-open {
+    max-height: 100% !important;
+}
+
+.accordion-header .icon{
+    position: relative;
+    margin-top: -65;
+}
+
+@media (min-width: 1280px){
+    .notification .actions .filledCard .agora-card-collection {
+        max-height: 200px !important;
+        min-height: 200px !important;
+    }
+    .notification .actions .agora-card-collection .card-info .anchor-container {
+        position: absolute !important;
+        right: 0 !important;
+    }
+ }

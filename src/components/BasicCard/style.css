@@ -1,0 +1,16 @@
+.basic-card{
+    align-items: center !important;
+    justify-content: center;
+} 
+
+.basic-card .card-single{
+    align-items: center !important;
+    border: solid #5F93FC 1px;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.basic-card .card-single .info-container{
+    align-items: center !important;
+    text-align: center;
+}

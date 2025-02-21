@@ -1,0 +1,45 @@
+.pedidos h1 {
+    color: #021C51;
+    font-weight: bold;
+    font-size: 48px;
+}
+.pedidos h4 {
+    color: #021C51;
+    font-weight: bold;  
+}
+.pedidos h2 {
+    color: #021C51;
+    font-weight: bold;
+    font-size: 26px; 
+}
+
+.pedidos .subtitle {
+    color: #757575;
+    font-size: 20px;
+}
+
+.pedidos .title {
+    margin-bottom: 70px;
+}
+
+.no-bold {
+    font-weight: 400 !important;
+}
+
+.transparent-block {
+    min-width: 300px;
+}
+
+.accordion{
+    border-bottom: solid 1px #757575;
+    max-height: 100px;
+}
+
+.accordion.accordion-open {
+    max-height: 100% !important;
+}
+.accordion-header .icon{
+    position: relative;
+    margin-top: -65px;
+}
+

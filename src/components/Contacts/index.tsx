@@ -31,8 +31,8 @@ const ContactsBanner = ({ heading, text, links, contacts }: ContactsBannerProps)
       <p className="text-blue-950">{text}</p>
       <i className="agora-line-calendar"></i>
       <div className="flex justify-between py-8">
-        {links.map((link) => (
-          <a href={link.href} className="inline-flex items-center text-blue-500 hover:underline">
+        {links.map((link, index) => (
+          <a href={link.href} className="inline-flex items-center text-blue-500 hover:underline" key={index}>
             {link.label}
             <Icon name={link.icon} className="ml-2" />
           </a>

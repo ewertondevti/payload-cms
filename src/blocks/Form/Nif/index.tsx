@@ -1,40 +1,66 @@
-import type { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form'
+import type { FieldValues } from 'react-hook-form'
+
+export interface NifField {
+  blockName?: string
+  blockType: 'nif'
+  defaultValue?: string
+  label?: string
+  placeholder?: string
+  name: string
+  id: string
+  required?: boolean
+  width?: number
+  //   disabled: boolean
+}
+
+import type { FieldErrorsImpl, UseFormRegister } from 'react-hook-form'
 
 import React from 'react'
 
 import { InputText } from '@ama-pt/agora-design-system'
 import { Width } from '../Width'
 
-export type NifProps = UseFormReturn & {
-  errors: FieldErrors<FieldValues>
-  width: number
-  name: string
-  label: string
-  required: boolean
-  placeholder: string
-}
-
-export const Nif: React.FC<NifProps> = ({
+export const Nif: React.FC<
+  NifField & {
+    errors: Partial<
+      FieldErrorsImpl<{
+        [x: string]: any
+      }>
+    >
+    register: UseFormRegister<FieldValues>
+  }
+> = ({
   name,
+  defaultValue,
+  placeholder,
   errors,
   label,
   register,
-  width,
-  placeholder,
   required,
+  width,
+  // disabled
 }) => {
   return (
     <Width width={width}>
+      <style>
+        {`
+          .input-label-wrapper {
+            margin-bottom: 8px !important;
+          }
+        `}
+      </style>
+
       {/* <Label htmlFor={name}>{label}</Label> */}
       <InputText
-        id={name}
+        defaultValue={defaultValue}
+        placeholder={placeholder}
+        id="cvtNIF"
         label={label}
         type="text"
         hasFeedback={true}
         maxLength={9}
         hasError={errors[name] ? true : false}
         feedbackText={errors[name]?.message?.toString()}
-        placeholder={placeholder}
         required={required}
         // disabled={disabled}
         {...register(name, {

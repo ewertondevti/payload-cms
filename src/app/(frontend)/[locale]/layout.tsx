@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 
 import { cn } from 'src/utilities/cn'
-import { GeistMono } from 'geist/font/mono'
-import { GeistSans } from 'geist/font/sans'
+import { Noto_Sans } from "next/font/google";
 import React from 'react'
 
 import './globals.css'
@@ -22,6 +21,8 @@ import { getMessages, setRequestLocale } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import { routing } from '@/i18n/routing'
 import { notFound } from 'next/navigation'
+import ClientLoaderWrapper from '@/components/ClientLoadWrapper'
+import ClientToastWrapper from '@/components/ClientToasterWrapper'
 
 type Args = {
   children: React.ReactNode
@@ -29,6 +30,13 @@ type Args = {
     locale: TypedLocale
   }>
 }
+
+const notoSans = Noto_Sans({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
 
 export default async function RootLayout({ children, params }: Args) {
   const { locale } = await params
@@ -43,7 +51,7 @@ export default async function RootLayout({ children, params }: Args) {
 
   return (
     <html
-      className={cn(GeistSans.variable, GeistMono.variable)}
+      className = {notoSans.className}
       lang={locale}
       suppressHydrationWarning
     >
@@ -55,16 +63,20 @@ export default async function RootLayout({ children, params }: Args) {
       <body>
         <Providers>
           <NextIntlClientProvider messages={messages}>
-            {/* <AdminBar
+            <ClientLoaderWrapper>
+              <ClientToastWrapper>
+                {/* <AdminBar
               adminBarProps={{
                 preview: isEnabled,
               }}
             /> */}
-            <LivePreviewListener />
+                <LivePreviewListener />
 
-            <Header locale={locale} />
-            {children}
-            <Footer locale={locale} />
+                <Header locale={locale} />
+                {children}
+                <Footer locale={locale} />
+              </ClientToastWrapper>
+            </ClientLoaderWrapper>
           </NextIntlClientProvider>
         </Providers>
       </body>

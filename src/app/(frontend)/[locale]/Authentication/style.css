@@ -1,0 +1,30 @@
+.auth h1 {
+    color: #021C51;
+    font-weight: bold;
+    font-size: 48px;
+}
+
+.auth h4 {
+    color: #021C51;
+    font-weight: bold;  
+}
+.auth h2 {
+    color: #021C51;
+    font-weight: bold;
+    font-size: 26px; 
+}
+
+.auth h2 {
+    color: #021C51;
+    font-weight: bold;
+    font-size: 26px; 
+}
+
+.auth .subtitle {
+    color: #757575;
+    font-size: 20px;
+}
+.auth .agora-card-emphasize{
+    justify-content: space-between;
+    min-height: 540px !important;
+}

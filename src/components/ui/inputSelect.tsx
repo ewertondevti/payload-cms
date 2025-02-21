@@ -53,7 +53,7 @@ export const InputSelect: React.FC<InputSelectProps> = ({
   const generatedId = useId()
 
   const [dropdownOptions, setDropdownOptions] = useState<ReactElement<DropdownSectionProps>[]>([
-    <DropdownSection label="País" name="pais" key={`country-${generatedId}-${0}`}>
+    <DropdownSection name="" key={`${generatedId}-${0}`}>
       {options.map((option) => (
         <DropdownOption key={option.value} value={option.value} selected={option.value === value}>
           {option.label}
@@ -68,12 +68,12 @@ export const InputSelect: React.FC<InputSelectProps> = ({
     }
 
     const newSections = dropdownOptions.map((s) => {
-      const sectionKey = `country-${generatedId}-${0}`
+      const sectionKey = `${generatedId}-${0}`
 
       return (
         <DropdownSection {...s.props} key={sectionKey}>
           {Children.toArray(s.props.children).map((item, sectionOptionIndex) => {
-            const sectionOptionKey = `country-${generatedId}-${0}-${sectionOptionIndex}`
+            const sectionOptionKey = `${generatedId}-${0}-${sectionOptionIndex}`
 
             if (isValidElement<DropdownOptionProps>(item)) {
               const selectedValue = selected.some((i) => i.value === item.props.value)

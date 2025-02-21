@@ -1,0 +1,35 @@
+.reserved-area h3 {
+    color: #021C51;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.citizen h2 {
+    color: #021C51;
+    font-weight: bold;
+    font-size: 36px;
+}
+.citizen .subtitle {
+    color: #757575;
+    font-size: 16px;
+    margin-top: 20px;
+}
+.reserved-area h1 {
+    color: #021C51;
+    font-weight: bold;
+    font-size: 48px;
+}
+
+.reserved-area .title {
+    margin-bottom: 70px;
+}
+
+.user-area .grid-container {
+    display: grid !important;
+    grid-template-columns: 3fr 3fr;
+    gap: 32px;
+}
+
+.label-container {
+    color: #021C51 !important;
+}

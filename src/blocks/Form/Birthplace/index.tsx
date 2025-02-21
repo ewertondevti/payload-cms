@@ -75,6 +75,18 @@ export const Birthplace: React.FC<BirthplaceProps> = ({
 
   return (
     <Width width={100}>
+      <style>
+        {`
+          .agora-input-select-label {
+            margin-bottom: 8px !important;
+          }
+
+          .input-label-wrapper {
+            margin-bottom: 8px !important;
+          }
+        `}
+      </style>
+
       <div className="flex flex-wrap gap-[32px]">
         <SelectWithApi
           {...countryProps}
@@ -122,7 +134,7 @@ export const Birthplace: React.FC<BirthplaceProps> = ({
           <Width width={50}>
             <InputText
               {...locationProps}
-              {...register('location', { required: true })}
+              {...register('location', { required: true, })}
               feedbackState="danger"
               feedbackText={`Obrigatório preencher "${locationProps.label}"`}
               hasError={!!errors['location']}
