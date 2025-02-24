@@ -1,14 +1,13 @@
 import configPromise from '@payload-config'
-import React from 'react'
 
-import { getPayload, TypedLocale } from 'payload'
+import CardHeroIndex from '@/components/CardHeroIndex'
+import ContactsBanner from '@/components/Contacts'
+import CustomButton from '@/components/CustomButton'
+import FindMore from '@/components/FindMore'
+import RichText from '@/components/RichText'
 import { formatDateTime } from '@/utilities/formatDateTime'
 import { getTranslations } from 'next-intl/server'
-import CardHeroIndex from '@/components/CardHeroIndex'
-import CustomButton from '@/components/CustomButton'
-import RichText from '@/components/RichText'
-import ContactsBanner from '@/components/Contacts'
-import FindMore from '@/components/FindMore'
+import { getPayload, TypedLocale } from 'payload'
 
 type Args = {
   params: Promise<{
@@ -110,6 +109,17 @@ export default async function Page({ params: paramsPromise }: Args) {
                 label="Iniciar Pedido"
                 href={'/serviceArea/' + id}
               />
+
+              <CustomButton
+                variant="primary"
+                appearance="outline"
+                hasIcon
+                trailingIcon="agora-line-document"
+                trailingIconHover="agora-solid-document"
+                label="Consultar"
+                href={'/serviceArea/' + id}
+              />
+
               <CustomButton
                 variant="primary"
                 appearance="outline"

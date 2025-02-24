@@ -1,38 +1,35 @@
 'use client'
-import React, { useCallback, useEffect, useState, useRef } from 'react'
-import { StepperBlock } from '@/blocks/Stepper/Component'
-import { ContentBlock } from '@/blocks/Content/Component'
-import { FormBlock } from '@/blocks/Form/Component'
-import PaymentBlock from '@/blocks/Payment/Component'
-import SubmissionBlock from '@/blocks/Submission/Component'
-import SummaryBlock from '@/blocks/Summary/Component'
-import { useLoaderDialogContext } from '@ama-pt/agora-design-system'
 import {
-  getUserServiceOrder,
+  getGetStepInfoServiceOrder,
   getServiceOrderById,
   getServiceStepsById,
-  postNewServiceOrder,
-  putOrderById,
-  deleteOrderbId,
-  getGetStepInfoServiceOrder,
+  getStepsByArgs,
+  getUserServiceOrder,
   postCreateStepServiceOrder,
+  postNewServiceOrder,
   postUpdateStepServiceOrder,
+  putOrderById,
   //   submitSteps,
   updateStepsByArgs,
-  getStepsByArgs,
 } from '@/app/(frontend)/api'
-import { Button, InputText } from '@ama-pt/agora-design-system'
-import { Data, TypedLocale } from 'payload'
-import { redirect } from 'next/navigation'
-import { FormProvider, useForm } from 'react-hook-form'
+import { ContentBlock } from '@/blocks/Content/Component'
 import { buildInitialFormState } from '@/blocks/Form/buildInitialFormState'
+import { FormBlock } from '@/blocks/Form/Component'
+import PaymentBlock from '@/blocks/Payment/Component'
+import { StepperBlock } from '@/blocks/Stepper/Component'
+import SubmissionBlock from '@/blocks/Submission/Component'
+import SummaryBlock from '@/blocks/Summary/Component'
 import { handlePaymentSubmit } from '@/helpers/paymentHelpers'
 import { useToast } from '@/hooks/useToast'
+import { Button, useLoaderDialogContext } from '@ama-pt/agora-design-system'
+import { redirect } from 'next/navigation'
+import { Data, TypedLocale } from 'payload'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
 // import { useSearchParams } from 'next/navigation'
 
+import { ConsultPreview } from '@/blocks/ConsultPreviewServiceStep'
 import { serviceStepComponents } from './serviceStepComponents'
-
-
 
 type BlockTypeProps = {
   content: string
@@ -41,6 +38,7 @@ type BlockTypeProps = {
   submission: string
   summary: string
   exemplo: string
+  consultarNascimento: string
 }
 
 const BlockType: BlockTypeProps = {
@@ -50,6 +48,7 @@ const BlockType: BlockTypeProps = {
   submission: 'submission-service-steps',
   summary: 'summary-service-steps',
   exemplo: 'exemplo1ServiceSteps',
+  consultarNascimento: 'consult-preview',
 }
 
 type Args = {
@@ -185,7 +184,7 @@ export default function ServiceStep({ params }: Args) {
     // } else {
     // }
 
-    console.log("nextStep", nextStep)
+    console.log('nextStep', nextStep)
 
     // const indexBeforeChange = stepIndex
 
@@ -310,14 +309,14 @@ export default function ServiceStep({ params }: Args) {
       case BlockType.payment:
         return (
           <FormProvider {...formMethods}>
-          <PaymentBlock
-            setPaymentMethod={setPaymentMethod}
-            validateFields={validateFields}
-            userId={userId}
-            serviceId={serviceOrder?.serviceId}
-            orderId={serviceOrder?.id}
-            services={[{ description: steps.steps[2]?.title, value: '10' }]}
-          />
+            <PaymentBlock
+              setPaymentMethod={setPaymentMethod}
+              validateFields={validateFields}
+              userId={userId}
+              serviceId={serviceOrder?.serviceId}
+              orderId={serviceOrder?.id}
+              services={[{ description: steps.steps[2]?.title, value: '10' }]}
+            />
           </FormProvider>
         )
       case BlockType.submission:
@@ -333,7 +332,7 @@ export default function ServiceStep({ params }: Args) {
             requestNumber="125 678 554"
           />
         )
-        case BlockType.summary:
+      case BlockType.summary:
         return (
           <SummaryBlock
             services={steps.steps[2]?.title}
@@ -342,29 +341,32 @@ export default function ServiceStep({ params }: Args) {
             orderId={serviceOrder?.id}
           />
         )
-      default:
 
-          // No caso de ser dinâmico:
-          const ServiceStepComponent: React.FC<any> = serviceStepComponents?.[blockType]
-          
-          if (ServiceStepComponent) {
-            return (
-              <FormProvider {...formMethods}>
-                <ServiceStepComponent
-                  {...steps.steps[stepIndex]}
-                  {...formMethods}
-                  control={control}
-                  errors={errors}
-                  register={register}
-                  // changeToNextStep={changeToNextStep}
-                  // handleSaveAndExit={handleSaveAndExit}
-                  stepIndex={stepIndex}
-                  steps={steps}
-                  blockType={blockType}
-                />
-              </FormProvider>
-            )
-          }
+      case BlockType.consultarNascimento:
+        return <ConsultPreview {...steps.steps[stepIndex]} />
+
+      default:
+        // No caso de ser dinâmico:
+        const ServiceStepComponent: React.FC<any> = serviceStepComponents?.[blockType]
+
+        if (ServiceStepComponent) {
+          return (
+            <FormProvider {...formMethods}>
+              <ServiceStepComponent
+                {...steps.steps[stepIndex]}
+                {...formMethods}
+                control={control}
+                errors={errors}
+                register={register}
+                // changeToNextStep={changeToNextStep}
+                // handleSaveAndExit={handleSaveAndExit}
+                stepIndex={stepIndex}
+                steps={steps}
+                blockType={blockType}
+              />
+            </FormProvider>
+          )
+        }
 
         return <div></div>
     }
@@ -384,13 +386,14 @@ export default function ServiceStep({ params }: Args) {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex gap-x-[136px]">
         <StepperBlock
           steps={steps}
           handleNextStep={(stepId: number) => changeToNextStep(stepId)}
           currentStep={stepIndex}
         />
-        {steps && <div>{StepRenderer(steps.steps[stepIndex]?.blockType)}</div>}
+
+        {steps && <div className="w-full">{StepRenderer(steps.steps[stepIndex]?.blockType)}</div>}
 
         <FormBlock
           enableIntro={false}
@@ -403,7 +406,7 @@ export default function ServiceStep({ params }: Args) {
       </div>
 
       {steps && (
-        <div className="flex my-16 px-8">
+        <div className="flex my-16">
           <div
             className="flex"
             style={{ display: 'flex-around', justifyContent: 'center', width: '100%' }}
@@ -442,12 +445,11 @@ export default function ServiceStep({ params }: Args) {
             )}
           </div>
 
-          <div className="flex" style={{ justifyContent: 'flex-end', paddingRight: 50 }}>
+          <div className="flex justify-end">
             {/* No caso de já estar steps com informação, será continuar em vez de começar */}
-            { ((steps.steps[stepIndex]?.blockType == BlockType.content) ||
-               (steps.steps[stepIndex]?.blockType == BlockType.summary) || 
-               (steps.steps[stepIndex]?.blockType == BlockType.exemplo)
-              ) ? (
+            {steps.steps[stepIndex]?.blockType == BlockType.content ||
+            steps.steps[stepIndex]?.blockType == BlockType.summary ||
+            steps.steps[stepIndex]?.blockType == BlockType.exemplo ? (
               <Button
                 children={
                   stepIndex == 0
@@ -515,9 +517,9 @@ export default function ServiceStep({ params }: Args) {
                 leadingIcon="agora-line-arrow-right-circle"
                 leadingIconHover="agora-solid-arrow-right-circle"
               />
-            // ) : steps.steps[stepIndex]?.blockType === BlockType.exemplo ? (
-            //   <></>
             ) : (
+              // ) : steps.steps[stepIndex]?.blockType === BlockType.exemplo ? (
+              //   <></>
               <Button
                 form={steps.steps[stepIndex]?.form?.id}
                 type="submit"

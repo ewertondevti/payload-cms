@@ -1150,6 +1150,14 @@ export interface Service {
             }
           | {
               title: string;
+              titlepage: string;
+              subtitlepage?: string | null;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'consult-preview';
+            }
+          | {
+              title: string;
               content: {
                 root: {
                   type: string;
@@ -1709,6 +1717,15 @@ export interface ServicesSelect<T extends boolean = true> {
                 | T
                 | {
                     title?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              'consult-preview'?:
+                | T
+                | {
+                    title?: T;
+                    titlepage?: T;
+                    subtitlepage?: T;
                     id?: T;
                     blockName?: T;
                   };

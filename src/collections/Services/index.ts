@@ -11,14 +11,15 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 
-import { slugField } from '@/fields/slug'
-import { authenticated } from '../../access/authenticated'
-import { anyone } from '../../access/anyone'
+import ConsultPreviewServiceStep from '@/blocks/ConsultPreviewServiceStep/ConsultPreviewServiceStepBlock'
+import ExemploServiceStepBlock from '@/blocks/ExemploServiceStep/ExemploServiceStepBlock'
 import FormServiceStepBlock from '@/blocks/FormServiceStepBlock/FormServiceStepBlock'
 import PaymentServiceStepBlock from '@/blocks/Payment/PaymentServiceStepBlock'
 import SubmissionServiceStepBlock from '@/blocks/Submission/SubmissionServiceStepBlock'
 import SummaryServiceStepBlock from '@/blocks/Summary/SummaryServiceStepBlock'
-import ExemploServiceStepBlock from '@/blocks/ExemploServiceStep/ExemploServiceStepBlock'
+import { slugField } from '@/fields/slug'
+import { anyone } from '../../access/anyone'
+import { authenticated } from '../../access/authenticated'
 
 export const Services: CollectionConfig = {
   slug: 'services',
@@ -85,7 +86,7 @@ export const Services: CollectionConfig = {
                 PaymentServiceStepBlock,
                 SubmissionServiceStepBlock,
                 SummaryServiceStepBlock,
-
+                ConsultPreviewServiceStep,
                 ExemploServiceStepBlock,
               ],
             },

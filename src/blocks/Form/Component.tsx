@@ -1,15 +1,16 @@
 'use client'
+
 import type { Form as FormType } from '@payloadcms/plugin-form-builder/types'
 
-import { useRouter } from 'next/navigation'
-import React, { useCallback, useState } from 'react'
-import { useForm, FormProvider } from 'react-hook-form'
 import RichText from '@/components/RichText'
 import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/navigation'
+import React, { useCallback, useState } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
 
+import { useTranslations } from 'next-intl'
 import { buildInitialFormState } from './buildInitialFormState'
 import { fields } from './fields'
-import { useTranslations } from 'next-intl'
 
 export type Value = unknown
 
@@ -160,6 +161,8 @@ export const FormBlock: React.FC<
   // console.log("stepIndex", stepIndex)
   // console.log("formID", formID)
 
+  if(!formFromProps?.fields?.length) return null
+
   return (
     <div className="container">
       <FormProvider {...formMethods}>
@@ -175,9 +178,8 @@ export const FormBlock: React.FC<
           <form key={'form'} id={formID} onSubmit={handleSubmit(onSubmit)} noValidate>
             <>
             <div className="flex flex-col gap-16">
-              {formFromProps &&
-                formFromProps.fields &&
-                formFromProps.fields?.map((field, index) => {
+              {
+                formFromProps.fields.map((field, index) => {
                   const Field: React.FC<any> = fields?.[field.blockType]
                   if (Field) {
                     return (

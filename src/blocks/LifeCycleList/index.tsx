@@ -1,10 +1,8 @@
 'use client'
 
-import { cn } from 'src/utilities/cn'
 import React from 'react'
+import { cn } from 'src/utilities/cn'
 // import type { Post } from '@/payload-types'
-import { Card } from '@/components/Card'
-import { LifeCycleListBlockProps } from './Component'
 import { Lifecycle } from '@/payload-types'
 import { CardFrame } from '@ama-pt/agora-design-system'
 export type Props = {

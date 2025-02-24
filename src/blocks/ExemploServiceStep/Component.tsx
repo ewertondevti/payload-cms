@@ -1,4 +1,3 @@
-
 // FIXME: DEMO
 const BlockType = {
   content: 'content-service-steps',
@@ -7,9 +6,9 @@ const BlockType = {
   submission: 'submission-service-steps',
   summary: 'summary-service-steps',
   exemplo: 'exemplo1ServiceSteps',
+  consultarNascimento: 'consult-preview',
 }
 // FIXME: DEMO
-
 
 export type ExemploBlockConfig = {
   title: string
@@ -25,9 +24,9 @@ export type ExemploBlockConfig = {
 
 import React from 'react'
 
-import { Width } from '../Form/Width'
-import { InputText, Button } from '@ama-pt/agora-design-system'
+import { InputText } from '@ama-pt/agora-design-system'
 import { ContentBlock } from '../Content/Component'
+import { Width } from '../Form/Width'
 
 export const ExemploBlock: React.FC<
   ExemploBlockConfig & {
@@ -41,21 +40,15 @@ export const ExemploBlock: React.FC<
   // changeToNextStep,
   // handleSaveAndExit,
 }) => {
-
   let richText
   richText = { richText: { root: content.root }, size: 'full' }
 
   return (
     <>
-    <Width width="100">
-      <InputText
-        id='exemplo1'
-        label={title}
-        type="text"
-        hasFeedback={true}
-      />
-    </Width>
-    <ContentBlock blockType="content" columns={[richText]} />
+      <Width width={100}>
+        <InputText id="exemplo1" label={title} type="text" hasFeedback={true} />
+      </Width>
+      <ContentBlock blockType="content" columns={[richText]} />
     </>
   )
 }

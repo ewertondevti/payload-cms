@@ -1,6 +1,5 @@
 'use client'
 import { Button } from '@ama-pt/agora-design-system'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 interface Props {
   appearance: string
@@ -20,6 +19,7 @@ const CustomButton = (props: Props) => {
         hasIcon={props.hasIcon}
         trailingIcon={props.trailingIcon}
         trailingIconHover={props.trailingIconHover}
+        className='w-[263px]'
       >
         <Link href={props.href}>{props.label} </Link>
       </Button>

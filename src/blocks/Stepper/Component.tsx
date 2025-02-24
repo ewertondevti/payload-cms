@@ -20,6 +20,7 @@ export const StepperBlock = (props) => {
               status={currentStep == index ? 'current' : currentStep > index ? 'done' : 'disabled'}
               onClick={() => handleMoveToNextStep(index)}
               style={{ cursor: 'pointer' }}
+              className="w-[280px]"
             >
               {step.title}
             </Step>

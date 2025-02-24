@@ -1,6 +1,6 @@
 'use client'
-import { cn } from 'src/utilities/cn'
 import React from 'react'
+import { cn } from 'src/utilities/cn'
 
 // import type { Post } from '@/payload-types'
 
@@ -15,7 +15,6 @@ export type Props = {
 
 export const MyCollectionArchive: React.FC<Props> = (props) => {
   const { posts } = props
-
   return (
     <div className={cn('container')}>
       <div>

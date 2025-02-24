@@ -1,0 +1,30 @@
+[
+    {
+        "icon": "agora-line-user-group",
+        "title": "Cidadão",
+        "description": "Registos essenciais para identificação e cidadania ativa",
+        "link": "#",
+        "linkText":"Ver todos os serviços"
+    },
+    {
+        "icon": "agora-line-briefcase",
+        "title": "Empresa",
+        "description": "Formalize a sua empresa e inicie suas atividades legais",
+        "link": "#",
+        "linkText":"Ver todos os serviços"
+    },
+    {
+        "icon": "agora-line-home",
+        "title": "Prédio",
+        "description": "Garanta a titularidade e segurança juridica do seu imóvel",
+        "link": "#",
+        "linkText":"Ver todos os serviços"
+    },
+    {
+        "icon": "agora-line-truck",
+        "title": "Veículos",
+        "description": "Legalize e registe o seu veiculo para circulação segura",
+        "link": "#",
+        "linkText":"Ver todos os serviços"
+    }
+]

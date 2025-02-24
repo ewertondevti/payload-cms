@@ -3,7 +3,6 @@ import { draftMode } from 'next/headers'
 import { getPayload } from 'payload'
 import { cache } from 'react'
 
-import { BirthCertificate } from '@/components/BirthCertificate'
 import { TypedLocale } from 'payload'
 import { MyCollectionArchive } from '.'
 
@@ -43,7 +42,6 @@ export default async function Lifecycle({ params: paramsPromise }: Args) {
   return (
     <>
       <article className="pt-16 pb-16">
-        <BirthCertificate />
         {/* <PageClient /> */}
 
         {/* Allows redirects for valid pages too */}
