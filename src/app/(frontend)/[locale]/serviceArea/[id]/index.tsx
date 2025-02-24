@@ -14,7 +14,6 @@ import {
 } from '@/app/(frontend)/api'
 import { ContentBlock } from '@/blocks/Content/Component'
 import { buildInitialFormState } from '@/blocks/Form/buildInitialFormState'
-import { FormBlock } from '@/blocks/Form/Component'
 import PaymentBlock from '@/blocks/Payment/Component'
 import { StepperBlock } from '@/blocks/Stepper/Component'
 import SubmissionBlock from '@/blocks/Submission/Component'
@@ -395,14 +394,14 @@ export default function ServiceStep({ params }: Args) {
 
         {steps && <div className="w-full">{StepRenderer(steps.steps[stepIndex]?.blockType)}</div>}
 
-        <FormBlock
+        {/* <FormBlock
           enableIntro={false}
           form={steps?.steps[stepIndex]?.form}
           // onSubmitOverride={onSubmitStep}
           onSubmitOverride={onSubmitStep}
           showSubmitButton={false}
           stepIndex={stepIndex}
-        />
+        /> */}
       </div>
 
       {steps && (
