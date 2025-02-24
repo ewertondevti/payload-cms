@@ -966,6 +966,20 @@ export interface Form {
             blockType: 'selectWithApi';
           }
         | {
+            accessCode: {
+              placeholder: string;
+              label: string;
+            };
+            captcha: {
+              placeholder: string;
+              label: string;
+              imageSrc: number | Media;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'birthconsultation';
+          }
+        | {
             nifIsVisible?: boolean | null;
             nifIsRequired?: boolean | null;
             id?: string | null;
@@ -2276,6 +2290,25 @@ export interface FormsSelect<T extends boolean = true> {
               width?: T;
               apidomain?: T;
               required?: T;
+              id?: T;
+              blockName?: T;
+            };
+        birthconsultation?:
+          | T
+          | {
+              accessCode?:
+                | T
+                | {
+                    placeholder?: T;
+                    label?: T;
+                  };
+              captcha?:
+                | T
+                | {
+                    placeholder?: T;
+                    label?: T;
+                    imageSrc?: T;
+                  };
               id?: T;
               blockName?: T;
             };

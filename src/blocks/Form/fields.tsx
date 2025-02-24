@@ -1,3 +1,4 @@
+import { BirthCertificate } from '@/components/BirthCertificate'
 import { Address } from './Address'
 import { AddressData } from './AddressData'
 import { BirthCertificateData } from './BirthCertificateData'
@@ -23,6 +24,7 @@ import { SelectWithApi } from './SelectWithAPI'
 import { State } from './State'
 import { Text } from './Text'
 import { Textarea } from './Textarea'
+import { BirthConsultation } from '../BirthConsultation'
 
 export const fields = {
   customMessage: CustomMessage,
@@ -47,6 +49,7 @@ export const fields = {
   customtext: Text,
   address: Address,
   nationality: Nationality,
+  birthconsultation: BirthConsultation,
   phoneNumber: PhoneNumber,
   radioButtons: RadioButtons,
   preLoadExample1: PreLoadExample1,
