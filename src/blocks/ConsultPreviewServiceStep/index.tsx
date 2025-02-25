@@ -1,7 +1,8 @@
 'use client'
 
 import { PdfViewer } from '@/components/PdfViewer'
-import { FC } from 'react'
+import { GetCertidao } from '@/services/certidaoServices'
+import { FC, useEffect, useState } from 'react'
 import { pdfjs } from 'react-pdf'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
 import 'react-pdf/dist/esm/Page/TextLayer.css'
@@ -17,7 +18,19 @@ type Props = {
   subtitlepage: string
 }
 
+const MOCK_CODE = '1001-5548-0239'
+
 export const ConsultPreview: FC<Props> = ({ titlepage, subtitlepage }) => {
+  const [base64file, setBase64file] = useState('')
+
+  useEffect(() => {
+    GetCertidao(MOCK_CODE).then((data) => {
+      if (!base64file) {
+        setBase64file(`data:${data.attachment.mimetype};base64,${data.attachment.bytes}`)
+      }
+    })
+  }, [])
+
   return (
     <div className="flex flex-col gap-[64px]">
       <div className="flex flex-col gap-[8px]">
@@ -25,7 +38,7 @@ export const ConsultPreview: FC<Props> = ({ titlepage, subtitlepage }) => {
         <small className="text-[16px] leading-[28px]">{subtitlepage}</small>
       </div>
 
-      <PdfViewer file="/mock/mock_document.pdf" />
+      <PdfViewer file={base64file} />
     </div>
   )
 }

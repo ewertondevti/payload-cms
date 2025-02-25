@@ -1,4 +1,7 @@
+'use client'
+
 import { SearchPagination, SearchPaginationProps } from '@ama-pt/agora-design-system'
+import '@react-pdf-viewer/core/lib/styles/index.css'
 import { FC, useState } from 'react'
 import { Document, DocumentProps, Page } from 'react-pdf'
 
@@ -29,9 +32,9 @@ export const PdfViewer: FC<Props> = ({ file }) => {
       <Document
         file={file}
         onLoadSuccess={onDocumentLoadSuccess}
-        className="w-full flex justify-center bg-[grey] p-[5px] min-h-[840px]"
+        className="w-full flex justify-center min-h-[840px]"
       >
-        <Page pageNumber={pageNumber} />
+        <Page pageNumber={pageNumber} width={800} />
       </Document>
 
       <SearchPagination {...paginationProps} />

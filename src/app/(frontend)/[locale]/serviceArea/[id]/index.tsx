@@ -23,12 +23,12 @@ import { useToast } from '@/hooks/useToast'
 import { Button, useLoaderDialogContext } from '@ama-pt/agora-design-system'
 import { redirect } from 'next/navigation'
 import { Data, TypedLocale } from 'payload'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 // import { useSearchParams } from 'next/navigation'
 
 import { ConsultPreview } from '@/blocks/ConsultPreviewServiceStep'
-import { serviceStepComponents } from './serviceStepComponents'
+import { FormBlock } from '@/blocks/Form/Component'
 
 type BlockTypeProps = {
   content: string
@@ -37,7 +37,7 @@ type BlockTypeProps = {
   submission: string
   summary: string
   exemplo: string
-  consultarNascimento: string
+  consultpreview: string
 }
 
 const BlockType: BlockTypeProps = {
@@ -47,7 +47,7 @@ const BlockType: BlockTypeProps = {
   submission: 'submission-service-steps',
   summary: 'summary-service-steps',
   exemplo: 'exemplo1ServiceSteps',
-  consultarNascimento: 'consult-preview',
+  consultpreview: 'consult-preview',
 }
 
 type Args = {
@@ -341,33 +341,20 @@ export default function ServiceStep({ params }: Args) {
           />
         )
 
-      case BlockType.consultarNascimento:
+      case BlockType.consultpreview:
         return <ConsultPreview {...steps.steps[stepIndex]} />
 
       default:
-        // No caso de ser dinâmico:
-        const ServiceStepComponent: React.FC<any> = serviceStepComponents?.[blockType]
-
-        if (ServiceStepComponent) {
-          return (
-            <FormProvider {...formMethods}>
-              <ServiceStepComponent
-                {...steps.steps[stepIndex]}
-                {...formMethods}
-                control={control}
-                errors={errors}
-                register={register}
-                // changeToNextStep={changeToNextStep}
-                // handleSaveAndExit={handleSaveAndExit}
-                stepIndex={stepIndex}
-                steps={steps}
-                blockType={blockType}
-              />
-            </FormProvider>
-          )
-        }
-
-        return <div></div>
+        return (
+          <FormBlock
+            enableIntro={false}
+            form={steps?.steps[stepIndex]?.form}
+            // onSubmitOverride={onSubmitStep}
+            onSubmitOverride={onSubmitStep}
+            showSubmitButton={false}
+            stepIndex={stepIndex}
+          />
+        )
     }
   }
 
@@ -393,15 +380,6 @@ export default function ServiceStep({ params }: Args) {
         />
 
         {steps && <div className="w-full">{StepRenderer(steps.steps[stepIndex]?.blockType)}</div>}
-
-        {/* <FormBlock
-          enableIntro={false}
-          form={steps?.steps[stepIndex]?.form}
-          // onSubmitOverride={onSubmitStep}
-          onSubmitOverride={onSubmitStep}
-          showSubmitButton={false}
-          stepIndex={stepIndex}
-        /> */}
       </div>
 
       {steps && (
