@@ -28,11 +28,11 @@ export const PdfViewer: FC<Props> = ({ file }) => {
   }
 
   return (
-    <div className="flex flex-col gap-[16px]">
+    <div className="flex flex-col w-fit gap-[16px]">
       <Document
         file={file}
         onLoadSuccess={onDocumentLoadSuccess}
-        className="w-full flex justify-center min-h-[840px] shadow-[0_0_16px_0_rgba(0,0,0,0.32)] rounded-[16px]"
+        className="w-[800px] flex justify-center min-h-[840px] shadow-[0_0_16px_0_rgba(0,0,0,0.32)] rounded-[16px]"
       >
         <Page pageNumber={pageNumber} width={800} />
       </Document>

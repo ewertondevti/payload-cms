@@ -1,8 +1,7 @@
-import React from 'react'
-import { getPayload, TypedLocale } from 'payload'
 import configPromise from '@payload-config'
-import PageClient from './page.client'
+import { getPayload, TypedLocale } from 'payload'
 import ServiceStep from '.'
+import PageClient from './page.client'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -36,7 +35,7 @@ export default async function ServiceStepPage({ params: paramsPromise }: Args) {
   return (
     <>
       <PageClient />
-      <div className="container mt-16 mb-16">
+      <div className="container w-fit mt-16 mb-16">
         <ServiceStep params={paramsPromise} />
       </div>
     </>

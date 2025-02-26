@@ -379,7 +379,7 @@ export default function ServiceStep({ params }: Args) {
           currentStep={stepIndex}
         />
 
-        {steps && <div className="w-full">{StepRenderer(steps.steps[stepIndex]?.blockType)}</div>}
+        {steps && <div className="w-fit">{StepRenderer(steps.steps[stepIndex]?.blockType)}</div>}
       </div>
 
       {steps && (
