@@ -25,18 +25,17 @@ export const ConsultPreview: FC<Props> = ({ titlepage, subtitlepage }) => {
 
   useEffect(() => {
     GetCertidao(MOCK_CODE).then((data) => {
-      if (!base64file) {
-        setBase64file(`data:${data.attachment.mimetype};base64,${data.attachment.bytes}`)
-      }
+      setBase64file(`data:${data.attachment.mimetype};base64,${data.attachment.bytes}`)
     })
   }, [])
 
   return (
     <div className="flex flex-col gap-[64px]">
-      <div className="flex flex-col gap-[8px]">
-        <Title label={titlepage} className="my-[0] text-[32px] leading-[48px]" />
-        <small className="text-[16px] leading-[28px]">{subtitlepage}</small>
-      </div>
+      <Title
+        label={titlepage}
+        sublabel={subtitlepage}
+        className="my-[0] text-[32px] leading-[48px]"
+      />
 
       <PdfViewer file={base64file} />
     </div>

@@ -30,7 +30,7 @@ export const Title: FC<Props> = ({ label, sublabel, htmlTag = 'h1', className })
   const Component: ElementType = htmlTag
 
   return (
-    <div>
+    <div className="flex flex-col gap-[8px]">
       <Component className={titleClasses}>{label}</Component>
 
       {!!sublabel && <span className="text-[16px] leading-[28px]">{sublabel}</span>}

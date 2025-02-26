@@ -32,7 +32,7 @@ export const PdfViewer: FC<Props> = ({ file }) => {
       <Document
         file={file}
         onLoadSuccess={onDocumentLoadSuccess}
-        className="w-full flex justify-center min-h-[840px]"
+        className="w-full flex justify-center min-h-[840px] shadow-[0_0_16px_0_rgba(0,0,0,0.32)] rounded-[16px]"
       >
         <Page pageNumber={pageNumber} width={800} />
       </Document>
