@@ -985,6 +985,18 @@ export interface Form {
             blockName?: string | null;
             blockType: 'birthplace';
           }
+        | {
+            title: string;
+            subtitle?: string | null;
+            accessCodeTitle: string;
+            accessCode: {
+              label: string;
+              placeholder: string;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'birthconsultation';
+          }
       )[]
     | null;
   submitButtonLabel?: string | null;
@@ -2306,6 +2318,21 @@ export interface FormsSelect<T extends boolean = true> {
         birthplace?:
           | T
           | {
+              id?: T;
+              blockName?: T;
+            };
+        birthconsultation?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              accessCodeTitle?: T;
+              accessCode?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                  };
               id?: T;
               blockName?: T;
             };
