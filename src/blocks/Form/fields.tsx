@@ -2,6 +2,7 @@ import { Address } from './Address'
 import { AddressData } from './AddressData'
 import { BirthCertificateData } from './BirthCertificateData'
 import { Birthdate } from './Birthdate'
+import { Birthplace } from './Birthplace'
 import { Checkbox } from './Checkbox'
 import { ContactData } from './ContactData'
 import { Country } from './Country'
@@ -10,6 +11,7 @@ import { CustomNumber } from './CustomNumber'
 import { Email } from './Email'
 import { Header } from './Header'
 import { IdData } from './IdData'
+import { IdentificationData } from './IdentificationData'
 import { Message } from './Message'
 import { Nationality } from './Nationality'
 import { Nif } from './Nif'
@@ -23,6 +25,7 @@ import { SelectWithApi } from './SelectWithAPI'
 import { State } from './State'
 import { Text } from './Text'
 import { Textarea } from './Textarea'
+import { Title } from './Title'
 
 export const fields = {
   customMessage: CustomMessage,
@@ -51,5 +54,8 @@ export const fields = {
   radioButtons: RadioButtons,
   preLoadExample1: PreLoadExample1,
   birthdate: Birthdate,
+  birthplace: Birthplace,
   customtextarea: Textarea,
+  title: Title,
+  identificationData: IdentificationData,
 }

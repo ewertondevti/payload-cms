@@ -707,8 +707,9 @@ export interface Form {
             blockType: 'preLoadExample1';
           }
         | {
-            name: string;
-            label?: string | null;
+            radioLabel: string;
+            dateLabel: string;
+            yearLabel: string;
             required?: boolean | null;
             id?: string | null;
             blockName?: string | null;
@@ -892,8 +893,9 @@ export interface Form {
                       blockType: 'preLoadExample1';
                     }
                   | {
-                      name: string;
-                      label?: string | null;
+                      radioLabel: string;
+                      dateLabel: string;
+                      yearLabel: string;
                       required?: boolean | null;
                       id?: string | null;
                       blockName?: string | null;
@@ -914,7 +916,9 @@ export interface Form {
                       blockType: 'customtextarea';
                     }
                   | {
-                      label?: string | null;
+                      label: string;
+                      htmlTag: 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
+                      sublabel?: string | null;
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'title';
@@ -931,6 +935,7 @@ export interface Form {
                       blockType: 'selectWithApi';
                     }
                   | {
+                      title?: string | null;
                       nifIsVisible?: boolean | null;
                       nifIsRequired?: boolean | null;
                       id?: string | null;
@@ -949,7 +954,9 @@ export interface Form {
             blockType: 'group';
           }
         | {
-            label?: string | null;
+            label: string;
+            htmlTag: 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
+            sublabel?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'title';
@@ -966,6 +973,7 @@ export interface Form {
             blockType: 'selectWithApi';
           }
         | {
+            title?: string | null;
             nifIsVisible?: boolean | null;
             nifIsRequired?: boolean | null;
             id?: string | null;
@@ -2011,8 +2019,9 @@ export interface FormsSelect<T extends boolean = true> {
         birthdate?:
           | T
           | {
-              name?: T;
-              label?: T;
+              radioLabel?: T;
+              dateLabel?: T;
+              yearLabel?: T;
               required?: T;
               id?: T;
               blockName?: T;
@@ -2202,8 +2211,9 @@ export interface FormsSelect<T extends boolean = true> {
                     birthdate?:
                       | T
                       | {
-                          name?: T;
-                          label?: T;
+                          radioLabel?: T;
+                          dateLabel?: T;
+                          yearLabel?: T;
                           required?: T;
                           id?: T;
                           blockName?: T;
@@ -2227,6 +2237,8 @@ export interface FormsSelect<T extends boolean = true> {
                       | T
                       | {
                           label?: T;
+                          htmlTag?: T;
+                          sublabel?: T;
                           id?: T;
                           blockName?: T;
                         };
@@ -2245,6 +2257,7 @@ export interface FormsSelect<T extends boolean = true> {
                     identificationData?:
                       | T
                       | {
+                          title?: T;
                           nifIsVisible?: T;
                           nifIsRequired?: T;
                           id?: T;
@@ -2264,6 +2277,8 @@ export interface FormsSelect<T extends boolean = true> {
           | T
           | {
               label?: T;
+              htmlTag?: T;
+              sublabel?: T;
               id?: T;
               blockName?: T;
             };
@@ -2282,6 +2297,7 @@ export interface FormsSelect<T extends boolean = true> {
         identificationData?:
           | T
           | {
+              title?: T;
               nifIsVisible?: T;
               nifIsRequired?: T;
               id?: T;

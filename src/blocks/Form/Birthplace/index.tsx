@@ -95,6 +95,7 @@ export const Birthplace: React.FC<BirthplaceProps> = ({
           feedbackState="danger"
           feedbackText={`Obrigatório preencher "${countryProps.label}"`}
           hasError={!!errors['countryBirth']}
+          defaultValue="Portugal"
         />
 
         {isPtSelected && (
@@ -134,7 +135,7 @@ export const Birthplace: React.FC<BirthplaceProps> = ({
           <Width width={50}>
             <InputText
               {...locationProps}
-              {...register('location', { required: true, })}
+              {...register('location', { required: true })}
               feedbackState="danger"
               feedbackText={`Obrigatório preencher "${locationProps.label}"`}
               hasError={!!errors['location']}

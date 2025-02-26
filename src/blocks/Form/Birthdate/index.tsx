@@ -5,9 +5,15 @@ import { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form'
 import { RadioButtons, RadioButtonsProps } from '../RadioButtonGroup'
 import { Width } from '../Width'
 
-export const Birthdate: FC<
-  RadioButtonsProps & UseFormReturn & { errors: FieldErrors<FieldValues> }
-> = ({ width, watch, register, required, ...props }) => {
+type Props = RadioButtonsProps &
+  UseFormReturn & {
+    errors: FieldErrors<FieldValues>
+    radioLabel: string
+    dateLabel: string
+    yearLabel: string
+  }
+
+export const Birthdate: FC<Props> = ({ width, watch, register, required, ...props }) => {
   const selectOption = watch('birthdate-or-year-registration')
 
   const endDate = new Date()
@@ -15,6 +21,8 @@ export const Birthdate: FC<
 
   const dateProps: InputDateProps & UseFormReturn = {
     ...props,
+
+    label: props.dateLabel,
 
     calendarIconAriaLabel: 'Open calendar picker overlay',
     previousYearAriaLabel: 'Navigate previous year',
@@ -79,7 +87,7 @@ export const Birthdate: FC<
         <RadioButtons
           {...props}
           name="birthdate-or-year-registration"
-          label="Sei a data exata de nascimento ou apenas o ano?"
+          label={props.radioLabel}
           width={50}
           watch={watch}
           register={register}
@@ -102,7 +110,7 @@ export const Birthdate: FC<
                 min: 1900,
                 max: new Date().getFullYear(),
               })}
-              label="Ano de nascimento"
+              label={props.yearLabel}
               placeholder="Indique o ano de nascimento"
               feedbackState="danger"
               feedbackText={getErrorMessage()}

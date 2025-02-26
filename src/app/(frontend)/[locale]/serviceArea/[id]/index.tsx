@@ -426,7 +426,7 @@ export default function ServiceStep({ params }: Args) {
             {/* No caso de já estar steps com informação, será continuar em vez de começar */}
             {steps.steps[stepIndex]?.blockType == BlockType.content ||
             steps.steps[stepIndex]?.blockType == BlockType.summary ||
-            steps.steps[stepIndex]?.blockType == BlockType.exemplo ? (
+            steps.steps[stepIndex]?.blockType == BlockType.form ? (
               <Button
                 children={
                   stepIndex == 0

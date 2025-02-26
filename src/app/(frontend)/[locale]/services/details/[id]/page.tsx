@@ -54,9 +54,6 @@ export default async function Page({ params: paramsPromise }: Args) {
     },
   ]
 
-  function teste() {
-    console.log('teste')
-  }
   return (
     <>
       <div>
@@ -117,7 +114,7 @@ export default async function Page({ params: paramsPromise }: Args) {
                 trailingIcon="agora-line-document"
                 trailingIconHover="agora-solid-document"
                 label="Consultar"
-                href={'/serviceArea/' + id}
+                href={'/serviceArea/' + id + '/certificate-consultations/' + id}
               />
 
               <CustomButton
