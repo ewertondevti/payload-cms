@@ -11,9 +11,15 @@ import {
 } from '@/components/ui/select'
 import React from 'react'
 import { Controller } from 'react-hook-form'
-
 import { Error } from '../Error'
 import { Width } from '../Width'
+
+export type SelectProps = SelectField & {
+  control: Control<FieldValues, any>,
+  errors: Partial<FieldErrorsImpl<{
+        [x: string]: any
+      }>>
+}
 
 export const Select: React.FC<
   SelectField & {

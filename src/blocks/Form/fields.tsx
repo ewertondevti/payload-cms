@@ -23,6 +23,7 @@ import { SelectWithApi } from './SelectWithAPI'
 import { State } from './State'
 import { Text } from './Text'
 import { Textarea } from './Textarea'
+import { IdentificationData } from './IdentificationData/'
 
 export const fields = {
   customMessage: CustomMessage,
@@ -52,4 +53,5 @@ export const fields = {
   preLoadExample1: PreLoadExample1,
   birthdate: Birthdate,
   customtextarea: Textarea,
+  identificationData: IdentificationData
 }
