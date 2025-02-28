@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form'
 import { Nif, NifProps } from '../Nif'
-import { Select, SelectProps } from '../Select'
 import { Text, TextProps } from '../Text'
 import { Title } from '../Title'
+import { InputSelect, InputSelectProps } from '@/components/ui/inputSelect'
 
 export type IdentificationDataProps = UseFormReturn & {
   errors: FieldErrors<FieldValues>
@@ -13,17 +13,18 @@ export type IdentificationDataProps = UseFormReturn & {
 }
 
 export const IdentificationData: FC<IdentificationDataProps> = (props) => {
-  const docTypeProps: SelectProps = {
+  const docTypeProps: InputSelectProps = {
     ...props,
-    name: 'document-type',
+    id: 'document-type',
     label: 'Documento de identificação',
     placeholder: 'Indique o documento de identificação',
-    width: 50,
+    hideSectionNames: true,
     options: [
       { label: 'Cartão Cidadão', value: 'cartao-cidadao' },
       { label: 'Passaporte', value: 'passaporte' },
       { label: 'Título de Residência', value: 'titulo-residencia' },
     ],
+    required: false
   }
 
   const fullnameProps: TextProps = {
@@ -82,7 +83,7 @@ export const IdentificationData: FC<IdentificationDataProps> = (props) => {
 
       <div className="flex flex-wrap gap-[32px]">
         <Text {...fullnameProps} />
-        <Select {...docTypeProps} />
+        <InputSelect {...docTypeProps} />
         <Text {...docNumberProps} />
         {!props.nifIsVisible && <Text {...digVerificationProps} />}
         {props.nifIsVisible && <Nif {...nifProps} />}
