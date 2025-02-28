@@ -10,6 +10,7 @@ export type BirthplaceProps = UseFormReturn & {
   apidomain: string
   required: boolean
   errors: FieldErrors<FieldValues>
+  label: string
 }
 
 export const Birthplace: React.FC<BirthplaceProps> = ({
@@ -17,6 +18,7 @@ export const Birthplace: React.FC<BirthplaceProps> = ({
   watch,
   required,
   errors,
+  label,
   ...props
 }) => {
   const selectedCountry: string = watch('countryBirth')
@@ -37,7 +39,7 @@ export const Birthplace: React.FC<BirthplaceProps> = ({
 
     apidomain: 'https://restcountries.com/v3.1/all',
     placeholder: 'Selecione um país',
-    label: 'País de naturalidade',
+    label,
   }
 
   const distritoProps: SelectWithAPIProps = {
