@@ -38,6 +38,7 @@ export const Checkbox: React.FC<
           }
         `}
       </style>
+
       <CheckboxUi
         defaultChecked={defaultValue}
         label={label}

@@ -21,6 +21,7 @@ export const SelectWithApi: FC<SelectWithAPIProps> = ({
   apidomain,
   className,
   width,
+  defaultValue,
   ...props
 }) => {
   const [sections, setSections] = useState<ReactElement<DropdownSectionProps>[]>([])
@@ -41,18 +42,26 @@ export const SelectWithApi: FC<SelectWithAPIProps> = ({
 
           const newSections = [
             <DropdownSection key={`my-input-select-${generatedId}-${0}`} name="Countries">
-              {newOptions.map(({ label, value }) => (
-                <DropdownOption key={`my-input-select-${value}-${0}-0`} value={value}>
-                  {label}
-                </DropdownOption>
-              ))}
+              {newOptions.map(({ label, value }) => {
+                if (value === defaultValue) setValue(props.name!, defaultValue)
+
+                return (
+                  <DropdownOption
+                    key={`my-input-select-${value}-${0}-0`}
+                    selected={value === defaultValue}
+                    value={value}
+                  >
+                    {label}
+                  </DropdownOption>
+                )
+              })}
             </DropdownSection>,
           ]
 
           setSections(newSections)
         })
     }
-  }, [apidomain, props.disabled])
+  }, [apidomain, props.disabled, defaultValue])
 
   const containerClassName = classNames(`h-[${(props.visibleCount ?? 4) * 62}px]`, {
     'text-white bg-[var(--color-primary-900)]': props.darkMode,

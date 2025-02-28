@@ -1,66 +1,89 @@
-import type { SelectField } from '@payloadcms/plugin-form-builder/types'
-import type { Control, FieldErrorsImpl, FieldValues } from 'react-hook-form'
+'use client'
 
-import { Label } from '@/components/ui/label'
 import {
-  Select as SelectComponent,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import React from 'react'
-import { Controller } from 'react-hook-form'
-import { Error } from '../Error'
-import { Width } from '../Width'
+  DropdownOption,
+  DropdownOptionProps,
+  DropdownSection,
+  DropdownSectionProps,
+  InputSelect,
+  InputSelectProps,
+} from '@ama-pt/agora-design-system'
+import classNames from 'classnames'
+import { Children, FC, isValidElement, ReactElement, useEffect, useId, useState } from 'react'
+import { UseFormReturn } from 'react-hook-form'
 
-export type SelectProps = SelectField & {
-  control: Control<FieldValues, any>,
-  errors: Partial<FieldErrorsImpl<{
-        [x: string]: any
-      }>>
-}
+export type SelectProps = InputSelectProps &
+  UseFormReturn & { width: number; options: { label: string; value: any }[] }
 
-export const Select: React.FC<
-  SelectField & {
-    control: Control<FieldValues, any>
-    errors: Partial<
-      FieldErrorsImpl<{
-        [x: string]: any
-      }>
-    >
+export const Select: FC<SelectProps> = ({ setValue, className, width, options, ...props }) => {
+  const [sections, setSections] = useState<ReactElement<DropdownSectionProps>[]>([])
+
+  const generatedId = useId()
+
+  useEffect(() => {
+    const newSections = [
+      <DropdownSection key={`my-input-select-${generatedId}-${0}`} name="Countries">
+        {options.map(({ label, value }) => (
+          <DropdownOption key={`my-input-select-${value}-${0}-0`} value={value}>
+            {label}
+          </DropdownOption>
+        ))}
+      </DropdownSection>,
+    ]
+
+    setSections(newSections)
+  }, [options])
+
+  const containerClassName = classNames(`h-[${(props.visibleCount ?? 4) * 62}px]`, {
+    'text-white bg-[var(--color-primary-900)]': props.darkMode,
+  })
+
+  const onInputSelectChange = (selected: DropdownOptionProps[]) => {
+    const newSections = sections.map((s) => {
+      const sectionKey = `my-input-select-${generatedId}-${0}`
+
+      return (
+        <DropdownSection {...s.props} key={sectionKey}>
+          {Children.toArray(s.props.children).map((item, sectionOptionIndex) => {
+            const sectionOptionKey = `my-input-select-${generatedId}-${0}-${sectionOptionIndex}`
+
+            if (isValidElement<DropdownOptionProps>(item)) {
+              const selectedValue = !!selected.find((i) => i.value === item.props.value)
+
+              if (selectedValue) setValue(props.name!, item.props.value)
+
+              return (
+                <DropdownOption {...item.props} selected={selectedValue} key={sectionOptionKey} />
+              )
+            }
+
+            return <></>
+          })}
+        </DropdownSection>
+      )
+    })
+
+    setSections(newSections)
   }
-> = ({ name, control, errors, label, options, required, width }) => {
-  return (
-    <Width width={width}>
-      <Label htmlFor={name}>{label}</Label>
-      <Controller
-        control={control}
-        defaultValue=""
-        name={name}
-        render={({ field: { onChange, value } }) => {
-          const controlledValue = options.find((t) => t.value === value)
 
-          return (
-            <SelectComponent onValueChange={(val) => onChange(val)} value={controlledValue?.value}>
-              <SelectTrigger className="w-full" id={name}>
-                <SelectValue placeholder={label} />
-              </SelectTrigger>
-              <SelectContent>
-                {options.map(({ label, value }) => {
-                  return (
-                    <SelectItem key={value} value={value}>
-                      {label}
-                    </SelectItem>
-                  )
-                })}
-              </SelectContent>
-            </SelectComponent>
-          )
-        }}
-        rules={{ required }}
-      />
-      {required && errors[name] && <Error />}
-    </Width>
+  return (
+    <div className={containerClassName} style={{ width: `calc(${width}% - 16px)` }}>
+      <style>
+        {`
+          .agora-dropdown.visible {
+            max-height: ${(props.visibleCount ?? 4) * 62}px !important;
+            overflow-y: auto !important;
+          }
+        `}
+      </style>
+
+      <InputSelect
+        {...props}
+        {...props.register(props.name!, { required: props.required })}
+        onChange={onInputSelectChange}
+      >
+        {sections}
+      </InputSelect>
+    </div>
   )
 }

@@ -1,37 +1,22 @@
-import type { FieldValues } from 'react-hook-form'
+import type { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form'
 
-export interface NifField {
-  blockName?: string
-  blockType: 'nif'
-  defaultValue?: string
+export type NifProps = UseFormReturn & {
+  errors: FieldErrors<FieldValues>
   label?: string
   placeholder?: string
   name: string
-  id: string
   required?: boolean
   width?: number
   //   disabled: boolean
 }
-
-import type { FieldErrorsImpl, UseFormRegister } from 'react-hook-form'
 
 import React from 'react'
 
 import { InputText } from '@ama-pt/agora-design-system'
 import { Width } from '../Width'
 
-export const Nif: React.FC<
-  NifField & {
-    errors: Partial<
-      FieldErrorsImpl<{
-        [x: string]: any
-      }>
-    >
-    register: UseFormRegister<FieldValues>
-  }
-> = ({
+export const Nif: React.FC<NifProps> = ({
   name,
-  defaultValue,
   placeholder,
   errors,
   label,
@@ -52,7 +37,6 @@ export const Nif: React.FC<
 
       {/* <Label htmlFor={name}>{label}</Label> */}
       <InputText
-        defaultValue={defaultValue}
         placeholder={placeholder}
         id="cvtNIF"
         label={label}

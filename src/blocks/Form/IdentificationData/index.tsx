@@ -9,6 +9,7 @@ export type IdentificationDataProps = UseFormReturn & {
   errors: FieldErrors<FieldValues>
   nifIsRequired: boolean
   nifIsVisible: boolean
+  title: string
 }
 
 export const IdentificationData: FC<IdentificationDataProps> = (props) => {
@@ -55,20 +56,10 @@ export const IdentificationData: FC<IdentificationDataProps> = (props) => {
     maxLength: 1,
   }
 
-  const nifLabel = props.nifIsRequired ? (
-    'Nif'
-  ) : (
-    <div className="flex flex-wrap gap-[8px]">
-      <label className="input-text-label">
-        Nif <span className="text-[#64718B]">(Optional)</span>
-      </label>
-    </div>
-  )
-
   const nifProps: NifProps = {
     ...props,
     name: 'nif',
-    label: nifLabel,
+    label: 'Número de Identificação Fiscal (NIF)',
     placeholder: 'Indique o NIF',
     width: 50,
     required: props.nifIsRequired,
@@ -88,7 +79,7 @@ export const IdentificationData: FC<IdentificationDataProps> = (props) => {
         `}
       </style>
 
-      <Title label="Dados de identificação" />
+      <Title label="Dados de identificação" htmlTag="h2" />
 
       <div className="flex flex-wrap gap-[32px]">
         <Text {...fullnameProps} />

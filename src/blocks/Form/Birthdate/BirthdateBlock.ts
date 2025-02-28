@@ -26,21 +26,31 @@ export const BirthdateBlock: Block = {
   slug: 'birthdate',
   fields: [
     {
+      ...label,
+      name: 'radioLabel',
+      label: 'Radio label',
+      defaultValue: 'Sei a data exata de nascimento ou apenas o ano?',
+      localized: true,
+      required: true,
+    },
+    {
       type: 'row',
       fields: [
         {
-          ...name,
-          defaultValue: 'birthdate',
-          admin: {
-            width: '50%',
-          },
+          ...label,
+          name: 'dateLabel',
+          label: 'Date label',
+          defaultValue: 'Data de nascimento',
+          localized: true,
+          required: true,
         },
         {
           ...label,
-          defaultValue: 'Data de nascimento',
-          admin: {
-            width: '50%',
-          },
+          name: 'yearLabel',
+          label: 'Year label',
+          defaultValue: 'Ano de nascimento',
+          localized: true,
+          required: true,
         },
       ],
     },
