@@ -943,6 +943,7 @@ export interface Form {
                       blockType: 'identificationData';
                     }
                   | {
+                      label: string;
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'birthplace';
@@ -981,6 +982,7 @@ export interface Form {
             blockType: 'identificationData';
           }
         | {
+            label: string;
             id?: string | null;
             blockName?: string | null;
             blockType: 'birthplace';
@@ -2266,6 +2268,7 @@ export interface FormsSelect<T extends boolean = true> {
                     birthplace?:
                       | T
                       | {
+                          label?: T;
                           id?: T;
                           blockName?: T;
                         };
@@ -2306,6 +2309,7 @@ export interface FormsSelect<T extends boolean = true> {
         birthplace?:
           | T
           | {
+              label?: T;
               id?: T;
               blockName?: T;
             };
