@@ -20,6 +20,7 @@ import SummaryServiceStepBlock from '@/blocks/Summary/SummaryServiceStepBlock'
 import { slugField } from '@/fields/slug'
 import { anyone } from '../../access/anyone'
 import { authenticated } from '../../access/authenticated'
+import { BirthConsultationFormBlock } from '@/blocks/BirthConsultationForm/BirthConsultationFormBlock'
 
 export const Services: CollectionConfig = {
   slug: 'services',
@@ -86,6 +87,7 @@ export const Services: CollectionConfig = {
                 PaymentServiceStepBlock,
                 SubmissionServiceStepBlock,
                 SummaryServiceStepBlock,
+                BirthConsultationFormBlock,
                 ConsultPreviewServiceStep,
                 ExemploServiceStepBlock,
               ],

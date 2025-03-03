@@ -987,6 +987,18 @@ export interface Form {
             blockName?: string | null;
             blockType: 'birthplace';
           }
+        | {
+            title: string;
+            subtitle?: string | null;
+            accessCodeTitle: string;
+            accessCode: {
+              label: string;
+              placeholder: string;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'birthconsultation';
+          }
       )[]
     | null;
   submitButtonLabel?: string | null;
@@ -1157,6 +1169,13 @@ export interface Service {
               id?: string | null;
               blockName?: string | null;
               blockType: 'summary-service-steps';
+            }
+          | {
+              stepTitle: string;
+              form: number | Form;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'birthbonsultationForm';
             }
           | {
               title: string;
@@ -1727,6 +1746,14 @@ export interface ServicesSelect<T extends boolean = true> {
                 | T
                 | {
                     title?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              birthbonsultationForm?:
+                | T
+                | {
+                    stepTitle?: T;
+                    form?: T;
                     id?: T;
                     blockName?: T;
                   };
@@ -2310,6 +2337,21 @@ export interface FormsSelect<T extends boolean = true> {
           | T
           | {
               label?: T;
+              id?: T;
+              blockName?: T;
+            };
+        birthconsultation?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              accessCodeTitle?: T;
+              accessCode?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                  };
               id?: T;
               blockName?: T;
             };

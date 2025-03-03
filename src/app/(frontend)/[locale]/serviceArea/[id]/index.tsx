@@ -29,6 +29,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 
 import { ConsultPreview } from '@/blocks/ConsultPreviewServiceStep'
 import { FormBlock } from '@/blocks/Form/Component'
+import { BirthConsultationForm } from '@/blocks/BirthConsultationForm'
 
 type BlockTypeProps = {
   content: string
@@ -38,6 +39,7 @@ type BlockTypeProps = {
   summary: string
   exemplo: string
   consultpreview: string
+  birthbonsultationForm: string
 }
 
 const BlockType: BlockTypeProps = {
@@ -48,6 +50,7 @@ const BlockType: BlockTypeProps = {
   summary: 'summary-service-steps',
   exemplo: 'exemplo1ServiceSteps',
   consultpreview: 'consult-preview',
+  birthbonsultationForm: 'birthbonsultationForm',
 }
 
 type Args = {
@@ -302,6 +305,7 @@ export default function ServiceStep({ params }: Args) {
   )
 
   const StepRenderer = (blockType: string) => {
+    console.log('blockType', blockType)
     switch (blockType) {
       case BlockType.content:
         return <ContentBlock blockType="content" columns={[richText]} />
@@ -340,16 +344,23 @@ export default function ServiceStep({ params }: Args) {
             orderId={serviceOrder?.id}
           />
         )
-
       case BlockType.consultpreview:
         return <ConsultPreview {...steps.steps[stepIndex]} />
-
+      case BlockType.birthbonsultationForm:
+        return (
+          <BirthConsultationForm
+            enableIntro={false}
+            form={steps?.steps[stepIndex]?.form}
+            onSubmitOverride={onSubmitStep}
+            showSubmitButton={false}
+            stepIndex={stepIndex}
+          />
+        )
       default:
         return (
           <FormBlock
             enableIntro={false}
             form={steps?.steps[stepIndex]?.form}
-            // onSubmitOverride={onSubmitStep}
             onSubmitOverride={onSubmitStep}
             showSubmitButton={false}
             stepIndex={stepIndex}
@@ -357,6 +368,7 @@ export default function ServiceStep({ params }: Args) {
         )
     }
   }
+
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -423,8 +435,8 @@ export default function ServiceStep({ params }: Args) {
               <div className="flex justify-end">
                 {/* No caso de já estar steps com informação, será continuar em vez de começar */}
                 {steps.steps[stepIndex]?.blockType == BlockType.content ||
-                steps.steps[stepIndex]?.blockType == BlockType.summary ||
-                steps.steps[stepIndex]?.blockType == BlockType.form ? (
+                  steps.steps[stepIndex]?.blockType == BlockType.summary ||
+                  steps.steps[stepIndex]?.blockType == BlockType.form ? (
                   <Button
                     children={
                       stepIndex == 0
