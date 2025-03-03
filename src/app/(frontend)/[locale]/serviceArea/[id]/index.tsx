@@ -30,7 +30,9 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { BirthConsultationForm } from '@/blocks/BirthConsultationForm'
 import { ConsultPreview } from '@/blocks/ConsultPreviewServiceStep'
 import { FormBlock } from '@/blocks/Form/Component'
+import { GetCertidaoResponse } from '@/models/certidao'
 import { Service } from '@/payload-types'
+import { GetCertidao } from '@/services/certidaoServices'
 
 type BlockTypeProps = {
   content: string
@@ -79,6 +81,9 @@ export default function ServiceStep({ params }: Args) {
   const validateFields = useRef<(() => Promise<boolean>) | null>(null)
   const [service, setService] = useState<Service>()
   const { showCustomToast } = useToast()
+  const [certidaoResponse, setCertidaoResponse] = useState<GetCertidaoResponse>()
+  const [isConsultingFetching, setIsConsultingFetching] = useState(false)
+  console.log('🚀 ~ ServiceStep ~ isConsultingFetching:', isConsultingFetching)
   const [data, setData] = useState({
     mensagem: {
       codigo: 0,
@@ -190,8 +195,6 @@ export default function ServiceStep({ params }: Args) {
     // } else {
     // }
 
-    console.log('nextStep', nextStep)
-
     // const indexBeforeChange = stepIndex
 
     setStepIndex(nextStep)
@@ -247,6 +250,8 @@ export default function ServiceStep({ params }: Args) {
 
   const onSubmitStep = useCallback(
     async (data: Data) => {
+      setIsConsultingFetching(true)
+
       const dataToSend = Object.entries(data).map(([name, value]) => ({
         field: name,
         value,
@@ -288,6 +293,15 @@ export default function ServiceStep({ params }: Args) {
 
       await handleGetServiceContent()
 
+      if (Object.keys(data).length) {
+        const code = `${data.accessCode1}-${data.accessCode2}-${data.accessCode3}`
+
+        const res = await GetCertidao(code)
+
+        setIsConsultingFetching(false)
+        setCertidaoResponse(res)
+      }
+
       if (stepIndex !== steps.steps.length - 1) {
         changeToNextStep(stepIndex + 1)
       }
@@ -296,7 +310,6 @@ export default function ServiceStep({ params }: Args) {
   )
 
   const StepRenderer = (blockType: string) => {
-    console.log('blockType', blockType)
     switch (blockType) {
       case BlockType.content:
         return <ContentBlock blockType="content" columns={[richText]} />
@@ -336,7 +349,14 @@ export default function ServiceStep({ params }: Args) {
           />
         )
       case BlockType.consultpreview:
-        return <ConsultPreview {...steps.steps[stepIndex]} />
+        return (
+          <ConsultPreview
+            {...steps.steps[stepIndex]}
+            certidaoResponse={certidaoResponse}
+            isLoading={isConsultingFetching}
+          />
+        )
+
       case BlockType.birthbonsultationForm:
         return (
           <BirthConsultationForm
