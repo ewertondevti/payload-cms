@@ -1171,6 +1171,13 @@ export interface Service {
               blockType: 'summary-service-steps';
             }
           | {
+              stepTitle: string;
+              form: number | Form;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'birthbonsultationForm';
+            }
+          | {
               title: string;
               titlepage: string;
               subtitlepage?: string | null;
@@ -1739,6 +1746,14 @@ export interface ServicesSelect<T extends boolean = true> {
                 | T
                 | {
                     title?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              birthbonsultationForm?:
+                | T
+                | {
+                    stepTitle?: T;
+                    form?: T;
                     id?: T;
                     blockName?: T;
                   };
