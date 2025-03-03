@@ -3,15 +3,15 @@ import fetch from 'node-fetch'
 import FormData from 'form-data'
 import https from 'https'
 
-const MOSPARO_URL = 'https://mosparo.irn.internal'
-const MOSPARO_PUBLIC_KEY = 'erNgKndOLlyfLpxb6lIuUYBJf5HslQkwYr98t5pPd-g'
+const MOSPARO_URL = process.env.MOSPARO_URL_API
+const MOSPARO_PUBLIC_KEY_TOKEN = 'erNgKndOLlyfLpxb6lIuUYBJf5HslQkwYr98t5pPd-g'
 
 const httpsAgent = new https.Agent({ rejectUnauthorized: false })
 
 export async function POST() {
  try {
   const formData = new FormData()
-  formData.append('publicKey', MOSPARO_PUBLIC_KEY)
+  formData.append('publicKey', MOSPARO_PUBLIC_KEY_TOKEN)
   formData.append('pageTitle', 'mosparo Form')
   formData.append('pageUrl', 'http://localhost')
 
