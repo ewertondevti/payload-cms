@@ -30,7 +30,7 @@ export const ConsultPreview: FC<Props> = ({ titlepage, subtitlepage }) => {
   }, [])
 
   return (
-    <div className="flex flex-col w-fit gap-[64px]">
+    <div className="flex flex-col w-fit gap-[64px]" data-testid="consult-preview">
       <Title
         label={titlepage}
         sublabel={subtitlepage}

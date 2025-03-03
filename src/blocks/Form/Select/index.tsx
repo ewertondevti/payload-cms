@@ -15,7 +15,14 @@ import { UseFormReturn } from 'react-hook-form'
 export type SelectProps = InputSelectProps &
   UseFormReturn & { width: number; options: { label: string; value: any }[] }
 
-export const Select: FC<SelectProps> = ({ setValue, className, width, options, ...props }) => {
+export const Select: FC<SelectProps> = ({
+  setValue,
+  className,
+  width,
+  defaultValue,
+  options,
+  ...props
+}) => {
   const [sections, setSections] = useState<ReactElement<DropdownSectionProps>[]>([])
 
   const generatedId = useId()
@@ -23,16 +30,26 @@ export const Select: FC<SelectProps> = ({ setValue, className, width, options, .
   useEffect(() => {
     const newSections = [
       <DropdownSection key={`my-input-select-${generatedId}-${0}`} name="Countries">
-        {options.map(({ label, value }) => (
-          <DropdownOption key={`my-input-select-${value}-${0}-0`} value={value}>
-            {label}
-          </DropdownOption>
-        ))}
+        {options.map(({ label, value }) => {
+          if (defaultValue) {
+            setValue(props.name!, defaultValue)
+          }
+
+          return (
+            <DropdownOption
+              key={`my-input-select-${value}-${0}-0`}
+              value={value}
+              selected={defaultValue === value}
+            >
+              {label}
+            </DropdownOption>
+          )
+        })}
       </DropdownSection>,
     ]
 
     setSections(newSections)
-  }, [options])
+  }, [options, defaultValue])
 
   const containerClassName = classNames(`h-[${(props.visibleCount ?? 4) * 62}px]`, {
     'text-white bg-[var(--color-primary-900)]': props.darkMode,

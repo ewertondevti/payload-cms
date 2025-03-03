@@ -27,9 +27,10 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 // import { useSearchParams } from 'next/navigation'
 
+import { BirthConsultationForm } from '@/blocks/BirthConsultationForm'
 import { ConsultPreview } from '@/blocks/ConsultPreviewServiceStep'
 import { FormBlock } from '@/blocks/Form/Component'
-import { BirthConsultationForm } from '@/blocks/BirthConsultationForm'
+import { Service } from '@/payload-types'
 
 type BlockTypeProps = {
   content: string
@@ -76,6 +77,7 @@ export default function ServiceStep({ params }: Args) {
   const [showLoading, setShowLoading] = useState(false)
   const [paymentStatus, setPaymentStatus] = useState('')
   const validateFields = useRef<(() => Promise<boolean>) | null>(null)
+  const [service, setService] = useState<Service>()
   const { showCustomToast } = useToast()
   const [data, setData] = useState({
     mensagem: {
@@ -148,7 +150,9 @@ export default function ServiceStep({ params }: Args) {
 
         setServiceOrder(resultado)
       }
-      const serviceSteps: any = await getServiceStepsById(ids?.id)
+
+      const serviceSteps: Service = await getServiceStepsById(ids?.id)
+      setService(serviceSteps)
       setSteps(serviceSteps?.steps)
       setPreviousStepId(stepIndex)
     } catch (error) {
@@ -243,10 +247,6 @@ export default function ServiceStep({ params }: Args) {
 
   const onSubmitStep = useCallback(
     async (data: Data) => {
-      console.log('data: ', data)
-      // console.log("onSubmitStep", stepIndex)
-      // console.log("serviceOrder", serviceOrder)
-
       const dataToSend = Object.entries(data).map(([name, value]) => ({
         field: name,
         value,
@@ -259,7 +259,6 @@ export default function ServiceStep({ params }: Args) {
         stepIndex,
         orderId: serviceOrder?.id,
       })
-      //   console.log(stepData)
 
       if (!stepData) {
         const newStepOrder = {
@@ -272,16 +271,6 @@ export default function ServiceStep({ params }: Args) {
         }
 
         await postCreateStepServiceOrder(newStepOrder)
-
-        // const stepsToSubmit = {
-        //   userId: userId,
-        //   serviceId: serviceOrder?.serviceId,
-        //   step: `${stepIndex}`,
-        //   orderId: serviceOrder?.id,
-        //   formData: JSON.stringify(dataToSend), //substituir pelo conteudo do formulário
-        // }
-
-        // submitSteps(stepsToSubmit)
       } else {
         const updatedStepOrder = {
           id: stepData.id,
@@ -299,7 +288,9 @@ export default function ServiceStep({ params }: Args) {
 
       await handleGetServiceContent()
 
-      stepIndex !== steps.steps.length - 1 && changeToNextStep(stepIndex + 1)
+      if (stepIndex !== steps.steps.length - 1) {
+        changeToNextStep(stepIndex + 1)
+      }
     },
     [stepIndex, steps, serviceOrder, serviceOrder?.id, userId],
   )
@@ -369,7 +360,6 @@ export default function ServiceStep({ params }: Args) {
     }
   }
 
-
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [stepIndex])
@@ -434,9 +424,8 @@ export default function ServiceStep({ params }: Args) {
 
               <div className="flex justify-end">
                 {/* No caso de já estar steps com informação, será continuar em vez de começar */}
-                {steps.steps[stepIndex]?.blockType == BlockType.content ||
-                  steps.steps[stepIndex]?.blockType == BlockType.summary ||
-                  steps.steps[stepIndex]?.blockType == BlockType.form ? (
+                {steps.steps[stepIndex]?.blockType === BlockType.content ||
+                steps.steps[stepIndex]?.blockType === BlockType.summary ? (
                   <Button
                     children={
                       stepIndex == 0
@@ -510,15 +499,7 @@ export default function ServiceStep({ params }: Args) {
                   <Button
                     form={steps.steps[stepIndex]?.form?.id}
                     type="submit"
-                    children={
-                      stepIndex == 0
-                        ? steps && stepData
-                          ? 'Continuar'
-                          : 'Começar'
-                        : stepIndex == steps.steps.length - 1
-                          ? 'Submeter'
-                          : 'Seguinte'
-                    }
+                    children={stepIndex === steps.steps.length - 1 ? 'Submeter' : 'Seguinte'}
                     hasIcon={true}
                     leadingIcon="agora-line-arrow-right-circle"
                     leadingIconHover="agora-solid-arrow-right-circle"
