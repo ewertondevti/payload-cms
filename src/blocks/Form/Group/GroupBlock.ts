@@ -20,6 +20,7 @@ import { RequestorBlock } from '../RequestorData/RequestorDataBlock'
 import { SelectWithApiBlock } from '../SelectWithAPI/SelectWithApiBlock'
 import { TextAreaBlock } from '../Textarea/TextAreaBlock'
 import { TitleBlock } from '../Title/TitleBlock'
+import { FlexRadioButtonGroupBlock } from '../Cidadao/FlexRadioButtonGroup/FlexRadioButtonGroupBlock'
 
 const title: Field = {
   name: 'title',
@@ -53,6 +54,7 @@ const arrayFields: Field = {
     SelectWithApiBlock,
     IdentificationDataBlock,
     BirthplaceBlock,
+    FlexRadioButtonGroupBlock,
   ],
   labels: {
     singular: 'Field',
