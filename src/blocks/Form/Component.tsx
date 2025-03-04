@@ -127,7 +127,7 @@ export const FormBlock: React.FC<
           if (!mosparoResult || mosparoResult.error || !mosparoResult.valid) {
             clearTimeout(loadingTimerID)
             setIsLoading(false)
-            setError({ message: 'Validação do Mosparo falhou. Tente novamente.' })
+            setError({ message: 'Mosparo validataion error' })
             return
           }
 
@@ -162,7 +162,7 @@ export const FormBlock: React.FC<
             if (url) router.push(url)
           }
         } catch (err) {
-          console.warn('Erro na submissão:', err)
+          console.warn('Erro in the submission process', err)
           clearTimeout(loadingTimerID)
           setIsLoading(false)
           setError({ message: 'Something is wrong with the request.' })
