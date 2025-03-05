@@ -5,7 +5,7 @@ import https from 'https'
 
 const httpsAgent = new https.Agent({ rejectUnauthorized: false })
 
-const MOSPARO_URL = 'https://mosparo.irn.internal'
+const MOSPARO_URL = process.env.MOSPARO_URL_API
 
 /**
  * POST /api/mosparo-check

@@ -1,23 +1,20 @@
 'use client'
 
 import type { Form as FormType } from '@payloadcms/plugin-form-builder/types'
+import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
+import React, { useCallback, useEffect, useState } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
 
 import RichText from '@/components/RichText'
 import { Button } from '@/components/ui/button'
-import { useRouter } from 'next/navigation'
-import React, { useCallback, useState } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
-
-import { useTranslations } from 'next-intl'
 import { buildInitialFormState } from './buildInitialFormState'
 import { fields } from './fields'
 
 export type Value = unknown
-
 export interface Property {
   [key: string]: Value
 }
-
 export interface Data {
   [key: string]: Property | Property[]
 }
@@ -27,9 +24,7 @@ export type FormBlockType = {
   blockType?: 'formBlock'
   enableIntro: boolean
   form: FormType
-  introContent?: {
-    [k: string]: unknown
-  }[]
+  introContent?: { [k: string]: unknown }[]
 }
 
 export const FormBlock: React.FC<
@@ -53,7 +48,6 @@ export const FormBlock: React.FC<
   const formMethods = useForm({
     defaultValues: buildInitialFormState(formFromProps?.fields),
   })
-
   const {
     control,
     formState: { errors },
@@ -64,102 +58,118 @@ export const FormBlock: React.FC<
   const [isLoading, setIsLoading] = useState(false)
   const [hasSubmitted, setHasSubmitted] = useState<boolean>(false)
   const [error, setError] = useState<{ message: string; status?: string } | undefined>()
+  const [submitToken, setSubmitToken] = useState<string | null>(null)
+
   const router = useRouter()
   const t = useTranslations()
+  useEffect(() => {
+    const fetchSubmitToken = async () => {
+      try {
+        const response = await fetch('/api/send-token', { method: 'POST' })
+        const data = await response.json()
+        console.log(response)
+        if (data.submitToken) {
+          setSubmitToken(data.submitToken)
+        } else {
+          setError({ message: 'Falha ao obter token de submissão' })
+        }
+      } catch (err) {
+        console.error('Erro ao obter submitToken:', err)
+        setError({ message: 'Falha ao obter token de submissão' })
+      }
+    }
+    fetchSubmitToken()
+  }, [])
 
   let onSubmit
-
-  // console.log("onSubmitOverride", onSubmitOverride)
-
   if (onSubmitOverride) {
     onSubmit = useCallback(
       (data: Data) => {
-        // console.log('onSubmitOverride');
-
-        // console.log("data:", data)
-        // console.log("hasSubmitted:", hasSubmitted)
-
         if (!hasSubmitted) {
           onSubmitOverride(data)
         }
-
         setIsLoading(false)
-        setHasSubmitted(false) // Ensure form submission state is managed
-        setError(undefined) // Ensure error state is cleared
+        setHasSubmitted(false)
+        setError(undefined)
       },
-      [onSubmitOverride],
+      [onSubmitOverride, hasSubmitted],
     )
   } else {
     onSubmit = useCallback(
-      (data: Data) => {
-        let loadingTimerID: ReturnType<typeof setTimeout>
-        const submitForm = async () => {
-          setError(undefined)
+      async (data: Data) => {
+        setError(undefined)
+        let loadingTimerID: ReturnType<typeof setTimeout> | undefined
 
+        try {
+          if (!submitToken) {
+            setError({ message: 'Token de submissão ausente ou inválido' })
+            return
+          }
           const dataToSend = Object.entries(data).map(([name, value]) => ({
-            field: name,
+            name,
             value,
+            fieldPath: name,
           }))
 
-          // delay loading indicator by 1s
-          loadingTimerID = setTimeout(() => {
-            setIsLoading(true)
-          }, 1000)
+          loadingTimerID = setTimeout(() => setIsLoading(true), 1000)
 
-          try {
-            const req = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/form-submissions`, {
-              body: JSON.stringify({
-                form: formID,
-                submissionData: dataToSend,
-              }),
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              method: 'POST',
-            })
-
-            const res = await req.json()
-
+          const mosparoResponse = await fetch('/api/mosparo-check', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              publicKey: 'erNgKndOLlyfLpxb6lIuUYBJf5HslQkwYr98t5pPd-g',
+              submitToken,
+              formData: { fields: dataToSend },
+            }),
+          })
+          const mosparoResult = await mosparoResponse.json()
+          if (!mosparoResult || mosparoResult.error || !mosparoResult.valid) {
             clearTimeout(loadingTimerID)
-
-            if (req.status >= 400) {
-              setIsLoading(false)
-
-              setError({
-                message: res.errors?.[0]?.message || 'Internal Server Error',
-                status: res.status,
-              })
-
-              return
-            }
-
             setIsLoading(false)
-            setHasSubmitted(true)
+            setError({ message: 'Mosparo validataion error' })
+            return
+          }
 
-            if (confirmationType === 'redirect' && redirect) {
-              const { url } = redirect
+          const req = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/form-submissions`, {
+            body: JSON.stringify({
+              form: formID,
+              submissionData: dataToSend,
+            }),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            method: 'POST',
+          })
 
-              const redirectUrl = url
+          const res = await req.json()
+          clearTimeout(loadingTimerID)
 
-              if (redirectUrl) router.push(redirectUrl)
-            }
-          } catch (err) {
-            console.warn(err)
+          if (req.status >= 400) {
             setIsLoading(false)
             setError({
-              message: 'Something went wrong.',
+              message: res.errors?.[0]?.message || 'Internal Server Error',
+              status: res.status,
             })
+            return
           }
-        }
 
-        void submitForm()
+          setIsLoading(false)
+          setHasSubmitted(true)
+
+          if (confirmationType === 'redirect' && redirect) {
+            const { url } = redirect
+            if (url) router.push(url)
+          }
+        } catch (err) {
+          console.warn('Erro in the submission process', err)
+          clearTimeout(loadingTimerID)
+          setIsLoading(false)
+          setError({ message: 'Something is wrong with the request.' })
+        }
       },
-      [router, formID, redirect, confirmationType],
+      [router, formID, redirect, confirmationType, submitToken],
     )
   }
-
-  // console.log("stepIndex", stepIndex)
-  // console.log("formID", formID)
 
   if (!formFromProps?.fields?.length) return null
 
@@ -169,43 +179,38 @@ export const FormBlock: React.FC<
         {enableIntro && introContent && !hasSubmitted && (
           <RichText className="mb-8" content={introContent} enableGutter={false} />
         )}
-        {/* {!isLoading && hasSubmitted && confirmationType === 'message' && (
-          <RichText content={confirmationMessage} />
-        )} */}
         {isLoading && !hasSubmitted && <p>{t('loading')}</p>}
-        {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
-        {true && (
-          <form key={'form'} id={formID} onSubmit={handleSubmit(onSubmit)} noValidate>
-            <>
-              <div className="flex flex-col gap-16">
-                {formFromProps.fields.map((field, index) => {
-                  const Field: React.FC<any> = fields?.[field.blockType]
-                  if (Field) {
-                    return (
-                      <div className="last:mb-0 w-full" key={index + '_' + stepIndex}>
-                        <Field
-                          form={formFromProps}
-                          {...field}
-                          {...formMethods}
-                          control={control}
-                          errors={errors}
-                          register={register}
-                        />
-                      </div>
-                    )
-                  }
-                  return null
-                })}
-              </div>
 
-              {showSubmitButton && (
-                <Button form={formID} type="submit" variant="default">
-                  {submitButtonLabel}
-                </Button>
-              )}
-            </>
-          </form>
-        )}
+        {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
+
+        <form key="form" id={formID} onSubmit={handleSubmit(onSubmit)} noValidate>
+          <div className="flex flex-col gap-16">
+            {formFromProps.fields.map((field, index) => {
+              const Field = fields?.[field.blockType] as React.FC<any> | undefined
+              if (Field) {
+                return (
+                  <div className="last:mb-0" key={`${index}_${stepIndex}`}>
+                    <Field
+                      form={formFromProps}
+                      {...field}
+                      {...formMethods}
+                      control={control}
+                      errors={errors}
+                      register={register}
+                    />
+                  </div>
+                )
+              }
+              return null
+            })}
+          </div>
+
+          {showSubmitButton && (
+            <Button form={formID} type="submit" variant="default">
+              {submitButtonLabel || 'Enviar'}
+            </Button>
+          )}
+        </form>
       </FormProvider>
     </div>
   )
