@@ -161,7 +161,7 @@ export const FormBlock: React.FC<
   // console.log("stepIndex", stepIndex)
   // console.log("formID", formID)
 
-  if(!formFromProps?.fields?.length) return null
+  if (!formFromProps?.fields?.length) return null
 
   return (
     <div className="container">
@@ -177,13 +177,12 @@ export const FormBlock: React.FC<
         {true && (
           <form key={'form'} id={formID} onSubmit={handleSubmit(onSubmit)} noValidate>
             <>
-            <div className="flex flex-col gap-16">
-              {
-                formFromProps.fields.map((field, index) => {
+              <div className="flex flex-col gap-16">
+                {formFromProps.fields.map((field, index) => {
                   const Field: React.FC<any> = fields?.[field.blockType]
                   if (Field) {
                     return (
-                      <div className="last:mb-0" key={index + "_" + stepIndex}>
+                      <div className="last:mb-0 w-full" key={index + '_' + stepIndex}>
                         <Field
                           form={formFromProps}
                           {...field}
@@ -197,7 +196,7 @@ export const FormBlock: React.FC<
                   }
                   return null
                 })}
-            </div>
+              </div>
 
               {showSubmitButton && (
                 <Button form={formID} type="submit" variant="default">

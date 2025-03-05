@@ -25,6 +25,19 @@ export const BirthConsultation: React.FC<AccessVerificationProps> = ({
   register,
   errors,
 }) => {
+  const getErrorMessage = (fieldname: string) => {
+    switch (errors[fieldname]?.type) {
+      case 'required':
+        return 'Obrigatório preencher este campo.'
+
+      case 'maxLength':
+        return 'Tamanho máximo deste bloco é 4'
+
+      default:
+        return ''
+    }
+  }
+
   return (
     <div className="space-y-4">
       <FormTitle title={title} subtitle={subtitle} />
@@ -34,30 +47,27 @@ export const BirthConsultation: React.FC<AccessVerificationProps> = ({
       </div>
 
       <div className="mt-8">
-        <h2 className="text-base font-semibold text-gray-900 mt-12">{accessCode.label}</h2>
+        <h2 className="text-base font-semibold text-[#021C51] mt-12">{accessCode.label}</h2>
         <div className="grid grid-cols-3 gap-6 mt-4 ">
           <InputText
-            id="accessCode1"
             placeholder={accessCode.placeholder}
-            {...register('accessCode1', { required: true })}
+            {...register('accessCode1', { required: true, maxLength: 4 })}
             feedbackState="danger"
-            feedbackText={`Obrigatório preencher "${accessCode.label}"`}
+            feedbackText={getErrorMessage('accessCode1')}
             hasError={!!errors['accessCode1']}
           />
           <InputText
-            id="accessCode2"
             placeholder={accessCode.placeholder}
-            {...register('accessCode2', { required: true })}
+            {...register('accessCode2', { required: true, maxLength: 4 })}
             feedbackState="danger"
-            feedbackText={`Obrigatório preencher "${accessCode.label}"`}
+            feedbackText={getErrorMessage('accessCode2')}
             hasError={!!errors['accessCode2']}
           />
           <InputText
-            id="accessCode3"
             placeholder={accessCode.placeholder}
-            {...register('accessCode3', { required: true })}
+            {...register('accessCode3', { required: true, maxLength: 4 })}
             feedbackState="danger"
-            feedbackText={`Obrigatório preencher "${accessCode.label}"`}
+            feedbackText={getErrorMessage('accessCode3')}
             hasError={!!errors['accessCode3']}
           />
         </div>
