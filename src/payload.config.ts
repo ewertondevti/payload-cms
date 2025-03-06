@@ -57,6 +57,7 @@ import { RequestorBlock } from './blocks/Form/RequestorData/RequestorDataBlock'
 import { SelectWithApiBlock } from './blocks/Form/SelectWithAPI/SelectWithApiBlock'
 import { TextAreaBlock } from './blocks/Form/Textarea/TextAreaBlock'
 import { TitleBlock } from './blocks/Form/Title/TitleBlock'
+import { FlexRadioButtonGroupBlock } from './blocks/Form/Cidadao/FlexRadioButtonGroup/FlexRadioButtonGroupBlock'
 import { Areas } from './collections/Areas'
 import { LifeCycles } from './collections/LifeCycles'
 import { Services } from './collections/Services'
@@ -227,6 +228,7 @@ export default buildConfig({
         SelectWithApiBlock,
         IdentificationDataBlock,
         BirthplaceBlock,
+        FlexRadioButtonGroupBlock,
         BirthConsultationBlock
       },
       formOverrides: {

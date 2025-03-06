@@ -27,6 +27,7 @@ import { State } from './State'
 import { Text } from './Text'
 import { Textarea } from './Textarea'
 import { Title } from './Title'
+import { FlexRadioButtonGroup } from './Cidadao/FlexRadioButtonGroup'
 
 export const fields = {
   customMessage: CustomMessage,
@@ -53,6 +54,7 @@ export const fields = {
   nationality: Nationality,
   phoneNumber: PhoneNumber,
   radioButtons: RadioButtons,
+  flexRadioButtonGroup: FlexRadioButtonGroup,
   preLoadExample1: PreLoadExample1,
   birthdate: Birthdate,
   birthplace: Birthplace,

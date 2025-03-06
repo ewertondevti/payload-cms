@@ -948,6 +948,21 @@ export interface Form {
                       blockName?: string | null;
                       blockType: 'birthplace';
                     }
+                  | {
+                      name: string;
+                      label?: string | null;
+                      alignment?: ('vertical' | 'horizontal') | null;
+                      options?:
+                        | {
+                            label: string;
+                            value: string;
+                            id?: string | null;
+                          }[]
+                        | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'flexRadioButtonGroup';
+                    }
                 )[]
               | null;
             id?: string | null;
@@ -988,6 +1003,21 @@ export interface Form {
             blockType: 'birthplace';
           }
         | {
+            name: string;
+            label?: string | null;
+            alignment?: ('vertical' | 'horizontal') | null;
+            options?:
+              | {
+                  label: string;
+                  value: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'flexRadioButtonGroup';
+         }
+       | {
             title: string;
             subtitle?: string | null;
             accessCodeTitle: string;
@@ -2299,6 +2329,22 @@ export interface FormsSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
+                    flexRadioButtonGroup?:
+                      | T
+                      | {
+                          name?: T;
+                          label?: T;
+                          alignment?: T;
+                          options?:
+                            | T
+                            | {
+                                label?: T;
+                                value?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
                   };
               id?: T;
               blockName?: T;
@@ -2351,6 +2397,22 @@ export interface FormsSelect<T extends boolean = true> {
                 | {
                     label?: T;
                     placeholder?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        flexRadioButtonGroup?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              alignment?: T;
+              options?:
+                | T
+                | {
+                    label?: T;
+                    value?: T;
+                    id?: T;
                   };
               id?: T;
               blockName?: T;
