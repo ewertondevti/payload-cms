@@ -64,6 +64,7 @@ import { Services } from './collections/Services'
 import { myRouteHandler } from './endpoints/my-route/route'
 import localization from './i18n/localization'
 import { BirthConsultationBlock } from './blocks/Form/BirthConsultation/BirthConsultationBlock'
+import { SecondParentBlock } from './blocks/Form/Cidadao/SecondParent/SecondParentBlock'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -229,6 +230,7 @@ export default buildConfig({
         IdentificationDataBlock,
         BirthplaceBlock,
         FlexRadioButtonGroupBlock,
+        SecondParentBlock,
         BirthConsultationBlock
       },
       formOverrides: {

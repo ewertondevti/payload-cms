@@ -21,6 +21,7 @@ import { SelectWithApiBlock } from '../SelectWithAPI/SelectWithApiBlock'
 import { TextAreaBlock } from '../Textarea/TextAreaBlock'
 import { TitleBlock } from '../Title/TitleBlock'
 import { FlexRadioButtonGroupBlock } from '../Cidadao/FlexRadioButtonGroup/FlexRadioButtonGroupBlock'
+import { SecondParentBlock } from '../Cidadao/SecondParent/SecondParentBlock'
 
 const title: Field = {
   name: 'title',
@@ -55,6 +56,7 @@ const arrayFields: Field = {
     IdentificationDataBlock,
     BirthplaceBlock,
     FlexRadioButtonGroupBlock,
+    SecondParentBlock
   ],
   labels: {
     singular: 'Field',

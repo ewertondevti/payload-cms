@@ -963,6 +963,12 @@ export interface Form {
                       blockName?: string | null;
                       blockType: 'flexRadioButtonGroup';
                     }
+                  | {
+                      name: string;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'secondParent';
+                    }
                 )[]
               | null;
             id?: string | null;
@@ -1016,8 +1022,14 @@ export interface Form {
             id?: string | null;
             blockName?: string | null;
             blockType: 'flexRadioButtonGroup';
-         }
-       | {
+          }
+        | {
+            name: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'secondParent';
+          }
+        | {
             title: string;
             subtitle?: string | null;
             accessCodeTitle: string;
@@ -2345,6 +2357,13 @@ export interface FormsSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
+                    secondParent?:
+                      | T
+                      | {
+                          name?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
                   };
               id?: T;
               blockName?: T;
@@ -2386,21 +2405,6 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        birthconsultation?:
-          | T
-          | {
-              title?: T;
-              subtitle?: T;
-              accessCodeTitle?: T;
-              accessCode?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
         flexRadioButtonGroup?:
           | T
           | {
@@ -2413,6 +2417,28 @@ export interface FormsSelect<T extends boolean = true> {
                     label?: T;
                     value?: T;
                     id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        secondParent?:
+          | T
+          | {
+              name?: T;
+              id?: T;
+              blockName?: T;
+            };
+        birthconsultation?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              accessCodeTitle?: T;
+              accessCode?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
                   };
               id?: T;
               blockName?: T;
