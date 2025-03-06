@@ -27,8 +27,12 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 // import { useSearchParams } from 'next/navigation'
 
+import { BirthConsultationForm } from '@/blocks/BirthConsultationForm'
 import { ConsultPreview } from '@/blocks/ConsultPreviewServiceStep'
 import { FormBlock } from '@/blocks/Form/Component'
+import { GetCertidaoResponse } from '@/models/certidao'
+import { Service } from '@/payload-types'
+import { GetCertidao } from '@/services/certidaoServices'
 
 type BlockTypeProps = {
   content: string
@@ -38,6 +42,7 @@ type BlockTypeProps = {
   summary: string
   exemplo: string
   consultpreview: string
+  birthbonsultationForm: string
 }
 
 const BlockType: BlockTypeProps = {
@@ -48,6 +53,7 @@ const BlockType: BlockTypeProps = {
   summary: 'summary-service-steps',
   exemplo: 'exemplo1ServiceSteps',
   consultpreview: 'consult-preview',
+  birthbonsultationForm: 'birthbonsultationForm',
 }
 
 type Args = {
@@ -73,7 +79,10 @@ export default function ServiceStep({ params }: Args) {
   const [showLoading, setShowLoading] = useState(false)
   const [paymentStatus, setPaymentStatus] = useState('')
   const validateFields = useRef<(() => Promise<boolean>) | null>(null)
+  const [service, setService] = useState<Service>()
   const { showCustomToast } = useToast()
+  const [certidaoResponse, setCertidaoResponse] = useState<GetCertidaoResponse>()
+  const [isConsultingFetching, setIsConsultingFetching] = useState(false)
   const [data, setData] = useState({
     mensagem: {
       codigo: 0,
@@ -145,7 +154,9 @@ export default function ServiceStep({ params }: Args) {
 
         setServiceOrder(resultado)
       }
-      const serviceSteps: any = await getServiceStepsById(ids?.id)
+
+      const serviceSteps: Service = await getServiceStepsById(ids?.id)
+      setService(serviceSteps)
       setSteps(serviceSteps?.steps)
       setPreviousStepId(stepIndex)
     } catch (error) {
@@ -182,8 +193,6 @@ export default function ServiceStep({ params }: Args) {
     //   setStepIndex(stepIndex)
     // } else {
     // }
-
-    console.log('nextStep', nextStep)
 
     // const indexBeforeChange = stepIndex
 
@@ -240,9 +249,7 @@ export default function ServiceStep({ params }: Args) {
 
   const onSubmitStep = useCallback(
     async (data: Data) => {
-      console.log('data: ', data)
-      // console.log("onSubmitStep", stepIndex)
-      // console.log("serviceOrder", serviceOrder)
+      setIsConsultingFetching(true)
 
       const dataToSend = Object.entries(data).map(([name, value]) => ({
         field: name,
@@ -256,7 +263,6 @@ export default function ServiceStep({ params }: Args) {
         stepIndex,
         orderId: serviceOrder?.id,
       })
-      //   console.log(stepData)
 
       if (!stepData) {
         const newStepOrder = {
@@ -269,16 +275,6 @@ export default function ServiceStep({ params }: Args) {
         }
 
         await postCreateStepServiceOrder(newStepOrder)
-
-        // const stepsToSubmit = {
-        //   userId: userId,
-        //   serviceId: serviceOrder?.serviceId,
-        //   step: `${stepIndex}`,
-        //   orderId: serviceOrder?.id,
-        //   formData: JSON.stringify(dataToSend), //substituir pelo conteudo do formulário
-        // }
-
-        // submitSteps(stepsToSubmit)
       } else {
         const updatedStepOrder = {
           id: stepData.id,
@@ -296,7 +292,18 @@ export default function ServiceStep({ params }: Args) {
 
       await handleGetServiceContent()
 
-      stepIndex !== steps.steps.length - 1 && changeToNextStep(stepIndex + 1)
+      if (Object.keys(data).length) {
+        const code = `${data.accessCode1}-${data.accessCode2}-${data.accessCode3}`
+
+        const res = await GetCertidao(code)
+
+        setIsConsultingFetching(false)
+        setCertidaoResponse(res)
+      }
+
+      if (stepIndex !== steps.steps.length - 1) {
+        changeToNextStep(stepIndex + 1)
+      }
     },
     [stepIndex, steps, serviceOrder, serviceOrder?.id, userId],
   )
@@ -340,16 +347,30 @@ export default function ServiceStep({ params }: Args) {
             orderId={serviceOrder?.id}
           />
         )
-
       case BlockType.consultpreview:
-        return <ConsultPreview {...steps.steps[stepIndex]} />
+        return (
+          <ConsultPreview
+            {...steps.steps[stepIndex]}
+            certidaoResponse={certidaoResponse}
+            isLoading={isConsultingFetching}
+          />
+        )
 
+      case BlockType.birthbonsultationForm:
+        return (
+          <BirthConsultationForm
+            enableIntro={false}
+            form={steps?.steps[stepIndex]?.form}
+            onSubmitOverride={onSubmitStep}
+            showSubmitButton={false}
+            stepIndex={stepIndex}
+          />
+        )
       default:
         return (
           <FormBlock
             enableIntro={false}
             form={steps?.steps[stepIndex]?.form}
-            // onSubmitOverride={onSubmitStep}
             onSubmitOverride={onSubmitStep}
             showSubmitButton={false}
             stepIndex={stepIndex}
@@ -379,144 +400,135 @@ export default function ServiceStep({ params }: Args) {
           currentStep={stepIndex}
         />
 
-        {steps && <div className="w-fit">{StepRenderer(steps.steps[stepIndex]?.blockType)}</div>}
+        {steps && (
+          <div className="w-fit flex flex-col gap-16">
+            {StepRenderer(steps.steps[stepIndex]?.blockType)}
+
+            <div className="flex justify-between px-8">
+              <div className="flex gap-8">
+                {stepIndex !== 0 && steps.steps[stepIndex]?.blockType !== BlockType.submission && (
+                  <>
+                    <Button
+                      children="Anterior"
+                      hasIcon={true}
+                      onClick={() => changeToNextStep(stepIndex - 1)}
+                      leadingIcon="agora-line-arrow-left-circle"
+                      leadingIconHover="agora-solid-arrow-left-circle"
+                    />
+                    <Button
+                      children="Guardar e Sair"
+                      appearance="outline"
+                      hasIcon={false}
+                      onClick={() => handleSaveAndExit()}
+                    />
+                    <Button
+                      children="Cancelar"
+                      appearance="outline"
+                      variant="danger"
+                      hasIcon={false}
+                      form={
+                        steps.steps[stepIndex]?.blockType === BlockType.content
+                          ? undefined
+                          : steps.steps[stepIndex]?.form?.id
+                      }
+                      type={
+                        steps.steps[stepIndex]?.blockType === BlockType.content
+                          ? undefined
+                          : 'reset'
+                      }
+                    />
+                  </>
+                )}
+              </div>
+
+              <div className="flex justify-end">
+                {/* No caso de já estar steps com informação, será continuar em vez de começar */}
+                {steps.steps[stepIndex]?.blockType === BlockType.content ||
+                steps.steps[stepIndex]?.blockType === BlockType.summary ? (
+                  <Button
+                    children={
+                      stepIndex == 0
+                        ? steps && !isNew
+                          ? 'Continuar'
+                          : 'Começar'
+                        : stepIndex == steps.steps.length - 1
+                          ? 'Submeter'
+                          : 'Seguinte'
+                    }
+                    hasIcon={true}
+                    onClick={() => {
+                      stepIndex !== steps.steps.length - 1 && changeToNextStep(stepIndex + 1)
+
+                      if (stepIndex >= steps.steps.length - 1) {
+                        redirect('/services/details/' + serviceOrder?.serviceId)
+                      }
+                    }}
+                    leadingIcon="agora-line-arrow-right-circle"
+                    leadingIconHover="agora-solid-arrow-right-circle"
+                  />
+                ) : steps.steps[stepIndex]?.blockType === BlockType.submission ? (
+                  <Button
+                    children="Ir para Área Reservada"
+                    hasIcon={true}
+                    onClick={() => redirect('/AreaReservada')}
+                    leadingIcon="agora-line-arrow-right-circle"
+                    leadingIconHover="agora-solid-arrow-right-circle"
+                  />
+                ) : steps.steps[stepIndex]?.blockType === BlockType.payment ? (
+                  <Button
+                    form={steps.steps[stepIndex]?.form?.id}
+                    children="Seguinte"
+                    hasIcon={true}
+                    type="submit"
+                    onClick={async () => {
+                      if (!paymentMethod.length) {
+                        showCustomToast(
+                          {
+                            id: +new Date(),
+                            title: 'Selecione um tipo de pagamento',
+                            description:
+                              'Para prosseguir é necessário selecionar um método de pagamento.',
+                            type: 'failure',
+                            closeLabel: 'Close toast',
+                          },
+                          5000,
+                        )
+                      } else {
+                        handleSubmit((data) => {
+                          onSubmitStep(data)
+                          handlePaymentSubmit(
+                            paymentMethod,
+                            setShowLoading,
+                            setData,
+                            setPaymentStatus,
+                            stepIndex,
+                            steps,
+                            changeToNextStep,
+                            showCustomToast,
+                          )
+                        })()
+                      }
+                    }}
+                    leadingIcon="agora-line-arrow-right-circle"
+                    leadingIconHover="agora-solid-arrow-right-circle"
+                  />
+                ) : (
+                  // ) : steps.steps[stepIndex]?.blockType === BlockType.exemplo ? (
+                  //   <></>
+                  <Button
+                    form={steps.steps[stepIndex]?.form?.id}
+                    type="submit"
+                    children={stepIndex === steps.steps.length - 1 ? 'Submeter' : 'Seguinte'}
+                    hasIcon={true}
+                    leadingIcon="agora-line-arrow-right-circle"
+                    leadingIconHover="agora-solid-arrow-right-circle"
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-
-      {steps && (
-        <div className="flex my-16">
-          <div
-            className="flex"
-            style={{ display: 'flex-around', justifyContent: 'center', width: '100%' }}
-          >
-            {stepIndex !== 0 && steps.steps[stepIndex]?.blockType !== BlockType.submission && (
-              <>
-                <Button
-                  children="Anterior"
-                  hasIcon={true}
-                  onClick={() => changeToNextStep(stepIndex - 1)}
-                  leadingIcon="agora-line-arrow-left-circle"
-                  leadingIconHover="agora-solid-arrow-left-circle"
-                />
-                <Button
-                  style={{ marginLeft: 20, marginRight: 20 }}
-                  children="Guardar e Sair"
-                  appearance="outline"
-                  hasIcon={false}
-                  onClick={() => handleSaveAndExit()}
-                />
-                <Button
-                  children="Cancelar"
-                  appearance="outline"
-                  variant="danger"
-                  hasIcon={false}
-                  form={
-                    steps.steps[stepIndex]?.blockType === BlockType.content
-                      ? undefined
-                      : steps.steps[stepIndex]?.form?.id
-                  }
-                  type={
-                    steps.steps[stepIndex]?.blockType === BlockType.content ? undefined : 'reset'
-                  }
-                />
-              </>
-            )}
-          </div>
-
-          <div className="flex justify-end">
-            {/* No caso de já estar steps com informação, será continuar em vez de começar */}
-            {steps.steps[stepIndex]?.blockType == BlockType.content ||
-            steps.steps[stepIndex]?.blockType == BlockType.summary ||
-            steps.steps[stepIndex]?.blockType == BlockType.form ? (
-              <Button
-                children={
-                  stepIndex == 0
-                    ? steps && !isNew
-                      ? 'Continuar'
-                      : 'Começar'
-                    : stepIndex == steps.steps.length - 1
-                      ? 'Submeter'
-                      : 'Seguinte'
-                }
-                hasIcon={true}
-                onClick={() => {
-                  stepIndex !== steps.steps.length - 1 && changeToNextStep(stepIndex + 1)
-
-                  if (stepIndex >= steps.steps.length - 1) {
-                    redirect('/services/details/' + serviceOrder?.serviceId)
-                  }
-                }}
-                leadingIcon="agora-line-arrow-right-circle"
-                leadingIconHover="agora-solid-arrow-right-circle"
-              />
-            ) : steps.steps[stepIndex]?.blockType === BlockType.submission ? (
-              <Button
-                children="Ir para Área Reservada"
-                hasIcon={true}
-                onClick={() => redirect('/AreaReservada')}
-                leadingIcon="agora-line-arrow-right-circle"
-                leadingIconHover="agora-solid-arrow-right-circle"
-              />
-            ) : steps.steps[stepIndex]?.blockType === BlockType.payment ? (
-              <Button
-                form={steps.steps[stepIndex]?.form?.id}
-                children="Seguinte"
-                hasIcon={true}
-                type="submit"
-                onClick={async () => {
-                  if (!paymentMethod.length) {
-                    showCustomToast(
-                      {
-                        id: +new Date(),
-                        title: 'Selecione um tipo de pagamento',
-                        description:
-                          'Para prosseguir é necessário selecionar um método de pagamento.',
-                        type: 'failure',
-                        closeLabel: 'Close toast',
-                      },
-                      5000,
-                    )
-                  } else {
-                    handleSubmit((data) => {
-                      onSubmitStep(data)
-                      handlePaymentSubmit(
-                        paymentMethod,
-                        setShowLoading,
-                        setData,
-                        setPaymentStatus,
-                        stepIndex,
-                        steps,
-                        changeToNextStep,
-                        showCustomToast,
-                      )
-                    })()
-                  }
-                }}
-                leadingIcon="agora-line-arrow-right-circle"
-                leadingIconHover="agora-solid-arrow-right-circle"
-              />
-            ) : (
-              // ) : steps.steps[stepIndex]?.blockType === BlockType.exemplo ? (
-              //   <></>
-              <Button
-                form={steps.steps[stepIndex]?.form?.id}
-                type="submit"
-                children={
-                  stepIndex == 0
-                    ? steps && stepData
-                      ? 'Continuar'
-                      : 'Começar'
-                    : stepIndex == steps.steps.length - 1
-                      ? 'Submeter'
-                      : 'Seguinte'
-                }
-                hasIcon={true}
-                leadingIcon="agora-line-arrow-right-circle"
-                leadingIconHover="agora-solid-arrow-right-circle"
-              />
-            )}
-          </div>
-        </div>
-      )}
     </>
   )
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import { PdfViewer } from '@/components/PdfViewer'
-import { GetCertidao } from '@/services/certidaoServices'
+import { GetCertidaoResponse } from '@/models/certidao'
 import { FC, useEffect, useState } from 'react'
 import { pdfjs } from 'react-pdf'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
@@ -16,28 +16,37 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 type Props = {
   titlepage: string
   subtitlepage: string
+  certidaoResponse?: GetCertidaoResponse
+  isLoading: boolean
 }
 
 const MOCK_CODE = '1001-5548-0239'
 
-export const ConsultPreview: FC<Props> = ({ titlepage, subtitlepage }) => {
+export const ConsultPreview: FC<Props> = ({
+  titlepage,
+  subtitlepage,
+  certidaoResponse,
+  isLoading,
+}) => {
   const [base64file, setBase64file] = useState('')
 
   useEffect(() => {
-    GetCertidao(MOCK_CODE).then((data) => {
-      setBase64file(`data:${data.attachment.mimetype};base64,${data.attachment.bytes}`)
-    })
-  }, [])
+    if (certidaoResponse) {
+      setBase64file(
+        `data:${certidaoResponse.attachment.mimetype};base64,${certidaoResponse.attachment.bytes}`,
+      )
+    }
+  }, [certidaoResponse])
 
   return (
-    <div className="flex flex-col w-fit gap-[64px]">
+    <div className="flex flex-col w-fit gap-[64px]" data-testid="consult-preview">
       <Title
         label={titlepage}
         sublabel={subtitlepage}
         className="my-[0] text-[32px] leading-[48px]"
       />
 
-      <PdfViewer file={base64file} />
+      <PdfViewer file={base64file} isLoading={isLoading} />
     </div>
   )
 }

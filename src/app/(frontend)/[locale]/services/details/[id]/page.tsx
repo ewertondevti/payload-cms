@@ -110,16 +110,6 @@ export default async function Page({ params: paramsPromise }: Args) {
               <CustomButton
                 variant="primary"
                 appearance="outline"
-                hasIcon
-                trailingIcon="agora-line-document"
-                trailingIconHover="agora-solid-document"
-                label="Consultar"
-                href={'/serviceArea/' + id + '/certificate-consultations/' + id}
-              />
-
-              <CustomButton
-                variant="primary"
-                appearance="outline"
                 self-start
                 hasIcon
                 trailingIcon="agora-line-calendar"

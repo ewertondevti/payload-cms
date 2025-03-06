@@ -8,7 +8,7 @@ export const getUserServiceOrder = async ({ userId, serviceId }) => {
       .then((data) => data)
     return data[0]
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }
 
@@ -19,7 +19,7 @@ export const getServiceOrderById = async (orderId: number) => {
       .then((data) => data)
     return data
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }
 
@@ -33,7 +33,7 @@ export const getServiceStepsById = async (serviceId: string) => {
       .then((data) => data)
     return data
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }
 
@@ -52,28 +52,28 @@ export const getStepsByArgs = async (
       .then((data) => data)
     return data
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }
 
 // API POSTS ----------------------------------------------------------------------------------------------------
 export const postNewServiceOrder = async (order: any) => {
   try {
-   const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders/create`, {
+    const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders/create`, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       method: 'POST',
       body: JSON.stringify(order),
-    }) .then((res) => res.json())
-    .then((data) => data)
-  return data
+    })
+      .then((res) => res.json())
+      .then((data) => data)
+    return data
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }
-
 
 // API PUTS ----------------------------------------------------------------------------------------------------
 export const putOrderById = async (order: any) => {
@@ -87,17 +87,11 @@ export const putOrderById = async (order: any) => {
       body: JSON.stringify(order),
     })
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }
 
-export const updateStepsByArgs = async (
- { formData,
-  stepId,
-  serviceId,
-  userId,
-  orderId,
-}) => {
+export const updateStepsByArgs = async ({ formData, stepId, serviceId, userId, orderId }) => {
   try {
     await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/updateStepByArgs?stepId=${stepId}&serviceId=${serviceId}&userId=${userId}&orderId=${orderId}`,
@@ -111,7 +105,7 @@ export const updateStepsByArgs = async (
       },
     )
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }
 
@@ -122,7 +116,7 @@ export const deleteOrderbId = async (orderId: number) => {
       method: 'DELETE',
     })
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }
 
@@ -138,7 +132,7 @@ export const getGetStepInfoServiceOrder = async ({ userId, serviceId, stepIndex,
       .then((data) => data)
     return data
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }
 // API POSTS ----------------------------------------------------------------------------------------------------
@@ -156,10 +150,10 @@ export const getGetStepInfoServiceOrder = async ({ userId, serviceId, stepIndex,
 //       .then((data) => data)
 //     return data
 //     } catch (e) {
-//       console.log(e)
+//       console.error(e)
 //     }
 //   }
-  
+
 export const postCreateStepServiceOrder = async (orderStep: any) => {
   try {
     await fetch(`${process.env.NEXT_PUBLIC_API_URL}/steps`, {
@@ -171,7 +165,7 @@ export const postCreateStepServiceOrder = async (orderStep: any) => {
       body: JSON.stringify(orderStep),
     })
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }
 
@@ -186,6 +180,6 @@ export const postUpdateStepServiceOrder = async (orderStep: any) => {
       body: JSON.stringify(orderStep),
     })
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }

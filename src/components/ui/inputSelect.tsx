@@ -6,8 +6,9 @@ import {
   DropdownOption,
   DropdownSection,
 } from '@ama-pt/agora-design-system'
+import { InputOptionalLabel } from './InputOptionalLabel'
 
-type InputSelectProps = {
+export type InputSelectProps = {
   id: string
   value?: string
   type?: 'checkbox' | 'text'
@@ -90,6 +91,12 @@ export const InputSelect: React.FC<InputSelectProps> = ({
     setDropdownOptions(newSections)
   }
 
+  const inputLabel = required || required === undefined ? label : (
+    <>
+      {label} <InputOptionalLabel/>
+    </>
+  )
+
   return (
     <>
       <style>
@@ -104,7 +111,7 @@ export const InputSelect: React.FC<InputSelectProps> = ({
         id={id}
         value={value}
         type={type}
-        label={label}
+        label={inputLabel}
         placeholder={placeholder}
         searchable={searchable}
         searchNoResultsText={searchNoResultsText}

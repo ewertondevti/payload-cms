@@ -943,6 +943,7 @@ export interface Form {
                       blockType: 'identificationData';
                     }
                   | {
+                      label: string;
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'birthplace';
@@ -996,6 +997,7 @@ export interface Form {
             blockType: 'identificationData';
           }
         | {
+            label: string;
             id?: string | null;
             blockName?: string | null;
             blockType: 'birthplace';
@@ -1014,6 +1016,18 @@ export interface Form {
             id?: string | null;
             blockName?: string | null;
             blockType: 'flexRadioButtonGroup';
+         }
+       | {
+            title: string;
+            subtitle?: string | null;
+            accessCodeTitle: string;
+            accessCode: {
+              label: string;
+              placeholder: string;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'birthconsultation';
           }
       )[]
     | null;
@@ -1185,6 +1199,13 @@ export interface Service {
               id?: string | null;
               blockName?: string | null;
               blockType: 'summary-service-steps';
+            }
+          | {
+              stepTitle: string;
+              form: number | Form;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'birthbonsultationForm';
             }
           | {
               title: string;
@@ -1758,6 +1779,14 @@ export interface ServicesSelect<T extends boolean = true> {
                     id?: T;
                     blockName?: T;
                   };
+              birthbonsultationForm?:
+                | T
+                | {
+                    stepTitle?: T;
+                    form?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
               'consult-preview'?:
                 | T
                 | {
@@ -2296,6 +2325,7 @@ export interface FormsSelect<T extends boolean = true> {
                     birthplace?:
                       | T
                       | {
+                          label?: T;
                           id?: T;
                           blockName?: T;
                         };
@@ -2352,6 +2382,22 @@ export interface FormsSelect<T extends boolean = true> {
         birthplace?:
           | T
           | {
+              label?: T;
+              id?: T;
+              blockName?: T;
+            };
+        birthconsultation?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              accessCodeTitle?: T;
+              accessCode?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                  };
               id?: T;
               blockName?: T;
             };

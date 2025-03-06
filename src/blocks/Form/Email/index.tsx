@@ -26,6 +26,8 @@ export const Email: React.FC<
         hasFeedback={true}
         feedbackState={'danger'}
         feedbackText={errors[name]?.message?.toString()}
+        hasError={!!errors[name]}
+        placeholder="Indique seu email"
         {...register(name, {
           required: requiredFromProps ? 'Campo de preenchimento obrigatório.' : false,
           pattern: {

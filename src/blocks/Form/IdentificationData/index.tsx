@@ -24,6 +24,8 @@ export const IdentificationData: FC<IdentificationDataProps> = (props) => {
       { label: 'Passaporte', value: 'passaporte' },
       { label: 'Título de Residência', value: 'titulo-residencia' },
     ],
+    required: true,
+    defaultValue: 'cartao-cidadao',
   }
 
   const fullnameProps: TextProps = {
@@ -34,6 +36,7 @@ export const IdentificationData: FC<IdentificationDataProps> = (props) => {
     width: 100,
     maxLength: 255,
     pattern: /[a-zA-Z]+\s[a-zA-Z]+/g,
+    required: true,
   }
 
   const docNumberProps: TextProps = {
@@ -44,6 +47,7 @@ export const IdentificationData: FC<IdentificationDataProps> = (props) => {
     width: 50,
     minLength: 6,
     maxLength: 8,
+    required: true,
   }
 
   const digVerificationProps: TextProps = {
