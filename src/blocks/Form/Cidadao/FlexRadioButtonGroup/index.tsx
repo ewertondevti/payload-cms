@@ -1,52 +1,74 @@
 import { RadioButton, RadioButtonGroup } from '@ama-pt/agora-design-system'
 import { FC, useEffect, useState } from 'react'
 import type { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form'
+import React from 'react'
+import { AtomicField } from '../types'
 import { Width } from '../../Width'
-import { AlignmentDirection } from './FlexRadioButtonGroupBlock'
+
+export type AlignmentDirection = 'vertical' | 'horizontal'
 
 export interface FlexRadioButtonGroupProps {
   label: string
   name: string
   alignment: AlignmentDirection
-  options: {
-    label: string
-    value: string
-  }[]
+  options: AtomicField<string>[]
   defaultValue?: string
   required?: boolean
   width?: number
   errors?: FieldErrors<FieldValues>
+  onChange?: (option: string) => void
+  value?: string
 }
 
-export const FlexRadioButtonGroup: FC<
-  FlexRadioButtonGroupProps & UseFormReturn & { errors: FieldErrors<FieldValues> }
-> = ({ label, name, alignment, options, required, width, errors, register, defaultValue, setValue, ...props }) => {
-    const [selectedValue, setSelectedValue] = useState<string | undefined>(defaultValue);
+export const FlexRadioButtonGroup: FC<FlexRadioButtonGroupProps & UseFormReturn> = ({
+  label,
+  name,
+  alignment,
+  options,
+  required,
+  errors,
+  register,
+  defaultValue,
+  setValue,
+  value,
+  onChange,
+  ...props
+}) => {
+  const [selectedValue, setSelectedValue] = useState<string | undefined>(defaultValue)
+
+  useEffect(() => {
+    if ((value !== undefined || defaultValue === undefined) && selectedValue !== value)
+      setSelectedValue(value)
+  }, [value])
+
+  useEffect(() => {
+    setValue(name, selectedValue)
+    if (onChange && selectedValue !== undefined) onChange(selectedValue)
+  }, [selectedValue])
 
   return (
-      <RadioButtonGroup
-        {...props}
-        {...register(name, { required })}
-        legend={label}
-        id={name}
-        feedbackState="danger"
-        feedbackText={`Obrigatório preencher "${label}"`}
-        hasError={!!errors[name]}
-      >
-        <div className={`w-full flex flex-wrap gap-12 ${alignment === 'vertical' ? 'flex-col' : ''}`}>
-          {options.map((option) => (
-            <RadioButton
-              label={option.label}
-              value={option.value}
-              key={option.value}
-              checked={selectedValue === option.value}
-              onChange={(e) => {
-                setSelectedValue(e.target.value)
-                setValue(name, e.target.value)
-              }}
-            />
-          ))}
-        </div>
-      </RadioButtonGroup>
+    <RadioButtonGroup
+      {...props}
+      {...register(name, { required })}
+      legend={label}
+      id={name}
+      feedbackState="danger"
+      feedbackText={`Obrigatório preencher "${label}"`}
+      hasError={!!errors?.[name]}
+    >
+      <div className={`w-full flex flex-wrap ${alignment === 'vertical' ? 'flex-col' : 'gap-8'}`}>
+        {options.map((option) => (
+          <RadioButton
+            label={option.label}
+            value={option.value}
+            key={option.value}
+            checked={selectedValue === option.value}
+            onChange={(e) => {
+              setSelectedValue(e.target.value)
+            }}
+          />
+        ))}
+      </div>
+    </RadioButtonGroup>
   )
 }
