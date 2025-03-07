@@ -1,4 +1,4 @@
-import { Block, Field } from 'payload'
+import { Block } from 'payload'
 
 export const ParentIdentificationBlock: Block = {
  slug: 'parentidentification',

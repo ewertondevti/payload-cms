@@ -62,24 +62,24 @@ export const FormBlock: React.FC<
 
   const router = useRouter()
   const t = useTranslations()
-  useEffect(() => {
-    const fetchSubmitToken = async () => {
-      try {
-        const response = await fetch('/api/send-token', { method: 'POST' })
-        const data = await response.json()
-        console.log(response)
-        if (data.submitToken) {
-          setSubmitToken(data.submitToken)
-        } else {
-          setError({ message: 'Falha ao obter token de submissão' })
-        }
-      } catch (err) {
-        console.error('Erro ao obter submitToken:', err)
-        setError({ message: 'Falha ao obter token de submissão' })
-      }
-    }
-    fetchSubmitToken()
-  }, [])
+  // useEffect(() => {
+  //   const fetchSubmitToken = async () => {
+  //     try {
+  //       const response = await fetch('/api/send-token', { method: 'POST' })
+  //       const data = await response.json()
+  //       console.log(response)
+  //       if (data.submitToken) {
+  //         setSubmitToken(data.submitToken)
+  //       } else {
+  //         setError({ message: 'Falha ao obter token de submissão' })
+  //       }
+  //     } catch (err) {
+  //       console.error('Erro ao obter submitToken:', err)
+  //       setError({ message: 'Falha ao obter token de submissão' })
+  //     }
+  //   }
+  //   fetchSubmitToken()
+  // }, [])
 
   let onSubmit
   if (onSubmitOverride) {
@@ -113,22 +113,22 @@ export const FormBlock: React.FC<
 
           loadingTimerID = setTimeout(() => setIsLoading(true), 1000)
 
-          const mosparoResponse = await fetch('/api/mosparo-check', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              publicKey: 'erNgKndOLlyfLpxb6lIuUYBJf5HslQkwYr98t5pPd-g',
-              submitToken,
-              formData: { fields: dataToSend },
-            }),
-          })
-          const mosparoResult = await mosparoResponse.json()
-          if (!mosparoResult || mosparoResult.error || !mosparoResult.valid) {
-            clearTimeout(loadingTimerID)
-            setIsLoading(false)
-            setError({ message: 'Mosparo validataion error' })
-            return
-          }
+          // const mosparoResponse = await fetch('/api/mosparo-check', {
+          //   method: 'POST',
+          //   headers: { 'Content-Type': 'application/json' },
+          //   body: JSON.stringify({
+          //     publicKey: 'erNgKndOLlyfLpxb6lIuUYBJf5HslQkwYr98t5pPd-g',
+          //     submitToken,
+          //     formData: { fields: dataToSend },
+          //   }),
+          // })
+          // const mosparoResult = await mosparoResponse.json()
+          // if (!mosparoResult || mosparoResult.error || !mosparoResult.valid) {
+          //   clearTimeout(loadingTimerID)
+          //   setIsLoading(false)
+          //   setError({ message: 'Mosparo validataion error' })
+          //   return
+          // }
 
           const req = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/form-submissions`, {
             body: JSON.stringify({
