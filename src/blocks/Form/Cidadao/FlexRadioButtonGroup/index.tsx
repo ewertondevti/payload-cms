@@ -1,9 +1,8 @@
+import React from 'react'
 import { RadioButton, RadioButtonGroup } from '@ama-pt/agora-design-system'
 import { FC, useEffect, useState } from 'react'
 import type { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form'
-import React from 'react'
 import { AtomicField } from '../types'
-import { Width } from '../../Width'
 
 export type AlignmentDirection = 'vertical' | 'horizontal'
 
