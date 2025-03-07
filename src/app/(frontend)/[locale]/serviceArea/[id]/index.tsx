@@ -83,7 +83,6 @@ export default function ServiceStep({ params }: Args) {
   const { showCustomToast } = useToast()
   const [certidaoResponse, setCertidaoResponse] = useState<GetCertidaoResponse>()
   const [isConsultingFetching, setIsConsultingFetching] = useState(false)
-  console.log('🚀 ~ ServiceStep ~ isConsultingFetching:', isConsultingFetching)
   const [data, setData] = useState({
     mensagem: {
       codigo: 0,
