@@ -4,9 +4,37 @@ import { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form'
 import { InputText, InputDate } from '@ama-pt/agora-design-system'
 import { InputSelect } from '@/components/ui/inputSelect'
 
-type BirthRegisterProps = {
+type ParentIdentificationProps = {
  errors: FieldErrors<FieldValues>
-} & UseFormReturn<FieldValues>
+ register: UseFormReturn<FieldValues>['register']
+
+ firstNameLabel: string
+ firstNamePlaceholder: string
+
+ lastNameLabel: string
+ lastNamePlaceholder: string
+
+ documentTypeLabel: string
+ documentTypePlaceholder: string
+
+ documentNumberLabel: string
+ documentNumberPlaceholder: string
+
+ verificationDigitLabel: string
+ verificationDigitPlaceholder: string
+
+ genderLabel: string
+ genderPlaceholder: string
+
+ maritalStatusLabel: string
+ maritalStatusPlaceholder: string
+
+ birthDateLabel: string
+ birthDatePlaceholder: string
+
+ nationalityLabel: string
+ nationalityPlaceholder: string
+}
 
 const identificationOptions = [
  { label: 'Cartão de Cidadão', value: 'cc' },
@@ -32,9 +60,28 @@ const nationalityOptions = [
  { label: 'Brasil', value: 'BR' },
  { label: 'Outro', value: 'other' },
 ]
-export const BirthRegister: React.FC<BirthRegisterProps> = ({
+
+export const ParentIdentification: React.FC<ParentIdentificationProps> = ({
  register,
  errors,
+ firstNameLabel,
+ firstNamePlaceholder,
+ lastNameLabel,
+ lastNamePlaceholder,
+ documentTypeLabel,
+ documentTypePlaceholder,
+ documentNumberLabel,
+ documentNumberPlaceholder,
+ verificationDigitLabel,
+ verificationDigitPlaceholder,
+ genderLabel,
+ genderPlaceholder,
+ maritalStatusLabel,
+ maritalStatusPlaceholder,
+ birthDateLabel,
+ birthDatePlaceholder,
+ nationalityLabel,
+ nationalityPlaceholder,
 }) => {
  const getErrorMessage = (fieldName: string) => {
   if (errors[fieldName]?.type === 'required') {
@@ -42,27 +89,24 @@ export const BirthRegister: React.FC<BirthRegisterProps> = ({
   }
   return ''
  }
-
- const OnChangee = () => {
-  return (console.log('test'))
- }
+ console.log(lastNameLabel)
+ console.log(lastNamePlaceholder)
+ console.log(lastNameLabel)
  return (
   <div className="space-y-6">
-   <h1>asdasd</h1>
    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
     <InputText
-     label="Nome(s) próprio(s)"
-     placeholder="Ex: Maria Clara"
+     label={firstNameLabel}
+     placeholder={firstNamePlaceholder}
      required
      hasError={!!errors['firstName']}
      feedbackText={getErrorMessage('firstName')}
      feedbackState="danger"
      {...register('firstName', { required: true })}
     />
-
     <InputText
-     label="Apelido(s)"
-     placeholder="Ex: Lopes"
+     label={lastNameLabel}
+     placeholder={lastNamePlaceholder}
      required
      hasError={!!errors['lastName']}
      feedbackText={getErrorMessage('lastName')}
@@ -70,54 +114,53 @@ export const BirthRegister: React.FC<BirthRegisterProps> = ({
      {...register('lastName', { required: true })}
     />
    </div>
-
    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
     <InputSelect
-     id={''} label="Documento de Identificação"
-     placeholder="Selecione um documento"
+     id=""
+     label={documentTypeLabel}
+     placeholder={documentTypePlaceholder}
      options={identificationOptions}
      hasError={!!errors['documentType']}
      {...register('documentType', { required: true })}
-     onChange={(e) => register('documentType').onChange({ target: { value: e } })} />
-
+     onChange={(e) => register('documentType').onChange({ target: { value: e } })}
+    />
     <InputText
-     label="Número do documento (Opcional)"
-     placeholder="Ex: 34567890 ZE"
+     label={documentNumberLabel}
+     placeholder={documentNumberPlaceholder}
      hasError={!!errors['documentNumber']}
      feedbackText={getErrorMessage('documentNumber')}
      feedbackState="danger"
      {...register('documentNumber')}
     />
-
     <InputText
-     label="Dígito de verificação (Opcional)"
-     placeholder="Ex: 12"
+     label={verificationDigitLabel}
+     placeholder={verificationDigitPlaceholder}
      hasError={!!errors['verificationDigit']}
      feedbackText={getErrorMessage('verificationDigit')}
      feedbackState="danger"
      {...register('verificationDigit')}
     />
    </div>
-
    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
     <InputSelect
-     id={''} label="Gênero"
-     placeholder="Selecione o gênero"
+     id=""
+     label={genderLabel}
+     placeholder={genderPlaceholder}
      options={genderOptions}
-     hasError={!!errors['documentType']}
-     {...register('documentType', { required: true })}
-     onChange={(e) => register('documentType').onChange({ target: { value: e } })}
+     hasError={!!errors['gender']}
+     {...register('gender', { required: true })}
+     onChange={(e) => register('gender').onChange({ target: { value: e } })}
     />
-
     <InputSelect
-     id={''} label="Estado civil"
-     placeholder="Selecione uma opção"
+     id=""
+     label={maritalStatusLabel}
+     placeholder={maritalStatusPlaceholder}
      options={maritalStatusOptions}
      hasError={!!errors['maritalStatus']}
-     {...register('documentType', { required: true })}
-     onChange={(e) => register('documentType').onChange({ target: { value: e } })} />
+     {...register('maritalStatus', { required: true })}
+     onChange={(e) => register('maritalStatus').onChange({ target: { value: e } })}
+    />
    </div>
-
    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
     <InputDate
      calendarIconAriaLabel=""
@@ -130,23 +173,23 @@ export const BirthRegister: React.FC<BirthRegisterProps> = ({
      todayLabel=""
      cancelLabel=""
      okLabel=""
-     label="Data de nascimento"
-     placeholder="dd/mm/aaaa"
+     label={birthDateLabel}
+     placeholder={birthDatePlaceholder}
      hasError={!!errors['birthDate']}
      feedbackText={getErrorMessage('birthDate')}
      feedbackState="danger"
      {...register('birthDate', { required: true })}
     />
-
     <InputSelect
-     id={''} label="País de nacionalidade"
-     placeholder="Selecione uma opção"
+     id=""
+     label={nationalityLabel}
+     placeholder={nationalityPlaceholder}
      options={nationalityOptions}
      hasError={!!errors['nationality']}
-     {...register('documentType', { required: true })}
-     onChange={(e) => register('documentType').onChange({ target: { value: e } })}
+     {...register('nationality', { required: true })}
+     onChange={(e) => register('nationality').onChange({ target: { value: e } })}
     />
    </div>
-  </div >
+  </div>
  )
 }

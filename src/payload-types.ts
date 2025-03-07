@@ -1015,7 +1015,24 @@ export interface Form {
             blockType: 'birthconsultation';
           }
         | {
-            parentName: string;
+            firstNameLabel: string;
+            firstNamePlaceholder: string;
+            lastNameLabel: string;
+            lastNamePlaceholder: string;
+            documentTypeLabel: string;
+            documentTypePlaceholder: string;
+            documentNumberLabel?: string | null;
+            documentNumberPlaceholder?: string | null;
+            verificationDigitLabel?: string | null;
+            verificationDigitPlaceholder?: string | null;
+            genderLabel: string;
+            genderPlaceholder: string;
+            maritalStatusLabel: string;
+            maritalStatusPlaceholder: string;
+            birthDateLabel: string;
+            birthDatePlaceholder: string;
+            nationalityLabel: string;
+            nationalityPlaceholder: string;
             id?: string | null;
             blockName?: string | null;
             blockType: 'parentidentification';
@@ -2410,7 +2427,24 @@ export interface FormsSelect<T extends boolean = true> {
         parentidentification?:
           | T
           | {
-              parentName?: T;
+              firstNameLabel?: T;
+              firstNamePlaceholder?: T;
+              lastNameLabel?: T;
+              lastNamePlaceholder?: T;
+              documentTypeLabel?: T;
+              documentTypePlaceholder?: T;
+              documentNumberLabel?: T;
+              documentNumberPlaceholder?: T;
+              verificationDigitLabel?: T;
+              verificationDigitPlaceholder?: T;
+              genderLabel?: T;
+              genderPlaceholder?: T;
+              maritalStatusLabel?: T;
+              maritalStatusPlaceholder?: T;
+              birthDateLabel?: T;
+              birthDatePlaceholder?: T;
+              nationalityLabel?: T;
+              nationalityPlaceholder?: T;
               id?: T;
               blockName?: T;
             };
