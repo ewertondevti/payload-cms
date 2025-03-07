@@ -1,92 +1,107 @@
-import { ReadOnlyStateConfig, StateConfig } from "../utils/StateConfig";
+import { ReadOnlyStateConfig, StateConfig } from '../utilities/StateConfig'
 
-export type RelationshipOptions = "unknown" | "unmarried" | "married" | "separated" | "divorced";
+export type RelationshipOptions = 'unknown' | 'unmarried' | 'married' | 'separated' | 'divorced'
 type StateKeys = {
-  relationship?: RelationshipOptions;
-  perished?: boolean;
-  foreignRegistration?: boolean;
-};
+  relationship?: RelationshipOptions
+  perished?: boolean
+  foreignRegistration?: boolean
+}
 type StateValues = {
-  showPerishedRadioGroup?: boolean;
-  showForeignRegistrationRadioGroup?: boolean;
-  showIdentificationForm?: boolean;
-  showAddressForm?: boolean;
-  submitEnabled?: boolean;
-};
-const stateConfig = new StateConfig<StateKeys, StateValues>();
-stateConfig.set({}, {});
+  showPerishedRadioGroup?: boolean
+  showForeignRegistrationRadioGroup?: boolean
+  showIdentificationForm?: boolean
+  showAddressForm?: boolean
+  submitEnabled?: boolean
+}
 
-stateConfig.set({ relationship: "unknown" }, { submitEnabled: true });
-
-stateConfig.set(
-  { relationship: "unmarried" },
-  { showPerishedRadioGroup: true },
-);
-stateConfig.set(
-  { relationship: "unmarried", perished: true },
+const stateConfig = StateConfig.from<StateKeys, StateValues>([
   {
-    showPerishedRadioGroup: true,
-    showIdentificationForm: true,
-    submitEnabled: true,
+    key: { relationship: 'unknown' },
+    value: { submitEnabled: true },
   },
-);
-stateConfig.set(
-  { relationship: "unmarried", perished: false },
   {
-    showPerishedRadioGroup: true,
-    showIdentificationForm: true,
-    showAddressForm: true,
-    submitEnabled: true,
+    key: { relationship: 'unmarried' },
+    value: { showPerishedRadioGroup: true },
   },
-);
-
-stateConfig.set({ relationship: "married" }, { showPerishedRadioGroup: true });
-stateConfig.set(
-  { relationship: "married", perished: true },
-  { showPerishedRadioGroup: true, showForeignRegistrationRadioGroup: true },
-);
-stateConfig.set(
-  { relationship: "married", perished: true, foreignRegistration: true },
   {
-    showPerishedRadioGroup: true,
-    showForeignRegistrationRadioGroup: true,
-    showIdentificationForm: true,
-    submitEnabled: true,
+    key: { relationship: 'unmarried', perished: true },
+    value: {
+      showPerishedRadioGroup: true,
+      showIdentificationForm: true,
+      submitEnabled: true,
+    },
   },
-);
-stateConfig.set(
-  { relationship: "married", perished: true, foreignRegistration: false },
   {
-    showPerishedRadioGroup: true,
-    showForeignRegistrationRadioGroup: true,
-    submitEnabled: true,
+    key: { relationship: 'unmarried', perished: false },
+    value: {
+      showPerishedRadioGroup: true,
+      showIdentificationForm: true,
+      showAddressForm: true,
+      submitEnabled: true,
+    },
   },
-);
-stateConfig.set(
-  { relationship: "married", perished: false },
+
+  { key: { relationship: 'married' }, value: { showPerishedRadioGroup: true } },
   {
-    showPerishedRadioGroup: true,
-    showIdentificationForm: true,
-    showAddressForm: true,
-    submitEnabled: true,
+    key: { relationship: 'married', perished: true },
+    value: { showPerishedRadioGroup: true, showForeignRegistrationRadioGroup: true },
   },
-);
+  {
+    key: { relationship: 'married', perished: true, foreignRegistration: true },
+    value: {
+      showPerishedRadioGroup: true,
+      showForeignRegistrationRadioGroup: true,
+      showIdentificationForm: true,
+      submitEnabled: true,
+    },
+  },
+  {
+    key: { relationship: 'married', perished: true, foreignRegistration: false },
+    value: {
+      showPerishedRadioGroup: true,
+      showForeignRegistrationRadioGroup: true,
+      submitEnabled: true,
+    },
+  },
+  {
+    key: { relationship: 'married', perished: false },
+    value: {
+      showPerishedRadioGroup: true,
+      showIdentificationForm: true,
+      showAddressForm: true,
+      submitEnabled: true,
+    },
+  },
 
-stateConfig.set(
-  { relationship: "separated" },
-  { showPerishedRadioGroup: true },
-);
-stateConfig.set(
-  { relationship: "separated", perished: true },
-  { showPerishedRadioGroup: true, submitEnabled: true },
-);
-stateConfig.set({relationship: "separated", perished: false}, {showPerishedRadioGroup: true, showIdentificationForm: true, showAddressForm: true, submitEnabled: true});
+  { key: { relationship: 'separated' }, value: { showPerishedRadioGroup: true } },
+  {
+    key: { relationship: 'separated', perished: true },
+    value: { showPerishedRadioGroup: true, submitEnabled: true },
+  },
+  {
+    key: { relationship: 'separated', perished: false },
+    value: {
+      showPerishedRadioGroup: true,
+      showIdentificationForm: true,
+      showAddressForm: true,
+      submitEnabled: true,
+    },
+  },
 
-stateConfig.set({ relationship: "divorced" }, { showPerishedRadioGroup: true });
-stateConfig.set(
-  { relationship: "divorced", perished: true },
-  { showPerishedRadioGroup: true, submitEnabled: true },
-);
-stateConfig.set({relationship: "divorced", perished: false}, {showPerishedRadioGroup: true, showIdentificationForm: true, showAddressForm: true, submitEnabled: true});
+  { key: { relationship: 'divorced' }, value: { showPerishedRadioGroup: true } },
+  {
+    key: { relationship: 'divorced', perished: true },
+    value: { showPerishedRadioGroup: true, submitEnabled: true },
+  },
+  {
+    key: { relationship: 'divorced', perished: false },
+    value: {
+      showPerishedRadioGroup: true,
+      showIdentificationForm: true,
+      showAddressForm: true,
+      submitEnabled: true,
+    },
+  },
+])
 
-export default stateConfig as ReadOnlyStateConfig<StateKeys, StateValues>;
+export default stateConfig as ReadOnlyStateConfig<StateKeys, StateValues>
