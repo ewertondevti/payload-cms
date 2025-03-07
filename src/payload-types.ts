@@ -999,6 +999,12 @@ export interface Form {
             blockName?: string | null;
             blockType: 'birthconsultation';
           }
+        | {
+            parentName: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'parentidentification';
+          }
       )[]
     | null;
   submitButtonLabel?: string | null;
@@ -2352,6 +2358,13 @@ export interface FormsSelect<T extends boolean = true> {
                     label?: T;
                     placeholder?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        parentidentification?:
+          | T
+          | {
+              parentName?: T;
               id?: T;
               blockName?: T;
             };
