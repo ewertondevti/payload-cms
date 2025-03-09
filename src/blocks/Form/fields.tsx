@@ -29,6 +29,7 @@ import { Textarea } from './Textarea'
 import { Title } from './Title'
 import { FlexRadioButtonGroup } from './Cidadao/FlexRadioButtonGroup'
 import { ParentIdentification } from './ParentIdentification'
+import { ParentAddress } from './ParentAddress/ParentAddress'
 
 export const fields = {
   customMessage: CustomMessage,
@@ -61,6 +62,7 @@ export const fields = {
   birthplace: Birthplace,
   customtextarea: Textarea,
   title: Title,
+  parentaddress: ParentAddress,
   identificationData: IdentificationData,
   birthconsultation: BirthConsultation,
   parentidentification: ParentIdentification,

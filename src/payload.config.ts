@@ -65,6 +65,7 @@ import { myRouteHandler } from './endpoints/my-route/route'
 import localization from './i18n/localization'
 import { BirthConsultationBlock } from './blocks/Form/BirthConsultation/BirthConsultationBlock'
 import { ParentIdentificationBlock } from './blocks/Form/ParentIdentification/ParentIdentificationBlock'
+import { ParentAddressBlock } from './blocks/Form/ParentAddress/ParentAddressBlock'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -230,6 +231,7 @@ export default buildConfig({
         IdentificationDataBlock,
         BirthplaceBlock,
         BirthConsultationBlock,
+        ParentAddressBlock,
         ParentIdentificationBlock,
         FlexRadioButtonGroupBlock,
       },
