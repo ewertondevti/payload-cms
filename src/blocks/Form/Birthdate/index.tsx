@@ -19,42 +19,6 @@ export const Birthdate: FC<Props> = ({ width, watch, register, required, ...prop
   const endDate = new Date()
   endDate.setDate(endDate.getDate() - 1)
 
-  const dateProps: InputDateProps & UseFormReturn = {
-    ...props,
-
-    label: props.dateLabel,
-
-    calendarIconAriaLabel: 'Open calendar picker overlay',
-    previousYearAriaLabel: 'Navigate previous year',
-    previousMonthAriaLabel: 'Navigate previous month',
-    nextMonthAriaLabel: 'Navigate next month',
-    nextYearAriaLabel: 'Navigate next year',
-
-    todayDayAriaLabel: 'Today',
-    focusedDayAriaLabel: 'focused',
-    selectedDayAriaLabel: 'selected',
-
-    todayLabel: 'Today',
-    cancelLabel: 'Cancel',
-    okLabel: 'OK',
-    todayAriaLabel: 'Navigate to today',
-    cancelAriaLabel: 'Cancel selection',
-    okAriaLabel: 'Select focused day',
-
-    dayInputPlaceholder: 'dd',
-    monthInputPlaceholder: 'mm',
-    yearInputPlaceholder: 'yyyy',
-
-    feedbackState: 'danger',
-    feedbackText: `Obrigatório preencher "${props.label}"`,
-    hasError: !!props.errors[props.name],
-
-    endDate,
-
-    watch,
-    register,
-  }
-
   const getErrorMessage = () => {
     const error = props.errors['year-registration']
 
@@ -97,9 +61,7 @@ export const Birthdate: FC<Props> = ({ width, watch, register, required, ...prop
           ]}
         />
 
-        {!!selectOption && (
-          <DatePicker {...dateProps} {...register(props.name, { required })} width={50} />
-        )}
+        {!!selectOption && <DatePicker {...register(props.name, { required })} width={50} />}
 
         {!selectOption && (
           <Width width={50}>

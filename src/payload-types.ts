@@ -967,6 +967,60 @@ export interface Form {
                     }
                   | {
                       name: string;
+                      identification: {
+                        firstName: {
+                          label: string;
+                          placeholder: string;
+                          required?: boolean | null;
+                        };
+                        lastName: {
+                          label: string;
+                          placeholder: string;
+                          required?: boolean | null;
+                        };
+                        documentType: {
+                          label: string;
+                          placeholder: string;
+                          required?: boolean | null;
+                        };
+                        documentNumber: {
+                          label: string;
+                          placeholder: string;
+                          required?: boolean | null;
+                        };
+                        verificationDigit: {
+                          label: string;
+                          placeholder: string;
+                          required?: boolean | null;
+                        };
+                        gender: {
+                          label: string;
+                          placeholder: string;
+                          required?: boolean | null;
+                        };
+                        maritalStatus: {
+                          label: string;
+                          placeholder: string;
+                          required?: boolean | null;
+                        };
+                        birthDate: {
+                          label: string;
+                          required?: boolean | null;
+                        };
+                        nationality: {
+                          label: string;
+                          placeholder: string;
+                          required?: boolean | null;
+                        };
+                      };
+                      filiation: {
+                        name: string;
+                        label?: string | null;
+                      };
+                      contact: {
+                        name: string;
+                        label?: string | null;
+                      };
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'secondParent';
@@ -1115,7 +1169,6 @@ export interface Form {
             };
             birthDate: {
               label: string;
-              placeholder: string;
               required?: boolean | null;
             };
             nationality: {
@@ -1144,21 +1197,63 @@ export interface Form {
           }
         | {
             name: string;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'secondParent';
-          }
-        | {
-            title: string;
-            subtitle?: string | null;
-            accessCodeTitle: string;
-            accessCode: {
-              label: string;
-              placeholder: string;
+            identification: {
+              firstName: {
+                label: string;
+                placeholder: string;
+                required?: boolean | null;
+              };
+              lastName: {
+                label: string;
+                placeholder: string;
+                required?: boolean | null;
+              };
+              documentType: {
+                label: string;
+                placeholder: string;
+                required?: boolean | null;
+              };
+              documentNumber: {
+                label: string;
+                placeholder: string;
+                required?: boolean | null;
+              };
+              verificationDigit: {
+                label: string;
+                placeholder: string;
+                required?: boolean | null;
+              };
+              gender: {
+                label: string;
+                placeholder: string;
+                required?: boolean | null;
+              };
+              maritalStatus: {
+                label: string;
+                placeholder: string;
+                required?: boolean | null;
+              };
+              birthDate: {
+                label: string;
+                required?: boolean | null;
+              };
+              nationality: {
+                label: string;
+                placeholder: string;
+                required?: boolean | null;
+              };
+            };
+            filiation: {
+              name: string;
+              label?: string | null;
+            };
+            contact: {
+              name: string;
+              label?: string | null;
             };
             id?: string | null;
             blockName?: string | null;
-            blockType: 'birthconsultation';
+            blockType: 'secondParent';
           }
       )[]
     | null;
@@ -2482,6 +2577,84 @@ export interface FormsSelect<T extends boolean = true> {
                       | T
                       | {
                           name?: T;
+                          identification?:
+                            | T
+                            | {
+                                firstName?:
+                                  | T
+                                  | {
+                                      label?: T;
+                                      placeholder?: T;
+                                      required?: T;
+                                    };
+                                lastName?:
+                                  | T
+                                  | {
+                                      label?: T;
+                                      placeholder?: T;
+                                      required?: T;
+                                    };
+                                documentType?:
+                                  | T
+                                  | {
+                                      label?: T;
+                                      placeholder?: T;
+                                      required?: T;
+                                    };
+                                documentNumber?:
+                                  | T
+                                  | {
+                                      label?: T;
+                                      placeholder?: T;
+                                      required?: T;
+                                    };
+                                verificationDigit?:
+                                  | T
+                                  | {
+                                      label?: T;
+                                      placeholder?: T;
+                                      required?: T;
+                                    };
+                                gender?:
+                                  | T
+                                  | {
+                                      label?: T;
+                                      placeholder?: T;
+                                      required?: T;
+                                    };
+                                maritalStatus?:
+                                  | T
+                                  | {
+                                      label?: T;
+                                      placeholder?: T;
+                                      required?: T;
+                                    };
+                                birthDate?:
+                                  | T
+                                  | {
+                                      label?: T;
+                                      required?: T;
+                                    };
+                                nationality?:
+                                  | T
+                                  | {
+                                      label?: T;
+                                      placeholder?: T;
+                                      required?: T;
+                                    };
+                              };
+                          filiation?:
+                            | T
+                            | {
+                                name?: T;
+                                label?: T;
+                              };
+                          contact?:
+                            | T
+                            | {
+                                name?: T;
+                                label?: T;
+                              };
                           id?: T;
                           blockName?: T;
                         };
@@ -2526,18 +2699,17 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        flexRadioButtonGroup?:
+        birthconsultation?:
           | T
           | {
-              name?: T;
-              label?: T;
-              alignment?: T;
-              options?:
+              title?: T;
+              subtitle?: T;
+              accessCodeTitle?: T;
+              accessCode?:
                 | T
                 | {
                     label?: T;
-                    value?: T;
-                    id?: T;
+                    placeholder?: T;
                   };
               id?: T;
               blockName?: T;
@@ -2674,7 +2846,6 @@ export interface FormsSelect<T extends boolean = true> {
                 | T
                 | {
                     label?: T;
-                    placeholder?: T;
                     required?: T;
                   };
               nationality?:
@@ -2691,20 +2862,99 @@ export interface FormsSelect<T extends boolean = true> {
           | T
           | {
               name?: T;
-              id?: T;
-              blockName?: T;
-            };
-        birthconsultation?:
-          | T
-          | {
-              title?: T;
-              subtitle?: T;
-              accessCodeTitle?: T;
-              accessCode?:
+              label?: T;
+              alignment?: T;
+              options?:
                 | T
                 | {
                     label?: T;
-                    placeholder?: T;
+                    value?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        secondParent?:
+          | T
+          | {
+              name?: T;
+              identification?:
+                | T
+                | {
+                    firstName?:
+                      | T
+                      | {
+                          label?: T;
+                          placeholder?: T;
+                          required?: T;
+                        };
+                    lastName?:
+                      | T
+                      | {
+                          label?: T;
+                          placeholder?: T;
+                          required?: T;
+                        };
+                    documentType?:
+                      | T
+                      | {
+                          label?: T;
+                          placeholder?: T;
+                          required?: T;
+                        };
+                    documentNumber?:
+                      | T
+                      | {
+                          label?: T;
+                          placeholder?: T;
+                          required?: T;
+                        };
+                    verificationDigit?:
+                      | T
+                      | {
+                          label?: T;
+                          placeholder?: T;
+                          required?: T;
+                        };
+                    gender?:
+                      | T
+                      | {
+                          label?: T;
+                          placeholder?: T;
+                          required?: T;
+                        };
+                    maritalStatus?:
+                      | T
+                      | {
+                          label?: T;
+                          placeholder?: T;
+                          required?: T;
+                        };
+                    birthDate?:
+                      | T
+                      | {
+                          label?: T;
+                          required?: T;
+                        };
+                    nationality?:
+                      | T
+                      | {
+                          label?: T;
+                          placeholder?: T;
+                          required?: T;
+                        };
+                  };
+              filiation?:
+                | T
+                | {
+                    name?: T;
+                    label?: T;
+                  };
+              contact?:
+                | T
+                | {
+                    name?: T;
+                    label?: T;
                   };
               id?: T;
               blockName?: T;

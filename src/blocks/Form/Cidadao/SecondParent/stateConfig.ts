@@ -1,20 +1,20 @@
 import { ReadOnlyStateConfig, StateConfig } from '../utilities/StateConfig'
 
 export type RelationshipOptions = 'unknown' | 'unmarried' | 'married' | 'separated' | 'divorced'
-type StateKeys = {
+type StateKey = {
   relationship?: RelationshipOptions
   perished?: boolean
   foreignRegistration?: boolean
 }
-type StateValues = {
+export type SecondParentStateValue = {
   showPerishedRadioGroup?: boolean
   showForeignRegistrationRadioGroup?: boolean
   showIdentificationForm?: boolean
-  showAddressForm?: boolean
+  showContactForm?: boolean
   submitEnabled?: boolean
 }
 
-const stateConfig = StateConfig.from<StateKeys, StateValues>([
+const stateConfig = StateConfig.from<StateKey, SecondParentStateValue>([
   {
     key: { relationship: 'unknown' },
     value: { submitEnabled: true },
@@ -36,7 +36,7 @@ const stateConfig = StateConfig.from<StateKeys, StateValues>([
     value: {
       showPerishedRadioGroup: true,
       showIdentificationForm: true,
-      showAddressForm: true,
+      showContactForm: true,
       submitEnabled: true,
     },
   },
@@ -68,7 +68,7 @@ const stateConfig = StateConfig.from<StateKeys, StateValues>([
     value: {
       showPerishedRadioGroup: true,
       showIdentificationForm: true,
-      showAddressForm: true,
+      showContactForm: true,
       submitEnabled: true,
     },
   },
@@ -83,7 +83,7 @@ const stateConfig = StateConfig.from<StateKeys, StateValues>([
     value: {
       showPerishedRadioGroup: true,
       showIdentificationForm: true,
-      showAddressForm: true,
+      showContactForm: true,
       submitEnabled: true,
     },
   },
@@ -98,10 +98,10 @@ const stateConfig = StateConfig.from<StateKeys, StateValues>([
     value: {
       showPerishedRadioGroup: true,
       showIdentificationForm: true,
-      showAddressForm: true,
+      showContactForm: true,
       submitEnabled: true,
     },
   },
 ])
 
-export default stateConfig as ReadOnlyStateConfig<StateKeys, StateValues>
+export default stateConfig as ReadOnlyStateConfig<StateKey, SecondParentStateValue>
