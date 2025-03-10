@@ -14,19 +14,19 @@ export const Header: React.FC<HeaderProps> = ({
     title,
     subtitle
 }) => {
-  return (
-    <div className='py-16'>
-        {main ?
-        (<div className='flex flex-col gap-2'>
-            <h1 className='font-bold text-2xl text-[#021C51]'>{title}</h1>
-            <span className='font-semibold text-base text-[#2B363C]'>{subtitle}</span>
-        </div>)
-        : 
-        (<div className='flex flex-col gap-2'>
-            <h2 className='font-bold text-xl text-[#021C51]'>{title}</h2>
-            <span className='font-semibold text-base text-[#2B363C]'>{subtitle}</span>
-        </div>)
-        }
-    </div>
-  )
+    return (
+        <div className=''>
+            {main ?
+                (<div className='flex flex-col gap-2'>
+                    <h1 className='font-bold text-2xl text-[#021C51]'>{title}</h1>
+                    <span className='font-semibold text-base text-[#2B363C]'>{subtitle}</span>
+                </div>)
+                :
+                (<div className='flex flex-col gap-2'>
+                    <h2 className='font-bold text-xl text-[#021C51]'>{title}</h2>
+                    <span className='font-semibold text-base text-[#2B363C]'>{subtitle}</span>
+                </div>)
+            }
+        </div>
+    )
 }

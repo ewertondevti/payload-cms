@@ -1,137 +1,47 @@
-import { Block } from 'payload'
+import { Block, Field } from "payload"
+
+const createFieldConfig = (name: string, label: string, required = true): Field => ({
+ name,
+ type: 'group',
+ fields: [
+  {
+   name: 'label',
+   type: 'text',
+   label: 'Rótulo',
+   required: true,
+   defaultValue: label
+  },
+  {
+   name: 'placeholder',
+   type: 'text',
+   label: 'Placeholder',
+   required: true
+  },
+  {
+   name: 'required',
+   type: 'checkbox',
+   label: 'Obrigatório',
+   defaultValue: required,
+   admin: { hidden: true }
+  }
+ ]
+})
 
 export const ParentIdentificationBlock: Block = {
  slug: 'parentidentification',
  labels: {
-  singular: 'Parent Identification',
-  plural: 'Parent Identifications',
+  singular: 'Identificação do Pai/Mãe',
+  plural: 'Identificações dos Pais'
  },
  fields: [
-  {
-   name: 'firstNameLabel',
-   label: 'First Name Label',
-   type: 'text',
-   defaultValue: 'Nome(s) próprio(s)',
-   required: true,
-  },
-  {
-   name: 'firstNamePlaceholder',
-   label: 'First Name Placeholder',
-   type: 'text',
-   defaultValue: 'Ex: Maria Clara',
-   required: true,
-  },
-  {
-   name: 'lastNameLabel',
-   label: 'Last Name Label',
-   type: 'text',
-   defaultValue: 'Apelido(s)',
-   required: true,
-  },
-  {
-   name: 'lastNamePlaceholder',
-   label: 'Last Name Placeholder',
-   type: 'text',
-   defaultValue: 'Ex: Ls',
-   required: true,
-  },
-  {
-   name: 'documentTypeLabel',
-   label: 'Document Type Label',
-   type: 'text',
-   defaultValue: 'Documento de Identificação',
-   required: true,
-  },
-  {
-   name: 'documentTypePlaceholder',
-   label: 'Document Type Placeholder',
-   type: 'text',
-   defaultValue: 'Selecione um documento',
-   required: true,
-  },
-  {
-   name: 'documentNumberLabel',
-   label: 'Document Number Label',
-   type: 'text',
-   defaultValue: 'Número do documento (Opcional)',
-   required: false,
-  },
-  {
-   name: 'documentNumberPlaceholder',
-   label: 'Document Number Placeholder',
-   type: 'text',
-   defaultValue: 'Ex: 34567890 ZE',
-   required: false,
-  },
-  {
-   name: 'verificationDigitLabel',
-   label: 'Verification Digit Label',
-   type: 'text',
-   defaultValue: 'Dígito de verificação (Opcional)',
-   required: false,
-  },
-  {
-   name: 'verificationDigitPlaceholder',
-   label: 'Verification Digit Placeholder',
-   type: 'text',
-   defaultValue: 'Ex: 12',
-   required: false,
-  },
-  {
-   name: 'genderLabel',
-   label: 'Gender Label',
-   type: 'text',
-   defaultValue: 'Gênero',
-   required: true,
-  },
-  {
-   name: 'genderPlaceholder',
-   label: 'Gender Placeholder',
-   type: 'text',
-   defaultValue: 'Selecione o gênero',
-   required: true,
-  },
-  {
-   name: 'maritalStatusLabel',
-   label: 'Marital Status Label',
-   type: 'text',
-   defaultValue: 'Estado civil',
-   required: true,
-  },
-  {
-   name: 'maritalStatusPlaceholder',
-   label: 'Marital Status Placeholder',
-   type: 'text',
-   defaultValue: 'Selecione uma opção',
-   required: true,
-  },
-  {
-   name: 'birthDateLabel',
-   label: 'Birth Date Label',
-   type: 'text',
-   defaultValue: 'Data de nascimento',
-   required: true,
-  },
-  {
-   name: 'birthDatePlaceholder',
-   label: 'Birth Date Placeholder',
-   type: 'text',
-   defaultValue: 'dd/mm/aaaa',
-   required: true,
-  },
-  {
-   name: 'nationalityLabel',
-   label: 'Nationality Label',
-   type: 'text',
-   defaultValue: 'País de nacionalidade',
-   required: true,
-  },
-  {
-   name: 'nationalityPlaceholder',
-   label: 'Nationality Placeholder',
-   type: 'text',
-   defaultValue: 'Selecione uma opção',
-   required: true,
-  },
- ],
+  createFieldConfig('firstName', 'Nome(s) próprio(s)'),
+  createFieldConfig('lastName', 'Apelido(s)'),
+  createFieldConfig('documentType', 'Documento de Identificação'),
+  createFieldConfig('documentNumber', 'Número do documento', false),
+  createFieldConfig('verificationDigit', 'Dígito de verificação', false),
+  createFieldConfig('gender', 'Gênero'),
+  createFieldConfig('maritalStatus', 'Estado civil'),
+  createFieldConfig('birthDate', 'Data de nascimento'),
+  createFieldConfig('nationality', 'Nacionalidade')
+ ]
 }

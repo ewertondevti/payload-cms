@@ -42,6 +42,18 @@ const searchable: Field = {
   label: 'Searchable',
 }
 
+
+const width: Field = {
+  name: 'width',
+  type: 'number',
+  label: 'Width (%)',
+  defaultValue: 100,
+  admin: {
+    step: 1,
+    width: '50%',
+  },
+}
+
 export const PhoneNumberBlock: Block = {
   slug: 'phoneNumber',
   fields: [
@@ -102,6 +114,12 @@ export const PhoneNumberBlock: Block = {
             width: 'calc(100% / 3)',
           },
         },
+      ],
+    },
+    {
+      type: 'row',
+      fields: [
+        width,
       ],
     },
   ],

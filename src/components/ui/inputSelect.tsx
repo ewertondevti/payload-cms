@@ -9,7 +9,7 @@ import {
 import { InputOptionalLabel } from './InputOptionalLabel'
 
 export type InputSelectProps = {
-  id: string
+  id?: string
   value?: string
   type?: 'checkbox' | 'text'
   label: string
@@ -93,7 +93,7 @@ export const InputSelect: React.FC<InputSelectProps> = ({
 
   const inputLabel = required || required === undefined ? label : (
     <>
-      {label} <InputOptionalLabel/>
+      {label} <InputOptionalLabel />
     </>
   )
 

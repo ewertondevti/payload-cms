@@ -696,6 +696,7 @@ export interface Form {
             required?: boolean | null;
             readOnly?: boolean | null;
             searchable?: boolean | null;
+            width?: number | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'phoneNumber';
@@ -882,6 +883,7 @@ export interface Form {
                       required?: boolean | null;
                       readOnly?: boolean | null;
                       searchable?: boolean | null;
+                      width?: number | null;
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'phoneNumber';
@@ -1015,24 +1017,106 @@ export interface Form {
             blockType: 'birthconsultation';
           }
         | {
-            firstNameLabel: string;
-            firstNamePlaceholder: string;
-            lastNameLabel: string;
-            lastNamePlaceholder: string;
-            documentTypeLabel: string;
-            documentTypePlaceholder: string;
-            documentNumberLabel?: string | null;
-            documentNumberPlaceholder?: string | null;
-            verificationDigitLabel?: string | null;
-            verificationDigitPlaceholder?: string | null;
-            genderLabel: string;
-            genderPlaceholder: string;
-            maritalStatusLabel: string;
-            maritalStatusPlaceholder: string;
-            birthDateLabel: string;
-            birthDatePlaceholder: string;
-            nationalityLabel: string;
-            nationalityPlaceholder: string;
+            countryOfResidence: {
+              label: string;
+              placeholder: string;
+              required?: boolean | null;
+            };
+            addressType: {
+              label: string;
+              placeholder: string;
+              required?: boolean | null;
+            };
+            wayDesignation: {
+              label: string;
+              placeholder: string;
+              required?: boolean | null;
+            };
+            doorNumber: {
+              label: string;
+              placeholder: string;
+              required?: boolean | null;
+            };
+            floor: {
+              label: string;
+              placeholder: string;
+              required?: boolean | null;
+            };
+            side: {
+              label: string;
+              placeholder: string;
+              required?: boolean | null;
+            };
+            district: {
+              label: string;
+              placeholder: string;
+              required?: boolean | null;
+            };
+            municipality: {
+              label: string;
+              placeholder: string;
+              required?: boolean | null;
+            };
+            parish: {
+              label: string;
+              placeholder: string;
+              required?: boolean | null;
+            };
+            postalCode: {
+              label: string;
+              placeholder: string;
+              required?: boolean | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'parentaddress';
+          }
+        | {
+            firstName: {
+              label: string;
+              placeholder: string;
+              required?: boolean | null;
+            };
+            lastName: {
+              label: string;
+              placeholder: string;
+              required?: boolean | null;
+            };
+            documentType: {
+              label: string;
+              placeholder: string;
+              required?: boolean | null;
+            };
+            documentNumber: {
+              label: string;
+              placeholder: string;
+              required?: boolean | null;
+            };
+            verificationDigit: {
+              label: string;
+              placeholder: string;
+              required?: boolean | null;
+            };
+            gender: {
+              label: string;
+              placeholder: string;
+              required?: boolean | null;
+            };
+            maritalStatus: {
+              label: string;
+              placeholder: string;
+              required?: boolean | null;
+            };
+            birthDate: {
+              label: string;
+              placeholder: string;
+              required?: boolean | null;
+            };
+            nationality: {
+              label: string;
+              placeholder: string;
+              required?: boolean | null;
+            };
             id?: string | null;
             blockName?: string | null;
             blockType: 'parentidentification';
@@ -2088,6 +2172,7 @@ export interface FormsSelect<T extends boolean = true> {
               required?: T;
               readOnly?: T;
               searchable?: T;
+              width?: T;
               id?: T;
               blockName?: T;
             };
@@ -2280,6 +2365,7 @@ export interface FormsSelect<T extends boolean = true> {
                           required?: T;
                           readOnly?: T;
                           searchable?: T;
+                          width?: T;
                           id?: T;
                           blockName?: T;
                         };
@@ -2424,27 +2510,148 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        parentaddress?:
+          | T
+          | {
+              countryOfResidence?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                    required?: T;
+                  };
+              addressType?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                    required?: T;
+                  };
+              wayDesignation?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                    required?: T;
+                  };
+              doorNumber?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                    required?: T;
+                  };
+              floor?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                    required?: T;
+                  };
+              side?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                    required?: T;
+                  };
+              district?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                    required?: T;
+                  };
+              municipality?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                    required?: T;
+                  };
+              parish?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                    required?: T;
+                  };
+              postalCode?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                    required?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         parentidentification?:
           | T
           | {
-              firstNameLabel?: T;
-              firstNamePlaceholder?: T;
-              lastNameLabel?: T;
-              lastNamePlaceholder?: T;
-              documentTypeLabel?: T;
-              documentTypePlaceholder?: T;
-              documentNumberLabel?: T;
-              documentNumberPlaceholder?: T;
-              verificationDigitLabel?: T;
-              verificationDigitPlaceholder?: T;
-              genderLabel?: T;
-              genderPlaceholder?: T;
-              maritalStatusLabel?: T;
-              maritalStatusPlaceholder?: T;
-              birthDateLabel?: T;
-              birthDatePlaceholder?: T;
-              nationalityLabel?: T;
-              nationalityPlaceholder?: T;
+              firstName?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                    required?: T;
+                  };
+              lastName?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                    required?: T;
+                  };
+              documentType?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                    required?: T;
+                  };
+              documentNumber?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                    required?: T;
+                  };
+              verificationDigit?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                    required?: T;
+                  };
+              gender?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                    required?: T;
+                  };
+              maritalStatus?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                    required?: T;
+                  };
+              birthDate?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                    required?: T;
+                  };
+              nationality?:
+                | T
+                | {
+                    label?: T;
+                    placeholder?: T;
+                    required?: T;
+                  };
               id?: T;
               blockName?: T;
             };
