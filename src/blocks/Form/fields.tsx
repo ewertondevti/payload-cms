@@ -30,6 +30,7 @@ import { Title } from './Title'
 import { FlexRadioButtonGroup } from './Cidadao/FlexRadioButtonGroup'
 import { ParentIdentification } from './ParentIdentification'
 import { ParentAddress } from './ParentAddress/ParentAddress'
+import { SecondParent } from './Cidadao/SecondParent'
 
 export const fields = {
   customMessage: CustomMessage,
@@ -57,6 +58,7 @@ export const fields = {
   phoneNumber: PhoneNumber,
   radioButtons: RadioButtons,
   flexRadioButtonGroup: FlexRadioButtonGroup,
+  secondParent: SecondParent,
   preLoadExample1: PreLoadExample1,
   birthdate: Birthdate,
   birthplace: Birthplace,

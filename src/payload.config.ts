@@ -66,6 +66,7 @@ import localization from './i18n/localization'
 import { BirthConsultationBlock } from './blocks/Form/BirthConsultation/BirthConsultationBlock'
 import { ParentIdentificationBlock } from './blocks/Form/ParentIdentification/ParentIdentificationBlock'
 import { ParentAddressBlock } from './blocks/Form/ParentAddress/ParentAddressBlock'
+import { SecondParentBlock } from './blocks/Form/Cidadao/SecondParent/SecondParentBlock'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -234,6 +235,8 @@ export default buildConfig({
         ParentAddressBlock,
         ParentIdentificationBlock,
         FlexRadioButtonGroupBlock,
+        SecondParentBlock,
+        BirthConsultationBlock,
       },
       formOverrides: {
         fields: ({ defaultFields }) => {
