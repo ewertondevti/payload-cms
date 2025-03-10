@@ -157,20 +157,19 @@ export const ParentIdentification = ({
           />
         </Width>
       </div>
-
       <div className="flex gap-4 flex-wrap">
         <Width width={50}>
           <InputDate
-            calendarIconAriaLabel={''}
-            previousYearAriaLabel={''}
-            previousMonthAriaLabel={''}
-            nextMonthAriaLabel={''}
-            nextYearAriaLabel={''}
-            selectedDayAriaLabel={''}
-            todayDayAriaLabel={''}
-            todayLabel={''}
-            cancelLabel={''}
-            okLabel={''}
+            calendarIconAriaLabel={'ok'}
+            previousYearAriaLabel={'ok'}
+            previousMonthAriaLabel={'ok'}
+            nextMonthAriaLabel={'ok'}
+            nextYearAriaLabel={'ok'}
+            selectedDayAriaLabel={'ok'}
+            todayDayAriaLabel={'ok'}
+            todayLabel={'ok'}
+            cancelLabel={'ok'}
+            okLabel={'ok'}
             label={birthDate.label}
             placeholder={birthDate.placeholder}
             required={birthDate.required}
