@@ -93,7 +93,7 @@ export const ParentIdentification = ({
       </div>
 
       <div className="flex gap-4 flex-wrap">
-        <Width width={33}>
+        <Width width={52}>
           <InputSelect
             label={documentType.label}
             placeholder={documentType.placeholder}
@@ -103,7 +103,7 @@ export const ParentIdentification = ({
             onChange={(e) => register('documentType').onChange({ target: { value: e } })}
           />
         </Width>
-        <Width width={33}>
+        <Width width={51}>
           <InputText
             label={documentNumber.label}
             placeholder={documentNumber.placeholder}
@@ -114,7 +114,7 @@ export const ParentIdentification = ({
             {...register('documentNumber', { required: documentNumber.required })}
           />
         </Width>
-        <Width width={34}>
+        <Width width={50}>
           <InputText
             label={verificationDigit.label}
             placeholder={verificationDigit.placeholder}
