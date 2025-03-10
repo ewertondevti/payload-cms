@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import type { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form'
 import { useFormContext } from 'react-hook-form'
 import { countryOptions } from '../Country/options'
+import { Width } from '../Width'
 
 export interface AddressProps {
   name: string
@@ -34,22 +35,25 @@ export const Address: React.FC<
 
   return (
     <>
-      <InputSelect
-        id={'cvtResidencia'}
-        value={selectedCountry}
-        defaultValue="PT"
-        type="text"
-        label="Residência"
-        options={countryOptions}
-        placeholder="Selecione uma opção"
-        visibleCount={5}
-        searchable
-        hideSectionNames
-        searchInputPlaceholder="Pesquisar país"
-        dropdownAriaLabel="Lista de países"
-        searchNoResultsText="Não foram encontrados resultados."
-        onChange={onChangeCountry}
-      />
+      <Width width={50}>
+        <InputSelect
+          id={'cvtResidencia'}
+          value={selectedCountry}
+          defaultValue="PT"
+          type="text"
+          label="Residência"
+          options={countryOptions}
+          placeholder="Selecione uma opção"
+          visibleCount={5}
+          searchable
+          hideSectionNames
+          searchInputPlaceholder="Pesquisar país"
+          dropdownAriaLabel="Lista de países"
+          searchNoResultsText="Não foram encontrados resultados."
+          onChange={onChangeCountry}
+        />
+      </Width>
+
       <br />
       {selectedCountry === 'PT' ? (
         <>
