@@ -55,7 +55,9 @@ export const FlexRadioButtonGroup: FC<FlexRadioButtonGroupProps & UseFormReturn>
       feedbackText={`Obrigatório preencher "${label}"`}
       hasError={!!errors?.[name]}
     >
-      <div className={`w-full flex flex-wrap ${alignment === 'vertical' ? 'flex-col' : 'gap-8'}`}>
+      <div
+        className={`w-full flex flex-wrap ${alignment === 'vertical' ? 'flex-col gap-4' : 'gap-32'}`}
+      >
         {options.map((option) => (
           <RadioButton
             label={option.label}

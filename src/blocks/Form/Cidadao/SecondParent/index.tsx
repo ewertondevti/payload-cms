@@ -3,6 +3,7 @@ import stateConfig, { RelationshipOptions } from './stateConfig'
 import { FlexRadioButtonGroup } from '../FlexRadioButtonGroup'
 import { AtomicField } from '../types'
 import { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form'
+import { LoadDataCard } from '../LoadDataCard'
 
 const relationshipOptions: AtomicField<RelationshipOptions>[] = [
   { label: 'Não conhece o segundo progenitor', value: 'unknown' },
@@ -64,7 +65,7 @@ export const SecondParent: FC<UseFormReturn & { errors: FieldErrors<FieldValues>
   }, [relationship, perished, foreignRegistration])
 
   return (
-    <div className="w-[800px] flex flex-col gap-16">
+    <div className="w-[800px] flex flex-col gap-64">
       <FlexRadioButtonGroup
         {...props}
         label="Qual a sua relação com o 2º progenitor?"
@@ -97,7 +98,11 @@ export const SecondParent: FC<UseFormReturn & { errors: FieldErrors<FieldValues>
           onChange={(value) => setForeignRegistration(Boolean(JSON.parse(value)))}
         />
       )}
-      {showIdentificationForm && <div>Identification form</div>}
+      {showIdentificationForm && (
+        <div>
+          <LoadDataCard />
+        </div>
+      )}
       {showAddressForm && <div>Address form</div>}
     </div>
   )
