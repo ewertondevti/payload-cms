@@ -7,8 +7,20 @@ import { useFormContext } from 'react-hook-form'
 import { countryOptions } from '../Country/options'
 import { Width } from '../Width'
 
+interface FieldsConfig {
+  label: string
+  placeholder: string
+  required?: boolean
+}
+
 export interface AddressProps {
-  name: string
+  residency: FieldsConfig
+  postalCode: FieldsConfig
+  location: FieldsConfig
+  address: FieldsConfig
+  addressName: FieldsConfig
+  addressFloor: FieldsConfig
+  addressDoor: FieldsConfig
 }
 
 export const Address: React.FC<
@@ -20,7 +32,7 @@ export const Address: React.FC<
     >
     register: UseFormRegister<FieldValues>
   }
-> = ({ name, errors, register }) => {
+> = ({ errors, register, addressFloor, residency, postalCode, location, address, addressName, addressDoor }) => {
   const { setValue } = useFormContext()
   const [selectedCountry, setSelectedCountry] = useState<string>('PT')
 
@@ -41,9 +53,10 @@ export const Address: React.FC<
           value={selectedCountry}
           defaultValue="PT"
           type="text"
-          label="Residência"
+          label={residency.label}
+          required={residency.required}
+          placeholder={residency.placeholder}
           options={countryOptions}
-          placeholder="Selecione uma opção"
           visibleCount={5}
           searchable
           hideSectionNames
@@ -61,9 +74,9 @@ export const Address: React.FC<
             <TextField
               id={'cvtCodPostal'}
               hasError={errors['cvtCodPostal'] ? true : false}
-              label="Código Postal"
-              placeholder="Indique o código postal"
-              required
+              label={postalCode.label}
+              placeholder={postalCode.placeholder}
+              required={postalCode.required}
               hasFeedback={true}
               feedbackState={'danger'}
               feedbackText={errors['cvtCodPostal']?.message?.toString()}
@@ -78,9 +91,10 @@ export const Address: React.FC<
 
             <TextField
               id={'cvtLocalidade'}
-              label="Localidade"
-              placeholder="Indique a localidade"
-              required
+              label={location.label}
+              placeholder={location.placeholder}
+
+              required={location.required}
               hasFeedback={true}
               hasError={errors['cvtLocalidade'] ? true : false}
               feedbackState={'danger'}
@@ -97,9 +111,9 @@ export const Address: React.FC<
           <br />
           <TextField
             id={'cvtMorada'}
-            label="Morada"
-            placeholder="Nome de rua ou avenida"
-            required
+            label={address.label}
+            placeholder={address.placeholder}
+            required={address.required}
             hasFeedback={true}
             feedbackState={'danger'}
             feedbackText={errors['cvtMorada']?.message?.toString()}
@@ -116,8 +130,9 @@ export const Address: React.FC<
           <div className="grid grid-cols-3 gap-4">
             <TextField
               id={'cvtNumero-lote'}
-              label="Número / Lote"
-              placeholder="Indique o número ou lote"
+              label={addressName.label}
+              placeholder={addressName.placeholder}
+              required={addressName.required}
               hasFeedback={true}
               feedbackState={'danger'}
               feedbackText={errors['cvtNumero-lote']?.message?.toString()}
@@ -132,8 +147,9 @@ export const Address: React.FC<
             />
             <TextField
               id={'cvtAndar'}
-              label="Andar"
-              placeholder="Indique o andar"
+              label={addressFloor.label}
+              placeholder={addressFloor.placeholder}
+              required={addressFloor.required}
               hasFeedback={true}
               feedbackState={'danger'}
               feedbackText={errors['cvtAndar']?.message?.toString()}
@@ -148,8 +164,9 @@ export const Address: React.FC<
             />
             <TextField
               id={'cvtPorta'}
-              label="Porta"
-              placeholder="Indique o nº, letra ou lado"
+              label={addressDoor.label}
+              placeholder={addressDoor.placeholder}
+              required={addressDoor.required}
               hasFeedback={true}
               feedbackState={'danger'}
               feedbackText={errors['cvtPorta']?.message?.toString()}

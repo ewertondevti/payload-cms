@@ -1,40 +1,53 @@
 import { Block, Field } from 'payload'
 
-const name: Field = {
-  name: 'name',
-  type: 'text',
-  label: 'Name (lowercase, no special characters)',
-  required: true,
-  defaultValue: 'morada',
-}
-
-const label: Field = {
-  name: 'label',
-  type: 'text',
-  label: 'Label',
-  defaultValue: 'Morada',
-}
-
-export const AddressBlock: Block = {
-  slug: 'address',
+const FieldConfig = (name: string, label: string, required = true, placeholder: string): Field => ({
+  name,
+  type: 'group',
   fields: [
     {
       type: 'row',
       fields: [
         {
-          ...name,
-          admin: {
-            width: '50%',
-          },
+          name: 'name',
+          type: 'text',
+          label: 'Name (lowercase, no special characters)',
+          required: true,
+          defaultValue: name,
         },
         {
-          ...label,
-          admin: {
-            width: '50%',
-          },
+          name: 'placeholder',
+          type: 'text',
+          label: 'Placeholder',
+          defaultValue: placeholder
         },
+        {
+          name: 'label',
+          type: 'text',
+          label: 'Label',
+          defaultValue: label
+        },
+        {
+          name: 'required',
+          type: 'checkbox',
+          label: 'Obrigatório',
+          defaultValue: required
+        }
       ],
     },
+  ],
+})
+
+export const AddressBlock: Block = {
+  slug: 'address',
+  fields: [
+    FieldConfig('residency', 'País de residência', true, "País de residência"),
+    FieldConfig('postalCode', 'Código Postal', true, "Código Postal",),
+    FieldConfig('location', 'Localidade', true, "Localidade"),
+    FieldConfig('address', 'Moarada', true, "Morada"),
+    FieldConfig('addressName', 'Localidade', true, "Localidade"),
+    FieldConfig('addressFloor', 'Andar (Opcional)', true, "Andar (Opcional)"),
+    FieldConfig('addressDoor', 'Porta (Opcional)', true, "Porta (Opcional)"),
+    FieldConfig('addressNumber', 'Número / Lote', true, "Número / Lote"),
   ],
   labels: {
     plural: 'Moradas',

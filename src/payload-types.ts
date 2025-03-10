@@ -625,8 +625,54 @@ export interface Form {
             blockType: 'customtext';
           }
         | {
-            name: string;
-            label?: string | null;
+            residency: {
+              name: string;
+              placeholder?: string | null;
+              label?: string | null;
+              required?: boolean | null;
+            };
+            postalCode: {
+              name: string;
+              placeholder?: string | null;
+              label?: string | null;
+              required?: boolean | null;
+            };
+            location: {
+              name: string;
+              placeholder?: string | null;
+              label?: string | null;
+              required?: boolean | null;
+            };
+            address: {
+              name: string;
+              placeholder?: string | null;
+              label?: string | null;
+              required?: boolean | null;
+            };
+            addressName: {
+              name: string;
+              placeholder?: string | null;
+              label?: string | null;
+              required?: boolean | null;
+            };
+            addressFloor: {
+              name: string;
+              placeholder?: string | null;
+              label?: string | null;
+              required?: boolean | null;
+            };
+            addressDoor: {
+              name: string;
+              placeholder?: string | null;
+              label?: string | null;
+              required?: boolean | null;
+            };
+            addressNumber: {
+              name: string;
+              placeholder?: string | null;
+              label?: string | null;
+              required?: boolean | null;
+            };
             id?: string | null;
             blockName?: string | null;
             blockType: 'address';
@@ -812,8 +858,54 @@ export interface Form {
                       blockType: 'customtext';
                     }
                   | {
-                      name: string;
-                      label?: string | null;
+                      residency: {
+                        name: string;
+                        placeholder?: string | null;
+                        label?: string | null;
+                        required?: boolean | null;
+                      };
+                      postalCode: {
+                        name: string;
+                        placeholder?: string | null;
+                        label?: string | null;
+                        required?: boolean | null;
+                      };
+                      location: {
+                        name: string;
+                        placeholder?: string | null;
+                        label?: string | null;
+                        required?: boolean | null;
+                      };
+                      address: {
+                        name: string;
+                        placeholder?: string | null;
+                        label?: string | null;
+                        required?: boolean | null;
+                      };
+                      addressName: {
+                        name: string;
+                        placeholder?: string | null;
+                        label?: string | null;
+                        required?: boolean | null;
+                      };
+                      addressFloor: {
+                        name: string;
+                        placeholder?: string | null;
+                        label?: string | null;
+                        required?: boolean | null;
+                      };
+                      addressDoor: {
+                        name: string;
+                        placeholder?: string | null;
+                        label?: string | null;
+                        required?: boolean | null;
+                      };
+                      addressNumber: {
+                        name: string;
+                        placeholder?: string | null;
+                        label?: string | null;
+                        required?: boolean | null;
+                      };
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'address';
@@ -2093,8 +2185,70 @@ export interface FormsSelect<T extends boolean = true> {
         address?:
           | T
           | {
-              name?: T;
-              label?: T;
+              residency?:
+                | T
+                | {
+                    name?: T;
+                    placeholder?: T;
+                    label?: T;
+                    required?: T;
+                  };
+              postalCode?:
+                | T
+                | {
+                    name?: T;
+                    placeholder?: T;
+                    label?: T;
+                    required?: T;
+                  };
+              location?:
+                | T
+                | {
+                    name?: T;
+                    placeholder?: T;
+                    label?: T;
+                    required?: T;
+                  };
+              address?:
+                | T
+                | {
+                    name?: T;
+                    placeholder?: T;
+                    label?: T;
+                    required?: T;
+                  };
+              addressName?:
+                | T
+                | {
+                    name?: T;
+                    placeholder?: T;
+                    label?: T;
+                    required?: T;
+                  };
+              addressFloor?:
+                | T
+                | {
+                    name?: T;
+                    placeholder?: T;
+                    label?: T;
+                    required?: T;
+                  };
+              addressDoor?:
+                | T
+                | {
+                    name?: T;
+                    placeholder?: T;
+                    label?: T;
+                    required?: T;
+                  };
+              addressNumber?:
+                | T
+                | {
+                    name?: T;
+                    placeholder?: T;
+                    label?: T;
+                    required?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -2286,8 +2440,70 @@ export interface FormsSelect<T extends boolean = true> {
                     address?:
                       | T
                       | {
-                          name?: T;
-                          label?: T;
+                          residency?:
+                            | T
+                            | {
+                                name?: T;
+                                placeholder?: T;
+                                label?: T;
+                                required?: T;
+                              };
+                          postalCode?:
+                            | T
+                            | {
+                                name?: T;
+                                placeholder?: T;
+                                label?: T;
+                                required?: T;
+                              };
+                          location?:
+                            | T
+                            | {
+                                name?: T;
+                                placeholder?: T;
+                                label?: T;
+                                required?: T;
+                              };
+                          address?:
+                            | T
+                            | {
+                                name?: T;
+                                placeholder?: T;
+                                label?: T;
+                                required?: T;
+                              };
+                          addressName?:
+                            | T
+                            | {
+                                name?: T;
+                                placeholder?: T;
+                                label?: T;
+                                required?: T;
+                              };
+                          addressFloor?:
+                            | T
+                            | {
+                                name?: T;
+                                placeholder?: T;
+                                label?: T;
+                                required?: T;
+                              };
+                          addressDoor?:
+                            | T
+                            | {
+                                name?: T;
+                                placeholder?: T;
+                                label?: T;
+                                required?: T;
+                              };
+                          addressNumber?:
+                            | T
+                            | {
+                                name?: T;
+                                placeholder?: T;
+                                label?: T;
+                                required?: T;
+                              };
                           id?: T;
                           blockName?: T;
                         };
