@@ -37,7 +37,7 @@ import { searchFields } from '@/search/fieldOverrides'
 import { fileURLToPath } from 'url'
 import { AddressBlock } from './blocks/Form/Address/AddressBlock'
 import { BirthCertificateBlock } from './blocks/Form/BirthCertificateData/BirthCertificateDataBlock'
-import { BirthdateBlock } from './blocks/Form/Birthdate/BirthdateBlock'
+import { DateOrYearPickerBlock } from './blocks/Form/DateOrYearPicker/DateOrYearPickerBlock'
 import { BirthplaceBlock } from './blocks/Form/Birthplace/BirthplaceBlock'
 import { ContactBlock } from './blocks/Form/ContactData/ContactDataBlock'
 import { CustomTextfieldBlock } from './blocks/Form/CostumTextfield/CustomTextfieldBlock'
@@ -224,7 +224,7 @@ export default buildConfig({
         NationalityBlock,
         PhoneNumberBlock,
         PreLoadExample1Block,
-        BirthdateBlock,
+        BirthdateBlock: DateOrYearPickerBlock,
         TextAreaBlock,
         GroupBlock,
         TitleBlock,

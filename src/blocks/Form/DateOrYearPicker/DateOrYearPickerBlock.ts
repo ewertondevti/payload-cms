@@ -1,19 +1,11 @@
-import { Block, Field } from 'payload'
-
-const name: Field = {
-  name: 'name',
-  type: 'text',
-  label: 'Name (lowercase, no special characters)',
-  required: true,
-  defaultValue: '',
-}
+import type { Block, Field } from 'payload'
 
 const label: Field = {
   name: 'label',
   type: 'text',
+  defaultValue: '',
   label: 'Label',
   localized: true,
-  defaultValue: '',
 }
 
 const required: Field = {
@@ -22,14 +14,14 @@ const required: Field = {
   label: 'Required',
 }
 
-export const BirthdateBlock: Block = {
-  slug: 'birthdate',
+export const DateOrYearPickerBlock: Block = {
+  slug: 'dateoryearpicker',
   fields: [
     {
       ...label,
       name: 'radioLabel',
-      label: 'Radio label',
       defaultValue: 'Sei a data exata de nascimento ou apenas o ano?',
+      label: 'Radio label',
       localized: true,
       required: true,
     },
@@ -39,16 +31,16 @@ export const BirthdateBlock: Block = {
         {
           ...label,
           name: 'dateLabel',
-          label: 'Date label',
           defaultValue: 'Data de nascimento',
+          label: 'Date label',
           localized: true,
           required: true,
         },
         {
           ...label,
           name: 'yearLabel',
-          label: 'Year label',
           defaultValue: 'Ano de nascimento',
+          label: 'Year label',
           localized: true,
           required: true,
         },
@@ -57,7 +49,7 @@ export const BirthdateBlock: Block = {
     required,
   ],
   labels: {
-    plural: 'Birthdates',
-    singular: 'Birthdate',
+    plural: 'Date or Year Pickers',
+    singular: 'Date or Year Picker',
   },
 }

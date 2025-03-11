@@ -2,7 +2,7 @@ import { Address } from './Address'
 import { AddressData } from './AddressData'
 import { BirthCertificateData } from './BirthCertificateData'
 import { BirthConsultation } from './BirthConsultation'
-import { Birthdate } from './Birthdate'
+import { DateOrYearPicker } from './DateOrYearPicker'
 import { Birthplace } from './Birthplace'
 import { Checkbox } from './Checkbox'
 import { ContactData } from './ContactData'
@@ -60,7 +60,7 @@ export const fields = {
   flexRadioButtonGroup: FlexRadioButtonGroup,
   secondParent: SecondParent,
   preLoadExample1: PreLoadExample1,
-  birthdate: Birthdate,
+  birthdate: DateOrYearPicker,
   birthplace: Birthplace,
   customtextarea: Textarea,
   title: Title,

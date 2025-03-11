@@ -1,7 +1,7 @@
 import { Block, Field } from 'payload'
 import { AddressBlock } from '../Address/AddressBlock'
 import { BirthCertificateBlock } from '../BirthCertificateData/BirthCertificateDataBlock'
-import { BirthdateBlock } from '../Birthdate/BirthdateBlock'
+import { DateOrYearPickerBlock } from '../DateOrYearPicker/DateOrYearPickerBlock'
 import { BirthplaceBlock } from '../Birthplace/BirthplaceBlock'
 import { ContactBlock } from '../ContactData/ContactDataBlock'
 import { CustomTextfieldBlock } from '../CostumTextfield/CustomTextfieldBlock'
@@ -49,14 +49,14 @@ const arrayFields: Field = {
     NationalityBlock,
     PhoneNumberBlock,
     PreLoadExample1Block,
-    BirthdateBlock,
+    DateOrYearPickerBlock,
     TextAreaBlock,
     TitleBlock,
     SelectWithApiBlock,
     IdentificationDataBlock,
     BirthplaceBlock,
     FlexRadioButtonGroupBlock,
-    SecondParentBlock
+    SecondParentBlock,
   ],
   labels: {
     singular: 'Field',

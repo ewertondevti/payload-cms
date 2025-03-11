@@ -1,20 +1,22 @@
-import { DatePicker } from '@/components/DatePicker'
-import { InputDateProps, InputNumber } from '@ama-pt/agora-design-system'
+import React from 'react'
+import { InputNumber } from '@ama-pt/agora-design-system'
 import { FC } from 'react'
 import { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form'
-import { RadioButtons, RadioButtonsProps } from '../RadioButtonGroup'
+import { FlexRadioButtonGroup, FlexRadioButtonGroupProps } from '../Cidadao/FlexRadioButtonGroup'
+import { DatePicker } from '@/components/DatePicker'
 import { Width } from '../Width'
 
-type Props = RadioButtonsProps &
+type Props = FlexRadioButtonGroupProps &
   UseFormReturn & {
     errors: FieldErrors<FieldValues>
     radioLabel: string
     dateLabel: string
     yearLabel: string
+    yearPlaceholder: string
   }
 
-export const Birthdate: FC<Props> = ({ width, watch, register, required, ...props }) => {
-  const selectOption = watch('birthdate-or-year-registration')
+export const DateOrYearPicker: FC<Props> = ({ watch, register, required, ...props }) => {
+  const selectOption = watch('date-or-year-registration')
 
   const endDate = new Date()
   endDate.setDate(endDate.getDate() - 1)
@@ -48,9 +50,9 @@ export const Birthdate: FC<Props> = ({ width, watch, register, required, ...prop
       </style>
 
       <div className="flex gap-[32px]">
-        <RadioButtons
+        <FlexRadioButtonGroup
           {...props}
-          name="birthdate-or-year-registration"
+          name="date-or-year-registration"
           label={props.radioLabel}
           width={50}
           watch={watch}
@@ -73,7 +75,7 @@ export const Birthdate: FC<Props> = ({ width, watch, register, required, ...prop
                 max: new Date().getFullYear(),
               })}
               label={props.yearLabel}
-              placeholder="Indique o ano de nascimento"
+              placeholder={props.yearPlaceholder}
               feedbackState="danger"
               feedbackText={getErrorMessage()}
               hasError={!!props.errors['year-registration']}
