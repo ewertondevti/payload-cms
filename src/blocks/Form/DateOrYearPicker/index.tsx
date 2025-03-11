@@ -4,7 +4,6 @@ import { FC } from 'react'
 import { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form'
 import { FlexRadioButtonGroup, FlexRadioButtonGroupProps } from '../Cidadao/FlexRadioButtonGroup'
 import { DatePicker } from '@/components/DatePicker'
-import { Width } from '../Width'
 
 type Props = FlexRadioButtonGroupProps &
   UseFormReturn & {
@@ -40,7 +39,7 @@ export const DateOrYearPicker: FC<Props> = ({ watch, register, required, ...prop
   }
 
   return (
-    <Width width={100}>
+    <div className="w-full">
       <style>
         {`
           .agora-input-select-label {
@@ -66,7 +65,7 @@ export const DateOrYearPicker: FC<Props> = ({ watch, register, required, ...prop
         {!!selectOption && <DatePicker {...register(props.name, { required })} width={50} />}
 
         {!selectOption && (
-          <Width width={50}>
+          <div className="w-[calc(50% - 16px)]">
             <InputNumber
               {...props}
               {...register('year-registration', {
@@ -80,9 +79,9 @@ export const DateOrYearPicker: FC<Props> = ({ watch, register, required, ...prop
               feedbackText={getErrorMessage()}
               hasError={!!props.errors['year-registration']}
             />
-          </Width>
+          </div>
         )}
       </div>
-    </Width>
+    </div>
   )
 }
