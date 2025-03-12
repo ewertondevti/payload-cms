@@ -630,48 +630,56 @@ export interface Form {
               placeholder?: string | null;
               label?: string | null;
               required?: boolean | null;
+              isAddressVisible?: boolean | null;
             };
             postalCode: {
               name: string;
               placeholder?: string | null;
               label?: string | null;
               required?: boolean | null;
+              isAddressVisible?: boolean | null;
             };
             location: {
               name: string;
               placeholder?: string | null;
               label?: string | null;
               required?: boolean | null;
+              isAddressVisible?: boolean | null;
             };
             address: {
               name: string;
               placeholder?: string | null;
               label?: string | null;
               required?: boolean | null;
+              isAddressVisible?: boolean | null;
             };
             addressName: {
               name: string;
               placeholder?: string | null;
               label?: string | null;
               required?: boolean | null;
+              isAddressVisible?: boolean | null;
             };
             addressFloor: {
               name: string;
               placeholder?: string | null;
               label?: string | null;
               required?: boolean | null;
+              isAddressVisible?: boolean | null;
             };
             addressDoor: {
               name: string;
               placeholder?: string | null;
               label?: string | null;
               required?: boolean | null;
+              isAddressVisible?: boolean | null;
             };
             addressNumber: {
               name: string;
               placeholder?: string | null;
               label?: string | null;
               required?: boolean | null;
+              isAddressVisible?: boolean | null;
             };
             id?: string | null;
             blockName?: string | null;
@@ -863,48 +871,56 @@ export interface Form {
                         placeholder?: string | null;
                         label?: string | null;
                         required?: boolean | null;
+                        isAddressVisible?: boolean | null;
                       };
                       postalCode: {
                         name: string;
                         placeholder?: string | null;
                         label?: string | null;
                         required?: boolean | null;
+                        isAddressVisible?: boolean | null;
                       };
                       location: {
                         name: string;
                         placeholder?: string | null;
                         label?: string | null;
                         required?: boolean | null;
+                        isAddressVisible?: boolean | null;
                       };
                       address: {
                         name: string;
                         placeholder?: string | null;
                         label?: string | null;
                         required?: boolean | null;
+                        isAddressVisible?: boolean | null;
                       };
                       addressName: {
                         name: string;
                         placeholder?: string | null;
                         label?: string | null;
                         required?: boolean | null;
+                        isAddressVisible?: boolean | null;
                       };
                       addressFloor: {
                         name: string;
                         placeholder?: string | null;
                         label?: string | null;
                         required?: boolean | null;
+                        isAddressVisible?: boolean | null;
                       };
                       addressDoor: {
                         name: string;
                         placeholder?: string | null;
                         label?: string | null;
                         required?: boolean | null;
+                        isAddressVisible?: boolean | null;
                       };
                       addressNumber: {
                         name: string;
                         placeholder?: string | null;
                         label?: string | null;
                         required?: boolean | null;
+                        isAddressVisible?: boolean | null;
                       };
                       id?: string | null;
                       blockName?: string | null;
@@ -1227,6 +1243,11 @@ export interface Form {
             id?: string | null;
             blockName?: string | null;
             blockType: 'flexRadioButtonGroup';
+          }
+        | {
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'placedate';
           }
       )[]
     | null;
@@ -2192,6 +2213,7 @@ export interface FormsSelect<T extends boolean = true> {
                     placeholder?: T;
                     label?: T;
                     required?: T;
+                    isAddressVisible?: T;
                   };
               postalCode?:
                 | T
@@ -2200,6 +2222,7 @@ export interface FormsSelect<T extends boolean = true> {
                     placeholder?: T;
                     label?: T;
                     required?: T;
+                    isAddressVisible?: T;
                   };
               location?:
                 | T
@@ -2208,6 +2231,7 @@ export interface FormsSelect<T extends boolean = true> {
                     placeholder?: T;
                     label?: T;
                     required?: T;
+                    isAddressVisible?: T;
                   };
               address?:
                 | T
@@ -2216,6 +2240,7 @@ export interface FormsSelect<T extends boolean = true> {
                     placeholder?: T;
                     label?: T;
                     required?: T;
+                    isAddressVisible?: T;
                   };
               addressName?:
                 | T
@@ -2224,6 +2249,7 @@ export interface FormsSelect<T extends boolean = true> {
                     placeholder?: T;
                     label?: T;
                     required?: T;
+                    isAddressVisible?: T;
                   };
               addressFloor?:
                 | T
@@ -2232,6 +2258,7 @@ export interface FormsSelect<T extends boolean = true> {
                     placeholder?: T;
                     label?: T;
                     required?: T;
+                    isAddressVisible?: T;
                   };
               addressDoor?:
                 | T
@@ -2240,6 +2267,7 @@ export interface FormsSelect<T extends boolean = true> {
                     placeholder?: T;
                     label?: T;
                     required?: T;
+                    isAddressVisible?: T;
                   };
               addressNumber?:
                 | T
@@ -2248,6 +2276,7 @@ export interface FormsSelect<T extends boolean = true> {
                     placeholder?: T;
                     label?: T;
                     required?: T;
+                    isAddressVisible?: T;
                   };
               id?: T;
               blockName?: T;
@@ -2447,6 +2476,7 @@ export interface FormsSelect<T extends boolean = true> {
                                 placeholder?: T;
                                 label?: T;
                                 required?: T;
+                                isAddressVisible?: T;
                               };
                           postalCode?:
                             | T
@@ -2455,6 +2485,7 @@ export interface FormsSelect<T extends boolean = true> {
                                 placeholder?: T;
                                 label?: T;
                                 required?: T;
+                                isAddressVisible?: T;
                               };
                           location?:
                             | T
@@ -2463,6 +2494,7 @@ export interface FormsSelect<T extends boolean = true> {
                                 placeholder?: T;
                                 label?: T;
                                 required?: T;
+                                isAddressVisible?: T;
                               };
                           address?:
                             | T
@@ -2471,6 +2503,7 @@ export interface FormsSelect<T extends boolean = true> {
                                 placeholder?: T;
                                 label?: T;
                                 required?: T;
+                                isAddressVisible?: T;
                               };
                           addressName?:
                             | T
@@ -2479,6 +2512,7 @@ export interface FormsSelect<T extends boolean = true> {
                                 placeholder?: T;
                                 label?: T;
                                 required?: T;
+                                isAddressVisible?: T;
                               };
                           addressFloor?:
                             | T
@@ -2487,6 +2521,7 @@ export interface FormsSelect<T extends boolean = true> {
                                 placeholder?: T;
                                 label?: T;
                                 required?: T;
+                                isAddressVisible?: T;
                               };
                           addressDoor?:
                             | T
@@ -2495,6 +2530,7 @@ export interface FormsSelect<T extends boolean = true> {
                                 placeholder?: T;
                                 label?: T;
                                 required?: T;
+                                isAddressVisible?: T;
                               };
                           addressNumber?:
                             | T
@@ -2503,6 +2539,7 @@ export interface FormsSelect<T extends boolean = true> {
                                 placeholder?: T;
                                 label?: T;
                                 required?: T;
+                                isAddressVisible?: T;
                               };
                           id?: T;
                           blockName?: T;
@@ -2884,6 +2921,12 @@ export interface FormsSelect<T extends boolean = true> {
                     value?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        placedate?:
+          | T
+          | {
               id?: T;
               blockName?: T;
             };
