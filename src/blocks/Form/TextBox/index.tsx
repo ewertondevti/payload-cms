@@ -5,7 +5,7 @@ import React from 'react'
 import { InputText } from '@ama-pt/agora-design-system'
 import { Width } from '../Width'
 
-export type TextProps = UseFormReturn & {
+export type TextBoxProps = UseFormReturn & {
   name: string
   label: string
   placeholder: string
@@ -18,7 +18,7 @@ export type TextProps = UseFormReturn & {
   maxLength?: number
 }
 
-export const Text: React.FC<TextProps> = ({
+export const TextBox: React.FC<TextBoxProps> = ({
   width,
   register,
   required,
@@ -41,12 +41,9 @@ export const Text: React.FC<TextProps> = ({
 
       <InputText
         {...props}
-        {...register(props.name!, {
-          required,
-          minLength,
-          maxLength,
-          pattern,
-        })}
+        {...register(props.name!, { required, minLength, maxLength, pattern })}
+        pattern={pattern?.toString()}
+        {...{ minLength, maxLength }}
         feedbackState="danger"
         feedbackText={errorMessage || `Obrigatório preencher "${props.label}"`}
         hasError={!!errors[props.name!]}

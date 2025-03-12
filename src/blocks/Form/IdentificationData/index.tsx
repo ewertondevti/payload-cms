@@ -18,18 +18,6 @@ export type IdentificationDataProps = UseFormReturn &
 export const IdentificationData: FC<IdentificationDataProps> = (props) => {
   return (
     <div className="flex flex-col gap-[32px]">
-      <style>
-        {`
-          .agora-input-select-label {
-            margin-bottom: 8px !important;
-          }
-
-          .input-label-wrapper {
-            margin-bottom: 8px !important;
-          }
-        `}
-      </style>
-
       <Title label={props.title} htmlTag="h2" />
 
       {props.identificationType === 'applicant-data' && <ApplicantData {...props} />}

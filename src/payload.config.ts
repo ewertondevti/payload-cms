@@ -67,6 +67,7 @@ import { BirthConsultationBlock } from './blocks/Form/BirthConsultation/BirthCon
 import { ParentIdentificationBlock } from './blocks/Form/ParentIdentification/ParentIdentificationBlock'
 import { ParentAddressBlock } from './blocks/Form/ParentAddress/ParentAddressBlock'
 import { SecondParentBlock } from './blocks/Form/Cidadao/SecondParent/SecondParentBlock'
+import { TextBoxBlock } from './blocks/Form/TextBox/TextBoxBlock'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -89,30 +90,13 @@ export default buildConfig({
       beforeLogin: ['@/components/BeforeLogin'],
       afterDashboard: ['@/components/AfterDashboard'],
     },
-    importMap: {
-      baseDir: path.resolve(dirname),
-    },
+    importMap: { baseDir: path.resolve(dirname) },
     user: Users.slug,
     livePreview: {
       breakpoints: [
-        {
-          label: 'Mobile',
-          name: 'mobile',
-          width: 375,
-          height: 667,
-        },
-        {
-          label: 'Tablet',
-          name: 'tablet',
-          width: 768,
-          height: 1024,
-        },
-        {
-          label: 'Desktop',
-          name: 'desktop',
-          width: 1440,
-          height: 900,
-        },
+        { label: 'Mobile', name: 'mobile', width: 375, height: 667 },
+        { label: 'Tablet', name: 'tablet', width: 768, height: 1024 },
+        { label: 'Desktop', name: 'desktop', width: 1440, height: 900 },
       ],
     },
   },
@@ -136,9 +120,7 @@ export default buildConfig({
               {
                 name: 'url',
                 type: 'text',
-                admin: {
-                  condition: ({ linkType }) => linkType !== 'internal',
-                },
+                admin: { condition: ({ linkType }) => linkType !== 'internal' },
                 label: ({ t }) => t('fields:enterURL'),
                 required: true,
               },
@@ -148,27 +130,15 @@ export default buildConfig({
       ]
     },
   }),
-  db: postgresAdapter({
-    pool: {
-      connectionString: process.env.DATABASE_URI || '',
-    },
-  }),
+  db: postgresAdapter({ pool: { connectionString: process.env.DATABASE_URI || '' } }),
   collections: [Areas, Categories, LifeCycles, Media, Pages, Posts, Services, Users],
   cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   endpoints: [
     // The seed endpoint is used to populate the database with some example data
     // You should delete this endpoint before deploying your site to production
-    {
-      handler: seedHandler,
-      method: 'get',
-      path: '/seed',
-    },
-    {
-      path: '/my-route',
-      method: 'get',
-      handler: myRouteHandler,
-    },
+    { handler: seedHandler, method: 'get', path: '/seed' },
+    { path: '/my-route', method: 'get', handler: myRouteHandler },
   ],
   globals: [Header, Footer],
   plugins: [
@@ -189,18 +159,11 @@ export default buildConfig({
             return field
           })
         },
-        hooks: {
-          afterChange: [revalidateRedirects],
-        },
+        hooks: { afterChange: [revalidateRedirects] },
       },
     }),
-    nestedDocsPlugin({
-      collections: ['categories'],
-    }),
-    seoPlugin({
-      generateTitle,
-      generateURL,
-    }),
+    nestedDocsPlugin({ collections: ['categories'] }),
+    seoPlugin({ generateTitle, generateURL }),
     formBuilderPlugin({
       fields: {
         //payment: false,
@@ -226,6 +189,7 @@ export default buildConfig({
         PreLoadExample1Block,
         BirthdateBlock: DateOrYearPickerBlock,
         TextAreaBlock,
+        TextBoxBlock,
         GroupBlock,
         TitleBlock,
         SelectWithApiBlock,
@@ -274,7 +238,5 @@ export default buildConfig({
   localization,
   secret: process.env.PAYLOAD_SECRET!,
   sharp,
-  typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
-  },
+  typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
 })

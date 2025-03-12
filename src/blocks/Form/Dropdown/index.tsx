@@ -6,26 +6,26 @@ import { Width } from '../Width'
 import { InputSelect } from '@/components/ui/inputSelect'
 
 export interface DropdownProps {
-    name: string;
-    label?: string;
-    ariaLabel?: string;
-    options?: { label:string, value:string }[];
-    inputPlaceholder?: string;
-    required: boolean;
-} 
+  name: string
+  label?: string
+  ariaLabel?: string
+  options?: { label: string; value: string }[]
+  inputPlaceholder?: string
+  required: boolean
+}
 
 export const Dropdown: React.FC<
-    DropdownProps & {
-        register: UseFormRegister<FieldValues>
-    }
+  DropdownProps & {
+    register: UseFormRegister<FieldValues>
+  }
 > = ({
-    name = 'Selecione a opção',
-    label = 'Selecionar',
-    ariaLabel = "Lista de opções",
-    options,
-    inputPlaceholder,
-    required = false,
-    register
+  name = 'Selecione a opção',
+  label = 'Selecionar',
+  ariaLabel = 'Lista de opções',
+  options,
+  inputPlaceholder,
+  required = false,
+  register,
 }) => {
   const { setValue } = useFormContext()
   const [selectedOption, setSelectedOption] = useState<string>('Opção 1')
@@ -41,21 +41,21 @@ export const Dropdown: React.FC<
 
   return (
     <InputSelect
-    id={name}
-    value={selectedOption}
-    defaultValue="Opção 1"
-    type="text"
-    label={label}
-    options={options || undefined}
-    placeholder="Selecione uma opção"
-    visibleCount={5}
-    searchable
-    hideSectionNames
-    searchInputPlaceholder={inputPlaceholder}
-    dropdownAriaLabel={ariaLabel}
-    searchNoResultsText="Não foram encontrados resultados."
-    onChange={onChangeOption}
-    required={required}
+      id={name}
+      value={selectedOption}
+      defaultValue="Opção 1"
+      type="text"
+      label={label}
+      options={options || []}
+      placeholder="Selecione uma opção"
+      visibleCount={5}
+      searchable
+      hideSectionNames
+      searchInputPlaceholder={inputPlaceholder}
+      dropdownAriaLabel={ariaLabel}
+      searchNoResultsText="Não foram encontrados resultados."
+      onChange={onChangeOption}
+      required={required}
     />
   )
 }

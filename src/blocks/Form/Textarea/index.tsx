@@ -5,16 +5,12 @@ import type { FieldErrorsImpl, UseFormReturn } from 'react-hook-form'
 
 import { Width } from '../Width'
 
+type TextAreaProps = { validation: { minLength?: number; maxLength?: number; pattern?: RegExp } }
+
 export const Textarea: React.FC<
   TextField &
-    UseFormReturn & {
-      errors: Partial<
-        FieldErrorsImpl<{
-          [x: string]: any
-        }>
-      >
-      rows?: number
-    }
+    TextAreaProps &
+    UseFormReturn & { errors: Partial<FieldErrorsImpl<{ [x: string]: any }>>; rows?: number }
 > = ({
   name,
   defaultValue,
@@ -24,6 +20,7 @@ export const Textarea: React.FC<
   required: requiredFromProps,
   rows = 3,
   width,
+  validation: { minLength, maxLength, pattern },
   ...props
 }) => {
   return (
@@ -49,6 +46,9 @@ export const Textarea: React.FC<
         hasError={errors[name] ? true : false}
         {...register(name, {
           required: requiredFromProps ? 'Campo de preenchimento obrigatório.' : false,
+          minLength,
+          maxLength,
+          pattern,
         })}
       />
     </Width>

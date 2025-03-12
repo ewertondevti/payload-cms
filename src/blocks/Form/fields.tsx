@@ -24,7 +24,7 @@ import { RequestorData } from './RequestorData'
 import { Select } from './Select'
 import { SelectWithApi } from './SelectWithAPI'
 import { State } from './State'
-import { Text } from './Text'
+import { TextBox } from './TextBox'
 import { Textarea } from './Textarea'
 import { Title } from './Title'
 import { FlexRadioButtonGroup } from './Cidadao/FlexRadioButtonGroup'
@@ -43,7 +43,7 @@ export const fields = {
   number: Number,
   select: Select,
   state: State,
-  text: Text,
+  textBox: TextBox,
   textarea: Textarea,
   nif: Nif,
   selectWithApi: SelectWithApi,
@@ -52,7 +52,7 @@ export const fields = {
   contactData: ContactData,
   idData: IdData,
   requestorData: RequestorData,
-  customtext: Text,
+  customtext: TextBox,
   address: Address,
   nationality: Nationality,
   phoneNumber: PhoneNumber,
