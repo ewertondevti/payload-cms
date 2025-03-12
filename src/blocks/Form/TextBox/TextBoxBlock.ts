@@ -33,8 +33,8 @@ const placeholder: Field = {
   localized: true,
 }
 
-export const TextAreaBlock: Block = {
-  slug: 'customtextarea',
+export const TextBoxBlock: Block = {
+  slug: 'textbox',
   fields: [
     {
       type: 'row',
@@ -74,19 +74,13 @@ export const TextAreaBlock: Block = {
         {
           type: 'row',
           fields: [
-            {
-              name: 'minLength',
-              type: 'number',
-              label: 'Minimum Length',
-              defaultValue: 0,
-              admin: { width: '50%' },
-            },
-            { name: 'maxLength', type: 'number', label: 'Maximum Length', admin: { width: '50%' } },
+            { name: 'minLength', type: 'number', label: 'Minimum Length', defaultValue: 0 },
+            { name: 'maxLength', type: 'number', label: 'Maximum Length' },
           ],
         },
         { name: 'pattern', type: 'text', label: 'Pattern (Regex)' },
       ],
     },
   ],
-  labels: { plural: 'Text Areas', singular: 'Text Area' },
+  labels: { plural: 'Text Boxes', singular: 'Text Box' },
 }

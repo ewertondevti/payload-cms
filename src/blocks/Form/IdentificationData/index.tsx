@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form'
 import { Nif, NifProps } from '../Nif'
 import { Select, SelectProps } from '../Select'
-import { Text, TextProps } from '../Text'
+import { TextBox, TextBoxProps } from '../TextBox'
 import { Title } from '../Title'
 
 export type IdentificationDataProps = UseFormReturn & {
@@ -28,7 +28,7 @@ export const IdentificationData: FC<IdentificationDataProps> = (props) => {
     defaultValue: 'cartao-cidadao',
   }
 
-  const fullnameProps: TextProps = {
+  const fullnameProps: TextBoxProps = {
     ...props,
     name: 'fullname',
     label: 'Nome completo',
@@ -39,7 +39,7 @@ export const IdentificationData: FC<IdentificationDataProps> = (props) => {
     required: true,
   }
 
-  const docNumberProps: TextProps = {
+  const docNumberProps: TextBoxProps = {
     ...props,
     name: 'document-number',
     label: 'Número do documento',
@@ -50,7 +50,7 @@ export const IdentificationData: FC<IdentificationDataProps> = (props) => {
     required: true,
   }
 
-  const digVerificationProps: TextProps = {
+  const digVerificationProps: TextBoxProps = {
     ...props,
     name: 'digit-verification',
     label: 'Dígito de verificação',
@@ -85,10 +85,10 @@ export const IdentificationData: FC<IdentificationDataProps> = (props) => {
       <Title label="Dados de identificação" htmlTag="h2" />
 
       <div className="flex flex-wrap gap-[32px]">
-        <Text {...fullnameProps} />
+        <TextBox {...fullnameProps} />
         <Select {...docTypeProps} />
-        <Text {...docNumberProps} />
-        {!props.nifIsVisible && <Text {...digVerificationProps} />}
+        <TextBox {...docNumberProps} />
+        {!props.nifIsVisible && <TextBox {...digVerificationProps} />}
         {props.nifIsVisible && <Nif {...nifProps} />}
       </div>
     </div>

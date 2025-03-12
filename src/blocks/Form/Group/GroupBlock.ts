@@ -22,13 +22,9 @@ import { TextAreaBlock } from '../Textarea/TextAreaBlock'
 import { TitleBlock } from '../Title/TitleBlock'
 import { FlexRadioButtonGroupBlock } from '../Cidadao/FlexRadioButtonGroup/FlexRadioButtonGroupBlock'
 import { SecondParentBlock } from '../Cidadao/SecondParent/SecondParentBlock'
+import { TextBoxBlock } from '../TextBox/TextBoxBlock'
 
-const title: Field = {
-  name: 'title',
-  type: 'text',
-  label: 'Title',
-  required: true,
-}
+const title: Field = { name: 'title', type: 'text', label: 'Title', required: true }
 
 const arrayFields: Field = {
   name: 'fields',
@@ -51,6 +47,7 @@ const arrayFields: Field = {
     PreLoadExample1Block,
     DateOrYearPickerBlock,
     TextAreaBlock,
+    TextBoxBlock,
     TitleBlock,
     SelectWithApiBlock,
     IdentificationDataBlock,
@@ -58,13 +55,7 @@ const arrayFields: Field = {
     FlexRadioButtonGroupBlock,
     SecondParentBlock,
   ],
-  labels: {
-    singular: 'Field',
-    plural: 'Fields',
-  },
+  labels: { singular: 'Field', plural: 'Fields' },
 }
 
-export const GroupBlock: Block = {
-  slug: 'group',
-  fields: [title, arrayFields],
-}
+export const GroupBlock: Block = { slug: 'group', fields: [title, arrayFields] }

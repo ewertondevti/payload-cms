@@ -7,7 +7,6 @@ export type NifProps = UseFormReturn & {
   name: string
   required?: boolean
   width?: number
-  //   disabled: boolean
 }
 
 import React from 'react'

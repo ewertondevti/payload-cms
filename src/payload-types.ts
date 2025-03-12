@@ -6,6 +6,60 @@
  * and re-run `payload generate:types` to regenerate this file.
  */
 
+/**
+ * Supported timezones in IANA format.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "supportedTimezones".
+ */
+export type SupportedTimezones =
+  | 'Pacific/Midway'
+  | 'Pacific/Niue'
+  | 'Pacific/Honolulu'
+  | 'Pacific/Rarotonga'
+  | 'America/Anchorage'
+  | 'Pacific/Gambier'
+  | 'America/Los_Angeles'
+  | 'America/Tijuana'
+  | 'America/Denver'
+  | 'America/Phoenix'
+  | 'America/Chicago'
+  | 'America/Guatemala'
+  | 'America/New_York'
+  | 'America/Bogota'
+  | 'America/Caracas'
+  | 'America/Santiago'
+  | 'America/Buenos_Aires'
+  | 'America/Sao_Paulo'
+  | 'Atlantic/South_Georgia'
+  | 'Atlantic/Azores'
+  | 'Atlantic/Cape_Verde'
+  | 'Europe/London'
+  | 'Europe/Berlin'
+  | 'Africa/Lagos'
+  | 'Europe/Athens'
+  | 'Africa/Cairo'
+  | 'Europe/Moscow'
+  | 'Asia/Riyadh'
+  | 'Asia/Dubai'
+  | 'Asia/Baku'
+  | 'Asia/Karachi'
+  | 'Asia/Tashkent'
+  | 'Asia/Calcutta'
+  | 'Asia/Dhaka'
+  | 'Asia/Almaty'
+  | 'Asia/Jakarta'
+  | 'Asia/Bangkok'
+  | 'Asia/Shanghai'
+  | 'Asia/Singapore'
+  | 'Asia/Tokyo'
+  | 'Asia/Seoul'
+  | 'Australia/Sydney'
+  | 'Pacific/Guam'
+  | 'Pacific/Noumea'
+  | 'Pacific/Auckland'
+  | 'Pacific/Fiji';
+
 export interface Config {
   auth: {
     users: UserAuthOperations;
@@ -714,7 +768,7 @@ export interface Form {
             required?: boolean | null;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'birthdate';
+            blockType: 'dateoryearpicker';
           }
         | {
             name: string;
@@ -726,9 +780,33 @@ export interface Form {
             disabled?: boolean | null;
             readOnly?: boolean | null;
             hideLabel?: boolean | null;
+            validation?: {
+              minLength?: number | null;
+              maxLength?: number | null;
+              pattern?: string | null;
+            };
             id?: string | null;
             blockName?: string | null;
             blockType: 'customtextarea';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            defaultValue?: string | null;
+            placeholder?: string | null;
+            width?: number | null;
+            required?: boolean | null;
+            disabled?: boolean | null;
+            readOnly?: boolean | null;
+            hideLabel?: boolean | null;
+            validation?: {
+              minLength?: number | null;
+              maxLength?: number | null;
+              pattern?: string | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'textbox';
           }
         | {
             title: string;
@@ -901,7 +979,7 @@ export interface Form {
                       required?: boolean | null;
                       id?: string | null;
                       blockName?: string | null;
-                      blockType: 'birthdate';
+                      blockType: 'dateoryearpicker';
                     }
                   | {
                       name: string;
@@ -913,9 +991,33 @@ export interface Form {
                       disabled?: boolean | null;
                       readOnly?: boolean | null;
                       hideLabel?: boolean | null;
+                      validation?: {
+                        minLength?: number | null;
+                        maxLength?: number | null;
+                        pattern?: string | null;
+                      };
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'customtextarea';
+                    }
+                  | {
+                      name: string;
+                      label?: string | null;
+                      defaultValue?: string | null;
+                      placeholder?: string | null;
+                      width?: number | null;
+                      required?: boolean | null;
+                      disabled?: boolean | null;
+                      readOnly?: boolean | null;
+                      hideLabel?: boolean | null;
+                      validation?: {
+                        minLength?: number | null;
+                        maxLength?: number | null;
+                        pattern?: string | null;
+                      };
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'textbox';
                     }
                   | {
                       label: string;
@@ -2302,7 +2404,7 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        birthdate?:
+        dateoryearpicker?:
           | T
           | {
               radioLabel?: T;
@@ -2324,6 +2426,35 @@ export interface FormsSelect<T extends boolean = true> {
               disabled?: T;
               readOnly?: T;
               hideLabel?: T;
+              validation?:
+                | T
+                | {
+                    minLength?: T;
+                    maxLength?: T;
+                    pattern?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        textbox?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              defaultValue?: T;
+              placeholder?: T;
+              width?: T;
+              required?: T;
+              disabled?: T;
+              readOnly?: T;
+              hideLabel?: T;
+              validation?:
+                | T
+                | {
+                    minLength?: T;
+                    maxLength?: T;
+                    pattern?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -2495,7 +2626,7 @@ export interface FormsSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
-                    birthdate?:
+                    dateoryearpicker?:
                       | T
                       | {
                           radioLabel?: T;
@@ -2517,6 +2648,35 @@ export interface FormsSelect<T extends boolean = true> {
                           disabled?: T;
                           readOnly?: T;
                           hideLabel?: T;
+                          validation?:
+                            | T
+                            | {
+                                minLength?: T;
+                                maxLength?: T;
+                                pattern?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                    textbox?:
+                      | T
+                      | {
+                          name?: T;
+                          label?: T;
+                          defaultValue?: T;
+                          placeholder?: T;
+                          width?: T;
+                          required?: T;
+                          disabled?: T;
+                          readOnly?: T;
+                          hideLabel?: T;
+                          validation?:
+                            | T
+                            | {
+                                minLength?: T;
+                                maxLength?: T;
+                                pattern?: T;
+                              };
                           id?: T;
                           blockName?: T;
                         };
