@@ -20,8 +20,6 @@ type Props = {
   isLoading: boolean
 }
 
-const MOCK_CODE = '1001-5548-0239'
-
 export const ConsultPreview: FC<Props> = ({
   titlepage,
   subtitlepage,

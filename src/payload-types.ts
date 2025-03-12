@@ -714,7 +714,7 @@ export interface Form {
             required?: boolean | null;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'birthdate';
+            blockType: 'dateoryearpicker';
           }
         | {
             name: string;
@@ -901,7 +901,7 @@ export interface Form {
                       required?: boolean | null;
                       id?: string | null;
                       blockName?: string | null;
-                      blockType: 'birthdate';
+                      blockType: 'dateoryearpicker';
                     }
                   | {
                       name: string;
@@ -938,8 +938,11 @@ export interface Form {
                     }
                   | {
                       title?: string | null;
+                      identificationType?: ('applicant-data' | 'parent-data' | 'baby-data') | null;
                       nifIsVisible?: boolean | null;
                       nifIsRequired?: boolean | null;
+                      isVerificationDigitVisible?: boolean | null;
+                      isVerificationDigitRequired?: boolean | null;
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'identificationData';
@@ -1052,8 +1055,11 @@ export interface Form {
           }
         | {
             title?: string | null;
+            identificationType?: ('applicant-data' | 'parent-data' | 'baby-data') | null;
             nifIsVisible?: boolean | null;
             nifIsRequired?: boolean | null;
+            isVerificationDigitVisible?: boolean | null;
+            isVerificationDigitRequired?: boolean | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'identificationData';
@@ -2302,7 +2308,7 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        birthdate?:
+        dateoryearpicker?:
           | T
           | {
               radioLabel?: T;
@@ -2495,7 +2501,7 @@ export interface FormsSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
-                    birthdate?:
+                    dateoryearpicker?:
                       | T
                       | {
                           radioLabel?: T;
@@ -2545,8 +2551,11 @@ export interface FormsSelect<T extends boolean = true> {
                       | T
                       | {
                           title?: T;
+                          identificationType?: T;
                           nifIsVisible?: T;
                           nifIsRequired?: T;
+                          isVerificationDigitVisible?: T;
+                          isVerificationDigitRequired?: T;
                           id?: T;
                           blockName?: T;
                         };
@@ -2687,8 +2696,11 @@ export interface FormsSelect<T extends boolean = true> {
           | T
           | {
               title?: T;
+              identificationType?: T;
               nifIsVisible?: T;
               nifIsRequired?: T;
+              isVerificationDigitVisible?: T;
+              isVerificationDigitRequired?: T;
               id?: T;
               blockName?: T;
             };
