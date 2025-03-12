@@ -30,9 +30,9 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { BirthConsultationForm } from '@/blocks/BirthConsultationForm'
 import { ConsultPreview } from '@/blocks/ConsultPreviewServiceStep'
 import { FormBlock } from '@/blocks/Form/Component'
-import { GetCertidaoResponse } from '@/models/certidao'
+import { GetCertidaoResponse } from '@/models/certificate'
 import { Service } from '@/payload-types'
-import { GetCertidao } from '@/services/certidaoServices'
+import { getCertidao } from '@/services/certificateServices'
 
 type BlockTypeProps = {
   content: string
@@ -295,7 +295,7 @@ export default function ServiceStep({ params }: Args) {
       if (Object.keys(data).length) {
         const code = `${data.accessCode1}-${data.accessCode2}-${data.accessCode3}`
 
-        const res = await GetCertidao(code)
+        const res = await getCertidao(code)
 
         setIsConsultingFetching(false)
         setCertidaoResponse(res)

@@ -1,7 +1,7 @@
 'use client'
 
 import { PdfViewer } from '@/components/PdfViewer'
-import { GetCertidaoResponse } from '@/models/certidao'
+import { GetCertidaoResponse } from '@/models/certificate'
 import { FC, useEffect, useState } from 'react'
 import { pdfjs } from 'react-pdf'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
@@ -33,7 +33,7 @@ export const ConsultPreview: FC<Props> = ({
   useEffect(() => {
     if (certidaoResponse) {
       setBase64file(
-        `data:${certidaoResponse.attachment.mimetype};base64,${certidaoResponse.attachment.bytes}`,
+        `data:${certidaoResponse.data.attachment.mimetype};base64,${certidaoResponse.data.attachment.bytes}`,
       )
     }
   }, [certidaoResponse])
