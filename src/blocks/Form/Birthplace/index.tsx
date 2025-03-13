@@ -77,18 +77,6 @@ export const Birthplace: React.FC<BirthplaceProps> = ({
 
   return (
     <Width width={100}>
-      <style>
-        {`
-          .agora-input-select-label {
-            margin-bottom: 8px !important;
-          }
-
-          .input-label-wrapper {
-            margin-bottom: 8px !important;
-          }
-        `}
-      </style>
-
       <div className="flex flex-wrap gap-[32px]">
         <SelectWithApi
           {...countryProps}

@@ -28,11 +28,11 @@ import { FormProvider, useForm } from 'react-hook-form'
 // import { useSearchParams } from 'next/navigation'
 
 import { BirthConsultationForm } from '@/blocks/BirthConsultationForm'
-import { ConsultPreview } from '@/blocks/ConsultPreviewServiceStep'
+import { CertificateConsultation } from '@/blocks/CertificateConsultation'
 import { FormBlock } from '@/blocks/Form/Component'
-import { GetCertidaoResponse } from '@/models/certidao'
+import { GetCertidaoResponse } from '@/models/certificate'
 import { Service } from '@/payload-types'
-import { GetCertidao } from '@/services/certidaoServices'
+import { getCertidao } from '@/services/certificateServices'
 
 type BlockTypeProps = {
   content: string
@@ -41,7 +41,7 @@ type BlockTypeProps = {
   submission: string
   summary: string
   exemplo: string
-  consultpreview: string
+  certificateconsultation: string
   birthbonsultationForm: string
 }
 
@@ -52,7 +52,7 @@ const BlockType: BlockTypeProps = {
   submission: 'submission-service-steps',
   summary: 'summary-service-steps',
   exemplo: 'exemplo1ServiceSteps',
-  consultpreview: 'consult-preview',
+  certificateconsultation: 'certificate-consultation',
   birthbonsultationForm: 'birthbonsultationForm',
 }
 
@@ -295,7 +295,7 @@ export default function ServiceStep({ params }: Args) {
       if (Object.keys(data).length) {
         const code = `${data.accessCode1}-${data.accessCode2}-${data.accessCode3}`
 
-        const res = await GetCertidao(code)
+        const res = await getCertidao(code)
 
         setIsConsultingFetching(false)
         setCertidaoResponse(res)
@@ -347,9 +347,9 @@ export default function ServiceStep({ params }: Args) {
             orderId={serviceOrder?.id}
           />
         )
-      case BlockType.consultpreview:
+      case BlockType.certificateconsultation:
         return (
-          <ConsultPreview
+          <CertificateConsultation
             {...steps.steps[stepIndex]}
             certidaoResponse={certidaoResponse}
             isLoading={isConsultingFetching}

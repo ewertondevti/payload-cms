@@ -1,9 +1,8 @@
-import React from 'react'
+import { DatePicker } from '@/components/DatePicker'
 import { InputNumber } from '@ama-pt/agora-design-system'
 import { FC } from 'react'
 import { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form'
 import { FlexRadioButtonGroup, FlexRadioButtonGroupProps } from '../Cidadao/FlexRadioButtonGroup'
-import { DatePicker } from '@/components/DatePicker'
 
 type Props = FlexRadioButtonGroupProps &
   UseFormReturn & {
@@ -40,14 +39,6 @@ export const DateOrYearPicker: FC<Props> = ({ watch, register, required, ...prop
 
   return (
     <div className="w-full">
-      <style>
-        {`
-          .agora-input-select-label {
-            margin-bottom: 8px !important;
-          }
-        `}
-      </style>
-
       <div className="flex gap-[32px]">
         <FlexRadioButtonGroup
           {...props}

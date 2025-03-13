@@ -25,13 +25,7 @@ export const Textarea: React.FC<
 }) => {
   return (
     <Width width={width}>
-      <style>
-        {`
-          .agora-input-select-label {
-            margin-bottom: 8px !important;
-          }
-        `}
-      </style>
+      
 
       <InputTextArea
         {...props}

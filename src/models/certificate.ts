@@ -1,4 +1,11 @@
 export interface GetCertidaoResponse {
+  data: ResponseData
+  success: boolean
+  errorMessage: string
+  statusCode: number
+}
+
+export interface ResponseData {
   attachment: Attachment
   status: Status
 }

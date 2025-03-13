@@ -26,14 +26,6 @@ export const Nif: React.FC<NifProps> = ({
 }) => {
   return (
     <Width width={width}>
-      <style>
-        {`
-          .input-label-wrapper {
-            margin-bottom: 8px !important;
-          }
-        `}
-      </style>
-
       {/* <Label htmlFor={name}>{label}</Label> */}
       <InputText
         placeholder={placeholder}
