@@ -4,7 +4,7 @@ import * as React from 'react'
 export const Width: React.FC<{
   children: React.ReactNode
   className?: string
-  width?: number
+  width?: number | string
 }> = ({ children, className, width }) => {
   const containerClass = classNames(className)
 

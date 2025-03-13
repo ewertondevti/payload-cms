@@ -1,5 +1,6 @@
+import { Width } from '@/blocks/Form/Width'
+import { cn } from '@/utilities/cn'
 import { InputDate, InputDateProps } from '@ama-pt/agora-design-system'
-import classNames from 'classnames'
 import { FC } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
@@ -8,9 +9,7 @@ export const DatePicker: FC<Partial<InputDateProps> & UseFormRegisterReturn<stri
   darkMode,
   ...rest
 }) => {
-  const xlSpanCol = width ? (width === 100 ? 12 : 6) : 12
-
-  const containerClassNames = classNames(`xs:col-span-4 md:col-span-6 xl:col-span-${xlSpanCol}`, {
+  const containerClassNames = cn({
     'bg-primary-900 text-white': darkMode,
   })
 
@@ -40,8 +39,10 @@ export const DatePicker: FC<Partial<InputDateProps> & UseFormRegisterReturn<stri
   }
 
   return (
-    <div className={containerClassNames}>
-      <InputDate {...compProps} />
-    </div>
+    <Width width={width}>
+      <div className={containerClassNames}>
+        <InputDate {...compProps} />
+      </div>
+    </Width>
   )
 }
