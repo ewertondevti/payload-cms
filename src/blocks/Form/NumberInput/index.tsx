@@ -5,7 +5,7 @@ import { InputNumber } from '@ama-pt/agora-design-system'
 import React from 'react'
 
 import { Width } from '../Width'
-export const Number: React.FC<
+export const NumberInput: React.FC<
   TextField & {
     errors: Partial<
       FieldErrorsImpl<{
