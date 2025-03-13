@@ -7,7 +7,6 @@ import { ContactBlock } from '../ContactData/ContactDataBlock'
 import { CustomTextfieldBlock } from '../CostumTextfield/CustomTextfieldBlock'
 import { CustomMessageBlock } from '../CustomMessage/CustomMessageBlock'
 import { CustomNumberBlock } from '../CustomNumber/CustomNumberBlock'
-import { DropdownBlock } from '../Dropdown/DropdownBlock'
 import { HeaderBlock } from '../Header/HeaderBlock'
 import { IdBlock } from '../IdData/IdDataBlock'
 import { IdentificationDataBlock } from '../IdentificationData/IdentificationDataBlock'
@@ -23,6 +22,10 @@ import { TitleBlock } from '../Title/TitleBlock'
 import { FlexRadioButtonGroupBlock } from '../Cidadao/FlexRadioButtonGroup/FlexRadioButtonGroupBlock'
 import { SecondParentBlock } from '../Cidadao/SecondParent/SecondParentBlock'
 import { TextBoxBlock } from '../TextBox/TextBoxBlock'
+import { PriorWeddingChildrenDataBlock } from '../Cidadao/PriorWeddingChildrenData/PriorWeddingChildrenDataBlock'
+import { TwinBirthDataBlock } from '../Cidadao/TwinBirthData/TwinBirthDataBlock'
+import { SelectBlock } from '../Select/SelectBlock'
+import { DropdownBlock } from '../Dropdown/DropdownBlock'
 
 const title: Field = { name: 'title', type: 'text', label: 'Title', required: true }
 
@@ -32,6 +35,7 @@ const arrayFields: Field = {
   blocks: [
     CustomMessageBlock,
     CustomNumberBlock,
+    DropdownBlock,
     NifBlock,
     RadioButtonBlock,
     CustomTextfieldBlock,
@@ -41,7 +45,7 @@ const arrayFields: Field = {
     IdBlock,
     RequestorBlock,
     HeaderBlock,
-    DropdownBlock,
+    SelectBlock,
     NationalityBlock,
     PhoneNumberBlock,
     PreLoadExample1Block,
@@ -49,10 +53,13 @@ const arrayFields: Field = {
     TextAreaBlock,
     TextBoxBlock,
     TitleBlock,
+    SelectBlock,
     SelectWithApiBlock,
     IdentificationDataBlock,
     BirthplaceBlock,
     FlexRadioButtonGroupBlock,
+    PriorWeddingChildrenDataBlock,
+    TwinBirthDataBlock,
     SecondParentBlock,
   ],
   labels: { singular: 'Field', plural: 'Fields' },

@@ -66,6 +66,30 @@ export const SelectBlock: Block = {
         { ...hideLabel, admin: { width: 'calc(100% / 4)' } },
       ],
     },
+    {
+      name: 'options',
+      type: 'array',
+      label: 'Options',
+      labels: {
+        singular: 'option',
+        plural: 'options',
+      },
+      fields: [
+        {
+          name: 'label',
+          type: 'text',
+          label: 'Text',
+          required: true,
+          localized: true,
+        },
+        {
+          name: 'value',
+          type: 'text',
+          label: 'Value',
+          required: true,
+        },
+      ],
+    },
   ],
   labels: { plural: 'Selects', singular: 'Select' },
 }

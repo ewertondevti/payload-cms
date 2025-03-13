@@ -738,6 +738,27 @@ export interface Form {
         | {
             name: string;
             label?: string | null;
+            defaultValue?: string | null;
+            placeholder?: string | null;
+            width?: number | null;
+            required?: boolean | null;
+            disabled?: boolean | null;
+            readOnly?: boolean | null;
+            hideLabel?: boolean | null;
+            options?:
+              | {
+                  label: string;
+                  value: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'select';
+          }
+        | {
+            name: string;
+            label?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'nationality';
@@ -2410,6 +2431,28 @@ export interface FormsSelect<T extends boolean = true> {
           | {
               name?: T;
               label?: T;
+              options?:
+                | T
+                | {
+                    label?: T;
+                    value?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        select?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              defaultValue?: T;
+              placeholder?: T;
+              width?: T;
+              required?: T;
+              disabled?: T;
+              readOnly?: T;
+              hideLabel?: T;
               options?:
                 | T
                 | {

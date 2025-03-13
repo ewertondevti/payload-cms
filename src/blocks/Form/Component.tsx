@@ -184,7 +184,7 @@ export const FormBlock: React.FC<
         {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
 
         <form key="form" id={formID} onSubmit={handleSubmit(onSubmit)} noValidate>
-          <div className="flex flex-col gap-16">
+          <div className="flex flex-col gap-64 w-[800px]">
             {formFromProps.fields.map((field, index) => {
               const Field = fields?.[field.blockType] as React.FC<any> | undefined
               if (Field) {
