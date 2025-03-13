@@ -8,7 +8,7 @@ import {
 import { Width } from '@/blocks/Form/Width'
 import { useForm } from 'react-hook-form'
 
-export type InputSelectProps = {
+export type SelectProps = {
   id?: string
   name?: string
   value?: string
@@ -32,7 +32,7 @@ export type InputSelectProps = {
   width?: number | string
 }
 
-export const Select: React.FC<InputSelectProps> = ({
+export const Select: React.FC<SelectProps> = ({
   id,
   value,
   name,
