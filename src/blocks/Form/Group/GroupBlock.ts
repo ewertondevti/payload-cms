@@ -27,6 +27,13 @@ import { TwinBirthDataBlock } from '../Cidadao/TwinBirthData/TwinBirthDataBlock'
 import { SelectBlock } from '../Select/SelectBlock'
 import { DropdownBlock } from '../Dropdown/DropdownBlock'
 
+const name: Field = {
+  name: 'name',
+  type: 'text',
+  label: 'Name (lowercase, no special characters)',
+  required: true,
+  defaultValue: '',
+}
 const title: Field = { name: 'title', type: 'text', label: 'Title', required: true }
 
 const arrayFields: Field = {
@@ -65,4 +72,4 @@ const arrayFields: Field = {
   labels: { singular: 'Field', plural: 'Fields' },
 }
 
-export const GroupBlock: Block = { slug: 'group', fields: [title, arrayFields] }
+export const GroupBlock: Block = { slug: 'group', fields: [name, title, arrayFields] }

@@ -830,6 +830,7 @@ export interface Form {
             blockType: 'textbox';
           }
         | {
+            name: string;
             title: string;
             fields?:
               | (
@@ -2549,6 +2550,7 @@ export interface FormsSelect<T extends boolean = true> {
         group?:
           | T
           | {
+              name?: T;
               title?: T;
               fields?:
                 | T
