@@ -30,9 +30,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { BirthConsultationForm } from '@/blocks/BirthConsultationForm'
 import { CertificateConsultation } from '@/blocks/CertificateConsultation'
 import { FormBlock } from '@/blocks/Form/Component'
-import { GetCertidaoResponse } from '@/models/certificate'
 import { Service } from '@/payload-types'
-import { getCertidao } from '@/services/certificateServices'
 
 type BlockTypeProps = {
   content: string
@@ -81,8 +79,6 @@ export default function ServiceStep({ params }: Args) {
   const validateFields = useRef<(() => Promise<boolean>) | null>(null)
   const [service, setService] = useState<Service>()
   const { showCustomToast } = useToast()
-  const [certidaoResponse, setCertidaoResponse] = useState<GetCertidaoResponse>()
-  const [isConsultingFetching, setIsConsultingFetching] = useState(false)
   const [data, setData] = useState({
     mensagem: {
       codigo: 0,
@@ -249,8 +245,6 @@ export default function ServiceStep({ params }: Args) {
 
   const onSubmitStep = useCallback(
     async (data: Data) => {
-      setIsConsultingFetching(true)
-
       const dataToSend = Object.entries(data).map(([name, value]) => ({
         field: name,
         value,
@@ -291,15 +285,6 @@ export default function ServiceStep({ params }: Args) {
       }
 
       await handleGetServiceContent()
-
-      if (Object.keys(data).length) {
-        const code = `${data.accessCode1}-${data.accessCode2}-${data.accessCode3}`
-
-        const res = await getCertidao(code)
-
-        setIsConsultingFetching(false)
-        setCertidaoResponse(res)
-      }
 
       if (stepIndex !== steps.steps.length - 1) {
         changeToNextStep(stepIndex + 1)
@@ -348,13 +333,7 @@ export default function ServiceStep({ params }: Args) {
           />
         )
       case BlockType.certificateconsultation:
-        return (
-          <CertificateConsultation
-            {...steps.steps[stepIndex]}
-            certidaoResponse={certidaoResponse}
-            isLoading={isConsultingFetching}
-          />
-        )
+        return <CertificateConsultation {...steps.steps[stepIndex]} />
 
       case BlockType.birthbonsultationForm:
         return (

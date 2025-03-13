@@ -1,9 +1,10 @@
 'use client'
 
 import { PdfViewer } from '@/components/PdfViewer'
-import { GetCertidaoResponse } from '@/models/certificate'
-import { InputText } from '@ama-pt/agora-design-system'
-import { FC, useEffect, useState } from 'react'
+import { addBase64Prefix } from '@/helpers/app'
+import { obterCertidao } from '@/services/certificateServices'
+import { Button, InputText } from '@ama-pt/agora-design-system'
+import { FC, useState } from 'react'
 import { FieldValues, RegisterOptions, useForm } from 'react-hook-form'
 import { pdfjs } from 'react-pdf'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
@@ -15,33 +16,26 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   import.meta.url,
 ).toString()
 
+type FormValues = {
+  accessCode1: string
+  accessCode2: string
+  accessCode3: string
+}
+
 type Props = {
   titlepage: string
   subtitlepage: string
-  certidaoResponse?: GetCertidaoResponse
-  isLoading: boolean
 }
 
-export const CertificateConsultation: FC<Props> = ({
-  titlepage,
-  subtitlepage,
-  certidaoResponse,
-  isLoading,
-}) => {
+export const CertificateConsultation: FC<Props> = ({ titlepage, subtitlepage }) => {
   const [base64file, setBase64file] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const {
     register,
     formState: { errors },
+    handleSubmit,
   } = useForm()
-
-  useEffect(() => {
-    if (certidaoResponse) {
-      setBase64file(
-        `data:${certidaoResponse.data.attachment.mimetype};base64,${certidaoResponse.data.attachment.bytes}`,
-      )
-    }
-  }, [certidaoResponse])
 
   const getErrorMessage = (fieldname: string) => {
     switch (errors[fieldname]?.type) {
@@ -57,6 +51,19 @@ export const CertificateConsultation: FC<Props> = ({
       default:
         return ''
     }
+  }
+
+  const onSubmit = async ({ accessCode1, accessCode2, accessCode3 }: FormValues) => {
+    setIsLoading(true)
+
+    const code = `${accessCode1}-${accessCode2}-${accessCode3}`
+    const res = await obterCertidao(code)
+
+    if (res.success) {
+      setBase64file(addBase64Prefix(res.data.attachment.bytes, res.data.attachment.mimetype))
+    }
+
+    setIsLoading(false)
   }
 
   const registerOptions: RegisterOptions<FieldValues> = {
@@ -75,10 +82,10 @@ export const CertificateConsultation: FC<Props> = ({
 
       <Title label="Código de acesso" htmlTag="h2" />
 
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-2">
           <h2 className="text-base font-semibold text-[#021C51]">Insira o código de acesso</h2>
-          <div className="grid grid-cols-3 gap-6">
+          <div className="flex gap-6">
             <InputText
               placeholder="0000"
               {...register('accessCode1', registerOptions)}
@@ -102,6 +109,8 @@ export const CertificateConsultation: FC<Props> = ({
               feedbackText={getErrorMessage('accessCode3')}
               hasError={!!errors['accessCode3']}
             />
+
+            <Button>Consultar</Button>
           </div>
         </div>
       </form>
