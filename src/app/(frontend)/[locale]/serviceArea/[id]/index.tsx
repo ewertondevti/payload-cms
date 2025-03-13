@@ -33,6 +33,7 @@ import { FormBlock } from '@/blocks/Form/Component'
 import { GetCertidaoResponse } from '@/models/certidao'
 import { Service } from '@/payload-types'
 import { GetCertidao } from '@/services/certidaoServices'
+import { ConsultPreviewform } from '@/blocks/ConsultPreviewForm'
 
 type BlockTypeProps = {
   content: string
@@ -43,6 +44,7 @@ type BlockTypeProps = {
   exemplo: string
   consultpreview: string
   birthbonsultationForm: string
+  consultpreviewform: string
 }
 
 const BlockType: BlockTypeProps = {
@@ -54,6 +56,7 @@ const BlockType: BlockTypeProps = {
   exemplo: 'exemplo1ServiceSteps',
   consultpreview: 'consult-preview',
   birthbonsultationForm: 'birthbonsultationForm',
+  consultpreviewform: 'consultpreviewform',
 }
 
 type Args = {
@@ -347,6 +350,17 @@ export default function ServiceStep({ params }: Args) {
             orderId={serviceOrder?.id}
           />
         )
+      case BlockType.consultpreviewform:
+        return (
+          <ConsultPreviewform
+            enableIntro={false}
+            form={steps?.steps[stepIndex]?.form}
+            onSubmitOverride={onSubmitStep}
+            showSubmitButton={false}
+            stepIndex={stepIndex}
+          >
+          </ConsultPreviewform>
+        )
       case BlockType.consultpreview:
         return (
           <ConsultPreview
@@ -444,7 +458,7 @@ export default function ServiceStep({ params }: Args) {
               <div className="flex justify-end">
                 {/* No caso de já estar steps com informação, será continuar em vez de começar */}
                 {steps.steps[stepIndex]?.blockType === BlockType.content ||
-                steps.steps[stepIndex]?.blockType === BlockType.summary ? (
+                  steps.steps[stepIndex]?.blockType === BlockType.summary ? (
                   <Button
                     children={
                       stepIndex == 0
