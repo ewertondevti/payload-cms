@@ -31,13 +31,7 @@ export const TextBox: React.FC<TextBoxProps> = ({
 }) => {
   return (
     <Width width={width}>
-      <style>
-        {`
-          .input-label-wrapper {
-            margin-bottom: 8px !important;
-          }
-        `}
-      </style>
+      
 
       <InputText
         {...props}

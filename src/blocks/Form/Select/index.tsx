@@ -85,15 +85,6 @@ export const Select: FC<SelectProps> = ({
 
   return (
     <div className={containerClassName} style={{ width: `calc(${width}% - 16px)` }}>
-      <style>
-        {`
-          .agora-dropdown.visible {
-            max-height: ${(props.visibleCount ?? 4) * 62}px !important;
-            overflow-y: auto !important;
-          }
-        `}
-      </style>
-
       <InputSelect
         {...props}
         {...props.register(props.name!, { required: props.required })}

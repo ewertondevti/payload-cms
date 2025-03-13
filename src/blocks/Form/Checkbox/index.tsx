@@ -31,13 +31,7 @@ export const Checkbox: React.FC<
 
   return (
     <Width width={width}>
-      <style>
-        {`
-          .agora-radio-button-feedback {
-            padding-left: 8px;
-          }
-        `}
-      </style>
+     
 
       <CheckboxUi
         defaultChecked={defaultValue}

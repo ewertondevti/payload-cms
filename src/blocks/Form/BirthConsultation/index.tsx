@@ -26,16 +26,16 @@ export const BirthConsultation: React.FC<AccessVerificationProps> = ({
   errors,
 }) => {
   return (
-    <div className="space-y-4">
+    <div>
       <FormTitle title={title} subtitle={subtitle} />
 
-      <div className="mb-4">
-        <h5 className="text-xl font-bold text-[#021C51] mt-12">{accessCodeTitle}</h5>
+      <div>
+        <h5 className="text-xl font-bold text-[#021C51]">{accessCodeTitle}</h5>
       </div>
 
-      <div className="mt-8">
-        <h2 className="text-base font-semibold text-gray-900 mt-12">{accessCode.label}</h2>
-        <div className="grid grid-cols-3 gap-6 mt-4 ">
+      <div>
+        <h2 className="text-base font-semibold text-gray-900">{accessCode.label}</h2>
+        <div className="grid grid-cols-3 gap-6">
           <InputText
             id="accessCode1"
             placeholder={accessCode.placeholder}
@@ -44,6 +44,7 @@ export const BirthConsultation: React.FC<AccessVerificationProps> = ({
             feedbackText={`Obrigatório preencher "${accessCode.label}"`}
             hasError={!!errors['accessCode1']}
           />
+
           <InputText
             id="accessCode2"
             placeholder={accessCode.placeholder}
@@ -52,6 +53,7 @@ export const BirthConsultation: React.FC<AccessVerificationProps> = ({
             feedbackText={`Obrigatório preencher "${accessCode.label}"`}
             hasError={!!errors['accessCode2']}
           />
+
           <InputText
             id="accessCode3"
             placeholder={accessCode.placeholder}

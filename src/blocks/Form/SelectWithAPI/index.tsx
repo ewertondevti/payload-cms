@@ -108,10 +108,6 @@ export const SelectWithApi: FC<SelectWithAPIProps> = ({
             max-height: ${(props.visibleCount ?? 4) * 62}px !important;
             overflow-y: auto !important;
           }
-
-          .agora-input-select-label {
-            margin-bottom: 8px !important;
-          }
         `}
       </style>
 

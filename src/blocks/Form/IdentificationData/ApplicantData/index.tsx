@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { IdentificationDataProps } from '..'
 import { Nif, NifProps } from '../../Nif'
 import { Select, SelectProps } from '../../Select'
-import { Text, TextProps } from '../../Text'
+import { TextBox, TextBoxProps } from '../../TextBox'
 
 export const ApplicantData: FC<IdentificationDataProps> = (props) => {
   const docTypeProps: SelectProps = {
@@ -20,7 +20,7 @@ export const ApplicantData: FC<IdentificationDataProps> = (props) => {
     defaultValue: 'cc',
   }
 
-  const fullnameProps: TextProps = {
+  const fullnameProps: TextBoxProps = {
     ...props,
     name: 'fullname',
     label: 'Nome completo',
@@ -31,7 +31,7 @@ export const ApplicantData: FC<IdentificationDataProps> = (props) => {
     required: true,
   }
 
-  const docNumberProps: TextProps = {
+  const docNumberProps: TextBoxProps = {
     ...props,
     name: 'document-number',
     label: 'Número do documento',
@@ -42,7 +42,7 @@ export const ApplicantData: FC<IdentificationDataProps> = (props) => {
     required: true,
   }
 
-  const digVerificationProps: TextProps = {
+  const digVerificationProps: TextBoxProps = {
     ...props,
     name: 'digit-verification',
     label: 'Dígito de verificação',
@@ -63,10 +63,10 @@ export const ApplicantData: FC<IdentificationDataProps> = (props) => {
 
   return (
     <div className="flex flex-wrap gap-[32px]">
-      <Text {...fullnameProps} />
+      <TextBox {...fullnameProps} />
       <Select {...docTypeProps} />
-      <Text {...docNumberProps} />
-      {props.isVerificationDigitVisible && <Text {...digVerificationProps} />}
+      <TextBox {...docNumberProps} />
+      {props.isVerificationDigitVisible && <TextBox {...digVerificationProps} />}
       {props.nifIsVisible && <Nif {...nifProps} />}
     </div>
   )
