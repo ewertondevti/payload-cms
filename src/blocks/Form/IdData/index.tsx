@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import type { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form'
-import { InputSelect } from '@/components/ui/inputSelect'
+import { Select } from '@/blocks/Form/Select'
 import { TextField } from '@/components/ui/textfield'
 import { useFormContext } from 'react-hook-form'
 import { idDocumentOptions } from '../IdDocument/options'
@@ -11,7 +11,7 @@ export interface IdDataProps {
 }
 
 export const IdData: React.FC<
- IdDataProps & {
+  IdDataProps & {
     errors: Partial<
       FieldErrorsImpl<{
         [x: string]: any
@@ -23,20 +23,15 @@ export const IdData: React.FC<
   const { setValue } = useFormContext()
   const [selectedIdDocument, setSelectedIdDocument] = useState<string>('cc')
 
-  const onChangeIdDocument = (value: string) => {
-    setSelectedIdDocument(value)
-    setValue('cvtDocumento', value)
-  }
-
   useEffect(() => {
     register('cvtDocumento', { value: selectedIdDocument })
   }, [])
-  
+
   return (
-    <div className='flex flex-col gap-8'>
-      <h2 className='font-bold text-xl text-[#021C51]'>Dados de identificação</h2>
+    <div className="flex flex-col gap-8">
+      <h2 className="font-bold text-xl text-[#021C51]">Dados de identificação</h2>
       <TextField
-        id='cvtNome'
+        id="cvtNome"
         label="Nome completo"
         placeholder="Indique o seu nome completo"
         required
@@ -52,19 +47,20 @@ export const IdData: React.FC<
         hasError={errors[name + 'Nome'] ? true : false}
         register={register}
       />
-      <div className='grid grid-cols-2 gap-4 overflow-hidden'>
-        <InputSelect
-          id='cvtDocumento'
+      <div className="grid grid-cols-2 gap-4 overflow-hidden">
+        <Select
+          id="cvtDocumento"
+          name="cvtDocumento"
           label="Documento de identificação"
           value={selectedIdDocument}
           type="text"
           options={idDocumentOptions}
           placeholder="Selecione uma opção"
           hideSectionNames
-          onChange={onChangeIdDocument}
+          onChange={setSelectedIdDocument}
         />
         <TextField
-          id='cvtNrDocumento'
+          id="cvtNrDocumento"
           label="Número do documento"
           placeholder="Indique o número do documento"
           required
@@ -81,7 +77,7 @@ export const IdData: React.FC<
           register={register}
         />
         <Nif
-          id='cvtNIF'
+          id="cvtNIF"
           name="NIF"
           label="Número de Identificação Fiscal (NIF)"
           blockType="nif"
@@ -91,6 +87,6 @@ export const IdData: React.FC<
           register={register}
         />
       </div>
-    </div>   
+    </div>
   )
 }

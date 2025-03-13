@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import type { CountryField } from '@payloadcms/plugin-form-builder/types'
 import type { FieldValues, UseFormRegister } from 'react-hook-form'
 import { useFormContext } from 'react-hook-form'
-import { Width } from '../Width'
-import { InputSelect } from '@/components/ui/inputSelect'
+import { Select } from '@/blocks/Form/Select'
 
 export interface DropdownProps {
   name: string
@@ -30,18 +28,10 @@ export const Dropdown: React.FC<
   const { setValue } = useFormContext()
   const [selectedOption, setSelectedOption] = useState<string>('Opção 1')
 
-  const onChangeOption = (value: string) => {
-    setSelectedOption(value)
-    setValue(name, value)
-  }
-
-  useEffect(() => {
-    register(name, { value: selectedOption })
-  }, [])
-
   return (
-    <InputSelect
+    <Select
       id={name}
+      {...{ name }}
       value={selectedOption}
       defaultValue="Opção 1"
       type="text"
@@ -54,7 +44,7 @@ export const Dropdown: React.FC<
       searchInputPlaceholder={inputPlaceholder}
       dropdownAriaLabel={ariaLabel}
       searchNoResultsText="Não foram encontrados resultados."
-      onChange={onChangeOption}
+      onChange={setSelectedOption}
       required={required}
     />
   )

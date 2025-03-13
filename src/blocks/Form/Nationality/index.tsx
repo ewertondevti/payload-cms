@@ -1,4 +1,4 @@
-import { InputSelect } from '@/components/ui/inputSelect'
+import { Select } from '@/blocks/Form/Select'
 import { RadioButton, RadioButtonGroup } from '@ama-pt/agora-design-system'
 import React, { useEffect, useState } from 'react'
 import type { UseFormReturn } from 'react-hook-form'
@@ -42,8 +42,9 @@ export const Nationality: React.FC<UseFormReturn> = ({ register, setValue }) => 
         </RadioButtonGroup>
       </div>
       <div className="w-full">
-        <InputSelect
+        <Select
           id="nacionalidade"
+          name="nacionalidade"
           value={selectedNationality}
           defaultValue="PT"
           type="text"
@@ -56,7 +57,7 @@ export const Nationality: React.FC<UseFormReturn> = ({ register, setValue }) => 
           searchInputPlaceholder="Pesquisar nacionalidade"
           dropdownAriaLabel="Lista de nacionalidades"
           searchNoResultsText="Não foram encontrados resultados."
-          onChange={onChangeCountry}
+          onChange={setSelectedNationality}
           disabled={nationalityRadio === 'portuguesa'}
         />
       </div>

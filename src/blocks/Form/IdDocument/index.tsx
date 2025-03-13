@@ -3,22 +3,17 @@ import type { TextField } from '@payloadcms/plugin-form-builder/types'
 import type { FieldValues, UseFormRegister } from 'react-hook-form'
 import { useFormContext } from 'react-hook-form'
 import { Width } from '../Width'
-import { InputSelect } from '@/components/ui/inputSelect'
+import { Select } from '@/blocks/Form/Select'
 
 import { idDocumentOptions } from './options'
 
 export const IdDocument: React.FC<
-    TextField & {
+  TextField & {
     register: UseFormRegister<FieldValues>
   }
 > = ({ name, label, required, width, register }) => {
   const { setValue } = useFormContext()
   const [selectedIdDocument, setSelectedIdDocument] = useState<string>('PT')
-
-  const onChangeIdDocument = (value: string) => {
-    setSelectedIdDocument(value)
-    setValue(name, value)
-  }
 
   useEffect(() => {
     register(name, { value: selectedIdDocument })
@@ -26,8 +21,9 @@ export const IdDocument: React.FC<
 
   return (
     <Width width={width}>
-      <InputSelect
+      <Select
         id={name}
+        {...{ name }}
         value={selectedIdDocument}
         defaultValue="cc"
         type="text"
@@ -40,7 +36,7 @@ export const IdDocument: React.FC<
         searchInputPlaceholder="Pesquisar documento"
         dropdownAriaLabel="Lista de documentos"
         searchNoResultsText="Não foram encontrados resultados."
-        onChange={onChangeIdDocument}
+        onChange={setSelectedIdDocument}
         required={required}
       />
     </Width>

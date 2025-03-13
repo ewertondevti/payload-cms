@@ -1,106 +1,120 @@
-'use client'
-
+import { useEffect, useState } from 'react'
 import {
-  DropdownOption,
+  InputSelect as AgoraInputSelect,
   DropdownOptionProps,
+  DropdownOption,
   DropdownSection,
-  DropdownSectionProps,
-  InputSelect,
-  InputSelectProps,
 } from '@ama-pt/agora-design-system'
-import classNames from 'classnames'
-import { Children, FC, isValidElement, ReactElement, useEffect, useId, useState } from 'react'
-import { UseFormReturn } from 'react-hook-form'
+import { Width } from '@/blocks/Form/Width'
+import { useForm } from 'react-hook-form'
 
-export type SelectProps = InputSelectProps &
-  UseFormReturn & { width: number; options: { label: string; value: any }[] }
+export type InputSelectProps = {
+  id?: string
+  name?: string
+  value?: string
+  type?: 'checkbox' | 'text'
+  label: string
+  options: { label: string; value: string }[]
+  searchable?: boolean
+  placeholder?: string
+  visibleCount?: number
+  searchNoResultsText?: string
+  searchInputPlaceholder?: string
+  defaultValue?: string
+  hideSectionNames?: boolean
+  allSelectedLabel?: string
+  dropdownAriaLabel?: string
+  icon?: string
+  hasError?: boolean
+  required?: boolean
+  disabled?: boolean
+  onChange?: ((option: string) => void) | undefined
+  width?: number | string
+}
 
-export const Select: FC<SelectProps> = ({
-  setValue,
-  className,
-  width,
-  defaultValue,
+export const Select: React.FC<InputSelectProps> = ({
+  id,
+  value,
+  name,
+  type = 'text',
+  label,
   options,
-  ...props
+  searchable,
+  placeholder,
+  visibleCount = 4,
+  searchNoResultsText,
+  searchInputPlaceholder,
+  defaultValue,
+  hideSectionNames = false,
+  allSelectedLabel = '',
+  dropdownAriaLabel,
+  icon,
+  hasError = false,
+  required,
+  disabled,
+  onChange,
+  width,
 }) => {
-  const [sections, setSections] = useState<ReactElement<DropdownSectionProps>[]>([])
+  const { register, setValue } = useForm()
+  const [selectedValue, setSelectedValue] = useState<string | undefined>(defaultValue)
 
-  const generatedId = useId()
-
-  useEffect(() => {
-    const newSections = [
-      <DropdownSection key={`my-input-select-${generatedId}-${0}`} name="Countries">
-        {options.map(({ label, value }) => {
-          if (defaultValue) {
-            setValue(props.name!, defaultValue)
-          }
-
-          return (
-            <DropdownOption
-              key={`my-input-select-${value}-${0}-0`}
-              value={value}
-              selected={defaultValue === value}
-            >
-              {label}
-            </DropdownOption>
-          )
-        })}
-      </DropdownSection>,
-    ]
-
-    setSections(newSections)
-  }, [options, defaultValue])
-
-  const containerClassName = classNames(`h-[${(props.visibleCount ?? 4) * 62}px]`, {
-    'text-white bg-[var(--color-primary-900)]': props.darkMode,
-  })
-
-  const onInputSelectChange = (selected: DropdownOptionProps[]) => {
-    const newSections = sections.map((s) => {
-      const sectionKey = `my-input-select-${generatedId}-${0}`
-
-      return (
-        <DropdownSection {...s.props} key={sectionKey}>
-          {Children.toArray(s.props.children).map((item, sectionOptionIndex) => {
-            const sectionOptionKey = `my-input-select-${generatedId}-${0}-${sectionOptionIndex}`
-
-            if (isValidElement<DropdownOptionProps>(item)) {
-              const selectedValue = !!selected.find((i) => i.value === item.props.value)
-
-              if (selectedValue) setValue(props.name!, item.props.value)
-
-              return (
-                <DropdownOption {...item.props} selected={selectedValue} key={sectionOptionKey} />
-              )
-            }
-
-            return <></>
-          })}
-        </DropdownSection>
-      )
-    })
-
-    setSections(newSections)
+  const onInputSelectChange = async (selected: DropdownOptionProps[]) => {
+    if (selected.length > 0 && onChange) {
+      const newValue = selected[0]?.value
+      onChange && onChange(newValue)
+      setSelectedValue(newValue)
+    }
   }
 
+  useEffect(() => {
+    name && register(name, { value: selectedValue, required })
+  }, [name, register])
+
+  useEffect(() => {
+    name && setValue(name, selectedValue)
+  }, [name, selectedValue, setValue])
+
   return (
-    <div className={containerClassName} style={{ width: `calc(${width}% - 16px)` }}>
+    <Width width={width}>
       <style>
         {`
           .agora-dropdown.visible {
-            max-height: ${(props.visibleCount ?? 4) * 62}px !important;
+            max-height: ${(visibleCount ?? 4) * 62}px !important;
             overflow-y: auto !important;
           }
         `}
       </style>
-
-      <InputSelect
-        {...props}
-        {...props.register(props.name!, { required: props.required })}
+      <AgoraInputSelect
+        id={id}
+        type={type}
+        label={label}
+        placeholder={placeholder}
+        searchable={searchable}
+        searchNoResultsText={searchNoResultsText}
+        visibleCount={visibleCount}
+        searchInputPlaceholder={searchInputPlaceholder}
+        defaultValue={defaultValue}
+        hideSectionNames={hideSectionNames}
+        allSelectedLabel={allSelectedLabel}
+        dropdownAriaLabel={dropdownAriaLabel}
+        icon={icon}
+        hasError={hasError}
+        required={required}
         onChange={onInputSelectChange}
+        disabled={disabled}
       >
-        {sections}
-      </InputSelect>
-    </div>
+        <DropdownSection name="options">
+          {options.map((option) => (
+            <DropdownOption
+              key={option.value}
+              value={option.value}
+              selected={option.value === selectedValue}
+            >
+              {option.label}
+            </DropdownOption>
+          ))}
+        </DropdownSection>
+      </AgoraInputSelect>
+    </Width>
   )
 }

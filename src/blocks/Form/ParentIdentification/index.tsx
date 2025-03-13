@@ -2,7 +2,7 @@
 import React from 'react'
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
 import { InputText, InputDate } from '@ama-pt/agora-design-system'
-import { InputSelect } from '@/components/ui/inputSelect'
+import { Select } from '@/blocks/Form/Select'
 import { Width } from '../Width'
 import { DatePicker } from '@/components/DatePicker'
 
@@ -96,13 +96,12 @@ export const ParentIdentification = ({
 
       <div className="flex gap-32 flex-wrap">
         <Width width={50}>
-          <InputSelect
+          <Select
+            name="documentType"
             label={documentType.label}
             placeholder={documentType.placeholder}
             options={options.identification}
             hasError={!!errors?.documentType}
-            {...register('documentType', { required: documentType.required })}
-            onChange={(e) => register('documentType').onChange({ target: { value: e } })}
           />
         </Width>
         <Width width={50}>
@@ -139,23 +138,21 @@ export const ParentIdentification = ({
       </div>
       <div className="flex gap-32 flex-wrap">
         <Width width={50}>
-          <InputSelect
+          <Select
+            name="gender"
             label={gender.label}
             placeholder={gender.placeholder}
             options={options.gender}
             hasError={!!errors?.gender}
-            {...register('gender', { required: gender.required })}
-            onChange={(e) => register('gender').onChange({ target: { value: e } })}
           />
         </Width>
         <Width width={50}>
-          <InputSelect
+          <Select
+            name="maritalStatus"
             label={maritalStatus.label}
             placeholder={maritalStatus.placeholder}
             options={options.maritalStatus}
             hasError={!!errors?.maritalStatus}
-            {...register('maritalStatus', { required: maritalStatus.required })}
-            onChange={(e) => register('maritalStatus').onChange({ target: { value: e } })}
           />
         </Width>
       </div>
@@ -167,13 +164,12 @@ export const ParentIdentification = ({
           width={50}
         />
         <Width width={50}>
-          <InputSelect
+          <Select
+            name="nationality"
             label={nationality.label}
             placeholder={nationality.placeholder}
             options={options.nationality}
             hasError={!!errors?.nationality}
-            {...register('nationality', { required: nationality.required })}
-            onChange={(e) => register('nationality').onChange({ target: { value: e } })}
           />
         </Width>
       </div>

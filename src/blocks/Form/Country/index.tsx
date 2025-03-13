@@ -1,4 +1,4 @@
-import { InputSelect } from '@/components/ui/inputSelect'
+import { Select } from '@/blocks/Form/Select'
 import type { CountryField } from '@payloadcms/plugin-form-builder/types'
 import React, { useEffect, useState } from 'react'
 import type { UseFormReturn } from 'react-hook-form'
@@ -16,19 +16,15 @@ export const Country: React.FC<CountryField & UseFormReturn> = ({
 }) => {
   const [selectedCountry, setSelectedCountry] = useState<string>('PT')
 
-  const onChangeCountry = (value: string) => {
-    setSelectedCountry(value)
-    setValue(name, value)
-  }
-
   useEffect(() => {
     register(name, { value: selectedCountry })
   }, [])
 
   return (
     <Width width={width}>
-      <InputSelect
+      <Select
         id={name}
+        {...{ name }}
         value={selectedCountry}
         defaultValue="PT"
         type="text"
@@ -41,7 +37,7 @@ export const Country: React.FC<CountryField & UseFormReturn> = ({
         searchInputPlaceholder="Pesquisar país"
         dropdownAriaLabel="Lista de países"
         searchNoResultsText="Não foram encontrados resultados."
-        onChange={onChangeCountry}
+        onChange={setSelectedCountry}
         required={required}
       />
     </Width>

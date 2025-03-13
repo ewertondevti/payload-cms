@@ -1,4 +1,4 @@
-import { InputSelect } from '@/components/ui/inputSelect'
+import { Select } from '@/blocks/Form/Select'
 import { TextField } from '@/components/ui/textfield'
 import { InputTextArea } from '@ama-pt/agora-design-system'
 import React, { useEffect, useState } from 'react'
@@ -23,19 +23,11 @@ export const Address: React.FC<
   const { setValue } = useFormContext()
   const [selectedCountry, setSelectedCountry] = useState<string>('PT')
 
-  const onChangeCountry = (value: string) => {
-    setSelectedCountry(value)
-    setValue(`cvtResidencia`, value)
-  }
-
-  useEffect(() => {
-    register(`cvtResidencia`, { value: selectedCountry })
-  }, [])
-
   return (
     <>
-      <InputSelect
+      <Select
         id={'cvtResidencia'}
+        name={'cvtResidencia'}
         value={selectedCountry}
         defaultValue="PT"
         type="text"
@@ -48,7 +40,7 @@ export const Address: React.FC<
         searchInputPlaceholder="Pesquisar país"
         dropdownAriaLabel="Lista de países"
         searchNoResultsText="Não foram encontrados resultados."
-        onChange={onChangeCountry}
+        onChange={setSelectedCountry}
       />
       <br />
       {selectedCountry === 'PT' ? (
