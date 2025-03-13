@@ -849,6 +849,20 @@ export interface Form {
                   | {
                       name: string;
                       label?: string | null;
+                      options?:
+                        | {
+                            label: string;
+                            value: string;
+                            id?: string | null;
+                          }[]
+                        | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'dropdown';
+                    }
+                  | {
+                      name: string;
+                      label?: string | null;
                       width?: number | null;
                       defaultValue?: string | null;
                       required?: boolean | null;
@@ -935,6 +949,13 @@ export interface Form {
                   | {
                       name: string;
                       label?: string | null;
+                      defaultValue?: string | null;
+                      placeholder?: string | null;
+                      width?: number | null;
+                      required?: boolean | null;
+                      disabled?: boolean | null;
+                      readOnly?: boolean | null;
+                      hideLabel?: boolean | null;
                       options?:
                         | {
                             label: string;
@@ -944,7 +965,7 @@ export interface Form {
                         | null;
                       id?: string | null;
                       blockName?: string | null;
-                      blockType: 'dropdown';
+                      blockType: 'select';
                     }
                   | {
                       name: string;
@@ -1066,6 +1087,18 @@ export interface Form {
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'flexRadioButtonGroup';
+                    }
+                  | {
+                      name: string;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'priorWeddingChildrenData';
+                    }
+                  | {
+                      name: string;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'twinBirthData';
                     }
                   | {
                       name: string;
@@ -1296,6 +1329,18 @@ export interface Form {
             id?: string | null;
             blockName?: string | null;
             blockType: 'flexRadioButtonGroup';
+          }
+        | {
+            name: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'priorWeddingChildrenData';
+          }
+        | {
+            name: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'twinBirthData';
           }
         | {
             name: string;
@@ -2487,6 +2532,21 @@ export interface FormsSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
+                    dropdown?:
+                      | T
+                      | {
+                          name?: T;
+                          label?: T;
+                          options?:
+                            | T
+                            | {
+                                label?: T;
+                                value?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
                     nif?:
                       | T
                       | {
@@ -2582,11 +2642,18 @@ export interface FormsSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
-                    dropdown?:
+                    select?:
                       | T
                       | {
                           name?: T;
                           label?: T;
+                          defaultValue?: T;
+                          placeholder?: T;
+                          width?: T;
+                          required?: T;
+                          disabled?: T;
+                          readOnly?: T;
+                          hideLabel?: T;
                           options?:
                             | T
                             | {
@@ -2730,6 +2797,20 @@ export interface FormsSelect<T extends boolean = true> {
                                 value?: T;
                                 id?: T;
                               };
+                          id?: T;
+                          blockName?: T;
+                        };
+                    priorWeddingChildrenData?:
+                      | T
+                      | {
+                          name?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    twinBirthData?:
+                      | T
+                      | {
+                          name?: T;
                           id?: T;
                           blockName?: T;
                         };
@@ -3031,6 +3112,20 @@ export interface FormsSelect<T extends boolean = true> {
                     value?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        priorWeddingChildrenData?:
+          | T
+          | {
+              name?: T;
+              id?: T;
+              blockName?: T;
+            };
+        twinBirthData?:
+          | T
+          | {
+              name?: T;
               id?: T;
               blockName?: T;
             };

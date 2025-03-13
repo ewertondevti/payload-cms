@@ -1,5 +1,5 @@
 import { Block, Field } from 'payload'
-import { AtomicField } from '../types';
+import { AtomicField } from '../types'
 
 const name: Field = {
   name: 'name',
@@ -17,8 +17,7 @@ const label: Field = {
   localized: true,
 }
 
-
-export type AlignmentDirection = 'vertical' | 'horizontal';
+export type AlignmentDirection = 'vertical' | 'horizontal'
 const options: AtomicField<AlignmentDirection>[] = [
   {
     label: 'Vertical',
@@ -28,7 +27,7 @@ const options: AtomicField<AlignmentDirection>[] = [
   {
     label: 'Horizontal',
     value: 'horizontal',
-  }
+  },
 ]
 
 const alignment: Field = {

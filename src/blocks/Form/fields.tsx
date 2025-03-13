@@ -16,7 +16,7 @@ import { IdentificationData } from './IdentificationData'
 import { Message } from './Message'
 import { Nationality } from './Nationality'
 import { Nif } from './Nif'
-import { Number } from './Number'
+import { NumberInput } from './NumberInput'
 import { PhoneNumber } from './PhoneNumber'
 import { PreLoadExample1 } from './PreloadExample1'
 import { RadioButtons } from './RadioButtonGroup'
@@ -31,6 +31,10 @@ import { FlexRadioButtonGroup } from './Cidadao/FlexRadioButtonGroup'
 import { ParentIdentification } from './ParentIdentification'
 import { ParentAddress } from './ParentAddress/ParentAddress'
 import { SecondParent } from './Cidadao/SecondParent'
+import { TwinBirthData } from './Cidadao/TwinBirthData'
+import { PriorWeddingChildrenData } from './Cidadao/PriorWeddingChildrenData'
+import wrapBlock from './wrapBlock'
+import { Group } from './Group'
 
 export const fields = {
   customMessage: CustomMessage,
@@ -40,7 +44,7 @@ export const fields = {
   email: Email,
   header: Header,
   message: Message,
-  number: Number,
+  number: NumberInput,
   select: Select,
   state: State,
   textBox: TextBox,
@@ -58,6 +62,8 @@ export const fields = {
   phoneNumber: PhoneNumber,
   radioButtons: RadioButtons,
   flexRadioButtonGroup: FlexRadioButtonGroup,
+  priorWeddingChildrenData: PriorWeddingChildrenData,
+  twinBirthData: wrapBlock(TwinBirthData),
   secondParent: SecondParent,
   preLoadExample1: PreLoadExample1,
   birthdate: DateOrYearPicker,
@@ -66,6 +72,7 @@ export const fields = {
   title: Title,
   parentaddress: ParentAddress,
   identificationData: IdentificationData,
+  group: Group,
   birthconsultation: BirthConsultation,
   parentidentification: ParentIdentification,
 }

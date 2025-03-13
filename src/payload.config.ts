@@ -68,6 +68,9 @@ import { ParentIdentificationBlock } from './blocks/Form/ParentIdentification/Pa
 import { ParentAddressBlock } from './blocks/Form/ParentAddress/ParentAddressBlock'
 import { SecondParentBlock } from './blocks/Form/Cidadao/SecondParent/SecondParentBlock'
 import { TextBoxBlock } from './blocks/Form/TextBox/TextBoxBlock'
+import { PriorWeddingChildrenDataBlock } from './blocks/Form/Cidadao/PriorWeddingChildrenData/PriorWeddingChildrenDataBlock'
+import { TwinBirthDataBlock } from './blocks/Form/Cidadao/TwinBirthData/TwinBirthDataBlock'
+import { SelectBlock } from './blocks/Form/Select/SelectBlock'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -184,6 +187,7 @@ export default buildConfig({
         RequestorBlock,
         HeaderBlock,
         DropdownBlock,
+        SelectBlock,
         NationalityBlock,
         PhoneNumberBlock,
         PreLoadExample1Block,
@@ -199,8 +203,9 @@ export default buildConfig({
         ParentAddressBlock,
         ParentIdentificationBlock,
         FlexRadioButtonGroupBlock,
+        PriorWeddingChildrenDataBlock,
+        TwinBirthDataBlock,
         SecondParentBlock,
-        BirthConsultationBlock,
       },
       formOverrides: {
         fields: ({ defaultFields }) => {
