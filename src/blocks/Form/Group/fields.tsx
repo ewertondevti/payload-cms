@@ -1,5 +1,4 @@
-import { Address } from '../Address'
-import { AddressData } from '../AddressData'
+
 import { BirthCertificateData } from '../BirthCertificateData'
 import { BirthConsultation } from '../BirthConsultation'
 import { Birthplace } from '../Birthplace'
@@ -21,7 +20,7 @@ import { Message } from '../Message'
 import { Nationality } from '../Nationality'
 import { Nif } from '../Nif'
 import { NumberInput } from '../NumberInput'
-import { ParentAddress } from '../ParentAddress/ParentAddress'
+import { ParentAddress } from '../Address/ParentAddress/ParentAddress'
 import { ParentIdentification } from '../ParentIdentification'
 import { PhoneNumber } from '../PhoneNumber'
 import { PreLoadExample1 } from '../PreloadExample1'
@@ -33,6 +32,7 @@ import { State } from '../State'
 import { Textarea } from '../Textarea'
 import { TextBox } from '../TextBox'
 import { Title } from '../Title'
+import { AddressData } from '../Address'
 
 export const fields = {
   customMessage: CustomMessage,
@@ -55,7 +55,6 @@ export const fields = {
   idData: IdData,
   requestorData: RequestorData,
   customtext: TextBox,
-  address: Address,
   nationality: Nationality,
   phoneNumber: PhoneNumber,
   radioButtons: RadioButtons,

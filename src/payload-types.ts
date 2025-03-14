@@ -629,13 +629,6 @@ export interface Form {
             label?: string | null;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'address';
-          }
-        | {
-            name: string;
-            label?: string | null;
-            id?: string | null;
-            blockName?: string | null;
             blockType: 'birthCertificateData';
           }
         | {
@@ -872,11 +865,19 @@ export interface Form {
                       blockType: 'customtext';
                     }
                   | {
-                      name: string;
-                      label?: string | null;
+                      title?: string | null;
+                      identificationType?: ('identification-data' | 'parent-data') | null;
+                      nifIsVisible?: boolean | null;
+                      nifIsRequired?: boolean | null;
+                      parentAddress?: {
+                        countryOfResidence?: string | null;
+                        addressType?: string | null;
+                        wayDesignation?: string | null;
+                        doorNumber?: string | null;
+                      };
                       id?: string | null;
                       blockName?: string | null;
-                      blockType: 'address';
+                      blockType: 'addressdata';
                     }
                   | {
                       name: string;
@@ -1375,6 +1376,21 @@ export interface Form {
             id?: string | null;
             blockName?: string | null;
             blockType: 'secondParent';
+          }
+        | {
+            title?: string | null;
+            identificationType?: ('identification-data' | 'parent-data') | null;
+            nifIsVisible?: boolean | null;
+            nifIsRequired?: boolean | null;
+            parentAddress?: {
+              countryOfResidence?: string | null;
+              addressType?: string | null;
+              wayDesignation?: string | null;
+              doorNumber?: string | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'addressdata';
           }
       )[]
     | null;
@@ -2330,14 +2346,6 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        address?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              id?: T;
-              blockName?: T;
-            };
         birthCertificateData?:
           | T
           | {
@@ -2590,11 +2598,21 @@ export interface FormsSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
-                    address?:
+                    addressdata?:
                       | T
                       | {
-                          name?: T;
-                          label?: T;
+                          title?: T;
+                          identificationType?: T;
+                          nifIsVisible?: T;
+                          nifIsRequired?: T;
+                          parentAddress?:
+                            | T
+                            | {
+                                countryOfResidence?: T;
+                                addressType?: T;
+                                wayDesignation?: T;
+                                doorNumber?: T;
+                              };
                           id?: T;
                           blockName?: T;
                         };
@@ -3213,6 +3231,24 @@ export interface FormsSelect<T extends boolean = true> {
                 | {
                     name?: T;
                     label?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        addressdata?:
+          | T
+          | {
+              title?: T;
+              identificationType?: T;
+              nifIsVisible?: T;
+              nifIsRequired?: T;
+              parentAddress?:
+                | T
+                | {
+                    countryOfResidence?: T;
+                    addressType?: T;
+                    wayDesignation?: T;
+                    doorNumber?: T;
                   };
               id?: T;
               blockName?: T;

@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { RadioButton } from '@ama-pt/agora-design-system'
 import { RadioButtonGroup, InputText } from '@ama-pt/agora-design-system'
 import { Nif } from '@/blocks/Form/Nif'
-import { AddressData } from '@/blocks/Form/AddressData'
 import { UseFormRegister, FieldValues, FieldErrorsImpl, UseFormSetValue } from 'react-hook-form'
+import { IdentificationAddress } from '@/blocks/Form/Address/IdentificationAddress'
 
 interface ReceiptDataProps {
   receiptOptions: { name: string; address: string }[]
@@ -118,7 +118,7 @@ const ReceiptData = ({ receiptOptions, register, errors, setValue }: ReceiptData
                 </div>
               </div>
               <div>
-                <AddressData name="morada" errors={errors} register={register} />
+                <IdentificationAddress name="morada" errors={errors} register={register} />
               </div>
             </>
           )}

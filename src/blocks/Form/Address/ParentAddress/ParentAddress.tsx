@@ -3,28 +3,8 @@ import React from 'react'
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
 import { InputText } from '@ama-pt/agora-design-system'
 import { Select } from '@/blocks/Form/Select'
-import { Width } from '../Width'
-
-interface FieldConfig {
-  label: string
-  placeholder: string
-  required?: boolean
-}
-
-interface ParentAddressProps {
-  errors: FieldErrors<FieldValues>
-  register: UseFormRegister<FieldValues>
-  countryOfResidence: FieldConfig
-  addressType: FieldConfig
-  wayDesignation: FieldConfig
-  doorNumber: FieldConfig
-  floor: FieldConfig
-  side: FieldConfig
-  district: FieldConfig
-  municipality: FieldConfig
-  parish: FieldConfig
-  postalCode: FieldConfig
-}
+import { Width } from '../../Width'
+import { countryOptions } from '../../Country/options'
 
 const addressOptions = {
   countryOfResidence: [
@@ -57,17 +37,10 @@ const addressOptions = {
 export const ParentAddress = ({
   register,
   errors,
-  countryOfResidence,
-  addressType,
-  wayDesignation,
-  doorNumber,
-  floor,
-  side,
-  district,
-  municipality,
-  parish,
-  postalCode,
-}: ParentAddressProps) => {
+}: {
+  register: UseFormRegister<FieldValues>
+  errors: FieldErrors<FieldValues>
+}) => {
   const getError = (field: string) =>
     errors[field]?.type === 'required' ? 'Obrigatório preencher este campo.' : ''
 
@@ -76,21 +49,29 @@ export const ParentAddress = ({
       <div className="flex gap-4 flex-wrap">
         <Width width={50}>
           <Select
-            name="countryOfResidence"
-            label={countryOfResidence.label}
-            placeholder={countryOfResidence.placeholder}
-            options={addressOptions.countryOfResidence}
-            required={countryOfResidence.required}
-            hasError={!!errors.countryOfResidence}
+            id={'cvtResidencia'}
+            name={'cvtResidencia'}
+            defaultValue="PT"
+            type="text"
+            label="Residência"
+            options={countryOptions}
+            placeholder="Selecione uma opção"
+            visibleCount={5}
+            searchable
+            hideSectionNames
+            searchInputPlaceholder="Pesquisar país"
+            dropdownAriaLabel="Lista de países"
+            searchNoResultsText="Não foram encontrados resultados."
+            required
           />
         </Width>
         <Width width={50}>
           <Select
             name="addressType"
-            label={addressType.label}
-            placeholder={addressType.placeholder}
+            label="Tipo de via"
+            placeholder="Selecione uma opção"
             options={addressOptions.addressType}
-            required={addressType.required}
+            required
             hasError={!!errors.addressType}
           />
         </Width>
@@ -99,9 +80,9 @@ export const ParentAddress = ({
       <Width width={100}>
         <InputText
           name="wayDesignation"
-          label={wayDesignation.label}
-          placeholder={wayDesignation.placeholder}
-          required={wayDesignation.required}
+          label="Designação de via"
+          placeholder="Indique a designação da via"
+          required
           hasError={!!errors.wayDesignation}
           feedbackText={getError('wayDesignation')}
           feedbackState="danger"
@@ -112,9 +93,9 @@ export const ParentAddress = ({
         <Width width={33}>
           <InputText
             name="doorNumber"
-            label={doorNumber.label}
-            placeholder={doorNumber.placeholder}
-            required={doorNumber.required}
+            label="Porta"
+            placeholder="Indique a porta"
+            required
             hasError={!!errors.doorNumber}
             feedbackText={getError('doorNumber')}
             feedbackState="danger"
@@ -123,9 +104,9 @@ export const ParentAddress = ({
         <Width width={33}>
           <InputText
             name="floor"
-            label={floor.label}
-            placeholder={floor.placeholder}
-            required={floor.required}
+            label="Andar"
+            placeholder="Indique o andar"
+            required
             hasError={!!errors.floor}
             feedbackText={getError('floor')}
             feedbackState="danger"
@@ -134,9 +115,9 @@ export const ParentAddress = ({
         <Width width={34}>
           <InputText
             name="side"
-            label={side.label}
-            placeholder={side.placeholder}
-            required={side.required}
+            label="Lado"
+            placeholder="Indique o lado"
+            required
             hasError={!!errors.side}
             feedbackText={getError('side')}
             feedbackState="danger"
@@ -148,39 +129,39 @@ export const ParentAddress = ({
         <Width width={50}>
           <Select
             name="district"
-            label={district.label}
-            placeholder={district.placeholder}
+            label="Distrito"
+            placeholder="Selecione um distrito"
             options={addressOptions.district}
-            required={district.required}
+            required
             hasError={!!errors.district}
           />
         </Width>
         <Width width={50}>
           <Select
             name="municipality"
-            label={municipality.label}
-            placeholder={municipality.placeholder}
+            label="Concelho"
+            placeholder="Selecione um concelho"
             options={addressOptions.municipality}
-            required={municipality.required}
+            required
             hasError={!!errors.municipality}
           />
         </Width>
         <Width width={50}>
           <Select
             name="parish"
-            label={parish.label}
-            placeholder={parish.placeholder}
+            label="Freguesia"
+            placeholder="Selecione uma freguesia"
             options={addressOptions.parish}
-            required={parish.required}
+            required
             hasError={!!errors.parish}
           />
         </Width>
         <Width width={50}>
           <InputText
             name="postalCode"
-            label={postalCode.label}
-            placeholder={postalCode.placeholder}
-            required={postalCode.required}
+            label="Código Postal"
+            placeholder="0000-000"
+            required
             hasError={!!errors.postalCode}
             feedbackText={getError('postalCode')}
             feedbackState="danger"

@@ -1,5 +1,4 @@
 import { Block, Field } from 'payload'
-import { AddressBlock } from '../Address/AddressBlock'
 import { BirthCertificateBlock } from '../BirthCertificateData/BirthCertificateDataBlock'
 import { DateOrYearPickerBlock } from '../DateOrYearPicker/DateOrYearPickerBlock'
 import { BirthplaceBlock } from '../Birthplace/BirthplaceBlock'
@@ -26,6 +25,7 @@ import { PriorWeddingChildrenDataBlock } from '../Cidadao/PriorWeddingChildrenDa
 import { TwinBirthDataBlock } from '../Cidadao/TwinBirthData/TwinBirthDataBlock'
 import { SelectBlock } from '../Select/SelectBlock'
 import { DropdownBlock } from '../Dropdown/DropdownBlock'
+import { AddressDataBlock } from '../Address/AddressDataBlock'
 
 const name: Field = {
   name: 'name',
@@ -46,7 +46,7 @@ const arrayFields: Field = {
     NifBlock,
     RadioButtonBlock,
     CustomTextfieldBlock,
-    AddressBlock,
+    AddressDataBlock,
     BirthCertificateBlock,
     ContactBlock,
     IdBlock,
