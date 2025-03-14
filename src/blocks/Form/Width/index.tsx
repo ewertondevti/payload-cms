@@ -1,4 +1,5 @@
-import classNames from 'classnames'
+
+import { cn } from '@/utilities/cn'
 import * as React from 'react'
 
 export const Width: React.FC<{
@@ -6,7 +7,7 @@ export const Width: React.FC<{
   className?: string
   width?: number | string
 }> = ({ children, className, width }) => {
-  const containerClass = classNames(className)
+  const containerClass = cn(className)
 
   return (
     <div

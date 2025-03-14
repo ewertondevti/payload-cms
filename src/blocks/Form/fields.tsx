@@ -3,7 +3,7 @@ import { AddressData } from './AddressData'
 import { BirthCertificateData } from './BirthCertificateData'
 import { BirthConsultation } from './BirthConsultation'
 import { DateOrYearPicker } from './DateOrYearPicker'
-import { Birthplace } from './Birthplace'
+import { Location } from './Location'
 import { Checkbox } from './Checkbox'
 import { ContactData } from './ContactData'
 import { Country } from './Country'
@@ -67,7 +67,7 @@ export const fields = {
   secondParent: SecondParent,
   preLoadExample1: PreLoadExample1,
   birthdate: DateOrYearPicker,
-  birthplace: Birthplace,
+  birthplace: Location,
   customtextarea: Textarea,
   title: Title,
   parentaddress: ParentAddress,

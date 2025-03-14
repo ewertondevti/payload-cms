@@ -8,14 +8,8 @@ export const Nationality: React.FC<UseFormReturn> = ({ register, setValue }) => 
   const [nationalityRadio, setNationalityRadio] = useState<string>('portuguesa')
   const [selectedNationality, setSelectedNationality] = useState<string>('PT')
 
-  const onChangeCountry = (value: string) => {
-    setSelectedNationality(value)
-    setValue('nacionalidadeSelecionada', value)
-  }
-
   useEffect(() => {
     register('nacionalidade', { value: nationalityRadio })
-    register('nacionalidadeSelecionada', { value: selectedNationality })
   }, [])
 
   return (
