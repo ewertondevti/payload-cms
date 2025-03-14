@@ -4,7 +4,7 @@ import type { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form'
 import { SelectWithApi, SelectWithAPIProps } from '../SelectWithAPI'
 import { Width } from '../Width'
 
-export type BirthplaceProps = UseFormReturn & {
+export type LocationProps = UseFormReturn & {
   name: string
   width: number
   apidomain: string
@@ -13,15 +13,16 @@ export type BirthplaceProps = UseFormReturn & {
   label: string
 }
 
-export const Birthplace: React.FC<BirthplaceProps> = ({
+export const Location: React.FC<LocationProps> = ({
   register,
   watch,
   required,
   errors,
   label,
+  name,
   ...props
 }) => {
-  const selectedCountry: string = watch('countryBirth')
+  const selectedCountry: string = watch(`${name}-country`)
   const isPtSelected = selectedCountry === 'Portugal'
 
   const commonProps: SelectWithAPIProps = {
@@ -80,18 +81,18 @@ export const Birthplace: React.FC<BirthplaceProps> = ({
       <div className="flex flex-wrap gap-[32px]">
         <SelectWithApi
           {...countryProps}
-          {...register('countryBirth', { required: true })}
+          {...register(`${name}-country`, { required: true })}
           onChange={undefined}
           feedbackState="danger"
           feedbackText={`Obrigatório preencher "${countryProps.label}"`}
-          hasError={!!errors['countryBirth']}
+          hasError={!!errors[`${name}-country`]}
           defaultValue="Portugal"
         />
 
         {isPtSelected && (
           <SelectWithApi
             {...distritoProps}
-            {...register('distrito', { required: true })}
+            {...register(`${name}-distrito`, { required: true })}
             onChange={undefined}
             feedbackState="danger"
             feedbackText={`Obrigatório preencher "${distritoProps.label}"`}
@@ -102,7 +103,7 @@ export const Birthplace: React.FC<BirthplaceProps> = ({
         {isPtSelected && (
           <SelectWithApi
             {...concelhoProps}
-            {...register('concelho', { required: true })}
+            {...register(`${name}-concelho`, { required: true })}
             onChange={undefined}
             feedbackState="danger"
             feedbackText={`Obrigatório preencher "${concelhoProps.label}"`}
@@ -113,7 +114,7 @@ export const Birthplace: React.FC<BirthplaceProps> = ({
         {isPtSelected && (
           <SelectWithApi
             {...freguesiaProps}
-            {...register('freguesia', { required: true })}
+            {...register(`${name}-freguesia`, { required: true })}
             onChange={undefined}
             feedbackState="danger"
             feedbackText={`Obrigatório preencher "${freguesiaProps.label}"`}
@@ -125,7 +126,7 @@ export const Birthplace: React.FC<BirthplaceProps> = ({
           <Width width={50}>
             <InputText
               {...locationProps}
-              {...register('location', { required: true })}
+              {...register(`${name}-location`, { required: true })}
               feedbackState="danger"
               feedbackText={`Obrigatório preencher "${locationProps.label}"`}
               hasError={!!errors['location']}

@@ -38,7 +38,7 @@ import { fileURLToPath } from 'url'
 import { AddressBlock } from './blocks/Form/Address/AddressBlock'
 import { BirthCertificateBlock } from './blocks/Form/BirthCertificateData/BirthCertificateDataBlock'
 import { DateOrYearPickerBlock } from './blocks/Form/DateOrYearPicker/DateOrYearPickerBlock'
-import { BirthplaceBlock } from './blocks/Form/Birthplace/BirthplaceBlock'
+import { LocationBlock } from './blocks/Form/Location/LocationBlock'
 import { ContactBlock } from './blocks/Form/ContactData/ContactDataBlock'
 import { CustomTextfieldBlock } from './blocks/Form/CostumTextfield/CustomTextfieldBlock'
 import { CustomMessageBlock } from './blocks/Form/CustomMessage/CustomMessageBlock'
@@ -198,7 +198,7 @@ export default buildConfig({
         TitleBlock,
         SelectWithApiBlock,
         IdentificationDataBlock,
-        BirthplaceBlock,
+        BirthplaceBlock: LocationBlock,
         BirthConsultationBlock,
         ParentAddressBlock,
         ParentIdentificationBlock,
