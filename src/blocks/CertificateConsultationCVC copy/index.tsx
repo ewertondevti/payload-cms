@@ -2,7 +2,7 @@
 
 import { PdfViewer } from '@/components/PdfViewer'
 import { addBase64Prefix } from '@/helpers/app'
-import { obterCertidao } from '@/services/certificateServices'
+import { getCertificate } from '@/services/certificateServices'
 import { Button, InputText } from '@ama-pt/agora-design-system'
 import { FC, useState } from 'react'
 import { FieldValues, RegisterOptions, useForm } from 'react-hook-form'
@@ -27,7 +27,7 @@ type Props = {
   subtitlepage: string
 }
 
-export const CertificateConsultation: FC<Props> = ({ titlepage, subtitlepage }) => {
+export const CertificateConsultationCVC: FC<Props> = ({ titlepage, subtitlepage }) => {
   const [base64file, setBase64file] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
@@ -57,7 +57,7 @@ export const CertificateConsultation: FC<Props> = ({ titlepage, subtitlepage }) 
     setIsLoading(true)
 
     const code = `${accessCode1}-${accessCode2}-${accessCode3}`
-    const res = await obterCertidao(code)
+    const res = await getCertificate(code)
 
     if (res.success) {
       setBase64file(addBase64Prefix(res.data.attachment.bytes, res.data.attachment.mimetype))
@@ -85,32 +85,48 @@ export const CertificateConsultation: FC<Props> = ({ titlepage, subtitlepage }) 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-2">
           <h2 className="text-base font-semibold text-[#021C51]">Insira o código de acesso</h2>
-          <div className="flex gap-6">
-            <InputText
-              placeholder="0000"
-              {...register('accessCode1', registerOptions)}
-              feedbackState="danger"
-              feedbackText={getErrorMessage('accessCode1')}
-              hasError={!!errors['accessCode1']}
-            />
+          <div className="flex flex-col gap-8">
+            <div className="flex gap-6">
+              <div className="w-full">
+                <InputText
+                  placeholder="0000"
+                  {...register('accessCode1', registerOptions)}
+                  feedbackState="danger"
+                  feedbackText={getErrorMessage('accessCode1')}
+                  hasError={!!errors['accessCode1']}
+                />
+              </div>
 
-            <InputText
-              placeholder="0000"
-              {...register('accessCode2', registerOptions)}
-              feedbackState="danger"
-              feedbackText={getErrorMessage('accessCode2')}
-              hasError={!!errors['accessCode2']}
-            />
+              <div className="w-full">
+                <InputText
+                  placeholder="0000"
+                  {...register('accessCode2', registerOptions)}
+                  feedbackState="danger"
+                  feedbackText={getErrorMessage('accessCode2')}
+                  hasError={!!errors['accessCode2']}
+                />
+              </div>
 
-            <InputText
-              placeholder="0000"
-              {...register('accessCode3', registerOptions)}
-              feedbackState="danger"
-              feedbackText={getErrorMessage('accessCode3')}
-              hasError={!!errors['accessCode3']}
-            />
+              <div className="w-full">
+                <InputText
+                  placeholder="0000"
+                  {...register('accessCode3', registerOptions)}
+                  feedbackState="danger"
+                  feedbackText={getErrorMessage('accessCode3')}
+                  hasError={!!errors['accessCode3']}
+                />
+              </div>
+            </div>
 
-            <Button>Consultar</Button>
+            <div className="flex justify-end">
+              <Button
+                hasIcon
+                leadingIcon="agora-line-arrow-right-circle"
+                leadingIconHover="agora-solid-arrow-right-circle"
+              >
+                Consultar
+              </Button>
+            </div>
           </div>
         </div>
       </form>

@@ -1560,28 +1560,19 @@ export interface Service {
               subtitlepage?: string | null;
               id?: string | null;
               blockName?: string | null;
-              blockType: 'certificate-consultation';
+              blockType: 'consult-certificate-form-cvc';
             }
           | {
               title: string;
-              content: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              };
+              titlepage: string;
+              subtitlepage?: string | null;
+              /**
+               * URL of the API that will receive the request.
+               */
+              apiurl: string;
               id?: string | null;
               blockName?: string | null;
-              blockType: 'exemplo1ServiceSteps';
+              blockType: 'certificate-preview-cvc';
             }
         )[]
       | null;
@@ -2134,7 +2125,7 @@ export interface ServicesSelect<T extends boolean = true> {
                     id?: T;
                     blockName?: T;
                   };
-              'certificate-consultation'?:
+              'consult-certificate-form-cvc'?:
                 | T
                 | {
                     title?: T;
@@ -2143,11 +2134,13 @@ export interface ServicesSelect<T extends boolean = true> {
                     id?: T;
                     blockName?: T;
                   };
-              exemplo1ServiceSteps?:
+              'certificate-preview-cvc'?:
                 | T
                 | {
                     title?: T;
-                    content?: T;
+                    titlepage?: T;
+                    subtitlepage?: T;
+                    apiurl?: T;
                     id?: T;
                     blockName?: T;
                   };

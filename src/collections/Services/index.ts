@@ -12,8 +12,8 @@ import {
 } from '@payloadcms/plugin-seo/fields'
 
 import { BirthConsultationFormBlock } from '@/blocks/BirthConsultationForm/BirthConsultationFormBlock'
-import CertificateConsultationServiceStepBlock from '@/blocks/CertificateConsultation/CertificateConsultationBlock'
-import ExemploServiceStepBlock from '@/blocks/ExemploServiceStep/ExemploServiceStepBlock'
+import CertificatePreviewCVCServiceStepBlock from '@/blocks/CertificatePreviewCVC/CertificatePreviewCVCBlock'
+import ConsultCertificateFormCVCServiceStepBlock from '@/blocks/ConsultFormCVC/ConsultCertificateFormCVCBlock'
 import FormServiceStepBlock from '@/blocks/FormServiceStepBlock/FormServiceStepBlock'
 import PaymentServiceStepBlock from '@/blocks/Payment/PaymentServiceStepBlock'
 import SubmissionServiceStepBlock from '@/blocks/Submission/SubmissionServiceStepBlock'
@@ -88,8 +88,8 @@ export const Services: CollectionConfig = {
                 SubmissionServiceStepBlock,
                 SummaryServiceStepBlock,
                 BirthConsultationFormBlock,
-                CertificateConsultationServiceStepBlock,
-                ExemploServiceStepBlock,
+                ConsultCertificateFormCVCServiceStepBlock,
+                CertificatePreviewCVCServiceStepBlock,
               ],
             },
           ],
