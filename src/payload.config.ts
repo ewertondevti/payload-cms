@@ -71,6 +71,7 @@ import { TextBoxBlock } from './blocks/Form/TextBox/TextBoxBlock'
 import { PriorWeddingChildrenDataBlock } from './blocks/Form/Cidadao/PriorWeddingChildrenData/PriorWeddingChildrenDataBlock'
 import { TwinBirthDataBlock } from './blocks/Form/Cidadao/TwinBirthData/TwinBirthDataBlock'
 import { SelectBlock } from './blocks/Form/Select/SelectBlock'
+import { CitizenshipCardRequestBlock } from './blocks/Form/Cidadao/CitizenshipCardRequest/CitizenshipCardRequestBlock'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -204,6 +205,7 @@ export default buildConfig({
         ParentIdentificationBlock,
         FlexRadioButtonGroupBlock,
         PriorWeddingChildrenDataBlock,
+        CitizenshipCardRequestBlock,
         TwinBirthDataBlock,
         SecondParentBlock,
       },
