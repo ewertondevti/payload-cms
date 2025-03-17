@@ -37,7 +37,7 @@ import { searchFields } from '@/search/fieldOverrides'
 import { fileURLToPath } from 'url'
 import { BirthCertificateBlock } from './blocks/Form/BirthCertificateData/BirthCertificateDataBlock'
 import { DateOrYearPickerBlock } from './blocks/Form/DateOrYearPicker/DateOrYearPickerBlock'
-import { BirthplaceBlock } from './blocks/Form/Birthplace/BirthplaceBlock'
+import { LocationBlock } from './blocks/Form/Location/LocationBlock'
 import { ContactBlock } from './blocks/Form/ContactData/ContactDataBlock'
 import { CustomTextfieldBlock } from './blocks/Form/CostumTextfield/CustomTextfieldBlock'
 import { CustomMessageBlock } from './blocks/Form/CustomMessage/CustomMessageBlock'
@@ -69,6 +69,7 @@ import { TextBoxBlock } from './blocks/Form/TextBox/TextBoxBlock'
 import { PriorWeddingChildrenDataBlock } from './blocks/Form/Cidadao/PriorWeddingChildrenData/PriorWeddingChildrenDataBlock'
 import { TwinBirthDataBlock } from './blocks/Form/Cidadao/TwinBirthData/TwinBirthDataBlock'
 import { SelectBlock } from './blocks/Form/Select/SelectBlock'
+import { CitizenshipCardRequestBlock } from './blocks/Form/Cidadao/CitizenshipCardRequest/CitizenshipCardRequestBlock'
 import { AddressDataBlock } from './blocks/Form/Address/AddressDataBlock'
 import { FormSpaceBlock } from './blocks/Form/FormSpace/FormSpaceBlock'
 
@@ -197,11 +198,12 @@ export default buildConfig({
         TitleBlock,
         SelectWithApiBlock,
         IdentificationDataBlock,
-        BirthplaceBlock,
+        BirthplaceBlock: LocationBlock,
         BirthConsultationBlock,
         ParentIdentificationBlock,
         FlexRadioButtonGroupBlock,
         PriorWeddingChildrenDataBlock,
+        CitizenshipCardRequestBlock,
         TwinBirthDataBlock,
         SecondParentBlock,
         AddressDataBlock,

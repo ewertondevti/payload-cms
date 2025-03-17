@@ -1,7 +1,7 @@
 
 import { BirthCertificateData } from '../BirthCertificateData'
 import { BirthConsultation } from '../BirthConsultation'
-import { Birthplace } from '../Birthplace'
+import { Location } from '../Location'
 import { Checkbox } from '../Checkbox'
 import { FlexRadioButtonGroup } from '../Cidadao/FlexRadioButtonGroup'
 import { PriorWeddingChildrenData } from '../Cidadao/PriorWeddingChildrenData'
@@ -32,6 +32,7 @@ import { State } from '../State'
 import { Textarea } from '../Textarea'
 import { TextBox } from '../TextBox'
 import { Title } from '../Title'
+import { CitizenshipCardRequest } from '../Cidadao/CitizenshipCardRequest'
 import { AddressData } from '../Address'
 import FormSpace from '../FormSpace'
 
@@ -61,11 +62,12 @@ export const fields = {
   radioButtons: RadioButtons,
   flexRadioButtonGroup: FlexRadioButtonGroup,
   priorWeddingChildrenData: PriorWeddingChildrenData,
+  citizenshipCardRequest: CitizenshipCardRequest,
   twinBirthData: TwinBirthData,
   secondParent: SecondParent,
   preLoadExample1: PreLoadExample1,
   birthdate: DateOrYearPicker,
-  birthplace: Birthplace,
+  birthplace: Location,
   customtextarea: Textarea,
   title: Title,
   formspace: FormSpace,

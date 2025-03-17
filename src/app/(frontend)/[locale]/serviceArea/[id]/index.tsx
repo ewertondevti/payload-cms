@@ -28,11 +28,10 @@ import { FormProvider, useForm } from 'react-hook-form'
 // import { useSearchParams } from 'next/navigation'
 
 import { BirthConsultationForm } from '@/blocks/BirthConsultationForm'
-import { CertificateConsultation } from '@/blocks/CertificateConsultation'
+import { CertificatePreviewCVC } from '@/blocks/CertificatePreviewCVC'
+import { ConsultFormCVC } from '@/blocks/ConsultFormCVC'
 import { FormBlock } from '@/blocks/Form/Component'
-import { GetCertidaoResponse } from '@/models/certificate'
 import { Service } from '@/payload-types'
-import { getCertidao } from '@/services/certificateServices'
 
 type BlockTypeProps = {
   content: string
@@ -41,8 +40,9 @@ type BlockTypeProps = {
   submission: string
   summary: string
   exemplo: string
-  certificateconsultation: string
   birthbonsultationForm: string
+  certificatepreviewcvc: string
+  consultcertificateformcvc: string
 }
 
 const BlockType: BlockTypeProps = {
@@ -52,8 +52,9 @@ const BlockType: BlockTypeProps = {
   submission: 'submission-service-steps',
   summary: 'summary-service-steps',
   exemplo: 'exemplo1ServiceSteps',
-  certificateconsultation: 'certificate-consultation',
   birthbonsultationForm: 'birthbonsultationForm',
+  certificatepreviewcvc: 'certificate-preview-cvc',
+  consultcertificateformcvc: 'consult-certificate-form-cvc',
 }
 
 type Args = {
@@ -81,8 +82,6 @@ export default function ServiceStep({ params }: Args) {
   const validateFields = useRef<(() => Promise<boolean>) | null>(null)
   const [service, setService] = useState<Service>()
   const { showCustomToast } = useToast()
-  const [certidaoResponse, setCertidaoResponse] = useState<GetCertidaoResponse>()
-  const [isConsultingFetching, setIsConsultingFetching] = useState(false)
   const [data, setData] = useState({
     mensagem: {
       codigo: 0,
@@ -249,8 +248,6 @@ export default function ServiceStep({ params }: Args) {
 
   const onSubmitStep = useCallback(
     async (data: Data) => {
-      setIsConsultingFetching(true)
-
       const dataToSend = Object.entries(data).map(([name, value]) => ({
         field: name,
         value,
@@ -291,15 +288,6 @@ export default function ServiceStep({ params }: Args) {
       }
 
       await handleGetServiceContent()
-
-      if (Object.keys(data).length) {
-        const code = `${data.accessCode1}-${data.accessCode2}-${data.accessCode3}`
-
-        const res = await getCertidao(code)
-
-        setIsConsultingFetching(false)
-        setCertidaoResponse(res)
-      }
 
       if (stepIndex !== steps.steps.length - 1) {
         changeToNextStep(stepIndex + 1)
@@ -347,14 +335,6 @@ export default function ServiceStep({ params }: Args) {
             orderId={serviceOrder?.id}
           />
         )
-      case BlockType.certificateconsultation:
-        return (
-          <CertificateConsultation
-            {...steps.steps[stepIndex]}
-            certidaoResponse={certidaoResponse}
-            isLoading={isConsultingFetching}
-          />
-        )
 
       case BlockType.birthbonsultationForm:
         return (
@@ -366,6 +346,13 @@ export default function ServiceStep({ params }: Args) {
             stepIndex={stepIndex}
           />
         )
+
+      case BlockType.certificatepreviewcvc:
+        return <CertificatePreviewCVC {...steps.steps[stepIndex]} {...formMethods} />
+
+      case BlockType.consultcertificateformcvc:
+        return <ConsultFormCVC {...steps.steps[stepIndex]} {...formMethods} errors={errors} />
+
       default:
         return (
           <FormBlock
@@ -404,7 +391,7 @@ export default function ServiceStep({ params }: Args) {
           <div className="w-fit flex flex-col gap-16">
             {StepRenderer(steps.steps[stepIndex]?.blockType)}
 
-            <div className="flex justify-between px-8">
+            <div className="flex justify-between">
               <div className="flex gap-8">
                 {stepIndex !== 0 && steps.steps[stepIndex]?.blockType !== BlockType.submission && (
                   <>
@@ -447,11 +434,11 @@ export default function ServiceStep({ params }: Args) {
                 steps.steps[stepIndex]?.blockType === BlockType.summary ? (
                   <Button
                     children={
-                      stepIndex == 0
+                      stepIndex === 0
                         ? steps && !isNew
                           ? 'Continuar'
                           : 'Começar'
-                        : stepIndex == steps.steps.length - 1
+                        : stepIndex === steps.steps.length - 1
                           ? 'Submeter'
                           : 'Seguinte'
                     }
@@ -512,14 +499,23 @@ export default function ServiceStep({ params }: Args) {
                     leadingIcon="agora-line-arrow-right-circle"
                     leadingIconHover="agora-solid-arrow-right-circle"
                   />
+                ) : stepIndex < steps.steps.length - 1 ? (
+                  <Button
+                    form={steps.steps[stepIndex]?.form?.id}
+                    children="Seguinte"
+                    hasIcon
+                    leadingIcon="agora-line-arrow-right-circle"
+                    leadingIconHover="agora-solid-arrow-right-circle"
+                    onClick={() => changeToNextStep(stepIndex + 1)}
+                  />
                 ) : (
                   // ) : steps.steps[stepIndex]?.blockType === BlockType.exemplo ? (
                   //   <></>
                   <Button
                     form={steps.steps[stepIndex]?.form?.id}
                     type="submit"
-                    children={stepIndex === steps.steps.length - 1 ? 'Submeter' : 'Seguinte'}
-                    hasIcon={true}
+                    children={stepIndex < steps.steps.length - 1 ? 'Seguinte' : 'Submeter'}
+                    hasIcon
                     leadingIcon="agora-line-arrow-right-circle"
                     leadingIconHover="agora-solid-arrow-right-circle"
                   />

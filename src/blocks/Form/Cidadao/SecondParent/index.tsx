@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, ReactNode, useEffect, useState } from 'react'
 import stateConfig, { RelationshipOptions, SecondParentStateValue } from './stateConfig'
 import { FlexRadioButtonGroup } from '../FlexRadioButtonGroup'
 import { AtomicField } from '../types'
@@ -7,6 +7,7 @@ import { LoadDataCard } from '../LoadDataCard'
 import { ParentIdentification, ParentIdentificationProps } from '../../ParentIdentification'
 import { ContactData, ContactDataProps } from '../../ContactData'
 import { Filiation, FiliationProps } from '../../Filiation'
+import { Anchor, useToastContext } from '@ama-pt/agora-design-system'
 
 const relationshipOptions: AtomicField<RelationshipOptions>[] = [
   { label: 'Não conhece o segundo progenitor', value: 'unknown' },
@@ -49,6 +50,17 @@ export const SecondParent: FC<
   const [currentState, setCurrentState] = useState<SecondParentStateValue>({})
   const [perished, setPerished] = useState<boolean>()
   const [foreignRegistration, setForeignRegistration] = useState<boolean>()
+  const { showToast } = useToastContext()
+
+  const showInfoToast = (info: ReactNode) => {
+    showToast({
+      id: '',
+      title: '',
+      description: info,
+      type: 'info',
+      closeLabel: 'Fechar',
+    })
+  }
 
   useEffect(() => {
     setPerished(undefined)
@@ -57,6 +69,32 @@ export const SecondParent: FC<
   useEffect(() => {
     setForeignRegistration(undefined)
   }, [relationship, perished])
+
+  useEffect(() => {
+    if (perished) {
+      showInfoToast(
+        'O segundo progenitor foi dado como falecido. Deste modo, o pedido de registo não será sujeito a confirmação pelo segundo progenitor.',
+      )
+    } else if (perished !== undefined) {
+      showInfoToast(
+        <div className="flex flex-col gap-8">
+          <span>
+            Os campos desta página podem ser preenchidos através da leitura do Cartão de Cidadão,
+            usando um leitor de cartões. Certifique-se que tem o Plugin Autenticação.Gov a correr no
+            seu computador.
+          </span>
+          <Anchor
+            hasIcon
+            inline
+            trailingIcon="agora-line-arrow-right-circle"
+            trailingIconHover="agora-solid-arrow-right-circle"
+          >
+            https://autenticacao.gov.pt/
+          </Anchor>
+        </div>,
+      )
+    }
+  }, [perished])
 
   useEffect(() => {
     setCurrentState(

@@ -1,10 +1,11 @@
-import { GetCertidaoResponse } from '@/models/certificate'
+import { ResponseData } from '@/models/certificate'
 import axios from 'axios'
 
-export const getCertidao = async (codigoAcesso: string) => {
-  const url = process.env.NEXT_PUBLIC_CONSULT_URL
+export const getCertificate = async (apiurl: string, codigoAcesso: string) => {
+  const token = process.env.NEXT_PUBLIC_USER_TOKEN
 
-  const { data } = await axios.get<GetCertidaoResponse>(String(url), { params: { codigoAcesso } })
-
+  const { data } = await axios.post<ResponseData>(String(apiurl), codigoAcesso, {
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+  })
   return data
 }

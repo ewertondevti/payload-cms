@@ -1,7 +1,7 @@
 import { Block } from 'payload'
 
-export const BirthplaceBlock: Block = {
-  slug: 'birthplace',
+export const LocationBlock: Block = {
+  slug: 'location',
   fields: [
     {
       name: 'label',
@@ -12,7 +12,7 @@ export const BirthplaceBlock: Block = {
     },
   ],
   labels: {
-    plural: 'Naturalidade',
-    singular: 'Naturalidade',
+    plural: 'Locations',
+    singular: 'Location',
   },
 }

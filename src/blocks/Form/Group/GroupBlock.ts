@@ -1,7 +1,7 @@
 import { Block, Field } from 'payload'
 import { BirthCertificateBlock } from '../BirthCertificateData/BirthCertificateDataBlock'
 import { DateOrYearPickerBlock } from '../DateOrYearPicker/DateOrYearPickerBlock'
-import { BirthplaceBlock } from '../Birthplace/BirthplaceBlock'
+import { LocationBlock } from '../Location/LocationBlock'
 import { ContactBlock } from '../ContactData/ContactDataBlock'
 import { CustomTextfieldBlock } from '../CostumTextfield/CustomTextfieldBlock'
 import { CustomMessageBlock } from '../CustomMessage/CustomMessageBlock'
@@ -25,8 +25,9 @@ import { PriorWeddingChildrenDataBlock } from '../Cidadao/PriorWeddingChildrenDa
 import { TwinBirthDataBlock } from '../Cidadao/TwinBirthData/TwinBirthDataBlock'
 import { SelectBlock } from '../Select/SelectBlock'
 import { DropdownBlock } from '../Dropdown/DropdownBlock'
-import { AddressDataBlock } from '../Address/AddressDataBlock'
+import { CitizenshipCardRequestBlock } from '../Cidadao/CitizenshipCardRequest/CitizenshipCardRequestBlock'
 import { FormSpaceBlock } from '../FormSpace/FormSpaceBlock'
+import { AddressDataBlock } from '../Address/AddressDataBlock'
 
 const name: Field = {
   name: 'name',
@@ -65,9 +66,10 @@ const arrayFields: Field = {
     SelectBlock,
     SelectWithApiBlock,
     IdentificationDataBlock,
-    BirthplaceBlock,
+    LocationBlock,
     FlexRadioButtonGroupBlock,
     PriorWeddingChildrenDataBlock,
+    CitizenshipCardRequestBlock,
     TwinBirthDataBlock,
     SecondParentBlock,
   ],

@@ -1,7 +1,7 @@
 import { BirthCertificateData } from './BirthCertificateData'
 import { BirthConsultation } from './BirthConsultation'
 import { DateOrYearPicker } from './DateOrYearPicker'
-import { Birthplace } from './Birthplace'
+import { Location } from './Location'
 import { Checkbox } from './Checkbox'
 import { ContactData } from './ContactData'
 import { Country } from './Country'
@@ -33,8 +33,9 @@ import { TwinBirthData } from './Cidadao/TwinBirthData'
 import { PriorWeddingChildrenData } from './Cidadao/PriorWeddingChildrenData'
 import wrapBlock from './wrapBlock'
 import { Group } from './Group'
-import { AddressData } from './Address'
+import { CitizenshipCardRequest } from './Cidadao/CitizenshipCardRequest'
 import FormSpace from './FormSpace'
+import { AddressData } from './Address'
 
 export const fields = {
   customMessage: CustomMessage,
@@ -63,11 +64,12 @@ export const fields = {
   radioButtons: RadioButtons,
   flexRadioButtonGroup: FlexRadioButtonGroup,
   priorWeddingChildrenData: PriorWeddingChildrenData,
+  citizenshipCardRequest: CitizenshipCardRequest,
   twinBirthData: wrapBlock(TwinBirthData),
   secondParent: SecondParent,
   preLoadExample1: PreLoadExample1,
   birthdate: DateOrYearPicker,
-  birthplace: Birthplace,
+  birthplace: Location,
   customtextarea: Textarea,
   title: Title,
   parentaddress: ParentAddress,

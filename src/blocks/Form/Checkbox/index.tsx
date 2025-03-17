@@ -1,47 +1,30 @@
-import type { CheckboxField } from '@payloadcms/plugin-form-builder/types'
-import type { FieldErrorsImpl, UseFormReturn } from 'react-hook-form'
+import { useForm, type FieldErrorsImpl, type UseFormReturn } from 'react-hook-form'
 
-import { Checkbox as CheckboxUi } from '@ama-pt/agora-design-system'
+import { Checkbox as CheckboxUi, CheckboxProps } from '@ama-pt/agora-design-system'
 
 import React from 'react'
 
 import { Width } from '../Width'
 
 export const Checkbox: React.FC<
-  CheckboxField & {
-    errors: Partial<
-      FieldErrorsImpl<{
-        [x: string]: any
-      }>
-    >
-  } & UseFormReturn
-> = ({
-  name,
-  defaultValue,
-  errors,
-  label,
-  register,
-  setValue,
-  required: requiredFromProps,
-  width,
-}) => {
-  const props = register(name, {
-    required: requiredFromProps ? 'Campo de preenchimento obrigatório.' : false,
-  })
-
+  { name: string } & CheckboxProps & {
+      errors: Partial<
+        FieldErrorsImpl<{
+          [x: string]: any
+        }>
+      >
+    }
+> = ({ name, errors, width, required, ...rest }) => {
+  const { register } = useForm()
   return (
     <Width width={width}>
-     
-
       <CheckboxUi
-        defaultChecked={defaultValue}
-        label={label}
+        {...rest}
         id={name}
-        {...props}
-        onChange={(event) => {
-          setValue(props.name, event.target.checked)
-        }}
-        required={requiredFromProps}
+        {...register(name, {
+          required: required ? 'Campo de preenchimento obrigatório.' : false,
+        })}
+        required={required}
         hasError={errors[name] ? true : false}
         hasFeedback={true}
         feedbackState={'danger'}
