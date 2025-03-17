@@ -33,6 +33,7 @@ import { State } from '../State'
 import { Textarea } from '../Textarea'
 import { TextBox } from '../TextBox'
 import { Title } from '../Title'
+import { CitizenshipCardRequest } from '../Cidadao/CitizenshipCardRequest'
 
 export const fields = {
   customMessage: CustomMessage,
@@ -61,6 +62,7 @@ export const fields = {
   radioButtons: RadioButtons,
   flexRadioButtonGroup: FlexRadioButtonGroup,
   priorWeddingChildrenData: PriorWeddingChildrenData,
+  citizenshipCardRequest: CitizenshipCardRequest,
   twinBirthData: TwinBirthData,
   secondParent: SecondParent,
   preLoadExample1: PreLoadExample1,

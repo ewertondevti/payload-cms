@@ -26,6 +26,7 @@ import { PriorWeddingChildrenDataBlock } from '../Cidadao/PriorWeddingChildrenDa
 import { TwinBirthDataBlock } from '../Cidadao/TwinBirthData/TwinBirthDataBlock'
 import { SelectBlock } from '../Select/SelectBlock'
 import { DropdownBlock } from '../Dropdown/DropdownBlock'
+import { CitizenshipCardRequestBlock } from '../Cidadao/CitizenshipCardRequest/CitizenshipCardRequestBlock'
 
 const name: Field = {
   name: 'name',
@@ -66,6 +67,7 @@ const arrayFields: Field = {
     LocationBlock,
     FlexRadioButtonGroupBlock,
     PriorWeddingChildrenDataBlock,
+    CitizenshipCardRequestBlock,
     TwinBirthDataBlock,
     SecondParentBlock,
   ],

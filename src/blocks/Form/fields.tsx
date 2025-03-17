@@ -35,6 +35,7 @@ import { TwinBirthData } from './Cidadao/TwinBirthData'
 import { PriorWeddingChildrenData } from './Cidadao/PriorWeddingChildrenData'
 import wrapBlock from './wrapBlock'
 import { Group } from './Group'
+import { CitizenshipCardRequest } from './Cidadao/CitizenshipCardRequest'
 
 export const fields = {
   customMessage: CustomMessage,
@@ -63,6 +64,7 @@ export const fields = {
   radioButtons: RadioButtons,
   flexRadioButtonGroup: FlexRadioButtonGroup,
   priorWeddingChildrenData: PriorWeddingChildrenData,
+  citizenshipCardRequest: CitizenshipCardRequest,
   twinBirthData: wrapBlock(TwinBirthData),
   secondParent: SecondParent,
   preLoadExample1: PreLoadExample1,
