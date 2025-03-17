@@ -12,37 +12,37 @@ importers:
         specifier: ^2.1.0
         version: 2.2.2(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@payloadcms/db-postgres':
-        specifier: ^3.24.0
+        specifier: 3.24.0
         version: 3.24.0(@types/react@19.0.1)(payload@3.24.0(graphql@16.10.0)(typescript@5.7.2))(react@19.0.0)
       '@payloadcms/live-preview-react':
-        specifier: ^3.24.0
+        specifier: 3.24.0
         version: 3.24.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@payloadcms/next':
-        specifier: ^3.24.0
+        specifier: 3.24.0
         version: 3.24.0(@types/react@19.0.1)(graphql@16.10.0)(monaco-editor@0.52.2)(next@15.2.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.85.1))(payload@3.24.0(graphql@16.10.0)(typescript@5.7.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2)
       '@payloadcms/payload-cloud':
-        specifier: ^3.24.0
+        specifier: 3.24.0
         version: 3.24.0(payload@3.24.0(graphql@16.10.0)(typescript@5.7.2))
       '@payloadcms/plugin-form-builder':
-        specifier: ^3.24.0
+        specifier: 3.24.0
         version: 3.24.0(@types/react@19.0.1)(monaco-editor@0.52.2)(next@15.2.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.85.1))(payload@3.24.0(graphql@16.10.0)(typescript@5.7.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2)
       '@payloadcms/plugin-nested-docs':
-        specifier: ^3.24.0
+        specifier: 3.24.0
         version: 3.24.0(payload@3.24.0(graphql@16.10.0)(typescript@5.7.2))
       '@payloadcms/plugin-redirects':
-        specifier: ^3.24.0
+        specifier: 3.24.0
         version: 3.24.0(payload@3.24.0(graphql@16.10.0)(typescript@5.7.2))
       '@payloadcms/plugin-search':
-        specifier: ^3.24.0
+        specifier: 3.24.0
         version: 3.24.0(@types/react@19.0.1)(graphql@16.10.0)(monaco-editor@0.52.2)(next@15.2.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.85.1))(payload@3.24.0(graphql@16.10.0)(typescript@5.7.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2)
       '@payloadcms/plugin-seo':
-        specifier: ^3.24.0
+        specifier: 3.24.0
         version: 3.24.0(@types/react@19.0.1)(monaco-editor@0.52.2)(next@15.2.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.85.1))(payload@3.24.0(graphql@16.10.0)(typescript@5.7.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2)
       '@payloadcms/richtext-lexical':
-        specifier: ^3.24.0
+        specifier: 3.24.0
         version: 3.24.0(@faceless-ui/modal@3.0.0-beta.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@faceless-ui/scroll-info@2.0.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@payloadcms/next@3.24.0(@types/react@19.0.1)(graphql@16.10.0)(monaco-editor@0.52.2)(next@15.2.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.85.1))(payload@3.24.0(graphql@16.10.0)(typescript@5.7.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2))(@types/react@19.0.1)(monaco-editor@0.52.2)(next@15.2.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.85.1))(payload@3.24.0(graphql@16.10.0)(typescript@5.7.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2)(yjs@13.6.24)
       '@payloadcms/ui':
-        specifier: ^3.24.0
+        specifier: 3.24.0
         version: 3.24.0(@types/react@19.0.1)(monaco-editor@0.52.2)(next@15.2.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.85.1))(payload@3.24.0(graphql@16.10.0)(typescript@5.7.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2)
       '@radix-ui/react-checkbox':
         specifier: ^1.0.4
@@ -92,6 +92,9 @@ importers:
       lucide-react:
         specifier: ^0.378.0
         version: 0.378.0(react@19.0.0)
+      moment:
+        specifier: ^2.30.1
+        version: 2.30.1
       next:
         specifier: ^15.1.0
         version: 15.2.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.85.1)
@@ -3752,6 +3755,9 @@ packages:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
     engines: {node: '>=10'}
     hasBin: true
+
+  moment@2.30.1:
+    resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
 
   monaco-editor@0.52.2:
     resolution: {integrity: sha512-GEQWEZmfkOGLdd3XK8ryrfWz3AIP8YymVXiPHEdewrUq7mh0qrKrfHLNCXcbB6sTnMLnOZ3ztSiKcciFUkIJwQ==}
@@ -9411,6 +9417,8 @@ snapshots:
   mkdirp-classic@0.5.3: {}
 
   mkdirp@1.0.4: {}
+
+  moment@2.30.1: {}
 
   monaco-editor@0.52.2: {}
 
