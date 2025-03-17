@@ -62,7 +62,7 @@ export const CertificatePreviewCVC: FC<Props> = ({
 
   useEffect(() => {
     hideLoader()
-  }, [base64file])
+  }, [base64file, hasError])
 
   return (
     <LoaderDialogProvider>

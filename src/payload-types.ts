@@ -1042,7 +1042,7 @@ export interface Form {
                       label: string;
                       id?: string | null;
                       blockName?: string | null;
-                      blockType: 'birthplace';
+                      blockType: 'location';
                     }
                   | {
                       name: string;
@@ -1171,7 +1171,7 @@ export interface Form {
             label: string;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'birthplace';
+            blockType: 'location';
           }
         | {
             title: string;
@@ -2770,7 +2770,7 @@ export interface FormsSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
-                    birthplace?:
+                    location?:
                       | T
                       | {
                           label?: T;
@@ -2929,7 +2929,7 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        birthplace?:
+        location?:
           | T
           | {
               label?: T;
