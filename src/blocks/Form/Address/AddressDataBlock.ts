@@ -21,6 +21,10 @@ const identificationType: Field = {
    label: 'Morada de casamento',
    value: 'wedding-data',
   },
+  {
+   label: 'Local e data do casamento na conservatoria',
+   value: 'wedding-place-data',
+  },
  ],
  defaultValue: 'identification-data',
  admin: { width: '50%' },
