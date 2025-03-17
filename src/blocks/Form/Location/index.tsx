@@ -4,24 +4,17 @@ import type { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form'
 import { SelectWithApi, SelectWithAPIProps } from '../SelectWithAPI'
 import { Width } from '../Width'
 
-export type LocationProps = UseFormReturn & {
+export type LocationProps = {
   name: string
   width: number
   apidomain: string
   required: boolean
-  errors: FieldErrors<FieldValues>
   label: string
 }
 
-export const Location: React.FC<LocationProps> = ({
-  register,
-  watch,
-  required,
-  errors,
-  label,
-  name,
-  ...props
-}) => {
+export const Location: React.FC<
+  LocationProps & UseFormReturn & { errors: FieldErrors<FieldValues> }
+> = ({ register, watch, required, errors, label, name, ...props }) => {
   const selectedCountry: string = watch(`${name}-country`)
   const isPtSelected = selectedCountry === 'Portugal'
 
