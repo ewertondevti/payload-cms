@@ -70,6 +70,7 @@ import { PriorWeddingChildrenDataBlock } from './blocks/Form/Cidadao/PriorWeddin
 import { TwinBirthDataBlock } from './blocks/Form/Cidadao/TwinBirthData/TwinBirthDataBlock'
 import { SelectBlock } from './blocks/Form/Select/SelectBlock'
 import { AddressDataBlock } from './blocks/Form/Address/AddressDataBlock'
+import { FormSpaceBlock } from './blocks/Form/FormSpace/FormSpaceBlock'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -203,7 +204,8 @@ export default buildConfig({
         PriorWeddingChildrenDataBlock,
         TwinBirthDataBlock,
         SecondParentBlock,
-        AddressDataBlock
+        AddressDataBlock,
+        FormSpaceBlock
       },
       formOverrides: {
         fields: ({ defaultFields }) => {

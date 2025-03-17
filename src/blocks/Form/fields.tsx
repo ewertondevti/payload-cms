@@ -27,13 +27,14 @@ import { Textarea } from './Textarea'
 import { Title } from './Title'
 import { FlexRadioButtonGroup } from './Cidadao/FlexRadioButtonGroup'
 import { ParentIdentification } from './ParentIdentification'
-import { ParentAddress } from './Address/ParentAddress/ParentAddress'
+import { ParentAddress } from './Address/ParentAddress'
 import { SecondParent } from './Cidadao/SecondParent'
 import { TwinBirthData } from './Cidadao/TwinBirthData'
 import { PriorWeddingChildrenData } from './Cidadao/PriorWeddingChildrenData'
 import wrapBlock from './wrapBlock'
 import { Group } from './Group'
 import { AddressData } from './Address'
+import FormSpace from './FormSpace'
 
 export const fields = {
   customMessage: CustomMessage,
@@ -49,6 +50,7 @@ export const fields = {
   textBox: TextBox,
   textarea: Textarea,
   nif: Nif,
+  formspace: FormSpace,
   selectWithApi: SelectWithApi,
   addressdata: AddressData,
   birthCertificateData: BirthCertificateData,
@@ -73,4 +75,5 @@ export const fields = {
   group: Group,
   birthconsultation: BirthConsultation,
   parentidentification: ParentIdentification,
+
 }

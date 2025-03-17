@@ -20,7 +20,7 @@ import { Message } from '../Message'
 import { Nationality } from '../Nationality'
 import { Nif } from '../Nif'
 import { NumberInput } from '../NumberInput'
-import { ParentAddress } from '../Address/ParentAddress/ParentAddress'
+import { ParentAddress } from '../Address/ParentAddress'
 import { ParentIdentification } from '../ParentIdentification'
 import { PhoneNumber } from '../PhoneNumber'
 import { PreLoadExample1 } from '../PreloadExample1'
@@ -33,6 +33,7 @@ import { Textarea } from '../Textarea'
 import { TextBox } from '../TextBox'
 import { Title } from '../Title'
 import { AddressData } from '../Address'
+import FormSpace from '../FormSpace'
 
 export const fields = {
   customMessage: CustomMessage,
@@ -67,6 +68,7 @@ export const fields = {
   birthplace: Birthplace,
   customtextarea: Textarea,
   title: Title,
+  formspace: FormSpace,
   parentaddress: ParentAddress,
   identificationData: IdentificationData,
   birthconsultation: BirthConsultation,

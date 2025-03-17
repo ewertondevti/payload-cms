@@ -25,7 +25,7 @@ export const IdentificationAddress: React.FC<
  const [selectedCountry, setSelectedCountry] = useState<string>('PT')
 
  return (
-  <>
+  <div>
    <Select
     id={'cvtResidencia'}
     name={'cvtResidencia'}
@@ -163,6 +163,6 @@ export const IdentificationAddress: React.FC<
      {...register('cvtEstrangeira')}
     />
    )}
-  </>
+  </div>
  )
 }

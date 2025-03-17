@@ -26,6 +26,7 @@ import { TwinBirthDataBlock } from '../Cidadao/TwinBirthData/TwinBirthDataBlock'
 import { SelectBlock } from '../Select/SelectBlock'
 import { DropdownBlock } from '../Dropdown/DropdownBlock'
 import { AddressDataBlock } from '../Address/AddressDataBlock'
+import { FormSpaceBlock } from '../FormSpace/FormSpaceBlock'
 
 const name: Field = {
   name: 'name',
@@ -55,6 +56,7 @@ const arrayFields: Field = {
     SelectBlock,
     NationalityBlock,
     PhoneNumberBlock,
+    FormSpaceBlock,
     PreLoadExample1Block,
     DateOrYearPickerBlock,
     TextAreaBlock,

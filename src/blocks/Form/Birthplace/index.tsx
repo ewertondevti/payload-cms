@@ -5,12 +5,12 @@ import { SelectWithApi, SelectWithAPIProps } from '../SelectWithAPI'
 import { Width } from '../Width'
 
 export type BirthplaceProps = UseFormReturn & {
-  name: string
-  width: number
+  name?: string
+  width?: number
   apidomain: string
-  required: boolean
+  required?: boolean
   errors: FieldErrors<FieldValues>
-  label: string
+  label?: string
 }
 
 export const Birthplace: React.FC<BirthplaceProps> = ({

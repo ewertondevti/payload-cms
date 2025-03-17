@@ -866,15 +866,9 @@ export interface Form {
                     }
                   | {
                       title?: string | null;
-                      identificationType?: ('identification-data' | 'parent-data') | null;
-                      nifIsVisible?: boolean | null;
-                      nifIsRequired?: boolean | null;
-                      parentAddress?: {
-                        countryOfResidence?: string | null;
-                        addressType?: string | null;
-                        wayDesignation?: string | null;
-                        doorNumber?: string | null;
-                      };
+                      identificationType?:
+                        | ('identification-data' | 'parent-data' | 'place-date' | 'wedding-data')
+                        | null;
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'addressdata';
@@ -955,6 +949,11 @@ export interface Form {
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'phoneNumber';
+                    }
+                  | {
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'formspace';
                     }
                   | {
                       simulatePreload?: boolean | null;
@@ -1187,61 +1186,6 @@ export interface Form {
             blockType: 'birthconsultation';
           }
         | {
-            countryOfResidence: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            addressType: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            wayDesignation: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            doorNumber: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            floor: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            side: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            district: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            municipality: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            parish: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            postalCode: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'parentaddress';
-          }
-        | {
             firstName: {
               label: string;
               placeholder: string;
@@ -1379,18 +1323,15 @@ export interface Form {
           }
         | {
             title?: string | null;
-            identificationType?: ('identification-data' | 'parent-data') | null;
-            nifIsVisible?: boolean | null;
-            nifIsRequired?: boolean | null;
-            parentAddress?: {
-              countryOfResidence?: string | null;
-              addressType?: string | null;
-              wayDesignation?: string | null;
-              doorNumber?: string | null;
-            };
+            identificationType?: ('identification-data' | 'parent-data' | 'place-date' | 'wedding-data') | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'addressdata';
+          }
+        | {
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'formspace';
           }
       )[]
     | null;
@@ -2603,16 +2544,6 @@ export interface FormsSelect<T extends boolean = true> {
                       | {
                           title?: T;
                           identificationType?: T;
-                          nifIsVisible?: T;
-                          nifIsRequired?: T;
-                          parentAddress?:
-                            | T
-                            | {
-                                countryOfResidence?: T;
-                                addressType?: T;
-                                wayDesignation?: T;
-                                doorNumber?: T;
-                              };
                           id?: T;
                           blockName?: T;
                         };
@@ -2698,6 +2629,12 @@ export interface FormsSelect<T extends boolean = true> {
                           readOnly?: T;
                           searchable?: T;
                           width?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    formspace?:
+                      | T
+                      | {
                           id?: T;
                           blockName?: T;
                         };
@@ -2976,82 +2913,6 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        parentaddress?:
-          | T
-          | {
-              countryOfResidence?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              addressType?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              wayDesignation?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              doorNumber?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              floor?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              side?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              district?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              municipality?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              parish?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              postalCode?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
         parentidentification?:
           | T
           | {
@@ -3240,16 +3101,12 @@ export interface FormsSelect<T extends boolean = true> {
           | {
               title?: T;
               identificationType?: T;
-              nifIsVisible?: T;
-              nifIsRequired?: T;
-              parentAddress?:
-                | T
-                | {
-                    countryOfResidence?: T;
-                    addressType?: T;
-                    wayDesignation?: T;
-                    doorNumber?: T;
-                  };
+              id?: T;
+              blockName?: T;
+            };
+        formspace?:
+          | T
+          | {
               id?: T;
               blockName?: T;
             };
