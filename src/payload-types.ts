@@ -6,65 +6,10 @@
  * and re-run `payload generate:types` to regenerate this file.
  */
 
-/**
- * Supported timezones in IANA format.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "supportedTimezones".
- */
-export type SupportedTimezones =
-  | 'Pacific/Midway'
-  | 'Pacific/Niue'
-  | 'Pacific/Honolulu'
-  | 'Pacific/Rarotonga'
-  | 'America/Anchorage'
-  | 'Pacific/Gambier'
-  | 'America/Los_Angeles'
-  | 'America/Tijuana'
-  | 'America/Denver'
-  | 'America/Phoenix'
-  | 'America/Chicago'
-  | 'America/Guatemala'
-  | 'America/New_York'
-  | 'America/Bogota'
-  | 'America/Caracas'
-  | 'America/Santiago'
-  | 'America/Buenos_Aires'
-  | 'America/Sao_Paulo'
-  | 'Atlantic/South_Georgia'
-  | 'Atlantic/Azores'
-  | 'Atlantic/Cape_Verde'
-  | 'Europe/London'
-  | 'Europe/Berlin'
-  | 'Africa/Lagos'
-  | 'Europe/Athens'
-  | 'Africa/Cairo'
-  | 'Europe/Moscow'
-  | 'Asia/Riyadh'
-  | 'Asia/Dubai'
-  | 'Asia/Baku'
-  | 'Asia/Karachi'
-  | 'Asia/Tashkent'
-  | 'Asia/Calcutta'
-  | 'Asia/Dhaka'
-  | 'Asia/Almaty'
-  | 'Asia/Jakarta'
-  | 'Asia/Bangkok'
-  | 'Asia/Shanghai'
-  | 'Asia/Singapore'
-  | 'Asia/Tokyo'
-  | 'Asia/Seoul'
-  | 'Australia/Sydney'
-  | 'Pacific/Guam'
-  | 'Pacific/Noumea'
-  | 'Pacific/Auckland'
-  | 'Pacific/Fiji';
-
 export interface Config {
   auth: {
     users: UserAuthOperations;
   };
-  blocks: {};
   collections: {
     areas: Area;
     categories: Category;
@@ -684,13 +629,6 @@ export interface Form {
             label?: string | null;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'address';
-          }
-        | {
-            name: string;
-            label?: string | null;
-            id?: string | null;
-            blockName?: string | null;
             blockType: 'birthCertificateData';
           }
         | {
@@ -945,11 +883,13 @@ export interface Form {
                       blockType: 'customtext';
                     }
                   | {
-                      name: string;
-                      label?: string | null;
+                      title?: string | null;
+                      identificationType?:
+                        | ('identification-data' | 'parent-data' | 'place-date' | 'wedding-data')
+                        | null;
                       id?: string | null;
                       blockName?: string | null;
-                      blockType: 'address';
+                      blockType: 'addressdata';
                     }
                   | {
                       name: string;
@@ -1027,6 +967,11 @@ export interface Form {
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'phoneNumber';
+                    }
+                  | {
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'formspace';
                     }
                   | {
                       simulatePreload?: boolean | null;
@@ -1283,61 +1228,6 @@ export interface Form {
             blockType: 'birthconsultation';
           }
         | {
-            countryOfResidence: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            addressType: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            wayDesignation: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            doorNumber: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            floor: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            side: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            district: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            municipality: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            parish: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            postalCode: {
-              label: string;
-              placeholder: string;
-              required?: boolean | null;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'parentaddress';
-          }
-        | {
             firstName: {
               label: string;
               placeholder: string;
@@ -1478,6 +1368,18 @@ export interface Form {
             id?: string | null;
             blockName?: string | null;
             blockType: 'secondParent';
+          }
+        | {
+            title?: string | null;
+            identificationType?: ('identification-data' | 'parent-data' | 'place-date' | 'wedding-data') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'addressdata';
+          }
+        | {
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'formspace';
           }
       )[]
     | null;
@@ -2426,14 +2328,6 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        address?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              id?: T;
-              blockName?: T;
-            };
         birthCertificateData?:
           | T
           | {
@@ -2709,11 +2603,11 @@ export interface FormsSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
-                    address?:
+                    addressdata?:
                       | T
                       | {
-                          name?: T;
-                          label?: T;
+                          title?: T;
+                          identificationType?: T;
                           id?: T;
                           blockName?: T;
                         };
@@ -2799,6 +2693,12 @@ export interface FormsSelect<T extends boolean = true> {
                           readOnly?: T;
                           searchable?: T;
                           width?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    formspace?:
+                      | T
+                      | {
                           id?: T;
                           blockName?: T;
                         };
@@ -3107,82 +3007,6 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        parentaddress?:
-          | T
-          | {
-              countryOfResidence?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              addressType?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              wayDesignation?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              doorNumber?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              floor?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              side?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              district?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              municipality?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              parish?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              postalCode?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
         parentidentification?:
           | T
           | {
@@ -3370,6 +3194,20 @@ export interface FormsSelect<T extends boolean = true> {
                     name?: T;
                     label?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        addressdata?:
+          | T
+          | {
+              title?: T;
+              identificationType?: T;
+              id?: T;
+              blockName?: T;
+            };
+        formspace?:
+          | T
+          | {
               id?: T;
               blockName?: T;
             };

@@ -1,5 +1,3 @@
-import { Address } from './Address'
-import { AddressData } from './AddressData'
 import { BirthCertificateData } from './BirthCertificateData'
 import { BirthConsultation } from './BirthConsultation'
 import { DateOrYearPicker } from './DateOrYearPicker'
@@ -29,13 +27,15 @@ import { Textarea } from './Textarea'
 import { Title } from './Title'
 import { FlexRadioButtonGroup } from './Cidadao/FlexRadioButtonGroup'
 import { ParentIdentification } from './ParentIdentification'
-import { ParentAddress } from './ParentAddress/ParentAddress'
+import { ParentAddress } from './Address/ParentAddress'
 import { SecondParent } from './Cidadao/SecondParent'
 import { TwinBirthData } from './Cidadao/TwinBirthData'
 import { PriorWeddingChildrenData } from './Cidadao/PriorWeddingChildrenData'
 import wrapBlock from './wrapBlock'
 import { Group } from './Group'
 import { CitizenshipCardRequest } from './Cidadao/CitizenshipCardRequest'
+import FormSpace from './FormSpace'
+import { AddressData } from './Address'
 import { DatePicker } from './DatePicker'
 
 export const fields = {
@@ -52,14 +52,14 @@ export const fields = {
   textBox: TextBox,
   textarea: Textarea,
   nif: Nif,
+  formspace: FormSpace,
   selectWithApi: SelectWithApi,
-  addressData: AddressData,
+  addressdata: AddressData,
   birthCertificateData: BirthCertificateData,
   contactData: ContactData,
   idData: IdData,
   requestorData: RequestorData,
   customtext: TextBox,
-  address: Address,
   nationality: Nationality,
   phoneNumber: PhoneNumber,
   radioButtons: RadioButtons,

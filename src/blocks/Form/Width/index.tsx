@@ -3,7 +3,7 @@ import { cn } from '@/utilities/cn'
 import * as React from 'react'
 
 export const Width: React.FC<{
-  children: React.ReactNode
+  children?: React.ReactNode
   className?: string
   width?: number | string
 }> = ({ children, className, width }) => {

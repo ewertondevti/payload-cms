@@ -35,7 +35,6 @@ import { revalidateRedirects } from './hooks/revalidateRedirects'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 import { searchFields } from '@/search/fieldOverrides'
 import { fileURLToPath } from 'url'
-import { AddressBlock } from './blocks/Form/Address/AddressBlock'
 import { BirthCertificateBlock } from './blocks/Form/BirthCertificateData/BirthCertificateDataBlock'
 import { DateOrYearPickerBlock } from './blocks/Form/DateOrYearPicker/DateOrYearPickerBlock'
 import { LocationBlock } from './blocks/Form/Location/LocationBlock'
@@ -65,7 +64,6 @@ import { myRouteHandler } from './endpoints/my-route/route'
 import localization from './i18n/localization'
 import { BirthConsultationBlock } from './blocks/Form/BirthConsultation/BirthConsultationBlock'
 import { ParentIdentificationBlock } from './blocks/Form/ParentIdentification/ParentIdentificationBlock'
-import { ParentAddressBlock } from './blocks/Form/ParentAddress/ParentAddressBlock'
 import { SecondParentBlock } from './blocks/Form/Cidadao/SecondParent/SecondParentBlock'
 import { TextBoxBlock } from './blocks/Form/TextBox/TextBoxBlock'
 import { PriorWeddingChildrenDataBlock } from './blocks/Form/Cidadao/PriorWeddingChildrenData/PriorWeddingChildrenDataBlock'
@@ -73,6 +71,8 @@ import { TwinBirthDataBlock } from './blocks/Form/Cidadao/TwinBirthData/TwinBirt
 import { SelectBlock } from './blocks/Form/Select/SelectBlock'
 import { CitizenshipCardRequestBlock } from './blocks/Form/Cidadao/CitizenshipCardRequest/CitizenshipCardRequestBlock'
 import { DatePickerBlock } from './blocks/Form/DatePicker/DatePickerBlock'
+import { AddressDataBlock } from './blocks/Form/Address/AddressDataBlock'
+import { FormSpaceBlock } from './blocks/Form/FormSpace/FormSpaceBlock'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -182,7 +182,6 @@ export default buildConfig({
         NifBlock,
         RadioButtonBlock,
         CustomTextfieldBlock,
-        AddressBlock,
         BirthCertificateBlock,
         ContactBlock,
         IdBlock,
@@ -203,13 +202,14 @@ export default buildConfig({
         IdentificationDataBlock,
         LocationBlock,
         BirthConsultationBlock,
-        ParentAddressBlock,
         ParentIdentificationBlock,
         FlexRadioButtonGroupBlock,
         PriorWeddingChildrenDataBlock,
         CitizenshipCardRequestBlock,
         TwinBirthDataBlock,
         SecondParentBlock,
+        AddressDataBlock,
+        FormSpaceBlock,
       },
       formOverrides: {
         fields: ({ defaultFields }) => {
