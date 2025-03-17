@@ -1,16 +1,19 @@
 import React from 'react'
 import { Width } from '../../Width'
 
-
 import { TextField } from '@/components/ui/textfield'
-import { FieldErrorsImpl, FieldValues, RegisterOptions, UseFormRegister, UseFormRegisterReturn } from 'react-hook-form'
+import {
+  FieldErrorsImpl,
+  FieldValues,
+  RegisterOptions,
+  UseFormRegister,
+  UseFormRegisterReturn,
+} from 'react-hook-form'
 import { countryOptions } from '../../Country/options'
 import { Select } from '../../Select'
-import { DatePicker } from '@/components/DatePicker'
+import { DatePicker } from '../../DatePicker'
 
-interface PlaceDateProps {
-
-}
+interface PlaceDateProps {}
 
 const PlaceDate: React.FC<
   PlaceDateProps & {
@@ -110,11 +113,7 @@ const PlaceDate: React.FC<
 
         <div className="flex flex-col gap-6">
           <Width width={100}>
-            <DatePicker
-              label="Data da cerimonia"
-              {...register('birthDate')}
-              width={50}
-            />
+            <DatePicker label="Data da cerimonia" {...register('birthDate')} width={50} />
           </Width>
         </div>
       </div>
