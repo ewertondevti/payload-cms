@@ -790,7 +790,25 @@ export interface Form {
             required?: boolean | null;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'dateoryearpicker';
+            blockType: 'dateOrYearPicker';
+          }
+        | {
+            label?: string | null;
+            width?: number | null;
+            relativeMinDate?: {
+              length?: number | null;
+              typeOfLength?: ('days' | 'weeks' | 'months' | 'years') | null;
+              beforeOrAfter?: ('before' | 'after') | null;
+            };
+            relativeMaxDate?: {
+              length?: number | null;
+              typeOfLength?: ('days' | 'weeks' | 'months' | 'years') | null;
+              beforeOrAfter?: ('before' | 'after') | null;
+            };
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'datePicker';
           }
         | {
             name: string;
@@ -828,7 +846,7 @@ export interface Form {
             };
             id?: string | null;
             blockName?: string | null;
-            blockType: 'textbox';
+            blockType: 'textBox';
           }
         | {
             name: string;
@@ -1023,7 +1041,25 @@ export interface Form {
                       required?: boolean | null;
                       id?: string | null;
                       blockName?: string | null;
-                      blockType: 'dateoryearpicker';
+                      blockType: 'dateOrYearPicker';
+                    }
+                  | {
+                      label?: string | null;
+                      width?: number | null;
+                      relativeMinDate?: {
+                        length?: number | null;
+                        typeOfLength?: ('days' | 'weeks' | 'months' | 'years') | null;
+                        beforeOrAfter?: ('before' | 'after') | null;
+                      };
+                      relativeMaxDate?: {
+                        length?: number | null;
+                        typeOfLength?: ('days' | 'weeks' | 'months' | 'years') | null;
+                        beforeOrAfter?: ('before' | 'after') | null;
+                      };
+                      required?: boolean | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'datePicker';
                     }
                   | {
                       name: string;
@@ -1061,7 +1097,7 @@ export interface Form {
                       };
                       id?: string | null;
                       blockName?: string | null;
-                      blockType: 'textbox';
+                      blockType: 'textBox';
                     }
                   | {
                       label: string;
@@ -2505,12 +2541,35 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        dateoryearpicker?:
+        dateOrYearPicker?:
           | T
           | {
               radioLabel?: T;
               dateLabel?: T;
               yearLabel?: T;
+              required?: T;
+              id?: T;
+              blockName?: T;
+            };
+        datePicker?:
+          | T
+          | {
+              label?: T;
+              width?: T;
+              relativeMinDate?:
+                | T
+                | {
+                    length?: T;
+                    typeOfLength?: T;
+                    beforeOrAfter?: T;
+                  };
+              relativeMaxDate?:
+                | T
+                | {
+                    length?: T;
+                    typeOfLength?: T;
+                    beforeOrAfter?: T;
+                  };
               required?: T;
               id?: T;
               blockName?: T;
@@ -2537,7 +2596,7 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        textbox?:
+        textBox?:
           | T
           | {
               name?: T;
@@ -2750,12 +2809,35 @@ export interface FormsSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
-                    dateoryearpicker?:
+                    dateOrYearPicker?:
                       | T
                       | {
                           radioLabel?: T;
                           dateLabel?: T;
                           yearLabel?: T;
+                          required?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    datePicker?:
+                      | T
+                      | {
+                          label?: T;
+                          width?: T;
+                          relativeMinDate?:
+                            | T
+                            | {
+                                length?: T;
+                                typeOfLength?: T;
+                                beforeOrAfter?: T;
+                              };
+                          relativeMaxDate?:
+                            | T
+                            | {
+                                length?: T;
+                                typeOfLength?: T;
+                                beforeOrAfter?: T;
+                              };
                           required?: T;
                           id?: T;
                           blockName?: T;
@@ -2782,7 +2864,7 @@ export interface FormsSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
-                    textbox?:
+                    textBox?:
                       | T
                       | {
                           name?: T;

@@ -1,7 +1,7 @@
 'use client'
 import React, { FC, useState } from 'react'
 import { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form'
-import { DatePicker } from '@/components/DatePicker'
+import { DatePicker } from '@/blocks/Form/DatePicker'
 import { CustomNumber } from '../../CustomNumber'
 import { Select } from '@/blocks/Form/Select'
 

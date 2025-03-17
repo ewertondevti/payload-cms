@@ -1,4 +1,4 @@
-import { DatePicker } from '@/components/DatePicker'
+import { DatePicker } from '@/blocks/Form/DatePicker'
 import { InputText } from '@ama-pt/agora-design-system'
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
 import { Width } from '../../Width'

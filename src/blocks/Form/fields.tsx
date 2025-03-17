@@ -36,6 +36,7 @@ import { PriorWeddingChildrenData } from './Cidadao/PriorWeddingChildrenData'
 import wrapBlock from './wrapBlock'
 import { Group } from './Group'
 import { CitizenshipCardRequest } from './Cidadao/CitizenshipCardRequest'
+import { DatePicker } from './DatePicker'
 
 export const fields = {
   customMessage: CustomMessage,
@@ -68,8 +69,9 @@ export const fields = {
   twinBirthData: wrapBlock(TwinBirthData),
   secondParent: SecondParent,
   preLoadExample1: PreLoadExample1,
-  birthdate: DateOrYearPicker,
-  birthplace: Location,
+  dateOrYearPicker: DateOrYearPicker,
+  datePicker: DatePicker,
+  location: Location,
   customtextarea: Textarea,
   title: Title,
   parentaddress: ParentAddress,

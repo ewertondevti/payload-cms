@@ -4,7 +4,7 @@ import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
 import { InputText, InputDate } from '@ama-pt/agora-design-system'
 import { Select } from '@/blocks/Form/Select'
 import { Width } from '../Width'
-import { DatePicker } from '@/components/DatePicker'
+import { DatePicker } from '@/blocks/Form/DatePicker'
 
 interface FieldConfig {
   label: string

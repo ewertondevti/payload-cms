@@ -27,6 +27,7 @@ import { TwinBirthDataBlock } from '../Cidadao/TwinBirthData/TwinBirthDataBlock'
 import { SelectBlock } from '../Select/SelectBlock'
 import { DropdownBlock } from '../Dropdown/DropdownBlock'
 import { CitizenshipCardRequestBlock } from '../Cidadao/CitizenshipCardRequest/CitizenshipCardRequestBlock'
+import { DatePickerBlock } from '../DatePicker/DatePickerBlock'
 
 const name: Field = {
   name: 'name',
@@ -58,6 +59,7 @@ const arrayFields: Field = {
     PhoneNumberBlock,
     PreLoadExample1Block,
     DateOrYearPickerBlock,
+    DatePickerBlock,
     TextAreaBlock,
     TextBoxBlock,
     TitleBlock,

@@ -15,7 +15,7 @@ const required: Field = {
 }
 
 export const DateOrYearPickerBlock: Block = {
-  slug: 'dateoryearpicker',
+  slug: 'dateOrYearPicker',
   fields: [
     {
       ...label,

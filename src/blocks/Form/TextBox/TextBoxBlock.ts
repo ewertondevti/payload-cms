@@ -34,7 +34,7 @@ const placeholder: Field = {
 }
 
 export const TextBoxBlock: Block = {
-  slug: 'textbox',
+  slug: 'textBox',
   fields: [
     {
       type: 'row',

@@ -3,12 +3,27 @@ import { cn } from '@/utilities/cn'
 import { InputDate, InputDateProps } from '@ama-pt/agora-design-system'
 import { FC } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
+import moment, { unitOfTime } from 'moment'
 
-export const DatePicker: FC<Partial<InputDateProps> & UseFormRegisterReturn<string>> = ({
-  width,
-  darkMode,
-  ...rest
-}) => {
+type DateSpecification = {
+  length: number
+  typeOfLength: unitOfTime.DurationConstructor
+  beforeOrAfter: string
+}
+
+type DatePickerProps = {
+  relativeMinDate?: DateSpecification
+  relativeMaxDate?: DateSpecification
+}
+
+const getDate = ({ length, typeOfLength, beforeOrAfter }: DateSpecification) => {
+  if (beforeOrAfter === 'before') return moment().subtract(length, typeOfLength).toDate()
+  else if (beforeOrAfter === 'after') return moment().add(length, typeOfLength).toDate()
+  return undefined
+}
+export const DatePicker: FC<
+  DatePickerProps & Partial<InputDateProps> & UseFormRegisterReturn<string>
+> = ({ relativeMinDate, relativeMaxDate, width, darkMode, ...rest }) => {
   const containerClassNames = cn({
     'bg-primary-900 text-white': darkMode,
   })
@@ -34,6 +49,9 @@ export const DatePicker: FC<Partial<InputDateProps> & UseFormRegisterReturn<stri
     dayInputPlaceholder: 'dd',
     monthInputPlaceholder: 'mm',
     yearInputPlaceholder: 'yyyy',
+
+    startDate: relativeMinDate && getDate(relativeMinDate),
+    endDate: relativeMaxDate && getDate(relativeMaxDate),
 
     ...rest,
   }

@@ -72,6 +72,7 @@ import { PriorWeddingChildrenDataBlock } from './blocks/Form/Cidadao/PriorWeddin
 import { TwinBirthDataBlock } from './blocks/Form/Cidadao/TwinBirthData/TwinBirthDataBlock'
 import { SelectBlock } from './blocks/Form/Select/SelectBlock'
 import { CitizenshipCardRequestBlock } from './blocks/Form/Cidadao/CitizenshipCardRequest/CitizenshipCardRequestBlock'
+import { DatePickerBlock } from './blocks/Form/DatePicker/DatePickerBlock'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -192,14 +193,15 @@ export default buildConfig({
         NationalityBlock,
         PhoneNumberBlock,
         PreLoadExample1Block,
-        BirthdateBlock: DateOrYearPickerBlock,
+        DateOrYearPickerBlock,
+        DatePickerBlock,
         TextAreaBlock,
         TextBoxBlock,
         GroupBlock,
         TitleBlock,
         SelectWithApiBlock,
         IdentificationDataBlock,
-        BirthplaceBlock: LocationBlock,
+        LocationBlock,
         BirthConsultationBlock,
         ParentAddressBlock,
         ParentIdentificationBlock,
