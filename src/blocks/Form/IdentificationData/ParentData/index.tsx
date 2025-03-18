@@ -3,6 +3,7 @@ import { InputText } from '@ama-pt/agora-design-system'
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
 import { Width } from '../../Width'
 import { Select } from '../../Select'
+import { joinName } from '@/utilities/joinName'
 
 interface FieldConfig {
   label: string
@@ -11,6 +12,7 @@ interface FieldConfig {
 }
 
 export interface ParentDataProps {
+  name: string
   firstName: FieldConfig
   lastName: FieldConfig
   documentType: FieldConfig
@@ -48,6 +50,7 @@ const options = {
 
 export const ParentData = ({
   register,
+  name,
   errors,
   firstName,
   lastName,
@@ -74,9 +77,9 @@ export const ParentData = ({
             placeholder={firstName.placeholder}
             required={firstName.required}
             hasError={!!errors?.firstName}
-            feedbackText={getError('firstName')}
+            feedbackText={getError(joinName(name, 'firstName'))}
             feedbackState="danger"
-            {...register('firstName', { required: firstName.required })}
+            {...register(joinName(name, 'firstName'), { required: firstName.required })}
           />
         </Width>
         <Width width={50}>
@@ -85,9 +88,9 @@ export const ParentData = ({
             placeholder={lastName.placeholder}
             required={lastName.required}
             hasError={!!errors?.lastName}
-            feedbackText={getError('lastName')}
+            feedbackText={getError(joinName(name, 'lastName'))}
             feedbackState="danger"
-            {...register('lastName', { required: lastName.required })}
+            {...register(joinName(name, 'lastName'), { required: lastName.required })}
           />
         </Width>
       </div>
@@ -99,7 +102,7 @@ export const ParentData = ({
             placeholder={documentType.placeholder}
             options={options.identification}
             hasError={!!errors?.documentType}
-            name="documentType"
+            name={joinName(name, 'documentType')}
           />
         </Width>
         <Width width={50}>
@@ -117,9 +120,9 @@ export const ParentData = ({
             placeholder={documentNumber.placeholder}
             required={documentNumber.required}
             hasError={!!errors?.documentNumber}
-            feedbackText={getError('documentNumber')}
+            feedbackText={getError(joinName(name, 'documentNumber'))}
             feedbackState="danger"
-            {...register('documentNumber', { required: documentNumber.required })}
+            {...register(joinName(name, 'documentNumber'), { required: documentNumber.required })}
           />
         </Width>
         <Width width={50}>
@@ -128,9 +131,11 @@ export const ParentData = ({
             placeholder={verificationDigit.placeholder}
             required={verificationDigit.required}
             hasError={!!errors?.verificationDigit}
-            feedbackText={getError('verificationDigit')}
+            feedbackText={getError(joinName(name, 'verificationDigit'))}
             feedbackState="danger"
-            {...register('verificationDigit', { required: verificationDigit.required })}
+            {...register(joinName(name, 'verificationDigit'), {
+              required: verificationDigit.required,
+            })}
           />
         </Width>
       </div>

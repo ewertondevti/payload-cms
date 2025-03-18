@@ -1,4 +1,4 @@
-import { useForm, type FieldErrorsImpl, type UseFormReturn } from 'react-hook-form'
+import { useFormContext, type FieldErrorsImpl } from 'react-hook-form'
 
 import { Checkbox as CheckboxUi, CheckboxProps } from '@ama-pt/agora-design-system'
 
@@ -15,7 +15,7 @@ export const Checkbox: React.FC<
       >
     }
 > = ({ name, errors, width, required, ...rest }) => {
-  const { register } = useForm()
+  const { register } = useFormContext()
   return (
     <Width width={width}>
       <CheckboxUi

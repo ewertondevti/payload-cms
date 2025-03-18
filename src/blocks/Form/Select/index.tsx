@@ -6,7 +6,7 @@ import {
   DropdownSection,
 } from '@ama-pt/agora-design-system'
 import { Width } from '@/blocks/Form/Width'
-import { useForm } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 export type SelectProps = {
   id?: string
@@ -55,11 +55,11 @@ export const Select: React.FC<SelectProps> = ({
   onChange,
   width,
 }) => {
-  const { register, setValue } = useForm()
+  const { register, setValue } = useFormContext()
   const [selectedValue, setSelectedValue] = useState<string | undefined>(defaultValue)
 
   const onInputSelectChange = async (selected: DropdownOptionProps[]) => {
-    if (selected.length > 0 && onChange) {
+    if (selected.length > 0) {
       const newValue = selected[0]?.value
       onChange && onChange(newValue)
       setSelectedValue(newValue)

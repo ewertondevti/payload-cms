@@ -2,13 +2,7 @@ import React from 'react'
 import { Width } from '../../Width'
 
 import { TextField } from '@/components/ui/textfield'
-import {
-  FieldErrorsImpl,
-  FieldValues,
-  RegisterOptions,
-  UseFormRegister,
-  UseFormRegisterReturn,
-} from 'react-hook-form'
+import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form'
 import { countryOptions } from '../../Country/options'
 import { Select } from '../../Select'
 import { DatePicker } from '../../DatePicker'

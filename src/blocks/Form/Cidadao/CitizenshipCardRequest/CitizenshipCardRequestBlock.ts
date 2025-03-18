@@ -22,6 +22,27 @@ export const CitizenshipCardRequestBlock: Block = {
         },
       ],
     },
+    {
+      type: 'group',
+      name: 'parentDataRef',
+      label: 'Parent Form Names (must match names on respective forms)',
+      fields: [
+        {
+          type: 'text',
+          name: 'first',
+          label: 'First Parent',
+          required: true,
+          defaultValue: 'firstparent',
+        },
+        {
+          type: 'text',
+          name: 'second',
+          label: 'Second Parent',
+          required: true,
+          defaultValue: 'secondparent',
+        },
+      ],
+    },
   ],
   labels: {
     plural: 'Citizenship Card Requests',

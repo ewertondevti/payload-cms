@@ -1,5 +1,15 @@
 import { Block, Field } from 'payload'
 
+const name: Field = {
+  localized: true,
+  name: 'name',
+  type: 'text',
+  label: 'Name (lowercase, no special characters)',
+  required: true,
+  defaultValue: '',
+  admin: { width: 'calc(100% / 3)' },
+}
+
 const identificationType: Field = {
   type: 'select',
   label: 'Tipo de Identificação',
@@ -19,7 +29,7 @@ const identificationType: Field = {
     },
   ],
   defaultValue: 'applicant-data',
-  admin: { width: '50%' },
+  admin: { width: 'calc(100% / 3)' },
 }
 
 export const IdentificationDataBlock: Block = {
@@ -28,12 +38,13 @@ export const IdentificationDataBlock: Block = {
     {
       type: 'row',
       fields: [
+        name,
         {
           name: 'title',
           type: 'text',
           label: 'Section title',
           defaultValue: 'Dados de identificação',
-          admin: { width: '50%' },
+          admin: { width: 'calc(100% / 3)' },
         },
         identificationType,
       ],

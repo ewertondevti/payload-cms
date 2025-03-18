@@ -8,6 +8,7 @@ import { Checkbox } from '../../Checkbox'
 
 export interface CitizenshipCardRequestProps {
   name: string
+  parentDataRef: { first: string; second: string }
 }
 
 const options = {
@@ -26,6 +27,7 @@ const options = {
 
 export const CitizenshipCardRequest = ({
   name,
+  parentDataRef,
   register,
   errors,
   watch,
@@ -38,14 +40,21 @@ export const CitizenshipCardRequest = ({
   const [portugueseAddress, setPortugueseAddress] = useState<boolean>()
   const [homeDelivery, setHomeDelivery] = useState<boolean>()
   const [typeOfLocation, setTypeOfLocation] = useState<string>()
+  const [first, second]: string[] = watch([
+    joinName(parentDataRef.first, 'address', 'cvcResidencia'),
+    joinName(parentDataRef.second, 'address', 'cvcResidencia'),
+  ])
+  const nationalities: string[] = watch([
+    joinName(parentDataRef.first, 'nationality', 'country'),
+    joinName(parentDataRef.second, 'nationality', 'country'),
+  ])
   const locationOptions = []
 
   useEffect(() => {
-    // TODO: Correctly determine address location
-    setPortugueseAddress(address === 'first')
-  }, [address])
+    address && setPortugueseAddress({ first, second }[address] === 'PT')
+  }, [address, first, second])
 
-  return (
+  return nationalities.includes('Portugal') ? (
     <div className="flex gap-64 flex-col">
       <h2 className="text-l-bold text-primary-900">Cartão de Cidadão</h2>
 
@@ -111,5 +120,5 @@ export const CitizenshipCardRequest = ({
         </div>
       )}
     </div>
-  )
+  ) : null
 }

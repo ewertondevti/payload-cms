@@ -1,10 +1,11 @@
 'use client'
-import React from 'react'
-import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
+import React, { useEffect } from 'react'
+import { FieldErrors, FieldValues, useForm, useFormContext, UseFormRegister } from 'react-hook-form'
 import { InputText } from '@ama-pt/agora-design-system'
 import { Select } from '@/blocks/Form/Select'
 import { Width } from '../../Width'
 import { countryOptions } from '../../Country/options'
+import { joinName } from '@/utilities/joinName'
 
 const addressOptions = {
   countryOfResidence: [
@@ -35,12 +36,15 @@ const addressOptions = {
 }
 
 export const ParentAddress = ({
+  name,
   register,
   errors,
 }: {
+  name: string
   register: UseFormRegister<FieldValues>
   errors: FieldErrors<FieldValues>
 }) => {
+  const { watch } = useFormContext()
   const getError = (field: string) =>
     errors[field]?.type === 'required' ? 'Obrigatório preencher este campo.' : ''
 
@@ -49,8 +53,8 @@ export const ParentAddress = ({
       <div className="flex gap-4 flex-wrap">
         <Width width={50}>
           <Select
-            id={'cvtResidencia'}
-            name={'cvtResidencia'}
+            id={joinName(name, 'cvcResidencia')}
+            name={joinName(name, 'cvcResidencia')}
             defaultValue="PT"
             type="text"
             label="Residência"
