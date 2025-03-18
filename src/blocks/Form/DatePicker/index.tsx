@@ -3,11 +3,11 @@ import { cn } from '@/utilities/cn'
 import { InputDate, InputDateProps } from '@ama-pt/agora-design-system'
 import { FC } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
-import moment, { unitOfTime } from 'moment'
+import dayjs, { ManipulateType } from 'dayjs'
 
 type DateSpecification = {
   length: number
-  typeOfLength: unitOfTime.DurationConstructor
+  typeOfLength: ManipulateType
   beforeOrAfter: string
 }
 
@@ -17,8 +17,8 @@ type DatePickerProps = {
 }
 
 const getDate = ({ length, typeOfLength, beforeOrAfter }: DateSpecification) => {
-  if (beforeOrAfter === 'before') return moment().subtract(length, typeOfLength).toDate()
-  else if (beforeOrAfter === 'after') return moment().add(length, typeOfLength).toDate()
+  if (beforeOrAfter === 'before') return dayjs().subtract(length, typeOfLength).toDate()
+  else if (beforeOrAfter === 'after') return dayjs().add(length, typeOfLength).toDate()
   return undefined
 }
 export const DatePicker: FC<
