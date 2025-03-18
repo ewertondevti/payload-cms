@@ -1,7 +1,7 @@
 import { Block } from 'payload'
 
 const ConsultCertificateFormCVCServiceStepBlock: Block = {
-  slug: 'consult-certificate-form-cvc',
+  slug: 'consult-certificate-form-cvc-service-step',
   labels: {
     plural: 'Formulário para consultas de certidões',
     singular: 'Formulário para consulta de certidão',

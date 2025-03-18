@@ -14,7 +14,7 @@ import { Title } from '../Form/Title'
 import { CertificatePreviewError } from './CertificatePreviewError'
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
+  'pdfjs-dist/build/pdf.worker.min.js',
   import.meta.url,
 ).toString()
 
@@ -28,7 +28,7 @@ export const CertificatePreviewCVC: FC<Props> = ({
   titlepage,
   subtitlepage,
   apiurl,
-  getValues,
+  handleSubmit,
 }) => {
   const [base64file, setBase64file] = useState('')
   const [hasError, setHasError] = useState(false)
@@ -37,27 +37,22 @@ export const CertificatePreviewCVC: FC<Props> = ({
 
   useEffect(() => {
     showLoader({ title: 'A carregar...', subtitle: 'Aguarde um momento.' })
-    const values = getValues() as ConsultFormCVCValues
 
-    if (values) {
-      const getCertidao = async () => {
-        const { accessCode1, accessCode2, accessCode3 } = values
+    handleSubmit(async (values: ConsultFormCVCValues) => {
+      const { accessCode1, accessCode2, accessCode3 } = values
 
-        const code = `${accessCode1}-${accessCode2}-${accessCode3}`
+      const code = `${accessCode1}-${accessCode2}-${accessCode3}`
 
-        try {
-          const res = await getCertificate(apiurl, code)
+      try {
+        const res = await getCertificate(apiurl, code)
 
-          setBase64file(addBase64Prefix(res.attachment.bytes, res.attachment.mimetype))
-          setHasError(false)
-        } catch (error) {
-          console.error(error)
-          setHasError(true)
-        }
+        setBase64file(addBase64Prefix(res.data.attachment.bytes, res.data.attachment.mimetype))
+        setHasError(false)
+      } catch (error) {
+        console.error(error)
+        setHasError(true)
       }
-
-      getCertidao()
-    }
+    })()
   }, [apiurl])
 
   useEffect(() => {

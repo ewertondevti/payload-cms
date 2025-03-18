@@ -940,7 +940,7 @@ export interface Form {
                   | {
                       title?: string | null;
                       identificationType?:
-                        | ('identification-data' | 'parent-data' | 'place-date' | 'wedding-data')
+                        | ('identification-data' | 'parent-data' | 'place-date' | 'wedding-data' | 'wedding-place-data')
                         | null;
                       id?: string | null;
                       blockName?: string | null;
@@ -1426,7 +1426,9 @@ export interface Form {
           }
         | {
             title?: string | null;
-            identificationType?: ('identification-data' | 'parent-data' | 'place-date' | 'wedding-data') | null;
+            identificationType?:
+              | ('identification-data' | 'parent-data' | 'place-date' | 'wedding-data' | 'wedding-place-data')
+              | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'addressdata';
@@ -1620,7 +1622,7 @@ export interface Service {
               subtitlepage?: string | null;
               id?: string | null;
               blockName?: string | null;
-              blockType: 'consult-certificate-form-cvc';
+              blockType: 'consult-certificate-form-cvc-service-step';
             }
           | {
               title: string;
@@ -1632,7 +1634,7 @@ export interface Service {
               apiurl: string;
               id?: string | null;
               blockName?: string | null;
-              blockType: 'certificate-preview-cvc';
+              blockType: 'certificate-preview-cvc-service-step';
             }
         )[]
       | null;
@@ -2185,7 +2187,7 @@ export interface ServicesSelect<T extends boolean = true> {
                     id?: T;
                     blockName?: T;
                   };
-              'consult-certificate-form-cvc'?:
+              'consult-certificate-form-cvc-service-step'?:
                 | T
                 | {
                     title?: T;
@@ -2194,7 +2196,7 @@ export interface ServicesSelect<T extends boolean = true> {
                     id?: T;
                     blockName?: T;
                   };
-              'certificate-preview-cvc'?:
+              'certificate-preview-cvc-service-step'?:
                 | T
                 | {
                     title?: T;
