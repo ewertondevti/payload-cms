@@ -53,7 +53,6 @@ export default async function RootLayout({ children, params }: Args) {
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
-        <script type="module" src="/scripts/reactPdfWorker.js" />
       </head>
       <body>
         <Providers>
