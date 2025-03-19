@@ -263,13 +263,13 @@ export interface Category {
   title: string;
   parent?: (number | null) | Category;
   breadcrumbs?:
-    | {
-        doc?: (number | null) | Category;
-        url?: string | null;
-        label?: string | null;
-        id?: string | null;
-      }[]
-    | null;
+  | {
+    doc?: (number | null) | Category;
+    url?: string | null;
+    label?: string | null;
+    id?: string | null;
+  }[]
+  | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -298,24 +298,24 @@ export interface Page {
       [k: string]: unknown;
     } | null;
     links?:
-      | {
-          link: {
-            type?: ('reference' | 'custom') | null;
-            newTab?: boolean | null;
-            reference?: {
-              relationTo: 'pages';
-              value: number | Page;
-            } | null;
-            url?: string | null;
-            label: string;
-            /**
-             * Choose how the link should be rendered.
-             */
-            appearance?: ('default' | 'outline') | null;
-          };
-          id?: string | null;
-        }[]
-      | null;
+    | {
+      link: {
+        type?: ('reference' | 'custom') | null;
+        newTab?: boolean | null;
+        reference?: {
+          relationTo: 'pages';
+          value: number | Page;
+        } | null;
+        url?: string | null;
+        label: string;
+        /**
+         * Choose how the link should be rendered.
+         */
+        appearance?: ('default' | 'outline') | null;
+      };
+      id?: string | null;
+    }[]
+    | null;
     media?: (number | null) | Media;
   };
   layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | LifeCycleListBlock)[];
@@ -354,24 +354,24 @@ export interface CallToActionBlock {
     [k: string]: unknown;
   } | null;
   links?:
-    | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?: {
-            relationTo: 'pages';
-            value: number | Page;
-          } | null;
-          url?: string | null;
-          label: string;
-          /**
-           * Choose how the link should be rendered.
-           */
-          appearance?: ('default' | 'outline') | null;
-        };
-        id?: string | null;
-      }[]
-    | null;
+  | {
+    link: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?: {
+        relationTo: 'pages';
+        value: number | Page;
+      } | null;
+      url?: string | null;
+      label: string;
+      /**
+       * Choose how the link should be rendered.
+       */
+      appearance?: ('default' | 'outline') | null;
+    };
+    id?: string | null;
+  }[]
+  | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'cta';
@@ -382,41 +382,41 @@ export interface CallToActionBlock {
  */
 export interface ContentBlock {
   columns?:
-    | {
-        size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
-        richText?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
+  | {
+    size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
           [k: string]: unknown;
-        } | null;
-        enableLink?: boolean | null;
-        link?: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?: {
-            relationTo: 'pages';
-            value: number | Page;
-          } | null;
-          url?: string | null;
-          label: string;
-          /**
-           * Choose how the link should be rendered.
-           */
-          appearance?: ('default' | 'outline') | null;
-        };
-        id?: string | null;
-      }[]
-    | null;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    enableLink?: boolean | null;
+    link?: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?: {
+        relationTo: 'pages';
+        value: number | Page;
+      } | null;
+      url?: string | null;
+      label: string;
+      /**
+       * Choose how the link should be rendered.
+       */
+      appearance?: ('default' | 'outline') | null;
+    };
+    id?: string | null;
+  }[]
+  | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'content';
@@ -457,11 +457,11 @@ export interface ArchiveBlock {
   categories?: (number | Category)[] | null;
   limit?: number | null;
   selectedDocs?:
-    | {
-        relationTo: 'posts';
-        value: number | Post;
-      }[]
-    | null;
+  | {
+    relationTo: 'posts';
+    value: number | Post;
+  }[]
+  | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'archive';
@@ -501,11 +501,11 @@ export interface Post {
   publishedAt?: string | null;
   authors?: (number | User)[] | null;
   populatedAuthors?:
-    | {
-        id?: string | null;
-        name?: string | null;
-      }[]
-    | null;
+  | {
+    id?: string | null;
+    name?: string | null;
+  }[]
+  | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -563,736 +563,622 @@ export interface Form {
   id: number;
   title: string;
   fields?:
-    | (
+  | (
+    | {
+      name: string;
+      label?: string | null;
+      width?: number | null;
+      required?: boolean | null;
+      defaultValue?: boolean | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'checkbox';
+    }
+    | {
+      name: string;
+      label?: string | null;
+      width?: number | null;
+      required?: boolean | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'country';
+    }
+    | {
+      name: string;
+      label?: string | null;
+      width?: number | null;
+      required?: boolean | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'email';
+    }
+    | {
+      name: string;
+      label?: string | null;
+      width?: number | null;
+      defaultValue?: string | null;
+      required?: boolean | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'textarea';
+    }
+    | {
+      richText?: {
+        root: {
+          type: string;
+          children: {
+            type: string;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'customMessage';
+    }
+    | {
+      name: string;
+      label?: string | null;
+      defaultValue?: string | null;
+      placeholder?: string | null;
+      min?: number | null;
+      max?: number | null;
+      required?: boolean | null;
+      disabled?: boolean | null;
+      readOnly?: boolean | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'customNumber';
+    }
+    | {
+      name: string;
+      label?: string | null;
+      width?: number | null;
+      defaultValue?: string | null;
+      required?: boolean | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'nif';
+    }
+    | {
+      name: string;
+      label?: string | null;
+      options?:
+      | {
+        label: string;
+        value: string;
+        id?: string | null;
+      }[]
+      | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'radioButtons';
+    }
+    | {
+      name: string;
+      label?: string | null;
+      defaultValue?: string | null;
+      placeholder?: string | null;
+      icon?: string | null;
+      width?: number | null;
+      minLength?: number | null;
+      maxLength?: number | null;
+      pattern?: string | null;
+      errorMessage?: string | null;
+      required?: boolean | null;
+      disabled?: boolean | null;
+      readOnly?: boolean | null;
+      hideLabel?: boolean | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'customtext';
+    }
+    | {
+      name: string;
+      label?: string | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'birthCertificateData';
+    }
+    | {
+      name: string;
+      label?: string | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'contactData';
+    }
+    | {
+      name: string;
+      label?: string | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'idData';
+    }
+    | {
+      name: string;
+      label?: string | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'requestorData';
+    }
+    | {
+      main: boolean;
+      title: string;
+      subtitle?: string | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'header';
+    }
+    | {
+      name: string;
+      label?: string | null;
+      options?:
+      | {
+        label: string;
+        value: string;
+        id?: string | null;
+      }[]
+      | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'dropdown';
+    }
+    | {
+      name: string;
+      label?: string | null;
+      defaultValue?: string | null;
+      placeholder?: string | null;
+      width?: number | null;
+      required?: boolean | null;
+      disabled?: boolean | null;
+      readOnly?: boolean | null;
+      hideLabel?: boolean | null;
+      options?:
+      | {
+        label: string;
+        value: string;
+        id?: string | null;
+      }[]
+      | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'select';
+    }
+    | {
+      name: string;
+      label?: string | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'nationality';
+    }
+    | {
+      name: string;
+      label?: string | null;
+      placeholder?: string | null;
+      searchInputPlaceholder?: string | null;
+      required?: boolean | null;
+      readOnly?: boolean | null;
+      searchable?: boolean | null;
+      width?: number | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'phoneNumber';
+    }
+    | {
+      simulatePreload?: boolean | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'preLoadExample1';
+    }
+    | {
+      radioLabel: string;
+      dateLabel: string;
+      yearLabel: string;
+      required?: boolean | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'dateOrYearPicker';
+    }
+    | {
+      label?: string | null;
+      width?: number | null;
+      relativeMinDate?: {
+        length?: number | null;
+        typeOfLength?: ('days' | 'weeks' | 'months' | 'years') | null;
+        beforeOrAfter?: ('before' | 'after') | null;
+      };
+      relativeMaxDate?: {
+        length?: number | null;
+        typeOfLength?: ('days' | 'weeks' | 'months' | 'years') | null;
+        beforeOrAfter?: ('before' | 'after') | null;
+      };
+      required?: boolean | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'datePicker';
+    }
+    | {
+      name: string;
+      label?: string | null;
+      defaultValue?: string | null;
+      placeholder?: string | null;
+      width?: number | null;
+      required?: boolean | null;
+      disabled?: boolean | null;
+      readOnly?: boolean | null;
+      hideLabel?: boolean | null;
+      validation?: {
+        minLength?: number | null;
+        maxLength?: number | null;
+        pattern?: string | null;
+      };
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'customtextarea';
+    }
+    | {
+      name: string;
+      label?: string | null;
+      defaultValue?: string | null;
+      placeholder?: string | null;
+      width?: number | null;
+      required?: boolean | null;
+      disabled?: boolean | null;
+      readOnly?: boolean | null;
+      hideLabel?: boolean | null;
+      validation?: {
+        minLength?: number | null;
+        maxLength?: number | null;
+        pattern?: string | null;
+      };
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'textBox';
+    }
+    | {
+      name: string;
+      title: string;
+      fields?:
+      | (
         | {
-            name: string;
-            label?: string | null;
-            width?: number | null;
-            required?: boolean | null;
-            defaultValue?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'checkbox';
-          }
-        | {
-            name: string;
-            label?: string | null;
-            width?: number | null;
-            required?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'country';
-          }
-        | {
-            name: string;
-            label?: string | null;
-            width?: number | null;
-            required?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'email';
-          }
-        | {
-            name: string;
-            label?: string | null;
-            width?: number | null;
-            defaultValue?: string | null;
-            required?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'textarea';
-          }
-        | {
-            richText?: {
-              root: {
+          richText?: {
+            root: {
+              type: string;
+              children: {
                 type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
                 version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'customMessage';
-          }
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'customMessage';
+        }
         | {
-            name: string;
-            label?: string | null;
-            defaultValue?: string | null;
-            placeholder?: string | null;
-            min?: number | null;
-            max?: number | null;
-            required?: boolean | null;
-            disabled?: boolean | null;
-            readOnly?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'customNumber';
-          }
+          name: string;
+          label?: string | null;
+          defaultValue?: string | null;
+          placeholder?: string | null;
+          min?: number | null;
+          max?: number | null;
+          required?: boolean | null;
+          disabled?: boolean | null;
+          readOnly?: boolean | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'customNumber';
+        }
         | {
-            name: string;
-            label?: string | null;
-            width?: number | null;
-            defaultValue?: string | null;
-            required?: boolean | null;
+          name: string;
+          label?: string | null;
+          options?:
+          | {
+            label: string;
+            value: string;
             id?: string | null;
-            blockName?: string | null;
-            blockType: 'nif';
-          }
+          }[]
+          | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'dropdown';
+        }
         | {
-            name: string;
-            label?: string | null;
-            options?:
-              | {
-                  label: string;
-                  value: string;
-                  id?: string | null;
-                }[]
-              | null;
+          name: string;
+          label?: string | null;
+          width?: number | null;
+          defaultValue?: string | null;
+          required?: boolean | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'nif';
+        }
+        | {
+          name: string;
+          label?: string | null;
+          options?:
+          | {
+            label: string;
+            value: string;
             id?: string | null;
-            blockName?: string | null;
-            blockType: 'radioButtons';
-          }
+          }[]
+          | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'radioButtons';
+        }
         | {
-            name: string;
-            label?: string | null;
-            defaultValue?: string | null;
-            placeholder?: string | null;
-            icon?: string | null;
-            width?: number | null;
+          name: string;
+          label?: string | null;
+          defaultValue?: string | null;
+          placeholder?: string | null;
+          icon?: string | null;
+          width?: number | null;
+          minLength?: number | null;
+          maxLength?: number | null;
+          pattern?: string | null;
+          errorMessage?: string | null;
+          required?: boolean | null;
+          disabled?: boolean | null;
+          readOnly?: boolean | null;
+          hideLabel?: boolean | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'customtext';
+        }
+        | {
+          name: string;
+          title?: string | null;
+          identificationType?:
+          | ('identification-data' | 'parent-data' | 'place-date' | 'wedding-data' | 'wedding-place-data')
+          | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'addressdata';
+        }
+        | {
+          name: string;
+          label?: string | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'birthCertificateData';
+        }
+        | {
+          name: string;
+          label?: string | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'contactData';
+        }
+        | {
+          name: string;
+          label?: string | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'idData';
+        }
+        | {
+          name: string;
+          label?: string | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'requestorData';
+        }
+        | {
+          main: boolean;
+          title: string;
+          subtitle?: string | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'header';
+        }
+        | {
+          name: string;
+          label?: string | null;
+          defaultValue?: string | null;
+          placeholder?: string | null;
+          width?: number | null;
+          required?: boolean | null;
+          disabled?: boolean | null;
+          readOnly?: boolean | null;
+          hideLabel?: boolean | null;
+          options?:
+          | {
+            label: string;
+            value: string;
+            id?: string | null;
+          }[]
+          | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'select';
+        }
+        | {
+          name: string;
+          label?: string | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'nationality';
+        }
+        | {
+          name: string;
+          label?: string | null;
+          placeholder?: string | null;
+          searchInputPlaceholder?: string | null;
+          required?: boolean | null;
+          readOnly?: boolean | null;
+          searchable?: boolean | null;
+          width?: number | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'phoneNumber';
+        }
+        | {
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'formspace';
+        }
+        | {
+          simulatePreload?: boolean | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'preLoadExample1';
+        }
+        | {
+          radioLabel: string;
+          dateLabel: string;
+          yearLabel: string;
+          required?: boolean | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'dateOrYearPicker';
+        }
+        | {
+          label?: string | null;
+          width?: number | null;
+          relativeMinDate?: {
+            length?: number | null;
+            typeOfLength?: ('days' | 'weeks' | 'months' | 'years') | null;
+            beforeOrAfter?: ('before' | 'after') | null;
+          };
+          relativeMaxDate?: {
+            length?: number | null;
+            typeOfLength?: ('days' | 'weeks' | 'months' | 'years') | null;
+            beforeOrAfter?: ('before' | 'after') | null;
+          };
+          required?: boolean | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'datePicker';
+        }
+        | {
+          name: string;
+          label?: string | null;
+          defaultValue?: string | null;
+          placeholder?: string | null;
+          width?: number | null;
+          required?: boolean | null;
+          disabled?: boolean | null;
+          readOnly?: boolean | null;
+          hideLabel?: boolean | null;
+          validation?: {
             minLength?: number | null;
             maxLength?: number | null;
             pattern?: string | null;
-            errorMessage?: string | null;
-            required?: boolean | null;
-            disabled?: boolean | null;
-            readOnly?: boolean | null;
-            hideLabel?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'customtext';
-          }
+          };
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'customtextarea';
+        }
         | {
-            name: string;
-            label?: string | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'birthCertificateData';
-          }
+          name: string;
+          label?: string | null;
+          defaultValue?: string | null;
+          placeholder?: string | null;
+          width?: number | null;
+          required?: boolean | null;
+          disabled?: boolean | null;
+          readOnly?: boolean | null;
+          hideLabel?: boolean | null;
+          validation?: {
+            minLength?: number | null;
+            maxLength?: number | null;
+            pattern?: string | null;
+          };
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'textBox';
+        }
         | {
-            name: string;
-            label?: string | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'contactData';
-          }
+          label: string;
+          htmlTag: 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
+          sublabel?: string | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'title';
+        }
         | {
-            name: string;
-            label?: string | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'idData';
-          }
+          name: string;
+          label?: string | null;
+          placeholder?: string | null;
+          width?: number | null;
+          apidomain?: string | null;
+          required?: boolean | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'selectWithApi';
+        }
         | {
-            name: string;
-            label?: string | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'requestorData';
-          }
+          name: string;
+          title?: string | null;
+          identificationType?: ('applicant-data' | 'parent-data' | 'baby-data') | null;
+          nifIsVisible?: boolean | null;
+          nifIsRequired?: boolean | null;
+          isVerificationDigitVisible?: boolean | null;
+          isVerificationDigitRequired?: boolean | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'identificationData';
+        }
         | {
-            main: boolean;
-            title: string;
-            subtitle?: string | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'header';
-          }
+          name: string;
+          label: string;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'location';
+        }
         | {
-            name: string;
-            label?: string | null;
-            options?:
-              | {
-                  label: string;
-                  value: string;
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'dropdown';
-          }
-        | {
-            name: string;
-            label?: string | null;
-            defaultValue?: string | null;
-            placeholder?: string | null;
-            width?: number | null;
-            required?: boolean | null;
-            disabled?: boolean | null;
-            readOnly?: boolean | null;
-            hideLabel?: boolean | null;
-            options?:
-              | {
-                  label: string;
-                  value: string;
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'select';
-          }
-        | {
-            name: string;
-            label?: string | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'nationality';
-          }
-        | {
-            name: string;
-            label?: string | null;
-            placeholder?: string | null;
-            searchInputPlaceholder?: string | null;
-            required?: boolean | null;
-            readOnly?: boolean | null;
-            searchable?: boolean | null;
-            width?: number | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'phoneNumber';
-          }
-        | {
-            simulatePreload?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'preLoadExample1';
-          }
-        | {
-            radioLabel: string;
-            dateLabel: string;
-            yearLabel: string;
-            required?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'dateOrYearPicker';
-          }
-        | {
-            label?: string | null;
-            width?: number | null;
-            relativeMinDate?: {
-              length?: number | null;
-              typeOfLength?: ('days' | 'weeks' | 'months' | 'years') | null;
-              beforeOrAfter?: ('before' | 'after') | null;
-            };
-            relativeMaxDate?: {
-              length?: number | null;
-              typeOfLength?: ('days' | 'weeks' | 'months' | 'years') | null;
-              beforeOrAfter?: ('before' | 'after') | null;
-            };
-            required?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'datePicker';
-          }
-        | {
-            name: string;
-            label?: string | null;
-            defaultValue?: string | null;
-            placeholder?: string | null;
-            width?: number | null;
-            required?: boolean | null;
-            disabled?: boolean | null;
-            readOnly?: boolean | null;
-            hideLabel?: boolean | null;
-            validation?: {
-              minLength?: number | null;
-              maxLength?: number | null;
-              pattern?: string | null;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'customtextarea';
-          }
-        | {
-            name: string;
-            label?: string | null;
-            defaultValue?: string | null;
-            placeholder?: string | null;
-            width?: number | null;
-            required?: boolean | null;
-            disabled?: boolean | null;
-            readOnly?: boolean | null;
-            hideLabel?: boolean | null;
-            validation?: {
-              minLength?: number | null;
-              maxLength?: number | null;
-              pattern?: string | null;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'textBox';
-          }
-        | {
-            name: string;
-            title: string;
-            fields?:
-              | (
-                  | {
-                      richText?: {
-                        root: {
-                          type: string;
-                          children: {
-                            type: string;
-                            version: number;
-                            [k: string]: unknown;
-                          }[];
-                          direction: ('ltr' | 'rtl') | null;
-                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                          indent: number;
-                          version: number;
-                        };
-                        [k: string]: unknown;
-                      } | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'customMessage';
-                    }
-                  | {
-                      name: string;
-                      label?: string | null;
-                      defaultValue?: string | null;
-                      placeholder?: string | null;
-                      min?: number | null;
-                      max?: number | null;
-                      required?: boolean | null;
-                      disabled?: boolean | null;
-                      readOnly?: boolean | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'customNumber';
-                    }
-                  | {
-                      name: string;
-                      label?: string | null;
-                      options?:
-                        | {
-                            label: string;
-                            value: string;
-                            id?: string | null;
-                          }[]
-                        | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'dropdown';
-                    }
-                  | {
-                      name: string;
-                      label?: string | null;
-                      width?: number | null;
-                      defaultValue?: string | null;
-                      required?: boolean | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'nif';
-                    }
-                  | {
-                      name: string;
-                      label?: string | null;
-                      options?:
-                        | {
-                            label: string;
-                            value: string;
-                            id?: string | null;
-                          }[]
-                        | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'radioButtons';
-                    }
-                  | {
-                      name: string;
-                      label?: string | null;
-                      defaultValue?: string | null;
-                      placeholder?: string | null;
-                      icon?: string | null;
-                      width?: number | null;
-                      minLength?: number | null;
-                      maxLength?: number | null;
-                      pattern?: string | null;
-                      errorMessage?: string | null;
-                      required?: boolean | null;
-                      disabled?: boolean | null;
-                      readOnly?: boolean | null;
-                      hideLabel?: boolean | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'customtext';
-                    }
-                  | {
-                      name: string;
-                      title?: string | null;
-                      identificationType?:
-                        | ('identification-data' | 'parent-data' | 'place-date' | 'wedding-data' | 'wedding-place-data')
-                        | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'addressdata';
-                    }
-                  | {
-                      name: string;
-                      label?: string | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'birthCertificateData';
-                    }
-                  | {
-                      name: string;
-                      label?: string | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'contactData';
-                    }
-                  | {
-                      name: string;
-                      label?: string | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'idData';
-                    }
-                  | {
-                      name: string;
-                      label?: string | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'requestorData';
-                    }
-                  | {
-                      main: boolean;
-                      title: string;
-                      subtitle?: string | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'header';
-                    }
-                  | {
-                      name: string;
-                      label?: string | null;
-                      defaultValue?: string | null;
-                      placeholder?: string | null;
-                      width?: number | null;
-                      required?: boolean | null;
-                      disabled?: boolean | null;
-                      readOnly?: boolean | null;
-                      hideLabel?: boolean | null;
-                      options?:
-                        | {
-                            label: string;
-                            value: string;
-                            id?: string | null;
-                          }[]
-                        | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'select';
-                    }
-                  | {
-                      name: string;
-                      label?: string | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'nationality';
-                    }
-                  | {
-                      name: string;
-                      label?: string | null;
-                      placeholder?: string | null;
-                      searchInputPlaceholder?: string | null;
-                      required?: boolean | null;
-                      readOnly?: boolean | null;
-                      searchable?: boolean | null;
-                      width?: number | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'phoneNumber';
-                    }
-                  | {
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'formspace';
-                    }
-                  | {
-                      simulatePreload?: boolean | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'preLoadExample1';
-                    }
-                  | {
-                      radioLabel: string;
-                      dateLabel: string;
-                      yearLabel: string;
-                      required?: boolean | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'dateOrYearPicker';
-                    }
-                  | {
-                      label?: string | null;
-                      width?: number | null;
-                      relativeMinDate?: {
-                        length?: number | null;
-                        typeOfLength?: ('days' | 'weeks' | 'months' | 'years') | null;
-                        beforeOrAfter?: ('before' | 'after') | null;
-                      };
-                      relativeMaxDate?: {
-                        length?: number | null;
-                        typeOfLength?: ('days' | 'weeks' | 'months' | 'years') | null;
-                        beforeOrAfter?: ('before' | 'after') | null;
-                      };
-                      required?: boolean | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'datePicker';
-                    }
-                  | {
-                      name: string;
-                      label?: string | null;
-                      defaultValue?: string | null;
-                      placeholder?: string | null;
-                      width?: number | null;
-                      required?: boolean | null;
-                      disabled?: boolean | null;
-                      readOnly?: boolean | null;
-                      hideLabel?: boolean | null;
-                      validation?: {
-                        minLength?: number | null;
-                        maxLength?: number | null;
-                        pattern?: string | null;
-                      };
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'customtextarea';
-                    }
-                  | {
-                      name: string;
-                      label?: string | null;
-                      defaultValue?: string | null;
-                      placeholder?: string | null;
-                      width?: number | null;
-                      required?: boolean | null;
-                      disabled?: boolean | null;
-                      readOnly?: boolean | null;
-                      hideLabel?: boolean | null;
-                      validation?: {
-                        minLength?: number | null;
-                        maxLength?: number | null;
-                        pattern?: string | null;
-                      };
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'textBox';
-                    }
-                  | {
-                      label: string;
-                      htmlTag: 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
-                      sublabel?: string | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'title';
-                    }
-                  | {
-                      name: string;
-                      label?: string | null;
-                      placeholder?: string | null;
-                      width?: number | null;
-                      apidomain?: string | null;
-                      required?: boolean | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'selectWithApi';
-                    }
-                  | {
-                      name: string;
-                      title?: string | null;
-                      identificationType?: ('applicant-data' | 'parent-data' | 'baby-data') | null;
-                      nifIsVisible?: boolean | null;
-                      nifIsRequired?: boolean | null;
-                      isVerificationDigitVisible?: boolean | null;
-                      isVerificationDigitRequired?: boolean | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'identificationData';
-                    }
-                  | {
-                      name: string;
-                      label: string;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'location';
-                    }
-                  | {
-                      name: string;
-                      label?: string | null;
-                      alignment?: ('vertical' | 'horizontal') | null;
-                      options?:
-                        | {
-                            label: string;
-                            value: string;
-                            id?: string | null;
-                          }[]
-                        | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'flexRadioButtonGroup';
-                    }
-                  | {
-                      name: string;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'priorWeddingChildrenData';
-                    }
-                  | {
-                      name: string;
-                      apiUrl: string;
-                      parentDataRef: {
-                        first: string;
-                        second: string;
-                      };
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'citizenshipCardRequest';
-                    }
-                  | {
-                      name: string;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'twinBirthData';
-                    }
-                  | {
-                      name: string;
-                      identification: {
-                        firstName: {
-                          label: string;
-                          placeholder: string;
-                          required?: boolean | null;
-                        };
-                        lastName: {
-                          label: string;
-                          placeholder: string;
-                          required?: boolean | null;
-                        };
-                        documentType: {
-                          label: string;
-                          placeholder: string;
-                          required?: boolean | null;
-                        };
-                        documentNumber: {
-                          label: string;
-                          placeholder: string;
-                          required?: boolean | null;
-                        };
-                        verificationDigit: {
-                          label: string;
-                          placeholder: string;
-                          required?: boolean | null;
-                        };
-                        gender: {
-                          label: string;
-                          placeholder: string;
-                          required?: boolean | null;
-                        };
-                        maritalStatus: {
-                          label: string;
-                          placeholder: string;
-                          required?: boolean | null;
-                        };
-                        birthDate: {
-                          label: string;
-                          required?: boolean | null;
-                        };
-                        nationality: {
-                          label: string;
-                          placeholder: string;
-                          required?: boolean | null;
-                        };
-                      };
-                      filiation: {
-                        name: string;
-                        label?: string | null;
-                      };
-                      contact: {
-                        name: string;
-                        label?: string | null;
-                      };
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'secondParent';
-                    }
-                )[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'group';
-          }
-        | {
+          name: string;
+          label?: string | null;
+          alignment?: ('vertical' | 'horizontal') | null;
+          options?:
+          | {
             label: string;
-            htmlTag: 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
-            sublabel?: string | null;
+            value: string;
             id?: string | null;
-            blockName?: string | null;
-            blockType: 'title';
-          }
+          }[]
+          | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'flexRadioButtonGroup';
+        }
         | {
-            name: string;
-            label?: string | null;
-            placeholder?: string | null;
-            width?: number | null;
-            apidomain?: string | null;
-            required?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'selectWithApi';
-          }
+          name: string;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'priorWeddingChildrenData';
+        }
         | {
-            name: string;
-            title?: string | null;
-            identificationType?: ('applicant-data' | 'parent-data' | 'baby-data') | null;
-            nifIsVisible?: boolean | null;
-            nifIsRequired?: boolean | null;
-            isVerificationDigitVisible?: boolean | null;
-            isVerificationDigitRequired?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'identificationData';
-          }
+          name: string;
+          apiUrl: string;
+          parentDataRef: {
+            first: string;
+            second: string;
+          };
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'citizenshipCardRequest';
+        }
         | {
-            name: string;
-            label: string;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'location';
-          }
+          name: string;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'twinBirthData';
+        }
         | {
-            title: string;
-            subtitle?: string | null;
-            accessCodeTitle: string;
-            accessCode: {
-              label: string;
-              placeholder: string;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'birthconsultation';
-          }
-        | {
+          name: string;
+          identification: {
             firstName: {
               label: string;
               placeholder: string;
@@ -1337,125 +1223,239 @@ export interface Form {
               placeholder: string;
               required?: boolean | null;
             };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'parentidentification';
-          }
-        | {
+          };
+          filiation: {
             name: string;
             label?: string | null;
-            alignment?: ('vertical' | 'horizontal') | null;
-            options?:
-              | {
-                  label: string;
-                  value: string;
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'flexRadioButtonGroup';
-          }
-        | {
+          };
+          contact: {
             name: string;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'priorWeddingChildrenData';
-          }
-        | {
-            name: string;
-            apiUrl: string;
-            parentDataRef: {
-              first: string;
-              second: string;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'citizenshipCardRequest';
-          }
-        | {
-            name: string;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'twinBirthData';
-          }
-        | {
-            name: string;
-            identification: {
-              firstName: {
-                label: string;
-                placeholder: string;
-                required?: boolean | null;
-              };
-              lastName: {
-                label: string;
-                placeholder: string;
-                required?: boolean | null;
-              };
-              documentType: {
-                label: string;
-                placeholder: string;
-                required?: boolean | null;
-              };
-              documentNumber: {
-                label: string;
-                placeholder: string;
-                required?: boolean | null;
-              };
-              verificationDigit: {
-                label: string;
-                placeholder: string;
-                required?: boolean | null;
-              };
-              gender: {
-                label: string;
-                placeholder: string;
-                required?: boolean | null;
-              };
-              maritalStatus: {
-                label: string;
-                placeholder: string;
-                required?: boolean | null;
-              };
-              birthDate: {
-                label: string;
-                required?: boolean | null;
-              };
-              nationality: {
-                label: string;
-                placeholder: string;
-                required?: boolean | null;
-              };
-            };
-            filiation: {
-              name: string;
-              label?: string | null;
-            };
-            contact: {
-              name: string;
-              label?: string | null;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'secondParent';
-          }
-        | {
-            name: string;
-            title?: string | null;
-            identificationType?:
-              | ('identification-data' | 'parent-data' | 'place-date' | 'wedding-data' | 'wedding-place-data')
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'addressdata';
-          }
-        | {
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'formspace';
-          }
+            label?: string | null;
+          };
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'secondParent';
+        }
       )[]
-    | null;
+      | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'group';
+    }
+    | {
+      label: string;
+      htmlTag: 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
+      sublabel?: string | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'title';
+    }
+    | {
+      name: string;
+      label?: string | null;
+      placeholder?: string | null;
+      width?: number | null;
+      apidomain?: string | null;
+      required?: boolean | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'selectWithApi';
+    }
+    | {
+      name: string;
+      title?: string | null;
+      identificationType?: ('applicant-data' | 'parent-data' | 'baby-data') | null;
+      nifIsVisible?: boolean | null;
+      nifIsRequired?: boolean | null;
+      isVerificationDigitVisible?: boolean | null;
+      isVerificationDigitRequired?: boolean | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'identificationData';
+    }
+    | {
+      name: string;
+      label: string;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'location';
+    }
+    | {
+      title: string;
+      subtitle?: string | null;
+      accessCodeTitle: string;
+      accessCode: {
+        label: string;
+        placeholder: string;
+      };
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'birthconsultation';
+    }
+    | {
+      firstName: {
+        label: string;
+        placeholder: string;
+        required?: boolean | null;
+      };
+      lastName: {
+        label: string;
+        placeholder: string;
+        required?: boolean | null;
+      };
+      documentType: {
+        label: string;
+        placeholder: string;
+        required?: boolean | null;
+      };
+      documentNumber: {
+        label: string;
+        placeholder: string;
+        required?: boolean | null;
+      };
+      verificationDigit: {
+        label: string;
+        placeholder: string;
+        required?: boolean | null;
+      };
+      gender: {
+        label: string;
+        placeholder: string;
+        required?: boolean | null;
+      };
+      maritalStatus: {
+        label: string;
+        placeholder: string;
+        required?: boolean | null;
+      };
+      birthDate: {
+        label: string;
+        required?: boolean | null;
+      };
+      nationality: {
+        label: string;
+        placeholder: string;
+        required?: boolean | null;
+      };
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'parentidentification';
+    }
+    | {
+      name: string;
+      label?: string | null;
+      alignment?: ('vertical' | 'horizontal') | null;
+      options?:
+      | {
+        label: string;
+        value: string;
+        id?: string | null;
+      }[]
+      | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'flexRadioButtonGroup';
+    }
+    | {
+      name: string;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'priorWeddingChildrenData';
+    }
+    | {
+      name: string;
+      apiUrl: string;
+      parentDataRef: {
+        first: string;
+        second: string;
+      };
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'citizenshipCardRequest';
+    }
+    | {
+      name: string;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'twinBirthData';
+    }
+    | {
+      name: string;
+      identification: {
+        firstName: {
+          label: string;
+          placeholder: string;
+          required?: boolean | null;
+        };
+        lastName: {
+          label: string;
+          placeholder: string;
+          required?: boolean | null;
+        };
+        documentType: {
+          label: string;
+          placeholder: string;
+          required?: boolean | null;
+        };
+        documentNumber: {
+          label: string;
+          placeholder: string;
+          required?: boolean | null;
+        };
+        verificationDigit: {
+          label: string;
+          placeholder: string;
+          required?: boolean | null;
+        };
+        gender: {
+          label: string;
+          placeholder: string;
+          required?: boolean | null;
+        };
+        maritalStatus: {
+          label: string;
+          placeholder: string;
+          required?: boolean | null;
+        };
+        birthDate: {
+          label: string;
+          required?: boolean | null;
+        };
+        nationality: {
+          label: string;
+          placeholder: string;
+          required?: boolean | null;
+        };
+      };
+      filiation: {
+        name: string;
+        label?: string | null;
+      };
+      contact: {
+        name: string;
+        label?: string | null;
+      };
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'secondParent';
+    }
+    | {
+      name: string;
+      title?: string | null;
+      identificationType?:
+      | ('identification-data' | 'parent-data' | 'place-date' | 'wedding-data' | 'wedding-place-data')
+      | null;
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'addressdata';
+    }
+    | {
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'formspace';
+    }
+  )[]
+  | null;
   submitButtonLabel?: string | null;
   /**
    * Choose whether to display an on-page message or redirect to a different page after they submit the form.
@@ -1483,34 +1483,34 @@ export interface Form {
    * Send custom emails when the form submits. Use comma separated lists to send the same email to multiple recipients. To reference a value from this form, wrap that field's name with double curly brackets, i.e. {{firstName}}. You can use a wildcard {{*}} to output all data and {{*:table}} to format it as an HTML table in the email.
    */
   emails?:
-    | {
-        emailTo?: string | null;
-        cc?: string | null;
-        bcc?: string | null;
-        replyTo?: string | null;
-        emailFrom?: string | null;
-        subject: string;
-        /**
-         * Enter the message that should be sent in this email.
-         */
-        message?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
+  | {
+    emailTo?: string | null;
+    cc?: string | null;
+    bcc?: string | null;
+    replyTo?: string | null;
+    emailFrom?: string | null;
+    subject: string;
+    /**
+     * Enter the message that should be sent in this email.
+     */
+    message?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
           [k: string]: unknown;
-        } | null;
-        id?: string | null;
-      }[]
-    | null;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    id?: string | null;
+  }[]
+  | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1553,87 +1553,107 @@ export interface Service {
   area: number | Area;
   abouttheservice?: {
     aboutTheService?:
-      | {
-          title: string;
-          content: {
-            root: {
-              type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
+    | {
+      title: string;
+      content: {
+        root: {
+          type: string;
+          children: {
+            type: string;
+            version: number;
             [k: string]: unknown;
-          };
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'about-this-service';
-        }[]
-      | null;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      };
+      id?: string | null;
+      blockName?: string | null;
+      blockType: 'about-this-service';
+    }[]
+    | null;
   };
   steps?: {
     steps?:
-      | (
-          | {
-              title: string;
-              content: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              };
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'content-service-steps';
-            }
-          | {
-              title: string;
-              form: number | Form;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'form-service-steps';
-            }
-          | {
-              title: string;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'payment-service-steps';
-            }
-          | {
-              title: string;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'submission-service-steps';
-            }
-          | {
-              title: string;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'summary-service-steps';
-            }
-          | {
-              stepTitle: string;
-              form: number | Form;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'birthbonsultationForm';
-            }
-        )[]
-      | null;
+    | (
+      | {
+        title: string;
+        content: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'content-service-steps';
+      }
+      | {
+        title: string;
+        form: number | Form;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'form-service-steps';
+      }
+      | {
+        title: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'payment-service-steps';
+      }
+      | {
+        title: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'submission-service-steps';
+      }
+      | {
+        title: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'summary-service-steps';
+      }
+      | {
+        stepTitle: string;
+        form: number | Form;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'birthbonsultationForm';
+      }
+      | {
+        title: string;
+        titlepage: string;
+        subtitlepage?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'consult-certificate-form-cvc-service-step';
+      }
+      | {
+        title: string;
+        titlepage: string;
+        subtitlepage?: string | null;
+        /**
+         * URL of the API that will receive the request.
+         */
+        apiurl: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'certificate-preview-cvc-service-step';
+      }
+    )[]
+    | null;
   };
   relatedservices?: {
     relatedServices?: (number | Service)[] | null;
@@ -1680,14 +1700,14 @@ export interface Redirect {
   to?: {
     type?: ('reference' | 'custom') | null;
     reference?:
-      | ({
-          relationTo: 'pages';
-          value: number | Page;
-        } | null)
-      | ({
-          relationTo: 'posts';
-          value: number | Post;
-        } | null);
+    | ({
+      relationTo: 'pages';
+      value: number | Page;
+    } | null)
+    | ({
+      relationTo: 'posts';
+      value: number | Post;
+    } | null);
     url?: string | null;
   };
   updatedAt: string;
@@ -1701,12 +1721,12 @@ export interface FormSubmission {
   id: number;
   form: number | Form;
   submissionData?:
-    | {
-        field: string;
-        value: string;
-        id?: string | null;
-      }[]
-    | null;
+  | {
+    field: string;
+    value: string;
+    id?: string | null;
+  }[]
+  | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1731,12 +1751,12 @@ export interface Search {
     image?: (number | null) | Media;
   };
   categories?:
-    | {
-        relationTo?: string | null;
-        id?: string | null;
-        title?: string | null;
-      }[]
-    | null;
+  | {
+    relationTo?: string | null;
+    id?: string | null;
+    title?: string | null;
+  }[]
+  | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1747,54 +1767,54 @@ export interface Search {
 export interface PayloadLockedDocument {
   id: number;
   document?:
-    | ({
-        relationTo: 'areas';
-        value: number | Area;
-      } | null)
-    | ({
-        relationTo: 'categories';
-        value: number | Category;
-      } | null)
-    | ({
-        relationTo: 'lifecycles';
-        value: number | Lifecycle;
-      } | null)
-    | ({
-        relationTo: 'media';
-        value: number | Media;
-      } | null)
-    | ({
-        relationTo: 'pages';
-        value: number | Page;
-      } | null)
-    | ({
-        relationTo: 'posts';
-        value: number | Post;
-      } | null)
-    | ({
-        relationTo: 'services';
-        value: number | Service;
-      } | null)
-    | ({
-        relationTo: 'users';
-        value: number | User;
-      } | null)
-    | ({
-        relationTo: 'redirects';
-        value: number | Redirect;
-      } | null)
-    | ({
-        relationTo: 'forms';
-        value: number | Form;
-      } | null)
-    | ({
-        relationTo: 'form-submissions';
-        value: number | FormSubmission;
-      } | null)
-    | ({
-        relationTo: 'search';
-        value: number | Search;
-      } | null);
+  | ({
+    relationTo: 'areas';
+    value: number | Area;
+  } | null)
+  | ({
+    relationTo: 'categories';
+    value: number | Category;
+  } | null)
+  | ({
+    relationTo: 'lifecycles';
+    value: number | Lifecycle;
+  } | null)
+  | ({
+    relationTo: 'media';
+    value: number | Media;
+  } | null)
+  | ({
+    relationTo: 'pages';
+    value: number | Page;
+  } | null)
+  | ({
+    relationTo: 'posts';
+    value: number | Post;
+  } | null)
+  | ({
+    relationTo: 'services';
+    value: number | Service;
+  } | null)
+  | ({
+    relationTo: 'users';
+    value: number | User;
+  } | null)
+  | ({
+    relationTo: 'redirects';
+    value: number | Redirect;
+  } | null)
+  | ({
+    relationTo: 'forms';
+    value: number | Form;
+  } | null)
+  | ({
+    relationTo: 'form-submissions';
+    value: number | FormSubmission;
+  } | null)
+  | ({
+    relationTo: 'search';
+    value: number | Search;
+  } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
@@ -1815,14 +1835,14 @@ export interface PayloadPreference {
   };
   key?: string | null;
   value?:
-    | {
-        [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
-    | null;
+  | {
+    [k: string]: unknown;
+  }
+  | unknown[]
+  | string
+  | number
+  | boolean
+  | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1844,23 +1864,23 @@ export interface PayloadMigration {
 export interface AreasSelect<T extends boolean = true> {
   name?: T;
   content?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-      };
+  | T
+  | {
+    title?: T;
+    description?: T;
+  };
   lifecycle?:
-    | T
-    | {
-        relatedLifeCycles?: T;
-      };
+  | T
+  | {
+    relatedLifeCycles?: T;
+  };
   meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        description?: T;
-      };
+  | T
+  | {
+    title?: T;
+    image?: T;
+    description?: T;
+  };
   publishedAt?: T;
   slug?: T;
   slugLock?: T;
@@ -1875,13 +1895,13 @@ export interface CategoriesSelect<T extends boolean = true> {
   title?: T;
   parent?: T;
   breadcrumbs?:
-    | T
-    | {
-        doc?: T;
-        url?: T;
-        label?: T;
-        id?: T;
-      };
+  | T
+  | {
+    doc?: T;
+    url?: T;
+    label?: T;
+    id?: T;
+  };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1893,18 +1913,18 @@ export interface LifecyclesSelect<T extends boolean = true> {
   icon?: T;
   name?: T;
   content?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-      };
+  | T
+  | {
+    title?: T;
+    description?: T;
+  };
   meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        description?: T;
-      };
+  | T
+  | {
+    title?: T;
+    image?: T;
+    description?: T;
+  };
   publishedAt?: T;
   slug?: T;
   slugLock?: T;
@@ -1937,44 +1957,44 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   hero?:
+  | T
+  | {
+    type?: T;
+    richText?: T;
+    links?:
     | T
     | {
+      link?:
+      | T
+      | {
         type?: T;
-        richText?: T;
-        links?:
-          | T
-          | {
-              link?:
-                | T
-                | {
-                    type?: T;
-                    newTab?: T;
-                    reference?: T;
-                    url?: T;
-                    label?: T;
-                    appearance?: T;
-                  };
-              id?: T;
-            };
-        media?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+        appearance?: T;
       };
+      id?: T;
+    };
+    media?: T;
+  };
   layout?:
-    | T
-    | {
-        cta?: T | CallToActionBlockSelect<T>;
-        content?: T | ContentBlockSelect<T>;
-        mediaBlock?: T | MediaBlockSelect<T>;
-        archive?: T | ArchiveBlockSelect<T>;
-        formBlock?: T | FormBlockSelect<T>;
-        lifecyclelist?: T | LifeCycleListBlockSelect<T>;
-      };
+  | T
+  | {
+    cta?: T | CallToActionBlockSelect<T>;
+    content?: T | ContentBlockSelect<T>;
+    mediaBlock?: T | MediaBlockSelect<T>;
+    archive?: T | ArchiveBlockSelect<T>;
+    formBlock?: T | FormBlockSelect<T>;
+    lifecyclelist?: T | LifeCycleListBlockSelect<T>;
+  };
   meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        description?: T;
-      };
+  | T
+  | {
+    title?: T;
+    image?: T;
+    description?: T;
+  };
   publishedAt?: T;
   slug?: T;
   slugLock?: T;
@@ -1988,20 +2008,20 @@ export interface PagesSelect<T extends boolean = true> {
 export interface CallToActionBlockSelect<T extends boolean = true> {
   richText?: T;
   links?:
+  | T
+  | {
+    link?:
     | T
     | {
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-              appearance?: T;
-            };
-        id?: T;
-      };
+      type?: T;
+      newTab?: T;
+      reference?: T;
+      url?: T;
+      label?: T;
+      appearance?: T;
+    };
+    id?: T;
+  };
   id?: T;
   blockName?: T;
 }
@@ -2011,23 +2031,23 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
  */
 export interface ContentBlockSelect<T extends boolean = true> {
   columns?:
+  | T
+  | {
+    size?: T;
+    richText?: T;
+    enableLink?: T;
+    link?:
     | T
     | {
-        size?: T;
-        richText?: T;
-        enableLink?: T;
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-              appearance?: T;
-            };
-        id?: T;
-      };
+      type?: T;
+      newTab?: T;
+      reference?: T;
+      url?: T;
+      label?: T;
+      appearance?: T;
+    };
+    id?: T;
+  };
   id?: T;
   blockName?: T;
 }
@@ -2088,20 +2108,20 @@ export interface PostsSelect<T extends boolean = true> {
   relatedPosts?: T;
   categories?: T;
   meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        description?: T;
-      };
+  | T
+  | {
+    title?: T;
+    image?: T;
+    description?: T;
+  };
   publishedAt?: T;
   authors?: T;
   populatedAuthors?:
-    | T
-    | {
-        id?: T;
-        name?: T;
-      };
+  | T
+  | {
+    id?: T;
+    name?: T;
+  };
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2117,95 +2137,114 @@ export interface ServicesSelect<T extends boolean = true> {
   image?: T;
   area?: T;
   abouttheservice?:
+  | T
+  | {
+    aboutTheService?:
     | T
     | {
-        aboutTheService?:
-          | T
-          | {
-              'about-this-service'?:
-                | T
-                | {
-                    title?: T;
-                    content?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-            };
-      };
-  steps?:
-    | T
-    | {
-        steps?:
-          | T
-          | {
-              'content-service-steps'?:
-                | T
-                | {
-                    title?: T;
-                    content?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              'form-service-steps'?:
-                | T
-                | {
-                    title?: T;
-                    form?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              'payment-service-steps'?:
-                | T
-                | {
-                    title?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              'submission-service-steps'?:
-                | T
-                | {
-                    title?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              'summary-service-steps'?:
-                | T
-                | {
-                    title?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              birthbonsultationForm?:
-                | T
-                | {
-                    stepTitle?: T;
-                    form?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-            };
-      };
-  relatedservices?:
-    | T
-    | {
-        relatedServices?: T;
-      };
-  configuration?:
-    | T
-    | {
-        authenticated?: T;
-        schedulable?: T;
-        informationPreloadAPI?: T;
-        formSubmissionBusinessValidationAPI?: T;
-        formSubmissionURL?: T;
-      };
-  meta?:
-    | T
-    | {
+      'about-this-service'?:
+      | T
+      | {
         title?: T;
-        image?: T;
-        description?: T;
+        content?: T;
+        id?: T;
+        blockName?: T;
       };
+    };
+  };
+  steps?:
+  | T
+  | {
+    steps?:
+    | T
+    | {
+      'content-service-steps'?:
+      | T
+      | {
+        title?: T;
+        content?: T;
+        id?: T;
+        blockName?: T;
+      };
+      'form-service-steps'?:
+      | T
+      | {
+        title?: T;
+        form?: T;
+        id?: T;
+        blockName?: T;
+      };
+      'payment-service-steps'?:
+      | T
+      | {
+        title?: T;
+        id?: T;
+        blockName?: T;
+      };
+      'submission-service-steps'?:
+      | T
+      | {
+        title?: T;
+        id?: T;
+        blockName?: T;
+      };
+      'summary-service-steps'?:
+      | T
+      | {
+        title?: T;
+        id?: T;
+        blockName?: T;
+      };
+      birthbonsultationForm?:
+      | T
+      | {
+        stepTitle?: T;
+        form?: T;
+        id?: T;
+        blockName?: T;
+      };
+      'consult-certificate-form-cvc-service-step'?:
+      | T
+      | {
+        title?: T;
+        titlepage?: T;
+        subtitlepage?: T;
+        id?: T;
+        blockName?: T;
+      };
+      'certificate-preview-cvc-service-step'?:
+      | T
+      | {
+        title?: T;
+        titlepage?: T;
+        subtitlepage?: T;
+        apiurl?: T;
+        id?: T;
+        blockName?: T;
+      };
+    };
+  };
+  relatedservices?:
+  | T
+  | {
+    relatedServices?: T;
+  };
+  configuration?:
+  | T
+  | {
+    authenticated?: T;
+    schedulable?: T;
+    informationPreloadAPI?: T;
+    formSubmissionBusinessValidationAPI?: T;
+    formSubmissionURL?: T;
+  };
+  meta?:
+  | T
+  | {
+    title?: T;
+    image?: T;
+    description?: T;
+  };
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2234,12 +2273,12 @@ export interface UsersSelect<T extends boolean = true> {
 export interface RedirectsSelect<T extends boolean = true> {
   from?: T;
   to?:
-    | T
-    | {
-        type?: T;
-        reference?: T;
-        url?: T;
-      };
+  | T
+  | {
+    type?: T;
+    reference?: T;
+    url?: T;
+  };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2250,1042 +2289,1042 @@ export interface RedirectsSelect<T extends boolean = true> {
 export interface FormsSelect<T extends boolean = true> {
   title?: T;
   fields?:
+  | T
+  | {
+    checkbox?:
     | T
     | {
-        checkbox?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              width?: T;
-              required?: T;
-              defaultValue?: T;
-              id?: T;
-              blockName?: T;
-            };
-        country?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              width?: T;
-              required?: T;
-              id?: T;
-              blockName?: T;
-            };
-        email?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              width?: T;
-              required?: T;
-              id?: T;
-              blockName?: T;
-            };
-        textarea?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              width?: T;
-              defaultValue?: T;
-              required?: T;
-              id?: T;
-              blockName?: T;
-            };
-        customMessage?:
-          | T
-          | {
-              richText?: T;
-              id?: T;
-              blockName?: T;
-            };
-        customNumber?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              defaultValue?: T;
-              placeholder?: T;
-              min?: T;
-              max?: T;
-              required?: T;
-              disabled?: T;
-              readOnly?: T;
-              id?: T;
-              blockName?: T;
-            };
-        nif?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              width?: T;
-              defaultValue?: T;
-              required?: T;
-              id?: T;
-              blockName?: T;
-            };
-        radioButtons?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              options?:
-                | T
-                | {
-                    label?: T;
-                    value?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        customtext?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              defaultValue?: T;
-              placeholder?: T;
-              icon?: T;
-              width?: T;
-              minLength?: T;
-              maxLength?: T;
-              pattern?: T;
-              errorMessage?: T;
-              required?: T;
-              disabled?: T;
-              readOnly?: T;
-              hideLabel?: T;
-              id?: T;
-              blockName?: T;
-            };
-        birthCertificateData?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              id?: T;
-              blockName?: T;
-            };
-        contactData?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              id?: T;
-              blockName?: T;
-            };
-        idData?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              id?: T;
-              blockName?: T;
-            };
-        requestorData?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              id?: T;
-              blockName?: T;
-            };
-        header?:
-          | T
-          | {
-              main?: T;
-              title?: T;
-              subtitle?: T;
-              id?: T;
-              blockName?: T;
-            };
-        dropdown?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              options?:
-                | T
-                | {
-                    label?: T;
-                    value?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        select?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              defaultValue?: T;
-              placeholder?: T;
-              width?: T;
-              required?: T;
-              disabled?: T;
-              readOnly?: T;
-              hideLabel?: T;
-              options?:
-                | T
-                | {
-                    label?: T;
-                    value?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        nationality?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              id?: T;
-              blockName?: T;
-            };
-        phoneNumber?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              placeholder?: T;
-              searchInputPlaceholder?: T;
-              required?: T;
-              readOnly?: T;
-              searchable?: T;
-              width?: T;
-              id?: T;
-              blockName?: T;
-            };
-        preLoadExample1?:
-          | T
-          | {
-              simulatePreload?: T;
-              id?: T;
-              blockName?: T;
-            };
-        dateOrYearPicker?:
-          | T
-          | {
-              radioLabel?: T;
-              dateLabel?: T;
-              yearLabel?: T;
-              required?: T;
-              id?: T;
-              blockName?: T;
-            };
-        datePicker?:
-          | T
-          | {
-              label?: T;
-              width?: T;
-              relativeMinDate?:
-                | T
-                | {
-                    length?: T;
-                    typeOfLength?: T;
-                    beforeOrAfter?: T;
-                  };
-              relativeMaxDate?:
-                | T
-                | {
-                    length?: T;
-                    typeOfLength?: T;
-                    beforeOrAfter?: T;
-                  };
-              required?: T;
-              id?: T;
-              blockName?: T;
-            };
-        customtextarea?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              defaultValue?: T;
-              placeholder?: T;
-              width?: T;
-              required?: T;
-              disabled?: T;
-              readOnly?: T;
-              hideLabel?: T;
-              validation?:
-                | T
-                | {
-                    minLength?: T;
-                    maxLength?: T;
-                    pattern?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        textBox?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              defaultValue?: T;
-              placeholder?: T;
-              width?: T;
-              required?: T;
-              disabled?: T;
-              readOnly?: T;
-              hideLabel?: T;
-              validation?:
-                | T
-                | {
-                    minLength?: T;
-                    maxLength?: T;
-                    pattern?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        group?:
-          | T
-          | {
-              name?: T;
-              title?: T;
-              fields?:
-                | T
-                | {
-                    customMessage?:
-                      | T
-                      | {
-                          richText?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    customNumber?:
-                      | T
-                      | {
-                          name?: T;
-                          label?: T;
-                          defaultValue?: T;
-                          placeholder?: T;
-                          min?: T;
-                          max?: T;
-                          required?: T;
-                          disabled?: T;
-                          readOnly?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    dropdown?:
-                      | T
-                      | {
-                          name?: T;
-                          label?: T;
-                          options?:
-                            | T
-                            | {
-                                label?: T;
-                                value?: T;
-                                id?: T;
-                              };
-                          id?: T;
-                          blockName?: T;
-                        };
-                    nif?:
-                      | T
-                      | {
-                          name?: T;
-                          label?: T;
-                          width?: T;
-                          defaultValue?: T;
-                          required?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    radioButtons?:
-                      | T
-                      | {
-                          name?: T;
-                          label?: T;
-                          options?:
-                            | T
-                            | {
-                                label?: T;
-                                value?: T;
-                                id?: T;
-                              };
-                          id?: T;
-                          blockName?: T;
-                        };
-                    customtext?:
-                      | T
-                      | {
-                          name?: T;
-                          label?: T;
-                          defaultValue?: T;
-                          placeholder?: T;
-                          icon?: T;
-                          width?: T;
-                          minLength?: T;
-                          maxLength?: T;
-                          pattern?: T;
-                          errorMessage?: T;
-                          required?: T;
-                          disabled?: T;
-                          readOnly?: T;
-                          hideLabel?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    addressdata?:
-                      | T
-                      | {
-                          name?: T;
-                          title?: T;
-                          identificationType?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    birthCertificateData?:
-                      | T
-                      | {
-                          name?: T;
-                          label?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    contactData?:
-                      | T
-                      | {
-                          name?: T;
-                          label?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    idData?:
-                      | T
-                      | {
-                          name?: T;
-                          label?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    requestorData?:
-                      | T
-                      | {
-                          name?: T;
-                          label?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    header?:
-                      | T
-                      | {
-                          main?: T;
-                          title?: T;
-                          subtitle?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    select?:
-                      | T
-                      | {
-                          name?: T;
-                          label?: T;
-                          defaultValue?: T;
-                          placeholder?: T;
-                          width?: T;
-                          required?: T;
-                          disabled?: T;
-                          readOnly?: T;
-                          hideLabel?: T;
-                          options?:
-                            | T
-                            | {
-                                label?: T;
-                                value?: T;
-                                id?: T;
-                              };
-                          id?: T;
-                          blockName?: T;
-                        };
-                    nationality?:
-                      | T
-                      | {
-                          name?: T;
-                          label?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    phoneNumber?:
-                      | T
-                      | {
-                          name?: T;
-                          label?: T;
-                          placeholder?: T;
-                          searchInputPlaceholder?: T;
-                          required?: T;
-                          readOnly?: T;
-                          searchable?: T;
-                          width?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    formspace?:
-                      | T
-                      | {
-                          id?: T;
-                          blockName?: T;
-                        };
-                    preLoadExample1?:
-                      | T
-                      | {
-                          simulatePreload?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    dateOrYearPicker?:
-                      | T
-                      | {
-                          radioLabel?: T;
-                          dateLabel?: T;
-                          yearLabel?: T;
-                          required?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    datePicker?:
-                      | T
-                      | {
-                          label?: T;
-                          width?: T;
-                          relativeMinDate?:
-                            | T
-                            | {
-                                length?: T;
-                                typeOfLength?: T;
-                                beforeOrAfter?: T;
-                              };
-                          relativeMaxDate?:
-                            | T
-                            | {
-                                length?: T;
-                                typeOfLength?: T;
-                                beforeOrAfter?: T;
-                              };
-                          required?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    customtextarea?:
-                      | T
-                      | {
-                          name?: T;
-                          label?: T;
-                          defaultValue?: T;
-                          placeholder?: T;
-                          width?: T;
-                          required?: T;
-                          disabled?: T;
-                          readOnly?: T;
-                          hideLabel?: T;
-                          validation?:
-                            | T
-                            | {
-                                minLength?: T;
-                                maxLength?: T;
-                                pattern?: T;
-                              };
-                          id?: T;
-                          blockName?: T;
-                        };
-                    textBox?:
-                      | T
-                      | {
-                          name?: T;
-                          label?: T;
-                          defaultValue?: T;
-                          placeholder?: T;
-                          width?: T;
-                          required?: T;
-                          disabled?: T;
-                          readOnly?: T;
-                          hideLabel?: T;
-                          validation?:
-                            | T
-                            | {
-                                minLength?: T;
-                                maxLength?: T;
-                                pattern?: T;
-                              };
-                          id?: T;
-                          blockName?: T;
-                        };
-                    title?:
-                      | T
-                      | {
-                          label?: T;
-                          htmlTag?: T;
-                          sublabel?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    selectWithApi?:
-                      | T
-                      | {
-                          name?: T;
-                          label?: T;
-                          placeholder?: T;
-                          width?: T;
-                          apidomain?: T;
-                          required?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    identificationData?:
-                      | T
-                      | {
-                          name?: T;
-                          title?: T;
-                          identificationType?: T;
-                          nifIsVisible?: T;
-                          nifIsRequired?: T;
-                          isVerificationDigitVisible?: T;
-                          isVerificationDigitRequired?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    location?:
-                      | T
-                      | {
-                          name?: T;
-                          label?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    flexRadioButtonGroup?:
-                      | T
-                      | {
-                          name?: T;
-                          label?: T;
-                          alignment?: T;
-                          options?:
-                            | T
-                            | {
-                                label?: T;
-                                value?: T;
-                                id?: T;
-                              };
-                          id?: T;
-                          blockName?: T;
-                        };
-                    priorWeddingChildrenData?:
-                      | T
-                      | {
-                          name?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    citizenshipCardRequest?:
-                      | T
-                      | {
-                          name?: T;
-                          apiUrl?: T;
-                          parentDataRef?:
-                            | T
-                            | {
-                                first?: T;
-                                second?: T;
-                              };
-                          id?: T;
-                          blockName?: T;
-                        };
-                    twinBirthData?:
-                      | T
-                      | {
-                          name?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    secondParent?:
-                      | T
-                      | {
-                          name?: T;
-                          identification?:
-                            | T
-                            | {
-                                firstName?:
-                                  | T
-                                  | {
-                                      label?: T;
-                                      placeholder?: T;
-                                      required?: T;
-                                    };
-                                lastName?:
-                                  | T
-                                  | {
-                                      label?: T;
-                                      placeholder?: T;
-                                      required?: T;
-                                    };
-                                documentType?:
-                                  | T
-                                  | {
-                                      label?: T;
-                                      placeholder?: T;
-                                      required?: T;
-                                    };
-                                documentNumber?:
-                                  | T
-                                  | {
-                                      label?: T;
-                                      placeholder?: T;
-                                      required?: T;
-                                    };
-                                verificationDigit?:
-                                  | T
-                                  | {
-                                      label?: T;
-                                      placeholder?: T;
-                                      required?: T;
-                                    };
-                                gender?:
-                                  | T
-                                  | {
-                                      label?: T;
-                                      placeholder?: T;
-                                      required?: T;
-                                    };
-                                maritalStatus?:
-                                  | T
-                                  | {
-                                      label?: T;
-                                      placeholder?: T;
-                                      required?: T;
-                                    };
-                                birthDate?:
-                                  | T
-                                  | {
-                                      label?: T;
-                                      required?: T;
-                                    };
-                                nationality?:
-                                  | T
-                                  | {
-                                      label?: T;
-                                      placeholder?: T;
-                                      required?: T;
-                                    };
-                              };
-                          filiation?:
-                            | T
-                            | {
-                                name?: T;
-                                label?: T;
-                              };
-                          contact?:
-                            | T
-                            | {
-                                name?: T;
-                                label?: T;
-                              };
-                          id?: T;
-                          blockName?: T;
-                        };
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        title?:
-          | T
-          | {
-              label?: T;
-              htmlTag?: T;
-              sublabel?: T;
-              id?: T;
-              blockName?: T;
-            };
-        selectWithApi?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              placeholder?: T;
-              width?: T;
-              apidomain?: T;
-              required?: T;
-              id?: T;
-              blockName?: T;
-            };
-        identificationData?:
-          | T
-          | {
-              name?: T;
-              title?: T;
-              identificationType?: T;
-              nifIsVisible?: T;
-              nifIsRequired?: T;
-              isVerificationDigitVisible?: T;
-              isVerificationDigitRequired?: T;
-              id?: T;
-              blockName?: T;
-            };
-        location?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              id?: T;
-              blockName?: T;
-            };
-        birthconsultation?:
-          | T
-          | {
-              title?: T;
-              subtitle?: T;
-              accessCodeTitle?: T;
-              accessCode?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        parentidentification?:
-          | T
-          | {
-              firstName?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              lastName?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              documentType?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              documentNumber?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              verificationDigit?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              gender?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              maritalStatus?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              birthDate?:
-                | T
-                | {
-                    label?: T;
-                    required?: T;
-                  };
-              nationality?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                    required?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        flexRadioButtonGroup?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              alignment?: T;
-              options?:
-                | T
-                | {
-                    label?: T;
-                    value?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        priorWeddingChildrenData?:
-          | T
-          | {
-              name?: T;
-              id?: T;
-              blockName?: T;
-            };
-        citizenshipCardRequest?:
-          | T
-          | {
-              name?: T;
-              apiUrl?: T;
-              parentDataRef?:
-                | T
-                | {
-                    first?: T;
-                    second?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        twinBirthData?:
-          | T
-          | {
-              name?: T;
-              id?: T;
-              blockName?: T;
-            };
-        secondParent?:
-          | T
-          | {
-              name?: T;
-              identification?:
-                | T
-                | {
-                    firstName?:
-                      | T
-                      | {
-                          label?: T;
-                          placeholder?: T;
-                          required?: T;
-                        };
-                    lastName?:
-                      | T
-                      | {
-                          label?: T;
-                          placeholder?: T;
-                          required?: T;
-                        };
-                    documentType?:
-                      | T
-                      | {
-                          label?: T;
-                          placeholder?: T;
-                          required?: T;
-                        };
-                    documentNumber?:
-                      | T
-                      | {
-                          label?: T;
-                          placeholder?: T;
-                          required?: T;
-                        };
-                    verificationDigit?:
-                      | T
-                      | {
-                          label?: T;
-                          placeholder?: T;
-                          required?: T;
-                        };
-                    gender?:
-                      | T
-                      | {
-                          label?: T;
-                          placeholder?: T;
-                          required?: T;
-                        };
-                    maritalStatus?:
-                      | T
-                      | {
-                          label?: T;
-                          placeholder?: T;
-                          required?: T;
-                        };
-                    birthDate?:
-                      | T
-                      | {
-                          label?: T;
-                          required?: T;
-                        };
-                    nationality?:
-                      | T
-                      | {
-                          label?: T;
-                          placeholder?: T;
-                          required?: T;
-                        };
-                  };
-              filiation?:
-                | T
-                | {
-                    name?: T;
-                    label?: T;
-                  };
-              contact?:
-                | T
-                | {
-                    name?: T;
-                    label?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        addressdata?:
-          | T
-          | {
-              name?: T;
-              title?: T;
-              identificationType?: T;
-              id?: T;
-              blockName?: T;
-            };
-        formspace?:
-          | T
-          | {
-              id?: T;
-              blockName?: T;
-            };
+      name?: T;
+      label?: T;
+      width?: T;
+      required?: T;
+      defaultValue?: T;
+      id?: T;
+      blockName?: T;
+    };
+    country?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      width?: T;
+      required?: T;
+      id?: T;
+      blockName?: T;
+    };
+    email?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      width?: T;
+      required?: T;
+      id?: T;
+      blockName?: T;
+    };
+    textarea?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      width?: T;
+      defaultValue?: T;
+      required?: T;
+      id?: T;
+      blockName?: T;
+    };
+    customMessage?:
+    | T
+    | {
+      richText?: T;
+      id?: T;
+      blockName?: T;
+    };
+    customNumber?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      defaultValue?: T;
+      placeholder?: T;
+      min?: T;
+      max?: T;
+      required?: T;
+      disabled?: T;
+      readOnly?: T;
+      id?: T;
+      blockName?: T;
+    };
+    nif?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      width?: T;
+      defaultValue?: T;
+      required?: T;
+      id?: T;
+      blockName?: T;
+    };
+    radioButtons?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      options?:
+      | T
+      | {
+        label?: T;
+        value?: T;
+        id?: T;
       };
+      id?: T;
+      blockName?: T;
+    };
+    customtext?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      defaultValue?: T;
+      placeholder?: T;
+      icon?: T;
+      width?: T;
+      minLength?: T;
+      maxLength?: T;
+      pattern?: T;
+      errorMessage?: T;
+      required?: T;
+      disabled?: T;
+      readOnly?: T;
+      hideLabel?: T;
+      id?: T;
+      blockName?: T;
+    };
+    birthCertificateData?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      id?: T;
+      blockName?: T;
+    };
+    contactData?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      id?: T;
+      blockName?: T;
+    };
+    idData?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      id?: T;
+      blockName?: T;
+    };
+    requestorData?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      id?: T;
+      blockName?: T;
+    };
+    header?:
+    | T
+    | {
+      main?: T;
+      title?: T;
+      subtitle?: T;
+      id?: T;
+      blockName?: T;
+    };
+    dropdown?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      options?:
+      | T
+      | {
+        label?: T;
+        value?: T;
+        id?: T;
+      };
+      id?: T;
+      blockName?: T;
+    };
+    select?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      defaultValue?: T;
+      placeholder?: T;
+      width?: T;
+      required?: T;
+      disabled?: T;
+      readOnly?: T;
+      hideLabel?: T;
+      options?:
+      | T
+      | {
+        label?: T;
+        value?: T;
+        id?: T;
+      };
+      id?: T;
+      blockName?: T;
+    };
+    nationality?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      id?: T;
+      blockName?: T;
+    };
+    phoneNumber?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      placeholder?: T;
+      searchInputPlaceholder?: T;
+      required?: T;
+      readOnly?: T;
+      searchable?: T;
+      width?: T;
+      id?: T;
+      blockName?: T;
+    };
+    preLoadExample1?:
+    | T
+    | {
+      simulatePreload?: T;
+      id?: T;
+      blockName?: T;
+    };
+    dateOrYearPicker?:
+    | T
+    | {
+      radioLabel?: T;
+      dateLabel?: T;
+      yearLabel?: T;
+      required?: T;
+      id?: T;
+      blockName?: T;
+    };
+    datePicker?:
+    | T
+    | {
+      label?: T;
+      width?: T;
+      relativeMinDate?:
+      | T
+      | {
+        length?: T;
+        typeOfLength?: T;
+        beforeOrAfter?: T;
+      };
+      relativeMaxDate?:
+      | T
+      | {
+        length?: T;
+        typeOfLength?: T;
+        beforeOrAfter?: T;
+      };
+      required?: T;
+      id?: T;
+      blockName?: T;
+    };
+    customtextarea?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      defaultValue?: T;
+      placeholder?: T;
+      width?: T;
+      required?: T;
+      disabled?: T;
+      readOnly?: T;
+      hideLabel?: T;
+      validation?:
+      | T
+      | {
+        minLength?: T;
+        maxLength?: T;
+        pattern?: T;
+      };
+      id?: T;
+      blockName?: T;
+    };
+    textBox?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      defaultValue?: T;
+      placeholder?: T;
+      width?: T;
+      required?: T;
+      disabled?: T;
+      readOnly?: T;
+      hideLabel?: T;
+      validation?:
+      | T
+      | {
+        minLength?: T;
+        maxLength?: T;
+        pattern?: T;
+      };
+      id?: T;
+      blockName?: T;
+    };
+    group?:
+    | T
+    | {
+      name?: T;
+      title?: T;
+      fields?:
+      | T
+      | {
+        customMessage?:
+        | T
+        | {
+          richText?: T;
+          id?: T;
+          blockName?: T;
+        };
+        customNumber?:
+        | T
+        | {
+          name?: T;
+          label?: T;
+          defaultValue?: T;
+          placeholder?: T;
+          min?: T;
+          max?: T;
+          required?: T;
+          disabled?: T;
+          readOnly?: T;
+          id?: T;
+          blockName?: T;
+        };
+        dropdown?:
+        | T
+        | {
+          name?: T;
+          label?: T;
+          options?:
+          | T
+          | {
+            label?: T;
+            value?: T;
+            id?: T;
+          };
+          id?: T;
+          blockName?: T;
+        };
+        nif?:
+        | T
+        | {
+          name?: T;
+          label?: T;
+          width?: T;
+          defaultValue?: T;
+          required?: T;
+          id?: T;
+          blockName?: T;
+        };
+        radioButtons?:
+        | T
+        | {
+          name?: T;
+          label?: T;
+          options?:
+          | T
+          | {
+            label?: T;
+            value?: T;
+            id?: T;
+          };
+          id?: T;
+          blockName?: T;
+        };
+        customtext?:
+        | T
+        | {
+          name?: T;
+          label?: T;
+          defaultValue?: T;
+          placeholder?: T;
+          icon?: T;
+          width?: T;
+          minLength?: T;
+          maxLength?: T;
+          pattern?: T;
+          errorMessage?: T;
+          required?: T;
+          disabled?: T;
+          readOnly?: T;
+          hideLabel?: T;
+          id?: T;
+          blockName?: T;
+        };
+        addressdata?:
+        | T
+        | {
+          name?: T;
+          title?: T;
+          identificationType?: T;
+          id?: T;
+          blockName?: T;
+        };
+        birthCertificateData?:
+        | T
+        | {
+          name?: T;
+          label?: T;
+          id?: T;
+          blockName?: T;
+        };
+        contactData?:
+        | T
+        | {
+          name?: T;
+          label?: T;
+          id?: T;
+          blockName?: T;
+        };
+        idData?:
+        | T
+        | {
+          name?: T;
+          label?: T;
+          id?: T;
+          blockName?: T;
+        };
+        requestorData?:
+        | T
+        | {
+          name?: T;
+          label?: T;
+          id?: T;
+          blockName?: T;
+        };
+        header?:
+        | T
+        | {
+          main?: T;
+          title?: T;
+          subtitle?: T;
+          id?: T;
+          blockName?: T;
+        };
+        select?:
+        | T
+        | {
+          name?: T;
+          label?: T;
+          defaultValue?: T;
+          placeholder?: T;
+          width?: T;
+          required?: T;
+          disabled?: T;
+          readOnly?: T;
+          hideLabel?: T;
+          options?:
+          | T
+          | {
+            label?: T;
+            value?: T;
+            id?: T;
+          };
+          id?: T;
+          blockName?: T;
+        };
+        nationality?:
+        | T
+        | {
+          name?: T;
+          label?: T;
+          id?: T;
+          blockName?: T;
+        };
+        phoneNumber?:
+        | T
+        | {
+          name?: T;
+          label?: T;
+          placeholder?: T;
+          searchInputPlaceholder?: T;
+          required?: T;
+          readOnly?: T;
+          searchable?: T;
+          width?: T;
+          id?: T;
+          blockName?: T;
+        };
+        formspace?:
+        | T
+        | {
+          id?: T;
+          blockName?: T;
+        };
+        preLoadExample1?:
+        | T
+        | {
+          simulatePreload?: T;
+          id?: T;
+          blockName?: T;
+        };
+        dateOrYearPicker?:
+        | T
+        | {
+          radioLabel?: T;
+          dateLabel?: T;
+          yearLabel?: T;
+          required?: T;
+          id?: T;
+          blockName?: T;
+        };
+        datePicker?:
+        | T
+        | {
+          label?: T;
+          width?: T;
+          relativeMinDate?:
+          | T
+          | {
+            length?: T;
+            typeOfLength?: T;
+            beforeOrAfter?: T;
+          };
+          relativeMaxDate?:
+          | T
+          | {
+            length?: T;
+            typeOfLength?: T;
+            beforeOrAfter?: T;
+          };
+          required?: T;
+          id?: T;
+          blockName?: T;
+        };
+        customtextarea?:
+        | T
+        | {
+          name?: T;
+          label?: T;
+          defaultValue?: T;
+          placeholder?: T;
+          width?: T;
+          required?: T;
+          disabled?: T;
+          readOnly?: T;
+          hideLabel?: T;
+          validation?:
+          | T
+          | {
+            minLength?: T;
+            maxLength?: T;
+            pattern?: T;
+          };
+          id?: T;
+          blockName?: T;
+        };
+        textBox?:
+        | T
+        | {
+          name?: T;
+          label?: T;
+          defaultValue?: T;
+          placeholder?: T;
+          width?: T;
+          required?: T;
+          disabled?: T;
+          readOnly?: T;
+          hideLabel?: T;
+          validation?:
+          | T
+          | {
+            minLength?: T;
+            maxLength?: T;
+            pattern?: T;
+          };
+          id?: T;
+          blockName?: T;
+        };
+        title?:
+        | T
+        | {
+          label?: T;
+          htmlTag?: T;
+          sublabel?: T;
+          id?: T;
+          blockName?: T;
+        };
+        selectWithApi?:
+        | T
+        | {
+          name?: T;
+          label?: T;
+          placeholder?: T;
+          width?: T;
+          apidomain?: T;
+          required?: T;
+          id?: T;
+          blockName?: T;
+        };
+        identificationData?:
+        | T
+        | {
+          name?: T;
+          title?: T;
+          identificationType?: T;
+          nifIsVisible?: T;
+          nifIsRequired?: T;
+          isVerificationDigitVisible?: T;
+          isVerificationDigitRequired?: T;
+          id?: T;
+          blockName?: T;
+        };
+        location?:
+        | T
+        | {
+          name?: T;
+          label?: T;
+          id?: T;
+          blockName?: T;
+        };
+        flexRadioButtonGroup?:
+        | T
+        | {
+          name?: T;
+          label?: T;
+          alignment?: T;
+          options?:
+          | T
+          | {
+            label?: T;
+            value?: T;
+            id?: T;
+          };
+          id?: T;
+          blockName?: T;
+        };
+        priorWeddingChildrenData?:
+        | T
+        | {
+          name?: T;
+          id?: T;
+          blockName?: T;
+        };
+        citizenshipCardRequest?:
+        | T
+        | {
+          name?: T;
+          apiUrl?: T;
+          parentDataRef?:
+          | T
+          | {
+            first?: T;
+            second?: T;
+          };
+          id?: T;
+          blockName?: T;
+        };
+        twinBirthData?:
+        | T
+        | {
+          name?: T;
+          id?: T;
+          blockName?: T;
+        };
+        secondParent?:
+        | T
+        | {
+          name?: T;
+          identification?:
+          | T
+          | {
+            firstName?:
+            | T
+            | {
+              label?: T;
+              placeholder?: T;
+              required?: T;
+            };
+            lastName?:
+            | T
+            | {
+              label?: T;
+              placeholder?: T;
+              required?: T;
+            };
+            documentType?:
+            | T
+            | {
+              label?: T;
+              placeholder?: T;
+              required?: T;
+            };
+            documentNumber?:
+            | T
+            | {
+              label?: T;
+              placeholder?: T;
+              required?: T;
+            };
+            verificationDigit?:
+            | T
+            | {
+              label?: T;
+              placeholder?: T;
+              required?: T;
+            };
+            gender?:
+            | T
+            | {
+              label?: T;
+              placeholder?: T;
+              required?: T;
+            };
+            maritalStatus?:
+            | T
+            | {
+              label?: T;
+              placeholder?: T;
+              required?: T;
+            };
+            birthDate?:
+            | T
+            | {
+              label?: T;
+              required?: T;
+            };
+            nationality?:
+            | T
+            | {
+              label?: T;
+              placeholder?: T;
+              required?: T;
+            };
+          };
+          filiation?:
+          | T
+          | {
+            name?: T;
+            label?: T;
+          };
+          contact?:
+          | T
+          | {
+            name?: T;
+            label?: T;
+          };
+          id?: T;
+          blockName?: T;
+        };
+      };
+      id?: T;
+      blockName?: T;
+    };
+    title?:
+    | T
+    | {
+      label?: T;
+      htmlTag?: T;
+      sublabel?: T;
+      id?: T;
+      blockName?: T;
+    };
+    selectWithApi?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      placeholder?: T;
+      width?: T;
+      apidomain?: T;
+      required?: T;
+      id?: T;
+      blockName?: T;
+    };
+    identificationData?:
+    | T
+    | {
+      name?: T;
+      title?: T;
+      identificationType?: T;
+      nifIsVisible?: T;
+      nifIsRequired?: T;
+      isVerificationDigitVisible?: T;
+      isVerificationDigitRequired?: T;
+      id?: T;
+      blockName?: T;
+    };
+    location?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      id?: T;
+      blockName?: T;
+    };
+    birthconsultation?:
+    | T
+    | {
+      title?: T;
+      subtitle?: T;
+      accessCodeTitle?: T;
+      accessCode?:
+      | T
+      | {
+        label?: T;
+        placeholder?: T;
+      };
+      id?: T;
+      blockName?: T;
+    };
+    parentidentification?:
+    | T
+    | {
+      firstName?:
+      | T
+      | {
+        label?: T;
+        placeholder?: T;
+        required?: T;
+      };
+      lastName?:
+      | T
+      | {
+        label?: T;
+        placeholder?: T;
+        required?: T;
+      };
+      documentType?:
+      | T
+      | {
+        label?: T;
+        placeholder?: T;
+        required?: T;
+      };
+      documentNumber?:
+      | T
+      | {
+        label?: T;
+        placeholder?: T;
+        required?: T;
+      };
+      verificationDigit?:
+      | T
+      | {
+        label?: T;
+        placeholder?: T;
+        required?: T;
+      };
+      gender?:
+      | T
+      | {
+        label?: T;
+        placeholder?: T;
+        required?: T;
+      };
+      maritalStatus?:
+      | T
+      | {
+        label?: T;
+        placeholder?: T;
+        required?: T;
+      };
+      birthDate?:
+      | T
+      | {
+        label?: T;
+        required?: T;
+      };
+      nationality?:
+      | T
+      | {
+        label?: T;
+        placeholder?: T;
+        required?: T;
+      };
+      id?: T;
+      blockName?: T;
+    };
+    flexRadioButtonGroup?:
+    | T
+    | {
+      name?: T;
+      label?: T;
+      alignment?: T;
+      options?:
+      | T
+      | {
+        label?: T;
+        value?: T;
+        id?: T;
+      };
+      id?: T;
+      blockName?: T;
+    };
+    priorWeddingChildrenData?:
+    | T
+    | {
+      name?: T;
+      id?: T;
+      blockName?: T;
+    };
+    citizenshipCardRequest?:
+    | T
+    | {
+      name?: T;
+      apiUrl?: T;
+      parentDataRef?:
+      | T
+      | {
+        first?: T;
+        second?: T;
+      };
+      id?: T;
+      blockName?: T;
+    };
+    twinBirthData?:
+    | T
+    | {
+      name?: T;
+      id?: T;
+      blockName?: T;
+    };
+    secondParent?:
+    | T
+    | {
+      name?: T;
+      identification?:
+      | T
+      | {
+        firstName?:
+        | T
+        | {
+          label?: T;
+          placeholder?: T;
+          required?: T;
+        };
+        lastName?:
+        | T
+        | {
+          label?: T;
+          placeholder?: T;
+          required?: T;
+        };
+        documentType?:
+        | T
+        | {
+          label?: T;
+          placeholder?: T;
+          required?: T;
+        };
+        documentNumber?:
+        | T
+        | {
+          label?: T;
+          placeholder?: T;
+          required?: T;
+        };
+        verificationDigit?:
+        | T
+        | {
+          label?: T;
+          placeholder?: T;
+          required?: T;
+        };
+        gender?:
+        | T
+        | {
+          label?: T;
+          placeholder?: T;
+          required?: T;
+        };
+        maritalStatus?:
+        | T
+        | {
+          label?: T;
+          placeholder?: T;
+          required?: T;
+        };
+        birthDate?:
+        | T
+        | {
+          label?: T;
+          required?: T;
+        };
+        nationality?:
+        | T
+        | {
+          label?: T;
+          placeholder?: T;
+          required?: T;
+        };
+      };
+      filiation?:
+      | T
+      | {
+        name?: T;
+        label?: T;
+      };
+      contact?:
+      | T
+      | {
+        name?: T;
+        label?: T;
+      };
+      id?: T;
+      blockName?: T;
+    };
+    addressdata?:
+    | T
+    | {
+      name?: T;
+      title?: T;
+      identificationType?: T;
+      id?: T;
+      blockName?: T;
+    };
+    formspace?:
+    | T
+    | {
+      id?: T;
+      blockName?: T;
+    };
+  };
   submitButtonLabel?: T;
   confirmationType?: T;
   confirmationMessage?: T;
   redirect?:
-    | T
-    | {
-        url?: T;
-      };
+  | T
+  | {
+    url?: T;
+  };
   emails?:
-    | T
-    | {
-        emailTo?: T;
-        cc?: T;
-        bcc?: T;
-        replyTo?: T;
-        emailFrom?: T;
-        subject?: T;
-        message?: T;
-        id?: T;
-      };
+  | T
+  | {
+    emailTo?: T;
+    cc?: T;
+    bcc?: T;
+    replyTo?: T;
+    emailFrom?: T;
+    subject?: T;
+    message?: T;
+    id?: T;
+  };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -3296,12 +3335,12 @@ export interface FormsSelect<T extends boolean = true> {
 export interface FormSubmissionsSelect<T extends boolean = true> {
   form?: T;
   submissionData?:
-    | T
-    | {
-        field?: T;
-        value?: T;
-        id?: T;
-      };
+  | T
+  | {
+    field?: T;
+    value?: T;
+    id?: T;
+  };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -3315,19 +3354,19 @@ export interface SearchSelect<T extends boolean = true> {
   doc?: T;
   slug?: T;
   meta?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        image?: T;
-      };
+  | T
+  | {
+    title?: T;
+    description?: T;
+    image?: T;
+  };
   categories?:
-    | T
-    | {
-        relationTo?: T;
-        id?: T;
-        title?: T;
-      };
+  | T
+  | {
+    relationTo?: T;
+    id?: T;
+    title?: T;
+  };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -3370,20 +3409,20 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Header {
   id: number;
   navItems?:
-    | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?: {
-            relationTo: 'pages';
-            value: number | Page;
-          } | null;
-          url?: string | null;
-          label: string;
-        };
-        id?: string | null;
-      }[]
-    | null;
+  | {
+    link: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?: {
+        relationTo: 'pages';
+        value: number | Page;
+      } | null;
+      url?: string | null;
+      label: string;
+    };
+    id?: string | null;
+  }[]
+  | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -3394,20 +3433,20 @@ export interface Header {
 export interface Footer {
   id: number;
   navItems?:
-    | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?: {
-            relationTo: 'pages';
-            value: number | Page;
-          } | null;
-          url?: string | null;
-          label: string;
-        };
-        id?: string | null;
-      }[]
-    | null;
+  | {
+    link: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?: {
+        relationTo: 'pages';
+        value: number | Page;
+      } | null;
+      url?: string | null;
+      label: string;
+    };
+    id?: string | null;
+  }[]
+  | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -3417,19 +3456,19 @@ export interface Footer {
  */
 export interface HeaderSelect<T extends boolean = true> {
   navItems?:
+  | T
+  | {
+    link?:
     | T
     | {
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-            };
-        id?: T;
-      };
+      type?: T;
+      newTab?: T;
+      reference?: T;
+      url?: T;
+      label?: T;
+    };
+    id?: T;
+  };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -3440,19 +3479,19 @@ export interface HeaderSelect<T extends boolean = true> {
  */
 export interface FooterSelect<T extends boolean = true> {
   navItems?:
+  | T
+  | {
+    link?:
     | T
     | {
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-            };
-        id?: T;
-      };
+      type?: T;
+      newTab?: T;
+      reference?: T;
+      url?: T;
+      label?: T;
+    };
+    id?: T;
+  };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -3503,5 +3542,5 @@ export interface Auth {
 
 
 declare module 'payload' {
-  export interface GeneratedTypes extends Config {}
+  export interface GeneratedTypes extends Config { }
 }

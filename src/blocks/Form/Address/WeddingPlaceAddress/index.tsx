@@ -13,6 +13,7 @@ interface WeddingPlaceAddressProps {
       [x: string]: any
     }>
   >
+  
   register: UseFormRegister<FieldValues>
 }
 

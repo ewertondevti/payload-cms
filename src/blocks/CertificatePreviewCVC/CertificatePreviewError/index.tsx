@@ -2,8 +2,8 @@ import { Title } from '@/blocks/Form/Title'
 import { Icon } from '@ama-pt/agora-design-system'
 
 export const CertificatePreviewError = () => (
-  <div className="flex flex-col justify-center items-center rounded-[16px] min-w-[800px] h-[1100px] gap-16 bg-[#B20917]">
-    <div className="flex flex-col gap-2">
+  <div className="flex flex-col justify-center items-center rounded-[16px] min-w-[800px] h-[1100px] gap-64 bg-[#B20917]">
+    <div className="flex flex-col gap-8">
       <Title label="Indisponível." className="font-semibold text-white text-center" />
       <Title
         label="Não foi possível carregar o ficheiro."

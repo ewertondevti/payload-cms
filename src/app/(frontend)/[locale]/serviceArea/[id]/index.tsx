@@ -54,7 +54,7 @@ const BlockType: BlockTypeProps = {
   exemplo: 'exemplo1ServiceSteps',
   birthbonsultationForm: 'birthbonsultationForm',
   certificatepreviewcvc: 'certificate-preview-cvc-service-step',
-  consultcertificateformcvc: 'consult-certificate-form-cvc-service-step',
+  consultcertificateformcvc: 'consult-certificate-form-service-step',
 }
 
 type Args = {
