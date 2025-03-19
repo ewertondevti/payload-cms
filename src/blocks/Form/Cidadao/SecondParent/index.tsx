@@ -4,10 +4,10 @@ import { FlexRadioButtonGroup } from '../FlexRadioButtonGroup'
 import { AtomicField } from '../types'
 import { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form'
 import { LoadDataCard } from '../LoadDataCard'
-import { ParentIdentification, ParentIdentificationProps } from '../../ParentIdentification'
 import { ContactData, ContactDataProps } from '../../ContactData'
 import { Filiation, FiliationProps } from '../../Filiation'
 import { Anchor, useToastContext } from '@ama-pt/agora-design-system'
+import { ParentData, ParentDataProps } from '../../IdentificationData/ParentData'
 
 const relationshipOptions: AtomicField<RelationshipOptions>[] = [
   { label: 'Não conhece o segundo progenitor', value: 'unknown' },
@@ -38,7 +38,7 @@ const foreignRegistrationOptions: AtomicField<'true' | 'false'>[] = [
 
 type SecondParentProps = {
   name: string
-  identification: ParentIdentificationProps
+  identification: ParentDataProps
   filiation: FiliationProps
   contact: ContactDataProps
 }
@@ -141,7 +141,7 @@ export const SecondParent: FC<
       {currentState.showIdentificationForm && (
         <>
           <LoadDataCard />
-          <ParentIdentification {...{ ...identification, register, errors }} />
+          <ParentData {...{ ...identification, register, errors }} />
           <Filiation {...{ ...filiation, register, errors }} />
         </>
       )}
