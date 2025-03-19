@@ -73,24 +73,24 @@ export const ParentData = ({
       <div className="flex gap-32 flex-wrap">
         <Width width={50}>
           <InputText
-            label={firstName.label}
-            placeholder={firstName.placeholder}
-            required={firstName.required}
+            label="Nome(s) próprio(s)"
+            placeholder="Mariana"
+            required
             hasError={!!errors?.firstName}
-            feedbackText={getError(joinName(name, 'firstName'))}
+            feedbackText={getError('firstName')}
             feedbackState="danger"
-            {...register(joinName(name, 'firstName'), { required: firstName.required })}
+            {...register('firstName', { required: true })}
           />
         </Width>
         <Width width={50}>
           <InputText
-            label={lastName.label}
-            placeholder={lastName.placeholder}
-            required={lastName.required}
+            label="Apelido(s)"
+            placeholder="Lopes"
+            required
             hasError={!!errors?.lastName}
-            feedbackText={getError(joinName(name, 'lastName'))}
+            feedbackText={getError('lastName')}
             feedbackState="danger"
-            {...register(joinName(name, 'lastName'), { required: lastName.required })}
+            {...register('lastName', { required: true })}
           />
         </Width>
       </div>
@@ -98,8 +98,8 @@ export const ParentData = ({
       <div className="flex gap-32 flex-wrap">
         <Width width={50}>
           <Select
-            label={documentType.label}
-            placeholder={documentType.placeholder}
+            label="Documento de Identificação"
+            placeholder="Cartão de cidadão"
             options={options.identification}
             hasError={!!errors?.documentType}
             name={joinName(name, 'documentType')}
@@ -116,34 +116,32 @@ export const ParentData = ({
 
         <Width width={50}>
           <InputText
-            label={documentNumber.label}
-            placeholder={documentNumber.placeholder}
-            required={documentNumber.required}
+            label="Número do documento"
+            placeholder="34567890 ZE"
+            required
             hasError={!!errors?.documentNumber}
             feedbackText={getError(joinName(name, 'documentNumber'))}
             feedbackState="danger"
-            {...register(joinName(name, 'documentNumber'), { required: documentNumber.required })}
+            {...register(joinName(name, 'documentNumber'))}
           />
         </Width>
         <Width width={50}>
           <InputText
-            label={verificationDigit.label}
-            placeholder={verificationDigit.placeholder}
-            required={verificationDigit.required}
+            label="Dígito de verificação"
+            placeholder="1"
+            required
             hasError={!!errors?.verificationDigit}
             feedbackText={getError(joinName(name, 'verificationDigit'))}
             feedbackState="danger"
-            {...register(joinName(name, 'verificationDigit'), {
-              required: verificationDigit.required,
-            })}
+            {...register(joinName(name, 'verificationDigit'))}
           />
         </Width>
       </div>
       <div className="flex gap-32 flex-wrap">
         <Width width={50}>
           <Select
-            label={gender.label}
-            placeholder={gender.placeholder}
+            label="Gênero"
+            placeholder="Feminino"
             options={options.gender}
             hasError={!!errors?.gender}
             name="gender"
@@ -151,8 +149,8 @@ export const ParentData = ({
         </Width>
         <Width width={50}>
           <Select
-            label={maritalStatus.label}
-            placeholder={maritalStatus.placeholder}
+            label="Estado civil"
+            placeholder="Solteiro(a)"
             options={options.maritalStatus}
             hasError={!!errors?.maritalStatus}
             name="maritalStatus"
@@ -162,14 +160,15 @@ export const ParentData = ({
 
       <div className="flex gap-32 flex-wrap">
         <DatePicker
-          label={birthDate.label}
-          {...register('birthDate', { required: birthDate.required })}
+          label="Data de nascimento"
+          required
+          {...register('birthDate')}
           width={50}
         />
         <Width width={50}>
           <Select
-            label={nationality.label}
-            placeholder={nationality.placeholder}
+            label="País de nacionalidade"
+            placeholder="Portugal"
             options={options.nationality}
             hasError={!!errors?.nationality}
             name="nationality"

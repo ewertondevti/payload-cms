@@ -938,6 +938,7 @@ export interface Form {
                       blockType: 'customtext';
                     }
                   | {
+                      name: string;
                       title?: string | null;
                       identificationType?:
                         | ('identification-data' | 'parent-data' | 'place-date' | 'wedding-data' | 'wedding-place-data')
@@ -1119,6 +1120,7 @@ export interface Form {
                       blockType: 'selectWithApi';
                     }
                   | {
+                      name: string;
                       title?: string | null;
                       identificationType?: ('applicant-data' | 'parent-data' | 'baby-data') | null;
                       nifIsVisible?: boolean | null;
@@ -1130,6 +1132,7 @@ export interface Form {
                       blockType: 'identificationData';
                     }
                   | {
+                      name: string;
                       label: string;
                       id?: string | null;
                       blockName?: string | null;
@@ -1158,6 +1161,11 @@ export interface Form {
                     }
                   | {
                       name: string;
+                      apiUrl: string;
+                      parentDataRef: {
+                        first: string;
+                        second: string;
+                      };
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'citizenshipCardRequest';
@@ -1254,6 +1262,7 @@ export interface Form {
             blockType: 'selectWithApi';
           }
         | {
+            name: string;
             title?: string | null;
             identificationType?: ('applicant-data' | 'parent-data' | 'baby-data') | null;
             nifIsVisible?: boolean | null;
@@ -1265,6 +1274,7 @@ export interface Form {
             blockType: 'identificationData';
           }
         | {
+            name: string;
             label: string;
             id?: string | null;
             blockName?: string | null;
@@ -1354,6 +1364,11 @@ export interface Form {
           }
         | {
             name: string;
+            apiUrl: string;
+            parentDataRef: {
+              first: string;
+              second: string;
+            };
             id?: string | null;
             blockName?: string | null;
             blockType: 'citizenshipCardRequest';
@@ -1425,6 +1440,7 @@ export interface Form {
             blockType: 'secondParent';
           }
         | {
+            name: string;
             title?: string | null;
             identificationType?:
               | ('identification-data' | 'parent-data' | 'place-date' | 'wedding-data' | 'wedding-place-data')
@@ -1615,26 +1631,6 @@ export interface Service {
               id?: string | null;
               blockName?: string | null;
               blockType: 'birthbonsultationForm';
-            }
-          | {
-              title: string;
-              titlepage: string;
-              subtitlepage?: string | null;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'consult-certificate-form-cvc-service-step';
-            }
-          | {
-              title: string;
-              titlepage: string;
-              subtitlepage?: string | null;
-              /**
-               * URL of the API that will receive the request.
-               */
-              apiurl: string;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'certificate-preview-cvc-service-step';
             }
         )[]
       | null;
@@ -2187,25 +2183,6 @@ export interface ServicesSelect<T extends boolean = true> {
                     id?: T;
                     blockName?: T;
                   };
-              'consult-certificate-form-cvc-service-step'?:
-                | T
-                | {
-                    title?: T;
-                    titlepage?: T;
-                    subtitlepage?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              'certificate-preview-cvc-service-step'?:
-                | T
-                | {
-                    title?: T;
-                    titlepage?: T;
-                    subtitlepage?: T;
-                    apiurl?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
             };
       };
   relatedservices?:
@@ -2663,6 +2640,7 @@ export interface FormsSelect<T extends boolean = true> {
                     addressdata?:
                       | T
                       | {
+                          name?: T;
                           title?: T;
                           identificationType?: T;
                           id?: T;
@@ -2867,6 +2845,7 @@ export interface FormsSelect<T extends boolean = true> {
                     identificationData?:
                       | T
                       | {
+                          name?: T;
                           title?: T;
                           identificationType?: T;
                           nifIsVisible?: T;
@@ -2879,6 +2858,7 @@ export interface FormsSelect<T extends boolean = true> {
                     location?:
                       | T
                       | {
+                          name?: T;
                           label?: T;
                           id?: T;
                           blockName?: T;
@@ -2910,6 +2890,13 @@ export interface FormsSelect<T extends boolean = true> {
                       | T
                       | {
                           name?: T;
+                          apiUrl?: T;
+                          parentDataRef?:
+                            | T
+                            | {
+                                first?: T;
+                                second?: T;
+                              };
                           id?: T;
                           blockName?: T;
                         };
@@ -3033,6 +3020,7 @@ export interface FormsSelect<T extends boolean = true> {
         identificationData?:
           | T
           | {
+              name?: T;
               title?: T;
               identificationType?: T;
               nifIsVisible?: T;
@@ -3045,6 +3033,7 @@ export interface FormsSelect<T extends boolean = true> {
         location?:
           | T
           | {
+              name?: T;
               label?: T;
               id?: T;
               blockName?: T;
@@ -3159,6 +3148,13 @@ export interface FormsSelect<T extends boolean = true> {
           | T
           | {
               name?: T;
+              apiUrl?: T;
+              parentDataRef?:
+                | T
+                | {
+                    first?: T;
+                    second?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -3257,6 +3253,7 @@ export interface FormsSelect<T extends boolean = true> {
         addressdata?:
           | T
           | {
+              name?: T;
               title?: T;
               identificationType?: T;
               id?: T;
