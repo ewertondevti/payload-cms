@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 import { DatePicker } from '@/blocks/Form/DatePicker'
 import { InputText } from '@ama-pt/agora-design-system'
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
@@ -6,14 +6,8 @@ import { Width } from '../../Width'
 import { Select } from '../../Select'
 import { joinName } from '@/utilities/joinName'
 
-interface FieldConfig {
-  label: string
-  placeholder: string
-  required?: boolean
-}
-
 export interface ParentDataProps {
-  name: string
+  name?: string
 }
 
 const options = {
@@ -40,7 +34,7 @@ const options = {
   ],
 }
 
-export const ParentData: React.FC = ({
+export const ParentData: FC<ParentDataProps> = ({
   register,
   name,
   errors,
@@ -85,7 +79,7 @@ export const ParentData: React.FC = ({
             placeholder="Cartão de cidadão"
             options={options.identification}
             hasError={!!errors?.documentType}
-            name={joinName(name, 'documentType')}
+            name={joinName(name || '', 'documentType')}
           />
         </Width>
         <Width width={50}>
@@ -103,9 +97,9 @@ export const ParentData: React.FC = ({
             placeholder="34567890 ZE"
             required
             hasError={!!errors?.documentNumber}
-            feedbackText={getError(joinName(name, 'documentNumber'))}
+            feedbackText={getError(joinName(name || '', 'documentNumber'))}
             feedbackState="danger"
-            {...register(joinName(name, 'documentNumber'))}
+            {...register(joinName(name || '', 'documentNumber'))}
           />
         </Width>
         <Width width={50}>
@@ -114,9 +108,9 @@ export const ParentData: React.FC = ({
             placeholder="1"
             required
             hasError={!!errors?.verificationDigit}
-            feedbackText={getError(joinName(name, 'verificationDigit'))}
+            feedbackText={getError(joinName(name || '', 'verificationDigit'))}
             feedbackState="danger"
-            {...register(joinName(name, 'verificationDigit'))}
+            {...register(joinName(name || '', 'verificationDigit'))}
           />
         </Width>
       </div>
