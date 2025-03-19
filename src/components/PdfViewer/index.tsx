@@ -41,7 +41,7 @@ export const PdfViewer: FC<Props> = ({ file, isLoading }) => {
   }
 
   return (
-    <div className="flex flex-col w-fit gap-[16px]">
+    <div className="flex flex-col w-fit gap-32">
       <LoaderDialogProvider>
         <Document
           file={file}

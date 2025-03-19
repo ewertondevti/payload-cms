@@ -61,7 +61,7 @@ export const CertificatePreviewCVC: FC<Props> = ({
 
   return (
     <LoaderDialogProvider>
-      <div className="flex flex-col w-fit gap-16" data-testid="consult-preview">
+      <div className="flex flex-col w-fit gap-64" data-testid="consult-preview">
         <Title
           label={titlepage}
           sublabel={subtitlepage}

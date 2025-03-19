@@ -1161,6 +1161,7 @@ export interface Form {
                     }
                   | {
                       name: string;
+                      apiUrl: string;
                       parentDataRef: {
                         first: string;
                         second: string;
@@ -1363,6 +1364,7 @@ export interface Form {
           }
         | {
             name: string;
+            apiUrl: string;
             parentDataRef: {
               first: string;
               second: string;
@@ -2927,6 +2929,7 @@ export interface FormsSelect<T extends boolean = true> {
                       | T
                       | {
                           name?: T;
+                          apiUrl?: T;
                           parentDataRef?:
                             | T
                             | {
@@ -3184,6 +3187,7 @@ export interface FormsSelect<T extends boolean = true> {
           | T
           | {
               name?: T;
+              apiUrl?: T;
               parentDataRef?:
                 | T
                 | {
