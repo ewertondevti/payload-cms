@@ -8,6 +8,7 @@ import { Checkbox } from '../../Checkbox'
 
 export interface CitizenshipCardRequestProps {
   name: string
+  apiUrl: string
   parentDataRef: { first: string; second: string }
 }
 
@@ -25,8 +26,14 @@ const options = {
   typeOfLocationForeign: [{ label: 'Consulado', value: 'consulate' }],
 }
 
+const useRequest = (url: string) => {
+  // TODO: Complete this
+  return []
+}
+
 export const CitizenshipCardRequest = ({
   name,
+  apiUrl,
   parentDataRef,
   register,
   errors,
@@ -48,7 +55,7 @@ export const CitizenshipCardRequest = ({
     joinName(parentDataRef.first, 'nationality', 'country'),
     joinName(parentDataRef.second, 'nationality', 'country'),
   ])
-  const locationOptions = []
+  const locationOptions = useRequest(apiUrl)
 
   useEffect(() => {
     address && setPortugueseAddress({ first, second }[address] === 'PT')
