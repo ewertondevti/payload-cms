@@ -1,3 +1,4 @@
+import React from 'react'
 import { DatePicker } from '@/blocks/Form/DatePicker'
 import { InputText } from '@ama-pt/agora-design-system'
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
@@ -13,15 +14,6 @@ interface FieldConfig {
 
 export interface ParentDataProps {
   name: string
-  firstName: FieldConfig
-  lastName: FieldConfig
-  documentType: FieldConfig
-  documentNumber: FieldConfig
-  verificationDigit: FieldConfig
-  gender: FieldConfig
-  maritalStatus: FieldConfig
-  birthDate: { label: string; required?: boolean }
-  nationality: FieldConfig
 }
 
 const options = {
@@ -48,19 +40,10 @@ const options = {
   ],
 }
 
-export const ParentData = ({
+export const ParentData: React.FC = ({
   register,
   name,
   errors,
-  firstName,
-  lastName,
-  documentType,
-  documentNumber,
-  verificationDigit,
-  gender,
-  maritalStatus,
-  birthDate,
-  nationality,
 }: ParentDataProps & {
   errors: FieldErrors<FieldValues>
   register: UseFormRegister<FieldValues>
