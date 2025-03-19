@@ -23,6 +23,12 @@ export const CitizenshipCardRequestBlock: Block = {
       ],
     },
     {
+      type: 'text',
+      name: 'apiUrl',
+      label: 'URL do API de consulados e balcões de atendimento',
+      required: true,
+    },
+    {
       type: 'group',
       name: 'parentDataRef',
       label: 'Parent Form Names (must match names on respective forms)',
