@@ -1,7 +1,7 @@
 import { Block } from 'payload'
 
 const CertificatePreviewCVCServiceStepBlock: Block = {
-  slug: 'certificate-preview-cvc',
+  slug: 'certificate-preview-cvc-service-step',
   labels: {
     plural: 'Pré-visualização das consultas de certidões',
     singular: 'Pré-visualização da consulta de certidão',

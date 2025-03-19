@@ -1,24 +1,22 @@
-import React from 'react'
-import { Width } from '../../Width'
-import { countryOptions } from '../../Country/options'
-import { Select } from '../../Select'
-import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form'
 import { TextField } from '@/components/ui/textfield'
-import { TimePicker } from '../../TimePicker'
+import React from 'react'
+import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form'
+import { countryOptions } from '../../Country/options'
 import { DatePicker } from '../../DatePicker'
+import { Select } from '../../Select'
+import { TimePicker } from '../../TimePicker'
+import { Width } from '../../Width'
 
-interface WeddingPlaceAddressProps {}
+interface WeddingPlaceAddressProps {
+  errors: Partial<
+    FieldErrorsImpl<{
+      [x: string]: any
+    }>
+  >
+  register: UseFormRegister<FieldValues>
+}
 
-const WeddingPlaceAddress: React.FC<
-  WeddingPlaceAddressProps & {
-    errors: Partial<
-      FieldErrorsImpl<{
-        [x: string]: any
-      }>
-    >
-    register: UseFormRegister<FieldValues>
-  }
-> = ({ register, errors }) => {
+const WeddingPlaceAddress: React.FC<WeddingPlaceAddressProps> = ({ register, errors }) => {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex gap-4 flex-wrap">
