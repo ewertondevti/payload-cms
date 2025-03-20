@@ -1,7 +1,8 @@
 import configPromise from '@payload-config'
 import { getPayload, TypedLocale } from 'payload'
-import ServiceStep from '.'
+
 import PageClient from './page.client'
+import ServiceStep from '.'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
