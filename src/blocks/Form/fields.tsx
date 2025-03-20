@@ -1,3 +1,4 @@
+import { AddressData } from '@/components/Address'
 import { Address } from './Address'
 import { Birthdate } from './Birthdate'
 import { Checkbox } from './Checkbox'
@@ -40,4 +41,5 @@ export const fields = {
   preLoadExample1: PreLoadExample1,
   birthdate: Birthdate,
   customtextarea: Textarea,
+  addressdata: AddressData,
 }

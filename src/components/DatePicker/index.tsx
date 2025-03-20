@@ -1,18 +1,34 @@
+import { Width } from '@/blocks/Form/Width'
+import { cn } from '@/utilities/cn'
 import { InputDate, InputDateProps } from '@ama-pt/agora-design-system'
-import classNames from 'classnames'
 import { FC } from 'react'
-import { UseFormReturn } from 'react-hook-form'
+import { UseFormRegisterReturn } from 'react-hook-form'
+import dayjs, { ManipulateType } from 'dayjs'
 
-export const DatePicker: FC<InputDateProps & UseFormReturn> = ({ setValue, width, ...props }) => {
-  const xlSpanCol = width ? (width === 100 ? 12 : 6) : 12
+type DateSpecification = {
+  length: number
+  typeOfLength: ManipulateType
+  beforeOrAfter: string
+}
 
-  const containerClassNames = classNames(`xs:col-span-4 md:col-span-6 xl:col-span-${xlSpanCol}`, {
-    'bg-primary-900 text-white': props.darkMode,
+type DatePickerProps = {
+  relativeMinDate?: DateSpecification
+  relativeMaxDate?: DateSpecification
+}
+
+const getDate = ({ length, typeOfLength, beforeOrAfter }: DateSpecification) => {
+  if (beforeOrAfter === 'before') return dayjs().subtract(length, typeOfLength).toDate()
+  else if (beforeOrAfter === 'after') return dayjs().add(length, typeOfLength).toDate()
+  return undefined
+}
+export const DatePicker: FC<
+  DatePickerProps & Partial<InputDateProps> & UseFormRegisterReturn<string>
+> = ({ relativeMinDate, relativeMaxDate, width, darkMode, ...rest }) => {
+  const containerClassNames = cn({
+    'bg-primary-900 text-white': darkMode,
   })
 
   const compProps: InputDateProps = {
-    ...props,
-
     calendarIconAriaLabel: 'Open calendar picker overlay',
     previousYearAriaLabel: 'Navigate previous year',
     previousMonthAriaLabel: 'Navigate previous month',
@@ -34,12 +50,17 @@ export const DatePicker: FC<InputDateProps & UseFormReturn> = ({ setValue, width
     monthInputPlaceholder: 'mm',
     yearInputPlaceholder: 'yyyy',
 
-    onChange: (e) => setValue(props.name!, e.target.value),
+    startDate: relativeMinDate && getDate(relativeMinDate),
+    endDate: relativeMaxDate && getDate(relativeMaxDate),
+
+    ...rest,
   }
 
   return (
-    <div className={containerClassNames}>
-      <InputDate {...compProps} />
-    </div>
+    <Width width={width}>
+      <div className={containerClassNames}>
+        <InputDate {...compProps} />
+      </div>
+    </Width>
   )
 }
