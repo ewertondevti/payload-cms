@@ -1,7 +1,7 @@
+import { Width } from '@/blocks/Form/Width'
 import { InputTime, InputTimeProps } from '@ama-pt/agora-design-system'
 import React from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
-import { Width } from '../Width'
 
 export const TimePicker = ({
   width,

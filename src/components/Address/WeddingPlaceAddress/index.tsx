@@ -5,7 +5,7 @@ import { countryOptions } from '../../Country/options'
 import { DatePicker } from '../../DatePicker'
 import { Select } from '../../Select'
 import { TimePicker } from '../../TimePicker'
-import { Width } from '../../Width'
+import { Width } from '../Width'
 
 interface WeddingPlaceAddressProps {
   errors: Partial<
@@ -13,7 +13,7 @@ interface WeddingPlaceAddressProps {
       [x: string]: any
     }>
   >
-  
+
   register: UseFormRegister<FieldValues>
 }
 

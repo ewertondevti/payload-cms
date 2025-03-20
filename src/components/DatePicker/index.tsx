@@ -1,9 +1,10 @@
-import { Width } from '@/blocks/Form/Width'
 import { cn } from '@/utilities/cn'
 import { InputDate, InputDateProps } from '@ama-pt/agora-design-system'
 import { FC } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
 import dayjs, { ManipulateType } from 'dayjs'
+import { Width } from '../Address/Width'
+
 
 type DateSpecification = {
   length: number

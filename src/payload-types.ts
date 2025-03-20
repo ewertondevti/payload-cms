@@ -685,6 +685,16 @@ export interface Form {
             blockName?: string | null;
             blockType: 'customtextarea';
           }
+        | {
+            name: string;
+            title?: string | null;
+            identificationType?:
+              | ('identification-data' | 'parent-data' | 'place-date' | 'wedding-data' | 'wedding-place-data')
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'addressdata';
+          }
       )[]
     | null;
   submitButtonLabel?: string | null;
@@ -1603,6 +1613,15 @@ export interface FormsSelect<T extends boolean = true> {
               disabled?: T;
               readOnly?: T;
               hideLabel?: T;
+              id?: T;
+              blockName?: T;
+            };
+        addressdata?:
+          | T
+          | {
+              name?: T;
+              title?: T;
+              identificationType?: T;
               id?: T;
               blockName?: T;
             };
