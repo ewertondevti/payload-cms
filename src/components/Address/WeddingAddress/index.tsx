@@ -1,9 +1,10 @@
 import React from 'react';
-import { Width } from '../../Width';
+
 import { FieldValues, UseFormRegister, FieldErrorsImpl } from 'react-hook-form';
 import { countryOptions } from '../../Country/options';
 import { Select } from '../../Select';
 import { TextField } from '@/components/ui/textfield';
+import { Width } from '../Width';
 
 interface PlaceDateProps { }
 

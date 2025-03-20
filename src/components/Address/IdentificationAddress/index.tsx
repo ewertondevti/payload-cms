@@ -27,14 +27,11 @@ export const IdentificationAddress: React.FC<
  return (
   <div>
    <Select
-    id={'cvtResidencia'}
     name={'cvtResidencia'}
     value={selectedCountry}
     defaultValue="PT"
-    type="text"
     label="Residência"
     options={countryOptions}
-    placeholder="Selecione uma opção"
     visibleCount={5}
     searchable
     hideSectionNames

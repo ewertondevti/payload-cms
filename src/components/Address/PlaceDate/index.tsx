@@ -6,18 +6,15 @@ import { Select } from '../../Select'
 import { Width } from '../Width'
 import { DatePicker } from '@/components/DatePicker'
 
-interface PlaceDateProps { }
-
-const PlaceDate: React.FC<
-  PlaceDateProps & {
-    errors: Partial<
-      FieldErrorsImpl<{
-        [x: string]: any
-      }>
-    >
-    register: UseFormRegister<FieldValues>
-  }
-> = ({ errors, register }) => {
+interface PlaceDateProps {
+  errors: Partial<
+    FieldErrorsImpl<{
+      [x: string]: any
+    }>
+  >,
+  register: UseFormRegister<FieldValues>
+}
+const PlaceDate: React.FC<PlaceDateProps> = ({ errors, register }) => {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex gap-4 flex-wrap">

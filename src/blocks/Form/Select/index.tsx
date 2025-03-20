@@ -1,60 +1,120 @@
-import type { SelectField } from '@payloadcms/plugin-form-builder/types'
-import type { Control, FieldErrorsImpl, FieldValues } from 'react-hook-form'
-
-import { Label } from '@/components/ui/label'
+import { useEffect, useState } from 'react'
 import {
-  Select as SelectComponent,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import React from 'react'
-import { Controller } from 'react-hook-form'
+  InputSelect as AgoraInputSelect,
+  DropdownOptionProps,
+  DropdownOption,
+  DropdownSection,
+} from '@ama-pt/agora-design-system'
+import { Width } from '@/blocks/Form/Width'
+import { useFormContext } from 'react-hook-form'
 
-import { Error } from '../Error'
-import { Width } from '../Width'
+export type SelectProps = {
+  id?: string
+  name?: string
+  value?: string
+  type?: 'checkbox' | 'text'
+  label: string
+  options: { label: string; value: string }[]
+  searchable?: boolean
+  placeholder?: string
+  visibleCount?: number
+  searchNoResultsText?: string
+  searchInputPlaceholder?: string
+  defaultValue?: string
+  hideSectionNames?: boolean
+  allSelectedLabel?: string
+  dropdownAriaLabel?: string
+  icon?: string
+  hasError?: boolean
+  required?: boolean
+  disabled?: boolean
+  onChange?: ((option: string) => void) | undefined
+  width?: number | string
+}
 
-export const Select: React.FC<
-  SelectField & {
-    control: Control<FieldValues, any>
-    errors: Partial<
-      FieldErrorsImpl<{
-        [x: string]: any
-      }>
-    >
+export const Select: React.FC<SelectProps> = ({
+  id,
+  value,
+  name,
+  type = 'text',
+  label,
+  options,
+  searchable,
+  placeholder,
+  visibleCount = 4,
+  searchNoResultsText,
+  searchInputPlaceholder,
+  defaultValue,
+  hideSectionNames = false,
+  allSelectedLabel = '',
+  dropdownAriaLabel,
+  icon,
+  hasError = false,
+  required,
+  disabled,
+  onChange,
+  width,
+}) => {
+  const { register, setValue } = useFormContext()
+  const [selectedValue, setSelectedValue] = useState<string | undefined>(defaultValue)
+
+  const onInputSelectChange = async (selected: DropdownOptionProps[]) => {
+    if (selected.length > 0) {
+      const newValue = selected[0]?.value
+      onChange && onChange(newValue)
+      setSelectedValue(newValue)
+    }
   }
-> = ({ name, control, errors, label, options, required, width }) => {
+
+  useEffect(() => {
+    name && register(name, { value: selectedValue, required })
+  }, [name, register])
+
+  useEffect(() => {
+    name && setValue(name, selectedValue)
+  }, [name, selectedValue, setValue])
+
   return (
     <Width width={width}>
-      <Label htmlFor={name}>{label}</Label>
-      <Controller
-        control={control}
-        defaultValue=""
-        name={name}
-        render={({ field: { onChange, value } }) => {
-          const controlledValue = options.find((t) => t.value === value)
-
-          return (
-            <SelectComponent onValueChange={(val) => onChange(val)} value={controlledValue?.value}>
-              <SelectTrigger className="w-full" id={name}>
-                <SelectValue placeholder={label} />
-              </SelectTrigger>
-              <SelectContent>
-                {options.map(({ label, value }) => {
-                  return (
-                    <SelectItem key={value} value={value}>
-                      {label}
-                    </SelectItem>
-                  )
-                })}
-              </SelectContent>
-            </SelectComponent>
-          )
-        }}
-        rules={{ required }}
-      />
-      {required && errors[name] && <Error />}
+      <style>
+        {`
+          .agora-dropdown.visible {
+            max-height: ${(visibleCount ?? 4) * 62}px !important;
+            overflow-y: auto !important;
+          }
+        `}
+      </style>
+      <AgoraInputSelect
+        id={id}
+        type={type}
+        label={label}
+        placeholder={placeholder}
+        searchable={searchable}
+        searchNoResultsText={searchNoResultsText}
+        visibleCount={visibleCount}
+        searchInputPlaceholder={searchInputPlaceholder}
+        defaultValue={defaultValue}
+        hideSectionNames={hideSectionNames}
+        allSelectedLabel={allSelectedLabel}
+        dropdownAriaLabel={dropdownAriaLabel}
+        icon={icon}
+        hasError={hasError}
+        required={required}
+        onChange={onInputSelectChange}
+        disabled={disabled}
+      >
+        <DropdownSection name="options">
+          {options.map((option) => (
+            <DropdownOption
+              key={option.value}
+              value={option.value}
+              selected={option.value === selectedValue}
+            >
+              {option.label}
+            </DropdownOption>
+          ))}
+        </DropdownSection>
+      </AgoraInputSelect>
     </Width>
   )
 }
