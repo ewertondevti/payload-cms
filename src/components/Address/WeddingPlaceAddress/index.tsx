@@ -19,8 +19,8 @@ interface WeddingPlaceAddressProps {
 
 const WeddingPlaceAddress: React.FC<WeddingPlaceAddressProps> = ({ register, errors }) => {
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex gap-4 flex-wrap">
+    <div className="flex flex-col gap-32">
+      <div className="flex gap-32 flex-wrap">
         <Width width={50}>
           <Select
             id={'cvtResidencia'}
@@ -41,7 +41,7 @@ const WeddingPlaceAddress: React.FC<WeddingPlaceAddressProps> = ({ register, err
         </Width>
       </div>
 
-      <div className="flex gap-4 flex-wrap">
+      <div className="flex gap-32 flex-wrap">
         <Width width={50}>
           <Select
             id={'cvtResidencia'}
@@ -80,7 +80,7 @@ const WeddingPlaceAddress: React.FC<WeddingPlaceAddressProps> = ({ register, err
           />
         </Width>
       </div>
-      <div className="flex gap-4 flex-wrap">
+      <div className="flex gap-32 flex-wrap">
         <Width width={50}>
           <DatePicker required label="Data da cerimonia" {...register('birthDate')} />
         </Width>

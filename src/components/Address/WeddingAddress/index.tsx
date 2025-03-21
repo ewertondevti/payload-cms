@@ -19,8 +19,8 @@ const WeddingAddress: React.FC<
  }
 > = ({ errors, register }) => {
  return (
-  <div className="flex flex-col gap-6">
-   <div className="flex gap-4 flex-wrap">
+  <div className="flex flex-col gap-32">
+   <div className="flex gap-32 flex-wrap">
     <Width width={50}>
      <Select
       id={'cvtResidencia'}
@@ -41,7 +41,7 @@ const WeddingAddress: React.FC<
     </Width>
    </div>
 
-   <div className='flex flex-col gap-6'>
+   <div className='flex gap-32 flex-wrap'>
     <Width width={100}>
      <TextField
       id={'cvtMorada'}
@@ -63,7 +63,7 @@ const WeddingAddress: React.FC<
     </Width>
    </div>
 
-   <div className='flex gap-4 flex-wrap'>
+   <div className='flex gap-32 flex-wrap'>
     <Width width={50}>
      <TextField
       id={'cvtCodPostal'}
@@ -105,7 +105,7 @@ const WeddingAddress: React.FC<
     </Width>
    </div>
 
-   <div className='flex gap-4 flex-wrap'>
+   <div className='flex gap-32 flex-wrap'>
     <Width width={50}>
      <Select
       name="district"
@@ -132,7 +132,7 @@ const WeddingAddress: React.FC<
      />
     </Width>
    </div>
-   <div className="flex gap-4 flex-wrap">
+   <div className="flex gap-32 flex-wrap">
     <Width width={50}>
      <Select
       defaultValue="PT"

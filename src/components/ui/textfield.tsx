@@ -21,6 +21,7 @@ export interface TextFieldProps {
   id: string
   hasIcon?: boolean
   validation?: any
+  className?: string
 }
 
 export const TextField: React.FC<TextFieldProps & { register: UseFormRegister<FieldValues> }> = ({
@@ -35,6 +36,7 @@ export const TextField: React.FC<TextFieldProps & { register: UseFormRegister<Fi
   maxLength,
   pattern,
   required,
+  className,
   id,
   hasFeedback,
   feedbackText,
@@ -56,6 +58,7 @@ export const TextField: React.FC<TextFieldProps & { register: UseFormRegister<Fi
       feedbackText={feedbackText}
       hideLabel={hideLabel}
       hasIcon={hasIcon}
+      className={className}
       disabled={disabled}
       readOnly={readOnly}
       minLength={minLength}

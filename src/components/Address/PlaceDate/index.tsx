@@ -14,10 +14,11 @@ interface PlaceDateProps {
   >,
   register: UseFormRegister<FieldValues>
 }
+
 const PlaceDate: React.FC<PlaceDateProps> = ({ errors, register }) => {
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex gap-4 flex-wrap">
+    <div className="flex flex-col gap-32">
+      <div className="flex gap-32 flex-wrap">
         <Width width={100}>
           <TextField
             id={'cvtMorada'}
@@ -37,7 +38,7 @@ const PlaceDate: React.FC<PlaceDateProps> = ({ errors, register }) => {
           />
         </Width>
       </div>
-      <div className="flex gap-4 flex-wrap">
+      <div className="flex gap-32 flex-wrap">
         <Width width={50}>
           <Select
             defaultValue="PT"
@@ -69,7 +70,7 @@ const PlaceDate: React.FC<PlaceDateProps> = ({ errors, register }) => {
           />
         </Width>
       </div>
-      <div className="flex flex-col gap-6">
+      <div className="flex gap-32 flex-wrap">
         <Width width={50}>
           <Select
             defaultValue="PT"
@@ -87,25 +88,24 @@ const PlaceDate: React.FC<PlaceDateProps> = ({ errors, register }) => {
         </Width>
       </div>
 
-      <div className="flex flex-col gap-6">
+      <div className="flex gap-32 flex-wrap">
         <Width width={100}>
           <TextField
-            id={'cvtMorada'}
+            id={'cvtMinistroCulto'}
             label="Nome do ministro de culto"
             placeholder="Indique o nome do ministro de culto"
             hasFeedback={true}
             feedbackState={'danger'}
-            feedbackText={errors['cvtMorada']?.message?.toString()}
-            hasError={errors['cvtMorada'] ? true : false}
+            feedbackText={errors['cvtMinistroCulto']?.message?.toString()}
+            hasError={errors['cvtMinistroCulto'] ? true : false}
             register={register}
           />
         </Width>
-
-        <div className="flex flex-col gap-6">
-          <Width width={100}>
-            <DatePicker label="Data da cerimonia" {...register('birthDate')} width={50} />
-          </Width>
-        </div>
+      </div>
+      <div className="flex gap-32 flex-wrap">
+        <Width width={50}>
+          <DatePicker label="Data da cerimonia" {...register('birthDate')} />
+        </Width>
       </div>
     </div>
   )

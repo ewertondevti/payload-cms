@@ -7,7 +7,6 @@ import { Width } from '../Width'
 import { joinName } from '@/utilities/joinName'
 import { Select } from '@/components/Select'
 
-
 const addressOptions = {
   countryOfResidence: [
     { label: 'Portugal', value: 'PT' },
@@ -50,8 +49,8 @@ export const ParentAddress = ({
     errors[field]?.type === 'required' ? 'Obrigatório preencher este campo.' : ''
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex gap-4 flex-wrap">
+    <div className="flex flex-col gap-32">
+      <div className="flex gap-32 flex-wrap">
         <Width width={50}>
           <Select
             id={joinName(name, 'cvcResidencia')}
@@ -94,43 +93,40 @@ export const ParentAddress = ({
         />
       </Width>
 
-      <div className="flex gap-4 flex-wrap">
-        <Width width={33}>
-          <InputText
-            name="doorNumber"
-            label="Porta"
-            placeholder="Indique a porta"
-            required
-            hasError={!!errors.doorNumber}
-            feedbackText={getError('doorNumber')}
-            feedbackState="danger"
-          />
-        </Width>
-        <Width width={33}>
-          <InputText
-            name="floor"
-            label="Andar"
-            placeholder="Indique o andar"
-            required
-            hasError={!!errors.floor}
-            feedbackText={getError('floor')}
-            feedbackState="danger"
-          />
-        </Width>
-        <Width width={34}>
-          <InputText
-            name="side"
-            label="Lado"
-            placeholder="Indique o lado"
-            required
-            hasError={!!errors.side}
-            feedbackText={getError('side')}
-            feedbackState="danger"
-          />
-        </Width>
+      <div className="grid grid-cols-3 gap-32">
+        <InputText
+          name="floor"
+          label="Andar"
+          placeholder="Indique o andar"
+          required
+          hasError={!!errors.floor}
+          feedbackText={getError('floor')}
+          feedbackState="danger"
+          className="w-full"
+        />
+        <InputText
+          name="doorNumber"
+          label="Porta"
+          placeholder="Indique a porta"
+          required
+          hasError={!!errors.doorNumber}
+          feedbackText={getError('doorNumber')}
+          feedbackState="danger"
+          className="w-full"
+        />
+        <InputText
+          name="side"
+          label="Lado"
+          placeholder="Indique o lado"
+          required
+          hasError={!!errors.side}
+          feedbackText={getError('side')}
+          feedbackState="danger"
+          className="w-full"
+        />
       </div>
 
-      <div className="flex gap-4 flex-wrap">
+      <div className="flex gap-32 flex-wrap">
         <Width width={50}>
           <Select
             name="district"

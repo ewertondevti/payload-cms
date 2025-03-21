@@ -1,11 +1,11 @@
 import { Select } from '@/blocks/Form/Select'
 import { TextField } from '@/components/ui/textfield'
 import { InputTextArea } from '@ama-pt/agora-design-system'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import type { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form'
 import { useFormContext } from 'react-hook-form'
 import { countryOptions } from '../../Country/options'
-
+import { Width } from '@/blocks/Form/Width'
 
 export interface AddressProps {
  name?: string
@@ -25,60 +25,67 @@ export const IdentificationAddress: React.FC<
  const [selectedCountry, setSelectedCountry] = useState<string>('PT')
 
  return (
-  <div>
-   <Select
-    name={'cvtResidencia'}
-    value={selectedCountry}
-    defaultValue="PT"
-    label="Residência"
-    options={countryOptions}
-    visibleCount={5}
-    searchable
-    hideSectionNames
-    searchInputPlaceholder="Pesquisar país"
-    dropdownAriaLabel="Lista de países"
-    searchNoResultsText="Não foram encontrados resultados."
-    onChange={setSelectedCountry}
-   />
+  <div className="flex flex-col gap-32">
+   <div className="flex gap-32 flex-wrap">
+    <Width width={100}>
+     <Select
+      name={'cvtResidencia'}
+      value={selectedCountry}
+      defaultValue="PT"
+      label="Residência"
+      options={countryOptions}
+      visibleCount={5}
+      searchable
+      hideSectionNames
+      searchInputPlaceholder="Pesquisar país"
+      dropdownAriaLabel="Lista de países"
+      searchNoResultsText="Não foram encontrados resultados."
+      onChange={setSelectedCountry}
+     />
+    </Width>
+   </div>
    <br />
    {selectedCountry === 'PT' ? (
-    <>
-     <div className="grid grid-cols-2 gap-4">
-      <TextField
-       id={'cvtCodPostal'}
-       hasError={errors['cvtCodPostal'] ? true : false}
-       label="Código Postal"
-       placeholder="Indique o código postal"
-       required
-       hasFeedback={true}
-       feedbackState={'danger'}
-       feedbackText={errors['cvtCodPostal']?.message?.toString()}
-       validation={{
-        pattern: {
-         value: /^\d{4}-?\d{3}$/,
-         message: 'Código postal inválido',
-        },
-       }}
-       register={register}
-      />
-
-      <TextField
-       id={'cvtLocalidade'}
-       label="Localidade"
-       placeholder="Indique a localidade"
-       required
-       hasFeedback={true}
-       hasError={errors['cvtLocalidade'] ? true : false}
-       feedbackState={'danger'}
-       feedbackText={errors['cvtLocalidade']?.message?.toString()}
-       validation={{
-        pattern: {
-         value: /^[\p{L}\s'-]+$/u,
-         message: 'Localidade inválida',
-        },
-       }}
-       register={register}
-      />
+    <div>
+     <div className="flex gap-32 flex-wrap">
+      <Width width={50}>
+       <TextField
+        id={'cvtCodPostal'}
+        hasError={errors['cvtCodPostal'] ? true : false}
+        label="Código Postal"
+        placeholder="Indique o código postal"
+        required
+        hasFeedback={true}
+        feedbackState={'danger'}
+        feedbackText={errors['cvtCodPostal']?.message?.toString()}
+        validation={{
+         pattern: {
+          value: /^\d{4}-?\d{3}$/,
+          message: 'Código postal inválido',
+         },
+        }}
+        register={register}
+       />
+      </Width>
+      <Width width={50}>
+       <TextField
+        id={'cvtLocalidade'}
+        label="Localidade"
+        placeholder="Indique a localidade"
+        required
+        hasFeedback={true}
+        hasError={errors['cvtLocalidade'] ? true : false}
+        feedbackState={'danger'}
+        feedbackText={errors['cvtLocalidade']?.message?.toString()}
+        validation={{
+         pattern: {
+          value: /^[\p{L}\s'-]+$/u,
+          message: 'Localidade inválida',
+         },
+        }}
+        register={register}
+       />
+      </Width>
      </div>
      <br />
      <TextField
@@ -99,57 +106,66 @@ export const IdentificationAddress: React.FC<
       register={register}
      />
      <br />
-     <div className="grid grid-cols-3 gap-4">
-      <TextField
-       id={'cvtNumero-lote'}
-       label="Número / Lote"
-       placeholder="Indique o número ou lote"
-       hasFeedback={true}
-       feedbackState={'danger'}
-       feedbackText={errors['cvtNumero-lote']?.message?.toString()}
-       validation={{
-        pattern: {
-         value: /^[\d\w\s]+$/,
-         message: 'Lote inválido',
-        },
-       }}
-       hasError={errors['cvtNumero-lote'] ? true : false}
-       register={register}
-      />
-      <TextField
-       id={'cvtAndar'}
-       label="Andar"
-       placeholder="Indique o andar"
-       hasFeedback={true}
-       feedbackState={'danger'}
-       feedbackText={errors['cvtAndar']?.message?.toString()}
-       hasError={errors['cvtAndar'] ? true : false}
-       validation={{
-        pattern: {
-         value: /^[\w\d]+$/,
-         message: 'Andar inválido',
-        },
-       }}
-       register={register}
-      />
-      <TextField
-       id={'cvtPorta'}
-       label="Porta"
-       placeholder="Indique o nº, letra ou lado"
-       hasFeedback={true}
-       feedbackState={'danger'}
-       feedbackText={errors['cvtPorta']?.message?.toString()}
-       validation={{
-        pattern: {
-         value: /^[\w\d]+$/,
-         message: 'Porta inválida',
-        },
-       }}
-       hasError={errors['cvtPorta'] ? true : false}
-       register={register}
-      />
+     <div className="grid grid-cols-3 gap-32">
+      <div className="w-full">
+       <TextField
+        id={'cvtNumero-lote'}
+        label="Número / Lote"
+        placeholder="Indique o número ou lote"
+        hasFeedback={true}
+        feedbackState={'danger'}
+        feedbackText={errors['cvtNumero-lote']?.message?.toString()}
+        validation={{
+         pattern: {
+          value: /^[\d\w\s]+$/,
+          message: 'Lote inválido',
+         },
+        }}
+        hasError={errors['cvtNumero-lote'] ? true : false}
+        register={register}
+        className="w-full" // Adicione esta linha para garantir que o input ocupe toda a largura disponível
+       />
+      </div>
+      <div className="w-full">
+       <TextField
+        id={'cvtAndar'}
+        label="Andar"
+        placeholder="Indique o andar"
+        hasFeedback={true}
+        feedbackState={'danger'}
+        feedbackText={errors['cvtAndar']?.message?.toString()}
+        hasError={errors['cvtAndar'] ? true : false}
+        validation={{
+         pattern: {
+          value: /^[\w\d]+$/,
+          message: 'Andar inválido',
+         },
+        }}
+        register={register}
+        className="w-full" // Adicione esta linha para garantir que o input ocupe toda a largura disponível
+       />
+      </div>
+      <div className="w-full">
+       <TextField
+        id={'cvtPorta'}
+        label="Porta"
+        placeholder="Indique o nº, letra ou lado"
+        hasFeedback={true}
+        feedbackState={'danger'}
+        feedbackText={errors['cvtPorta']?.message?.toString()}
+        validation={{
+         pattern: {
+          value: /^[\w\d]+$/,
+          message: 'Porta inválida',
+         },
+        }}
+        hasError={errors['cvtPorta'] ? true : false}
+        register={register}
+        className="w-full" // Adicione esta linha para garantir que o input ocupe toda a largura disponível
+       />
+      </div>
      </div>
-    </>
+    </div>
    ) : (
     <InputTextArea
      id={'cvtEstrangeira'}
