@@ -24,6 +24,10 @@ const identificationType: Field = {
       value: 'parent-data',
     },
     {
+      label: 'Horario da cerimonia de casamento',
+      value: 'wedding-ceremony',
+    },
+    {
       label: 'Local e data do casamento',
       value: 'place-date',
     },

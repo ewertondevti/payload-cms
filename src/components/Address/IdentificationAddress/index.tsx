@@ -123,7 +123,7 @@ export const IdentificationAddress: React.FC<
         }}
         hasError={errors['cvtNumero-lote'] ? true : false}
         register={register}
-        className="w-full" // Adicione esta linha para garantir que o input ocupe toda a largura disponível
+        className="w-full"
        />
       </div>
       <div className="w-full">
@@ -142,7 +142,7 @@ export const IdentificationAddress: React.FC<
          },
         }}
         register={register}
-        className="w-full" // Adicione esta linha para garantir que o input ocupe toda a largura disponível
+        className="w-full"
        />
       </div>
       <div className="w-full">
@@ -161,7 +161,7 @@ export const IdentificationAddress: React.FC<
         }}
         hasError={errors['cvtPorta'] ? true : false}
         register={register}
-        className="w-full" // Adicione esta linha para garantir que o input ocupe toda a largura disponível
+        className="w-full"
        />
       </div>
      </div>

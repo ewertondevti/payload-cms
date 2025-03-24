@@ -7,6 +7,7 @@ import WeddingAddress from './WeddingAddress'
 import PlaceDate from './PlaceDate'
 import WeddingPlaceAddress from './WeddingPlaceAddress'
 import { Title } from '../Title'
+import WeddingCeremony from './WeddingCeremony'
 
 export type AddressProps = UseFormReturn & {
   name: string
@@ -18,6 +19,7 @@ export type AddressProps = UseFormReturn & {
   | 'place-date'
   | 'wedding-data'
   | 'wedding-place-data'
+  | 'wedding-ceremony'
 }
 
 export const AddressData: React.FC<AddressProps> = (props) => {
@@ -29,6 +31,7 @@ export const AddressData: React.FC<AddressProps> = (props) => {
       {props.identificationType === 'place-date' && <PlaceDate {...props} />}
       {props.identificationType === 'wedding-data' && <WeddingAddress {...props} />}
       {props.identificationType === 'wedding-place-data' && <WeddingPlaceAddress {...props} />}
+      {props.identificationType === 'wedding-ceremony' && <WeddingCeremony {...props} />}
     </div>
   )
 }

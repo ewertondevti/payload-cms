@@ -46,7 +46,7 @@ export const IdentificationDataBlock: Block = {
           defaultValue: 'Dados de identificação',
           admin: { width: 'calc(100% / 3)' },
         },
-        identificationType,
+        // identificationType,
       ],
     },
     {
@@ -69,7 +69,7 @@ export const IdentificationDataBlock: Block = {
         },
       ],
       admin: {
-        condition: (_, { identificationType }) => identificationType === 'applicant-data',
+        // condition: (_, { identificationType }) => identificationType === 'applicant-data',
       },
     },
     {
@@ -92,7 +92,7 @@ export const IdentificationDataBlock: Block = {
         },
       ],
       admin: {
-        condition: (_, { identificationType }) => identificationType === 'applicant-data',
+        // condition: (_, { identificationType }) => identificationType === 'applicant-data',
       },
     },
   ],
