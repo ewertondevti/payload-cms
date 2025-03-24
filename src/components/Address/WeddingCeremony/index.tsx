@@ -2,7 +2,6 @@ import React from 'react'
 import { Width } from '../Width'
 import { countryOptions } from '@/components/Country/options'
 import { Select } from '@/components/Select'
-import { TextField } from '@/components/ui/textfield'
 import { DatePicker } from '@/components/DatePicker'
 import { TimePicker } from '@/components/TimePicker'
 import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form'
@@ -96,17 +95,27 @@ const WeddingCeremony: React.FC<WeddingCeremonyProps> = ({ errors, register }) =
 
    <div className="flex gap-32 flex-wrap">
     <Width width={50}>
+     <Select
+      id={'cvtDistritoConservatoria'}
+      name={'cvtDistritoConservatoria'}
+      type="text"
+      label="Conservatória"
+      options={countryOptions}
+      placeholder="Selecione uma opção"
+      visibleCount={5}
+      searchable
+      hideSectionNames
+      searchInputPlaceholder="Pesquisar Conservatória"
+      dropdownAriaLabel="Lista de Conservatória"
+      searchNoResultsText="Não foram encontrados resultados."
+      required
+     />
+    </Width>
+    <Width width={50}>
      <DatePicker
       required
       label="Data da cerimónia"
       {...register('ceremonyDate')}
-     />
-    </Width>
-    <Width width={50}>
-     <TimePicker
-      required
-      label="Hora da cerimónia"
-      {...register('ceremonyTime')}
      />
     </Width>
    </div>
@@ -119,7 +128,6 @@ const WeddingCeremony: React.FC<WeddingCeremonyProps> = ({ errors, register }) =
        label="Tomei conhecimento que a data indicada é meramente indicativa, e sujeita a acordo com o conservador."
        required={true}
        errors={errors}
-       register={register}
        width={100}
       />
      </div>
@@ -127,26 +135,11 @@ const WeddingCeremony: React.FC<WeddingCeremonyProps> = ({ errors, register }) =
    </div>
 
    <div className="flex gap-32 flex-wrap">
-    <Width width={100}>
-     <TextField
-      id={'cvtMinistroCulto'}
-      label="Nome do ministro de culto"
-      placeholder="Indique o nome do ministro de culto"
-      required
-      hasFeedback={true}
-      hasError={errors['cvtMinistroCulto'] ? true : false}
-      feedbackState={'danger'}
-      feedbackText={errors['cvtMinistroCulto']?.message?.toString()}
-      validation={{
-       pattern: {
-        value: /^[\p{L}\s'-]+$/u,
-        message: 'Nome inválido',
-       },
-      }}
-      register={register}
-     />
+    <Width width={50}>
+     <TimePicker required label="Hora da cerimónia" {...register('ceremonyTime')} />
     </Width>
    </div>
+
   </div>
  )
 }

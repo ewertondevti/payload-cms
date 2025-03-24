@@ -52,6 +52,8 @@ import { Services } from './collections/Services'
 import { myRouteHandler } from './endpoints/my-route/route'
 import localization from './i18n/localization'
 import { AddressDataBlock } from './components/Address/AddressDataBlock'
+import { IdentificationData } from './blocks/Form/IdentificationData'
+import { IdentificationDataBlock } from './blocks/Form/IdentificationData/IdentificationDataBlock'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -198,6 +200,8 @@ export default buildConfig({
         CustomNumberBlock,
         NifBlock,
         // SelectWithApiBlock,
+        IdentificationDataBlock,
+        AddressDataBlock,
         RadioButtonBlock,
         CustomTextfieldBlock,
         AdressBlock: AddressBlock,
@@ -205,8 +209,7 @@ export default buildConfig({
         PhoneNumberBlock,
         PreLoadExample1Block,
         BirthdateBlock,
-        TextAreaBlock,
-        AddressDataBlock
+        TextAreaBlock
       },
       formOverrides: {
         fields: ({ defaultFields }) => {
