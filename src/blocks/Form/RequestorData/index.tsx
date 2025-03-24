@@ -5,7 +5,7 @@ import { Width } from '../Width'
 import { RadioButton, RadioButtonGroup } from '@ama-pt/agora-design-system'
 
 export interface RequestorDataProps {
-  name: string,
+  name: string
   label: string
 }
 
@@ -27,11 +27,11 @@ export const RequestorData: React.FC<
   }, [])
 
   return (
-    <div className='flex flex-col gap-8'>
-      <h2 className='font-bold text-xl text-[#021C51]'>{label}</h2>
-      <Width width={50} className='flex flex-col gap-8'>
+    <div className="flex flex-col gap-8">
+      <h2 className="font-bold text-xl text-[#021C51]">{label}</h2>
+      <Width width={50} className="flex flex-col gap-8">
         <RadioButtonGroup
-          id='cvtRequerente'
+          id="cvtRequerente"
           legend="A quem se destina o pedido em curso?"
           onChange={(e) => {
             setSelectedValue(e.target.value)
@@ -42,18 +42,20 @@ export const RequestorData: React.FC<
             label="Para mim"
             value="proprio"
             key="proprio"
-            checked={selectedValue === "proprio"}
+            checked={selectedValue === 'proprio'}
           />
           <RadioButton
             label="Represento outra pessoa"
             value="representante"
             key="representante"
-            checked={selectedValue === "representante"}
+            checked={selectedValue === 'representante'}
           />
         </RadioButtonGroup>
-        {selectedValue === 'proprio' ? (<></>) : (
+        {selectedValue === 'proprio' ? (
+          <></>
+        ) : (
           <RadioButtonGroup
-            id='cvtLegitimidade'
+            id="cvtLegitimidade"
             legend="Legitimidade da representação"
             onChange={(e) => {
               setSelectedValue(e.target.value)
@@ -64,23 +66,22 @@ export const RequestorData: React.FC<
               label="Sujeito da obrigação de registar"
               value="sujeitoObrigacao"
               key="sujeitoObrigacao"
-              checked={selectedValue === "sujeitoObrigacao"}
+              checked={selectedValue === 'sujeitoObrigacao'}
             />
             <RadioButton
               label="Representante com procuração"
               value="comProcuracao"
               key="comProcuracao"
-              checked={selectedValue === "comProcuracao"}
+              checked={selectedValue === 'comProcuracao'}
             />
             <RadioButton
               label="Representante sem procuração"
               value="semProcuracao"
               key="semProcuracao"
-              checked={selectedValue === "semProcuracao"}
+              checked={selectedValue === 'semProcuracao'}
             />
           </RadioButtonGroup>
         )}
-
       </Width>
     </div>
   )

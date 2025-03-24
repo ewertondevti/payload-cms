@@ -11,6 +11,10 @@ import { InputPhone } from '@ama-pt/agora-design-system'
 
 export interface ContactDataProps {
   name: string
+  defaults?: {
+    email?: string
+    phoneNumber?: string
+  }
 }
 
 export const ContactData: React.FC<
@@ -22,7 +26,7 @@ export const ContactData: React.FC<
     >
     register: UseFormRegister<FieldValues>
   }
-> = ({ name, errors, register }) => {
+> = ({ name, defaults, errors, register }) => {
   return (
     <div className="flex flex-col gap-64">
       <h2 className="font-bold text-xl text-[#021C51]">Dados de contacto</h2>
@@ -33,6 +37,7 @@ export const ContactData: React.FC<
         hasError={errors.email ? true : false}
         feedbackState={'danger'}
         feedbackText={errors.email?.message?.toString()}
+        defaultValue={defaults?.email}
         {...register('cvtEmail', {
           required: 'Campo de preenchimento obrigatório',
           pattern: {
@@ -48,6 +53,7 @@ export const ContactData: React.FC<
         hasError={errors.cvtTelefone ? true : false}
         feedbackState={'danger'}
         feedbackText={errors.cvtTelefone?.message?.toString()}
+        defaultValue={defaults?.phoneNumber}
         {...register('cvtTelefone', {
           required: 'Campo de preenchimento obrigatório',
           pattern: {

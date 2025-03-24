@@ -29,6 +29,7 @@ import { CitizenshipCardRequestBlock } from '../Cidadao/CitizenshipCardRequest/C
 import { FormSpaceBlock } from '../FormSpace/FormSpaceBlock'
 import { AddressDataBlock } from '../Address/AddressDataBlock'
 import { DatePickerBlock } from '../DatePicker/DatePickerBlock'
+import { RepresentativeCardBlock } from '../RepresentativeCard/RepresentativeCardBlock'
 
 const name: Field = {
   name: 'name',
@@ -54,6 +55,7 @@ const arrayFields: Field = {
     ContactBlock,
     IdBlock,
     RequestorBlock,
+    RepresentativeCardBlock,
     HeaderBlock,
     SelectBlock,
     NationalityBlock,

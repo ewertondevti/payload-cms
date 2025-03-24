@@ -73,6 +73,7 @@ import { CitizenshipCardRequestBlock } from './blocks/Form/Cidadao/CitizenshipCa
 import { DatePickerBlock } from './blocks/Form/DatePicker/DatePickerBlock'
 import { AddressDataBlock } from './blocks/Form/Address/AddressDataBlock'
 import { FormSpaceBlock } from './blocks/Form/FormSpace/FormSpaceBlock'
+import { RepresentativeCardBlock } from './blocks/Form/RepresentativeCard/RepresentativeCardBlock'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -186,6 +187,7 @@ export default buildConfig({
         ContactBlock,
         IdBlock,
         RequestorBlock,
+        RepresentativeCardBlock,
         HeaderBlock,
         DropdownBlock,
         SelectBlock,

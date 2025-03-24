@@ -21,6 +21,7 @@ import { getMessages, setRequestLocale } from 'next-intl/server'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import { TypedLocale } from 'payload'
+import ClientModalWrapper from '@/components/ClientModalWrapper'
 
 type Args = {
   children: React.ReactNode
@@ -59,16 +60,18 @@ export default async function RootLayout({ children, params }: Args) {
           <NextIntlClientProvider messages={messages}>
             <ClientLoaderWrapper>
               <ClientToastWrapper>
-                {/* <AdminBar
+                <ClientModalWrapper>
+                  {/* <AdminBar
               adminBarProps={{
                 preview: isEnabled,
               }}
             /> */}
-                <LivePreviewListener />
+                  <LivePreviewListener />
 
-                <Header locale={locale} />
-                {children}
-                <Footer locale={locale} />
+                  <Header locale={locale} />
+                  {children}
+                  <Footer locale={locale} />
+                </ClientModalWrapper>
               </ClientToastWrapper>
             </ClientLoaderWrapper>
           </NextIntlClientProvider>

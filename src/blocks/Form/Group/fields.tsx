@@ -35,6 +35,7 @@ import { CitizenshipCardRequest } from '../Cidadao/CitizenshipCardRequest'
 import { AddressData } from '../Address'
 import FormSpace from '../FormSpace'
 import { DatePicker } from '../DatePicker'
+import { RepresentativeCard } from '../RepresentativeCard'
 
 export const fields = {
   customMessage: CustomMessage,
@@ -56,6 +57,7 @@ export const fields = {
   contactData: ContactData,
   idData: IdData,
   requestorData: RequestorData,
+  representativeCard: RepresentativeCard,
   customtext: TextBox,
   nationality: Nationality,
   phoneNumber: PhoneNumber,

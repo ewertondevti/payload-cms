@@ -1,38 +1,35 @@
-import { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 import React from 'react'
 
 import { InputText } from '@ama-pt/agora-design-system'
 import { Width } from '../Width'
 
-export type TextBoxProps = UseFormReturn & {
+export type TextBoxProps = {
   name: string
   label: string
-  placeholder: string
+  placeholder?: string
   required?: boolean
   width: number
   pattern?: RegExp
   errorMessage?: string
-  errors: FieldErrors<FieldValues>
   minLength?: number
   maxLength?: number
+  defaultValue?: string
 }
 
 export const TextBox: React.FC<TextBoxProps> = ({
   width,
-  register,
   required,
   pattern,
   errorMessage,
-  errors,
   minLength,
   maxLength,
   ...props
 }) => {
+  const { register, formState } = useFormContext()
   return (
     <Width width={width}>
-      
-
       <InputText
         {...props}
         {...register(props.name!, { required, minLength, maxLength, pattern })}
@@ -40,7 +37,7 @@ export const TextBox: React.FC<TextBoxProps> = ({
         {...{ minLength, maxLength }}
         feedbackState="danger"
         feedbackText={errorMessage || `Obrigatório preencher "${props.label}"`}
-        hasError={!!errors[props.name!]}
+        hasError={!!formState.errors[props.name!]}
       />
     </Width>
   )

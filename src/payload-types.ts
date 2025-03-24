@@ -708,6 +708,13 @@ export interface Form {
             blockType: 'requestorData';
           }
         | {
+            name: string;
+            label?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'representativeCard';
+          }
+        | {
             main: boolean;
             title: string;
             subtitle?: string | null;
@@ -976,6 +983,13 @@ export interface Form {
                       blockType: 'requestorData';
                     }
                   | {
+                      name: string;
+                      label?: string | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'representativeCard';
+                    }
+                  | {
                       main: boolean;
                       title: string;
                       subtitle?: string | null;
@@ -1161,6 +1175,7 @@ export interface Form {
                     }
                   | {
                       name: string;
+                      apiUrl: string;
                       parentDataRef: {
                         first: string;
                         second: string;
@@ -1363,6 +1378,7 @@ export interface Form {
           }
         | {
             name: string;
+            apiUrl: string;
             parentDataRef: {
               first: string;
               second: string;
@@ -2431,6 +2447,14 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        representativeCard?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              id?: T;
+              blockName?: T;
+            };
         header?:
           | T
           | {
@@ -2715,6 +2739,14 @@ export interface FormsSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
+                    representativeCard?:
+                      | T
+                      | {
+                          name?: T;
+                          label?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
                     header?:
                       | T
                       | {
@@ -2927,6 +2959,7 @@ export interface FormsSelect<T extends boolean = true> {
                       | T
                       | {
                           name?: T;
+                          apiUrl?: T;
                           parentDataRef?:
                             | T
                             | {
@@ -3184,6 +3217,7 @@ export interface FormsSelect<T extends boolean = true> {
           | T
           | {
               name?: T;
+              apiUrl?: T;
               parentDataRef?:
                 | T
                 | {
