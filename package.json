@@ -17,7 +17,7 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
   "dependencies": {
-    "@ama-pt/agora-design-system": "^2.1.0",
+    "@ama-pt/agora-design-system": "^2.2.2",
     "@payloadcms/db-postgres": "3.24.0",
     "@payloadcms/live-preview-react": "3.24.0",
     "@payloadcms/next": "3.24.0",

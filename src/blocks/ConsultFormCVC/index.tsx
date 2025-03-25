@@ -1,7 +1,7 @@
 'use client'
 
 import { InputText } from '@ama-pt/agora-design-system'
-import { FC } from 'react'
+import { ChangeEvent, ClipboardEvent, FC } from 'react'
 import { FieldErrors, FieldValues, RegisterOptions, UseFormReturn } from 'react-hook-form'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
 import 'react-pdf/dist/esm/Page/TextLayer.css'
@@ -19,7 +19,13 @@ type Props = UseFormReturn & {
   errors: FieldErrors<FieldValues>
 }
 
-export const ConsultFormCVC: FC<Props> = ({ titlepage, subtitlepage, errors, register }) => {
+export const ConsultFormCVC: FC<Props> = ({
+  titlepage,
+  subtitlepage,
+  errors,
+  register,
+  setValue,
+}) => {
   const getErrorMessage = (fieldname: string) => {
     switch (errors?.[fieldname]?.type) {
       case 'required':
@@ -34,6 +40,35 @@ export const ConsultFormCVC: FC<Props> = ({ titlepage, subtitlepage, errors, reg
       default:
         return ''
     }
+  }
+
+  const onPaste = (evt: ClipboardEvent<HTMLInputElement>) => {
+    evt.preventDefault()
+    const value = evt.clipboardData.getData('text')
+    const arr = value
+      .replace(/[a-zA-Z]+/g, '')
+      .split('-')
+      .filter(Boolean)
+
+    const isValid = () => {
+      const regex = /^\d{4}-\d{4}-\d{4}$/
+      return regex.test(value)
+    }
+
+    if (arr.length === 3 && isValid()) {
+      setValue('accessCode1', arr[0])
+      setValue('accessCode2', arr[1])
+      setValue('accessCode3', arr[2])
+    } else {
+      setValue('accessCode1', '')
+      setValue('accessCode2', '')
+      setValue('accessCode3', '')
+    }
+  }
+
+  const onChange = (fieldname: string) => (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/[a-zA-Z]+/g, '')
+    setValue(fieldname, value)
   }
 
   const registerOptions: RegisterOptions<FieldValues> = {
@@ -63,6 +98,9 @@ export const ConsultFormCVC: FC<Props> = ({ titlepage, subtitlepage, errors, reg
                 feedbackState="danger"
                 feedbackText={getErrorMessage('accessCode1')}
                 hasError={!!errors?.['accessCode1']}
+                onChange={onChange('accessCode1')}
+                onPaste={onPaste}
+                maxLength={4}
               />
             </div>
 
@@ -73,6 +111,9 @@ export const ConsultFormCVC: FC<Props> = ({ titlepage, subtitlepage, errors, reg
                 feedbackState="danger"
                 feedbackText={getErrorMessage('accessCode2')}
                 hasError={!!errors?.['accessCode2']}
+                onChange={onChange('accessCode2')}
+                onPaste={onPaste}
+                maxLength={4}
               />
             </div>
 
@@ -83,6 +124,9 @@ export const ConsultFormCVC: FC<Props> = ({ titlepage, subtitlepage, errors, reg
                 feedbackState="danger"
                 feedbackText={getErrorMessage('accessCode3')}
                 hasError={!!errors?.['accessCode3']}
+                onChange={onChange('accessCode3')}
+                onPaste={onPaste}
+                maxLength={4}
               />
             </div>
           </div>
