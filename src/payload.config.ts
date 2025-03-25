@@ -74,6 +74,7 @@ import { DatePickerBlock } from './blocks/Form/DatePicker/DatePickerBlock'
 import { AddressDataBlock } from './blocks/Form/Address/AddressDataBlock'
 import { FormSpaceBlock } from './blocks/Form/FormSpace/FormSpaceBlock'
 import { RepresentativeCardBlock } from './blocks/Form/RepresentativeCard/RepresentativeCardBlock'
+import { WeddingDataBlock } from './blocks/Form/WeddingData/WeddingDataBlock'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -211,6 +212,7 @@ export default buildConfig({
         TwinBirthDataBlock,
         SecondParentBlock,
         AddressDataBlock,
+        WeddingDataBlock,
         FormSpaceBlock,
       },
       formOverrides: {

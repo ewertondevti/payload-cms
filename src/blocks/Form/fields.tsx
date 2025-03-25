@@ -38,6 +38,7 @@ import FormSpace from './FormSpace'
 import { AddressData } from './Address'
 import { DatePicker } from './DatePicker'
 import { RepresentativeCard } from './RepresentativeCard'
+import { WeddingData } from './WeddingData'
 
 export const fields = {
   customMessage: CustomMessage,
@@ -68,6 +69,7 @@ export const fields = {
   flexRadioButtonGroup: FlexRadioButtonGroup,
   priorWeddingChildrenData: PriorWeddingChildrenData,
   citizenshipCardRequest: CitizenshipCardRequest,
+  weddingData: WeddingData,
   twinBirthData: wrapBlock(TwinBirthData),
   secondParent: SecondParent,
   preLoadExample1: PreLoadExample1,

@@ -2,28 +2,45 @@ import { Width } from '@/blocks/Form/Width'
 import { cn } from '@/utilities/cn'
 import { InputDate, InputDateProps } from '@ama-pt/agora-design-system'
 import { FC } from 'react'
-import { UseFormRegisterReturn } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 import dayjs, { ManipulateType } from 'dayjs'
 
-type DateSpecification = {
+type RelativeDateSpecification = {
   length: number
   typeOfLength: ManipulateType
-  beforeOrAfter: string
+  beforeOrAfter: 'before' | 'after'
 }
 
 type DatePickerProps = {
-  relativeMinDate?: DateSpecification
-  relativeMaxDate?: DateSpecification
+  relativeMinDate?: RelativeDateSpecification
+  relativeMaxDate?: RelativeDateSpecification
 }
 
-const getDate = ({ length, typeOfLength, beforeOrAfter }: DateSpecification) => {
+export const relativeDate = (
+  length: number,
+  typeOfLength: ManipulateType,
+  beforeOrAfter: 'before' | 'after',
+): RelativeDateSpecification => ({
+  length,
+  typeOfLength,
+  beforeOrAfter,
+})
+
+const getDate = ({ length, typeOfLength, beforeOrAfter }: RelativeDateSpecification) => {
   if (beforeOrAfter === 'before') return dayjs().subtract(length, typeOfLength).toDate()
   else if (beforeOrAfter === 'after') return dayjs().add(length, typeOfLength).toDate()
   return undefined
 }
-export const DatePicker: FC<
-  DatePickerProps & Partial<InputDateProps> & UseFormRegisterReturn<string>
-> = ({ relativeMinDate, relativeMaxDate, width, darkMode, ...rest }) => {
+export const DatePicker: FC<DatePickerProps & Partial<InputDateProps>> = ({
+  relativeMinDate,
+  relativeMaxDate,
+  width,
+  darkMode,
+  name,
+  required,
+  ...rest
+}) => {
+  const { register } = useFormContext()
   const containerClassNames = cn({
     'bg-primary-900 text-white': darkMode,
   })
@@ -52,7 +69,8 @@ export const DatePicker: FC<
 
     startDate: relativeMinDate && getDate(relativeMinDate),
     endDate: relativeMaxDate && getDate(relativeMaxDate),
-
+    required,
+    ...(name ? register(name, { required }) : {}),
     ...rest,
   }
 
