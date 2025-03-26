@@ -50,7 +50,6 @@ import { IdentificationDataBlock } from './blocks/Form/IdentificationData/Identi
 import { NationalityBlock } from './blocks/Form/Nationality/NationalityBlock'
 import { NifBlock } from './blocks/Form/Nif/NifBlock'
 import { PhoneNumberBlock } from './blocks/Form/PhoneNumber/PhoneNumberBlock'
-import { PreLoadExample1Block } from './blocks/Form/PreloadExample1/PreLoadExample1'
 import { RadioButtonBlock } from './blocks/Form/RadioButtonGroup/RadioButtonGroupBlock'
 import { RequestorBlock } from './blocks/Form/RequestorData/RequestorDataBlock'
 import { SelectWithApiBlock } from './blocks/Form/SelectWithAPI/SelectWithApiBlock'
@@ -194,7 +193,6 @@ export default buildConfig({
         SelectBlock,
         NationalityBlock,
         PhoneNumberBlock,
-        PreLoadExample1Block,
         DateOrYearPickerBlock,
         DatePickerBlock,
         TextAreaBlock,

@@ -16,7 +16,6 @@ import { Nationality } from './Nationality'
 import { Nif } from './Nif'
 import { NumberInput } from './NumberInput'
 import { PhoneNumber } from './PhoneNumber'
-import { PreLoadExample1 } from './PreloadExample1'
 import { RadioButtons } from './RadioButtonGroup'
 import { RequestorData } from './RequestorData'
 import { Select } from './Select'
@@ -72,7 +71,6 @@ export const fields = {
   weddingData: WeddingData,
   twinBirthData: wrapBlock(TwinBirthData),
   secondParent: SecondParent,
-  preLoadExample1: PreLoadExample1,
   dateOrYearPicker: DateOrYearPicker,
   datePicker: DatePicker,
   location: Location,
