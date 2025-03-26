@@ -22,7 +22,6 @@ import { NumberInput } from '../NumberInput'
 import { ParentAddress } from '../Address/ParentAddress'
 import { ParentIdentification } from '../ParentIdentification'
 import { PhoneNumber } from '../PhoneNumber'
-import { PreLoadExample1 } from '../PreloadExample1'
 import { RadioButtons } from '../RadioButtonGroup'
 import { RequestorData } from '../RequestorData'
 import { Select } from '../Select'
@@ -69,7 +68,6 @@ export const fields = {
   weddingData: WeddingData,
   twinBirthData: TwinBirthData,
   secondParent: SecondParent,
-  preLoadExample1: PreLoadExample1,
   dateOrYearPicker: DateOrYearPicker,
   datePicker: DatePicker,
   location: Location,
