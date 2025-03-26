@@ -12,7 +12,6 @@ import { IdentificationDataBlock } from '../IdentificationData/IdentificationDat
 import { NationalityBlock } from '../Nationality/NationalityBlock'
 import { NifBlock } from '../Nif/NifBlock'
 import { PhoneNumberBlock } from '../PhoneNumber/PhoneNumberBlock'
-import { PreLoadExample1Block } from '../PreloadExample1/PreLoadExample1'
 import { RadioButtonBlock } from '../RadioButtonGroup/RadioButtonGroupBlock'
 import { RequestorBlock } from '../RequestorData/RequestorDataBlock'
 import { SelectWithApiBlock } from '../SelectWithAPI/SelectWithApiBlock'
@@ -62,7 +61,6 @@ const arrayFields: Field = {
     NationalityBlock,
     PhoneNumberBlock,
     FormSpaceBlock,
-    PreLoadExample1Block,
     DateOrYearPickerBlock,
     DatePickerBlock,
     TextAreaBlock,
