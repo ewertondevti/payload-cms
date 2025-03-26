@@ -1,5 +1,4 @@
 import { BirthCertificateData } from '../BirthCertificateData'
-import { BirthConsultation } from '../BirthConsultation'
 import { Location } from '../Location'
 import { Checkbox } from '../Checkbox'
 import { FlexRadioButtonGroup } from '../Cidadao/FlexRadioButtonGroup'
@@ -76,6 +75,5 @@ export const fields = {
   formspace: FormSpace,
   parentaddress: ParentAddress,
   identificationData: IdentificationData,
-  birthconsultation: BirthConsultation,
   parentidentification: ParentIdentification,
 }

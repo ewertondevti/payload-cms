@@ -61,7 +61,6 @@ import { LifeCycles } from './collections/LifeCycles'
 import { Services } from './collections/Services'
 import { myRouteHandler } from './endpoints/my-route/route'
 import localization from './i18n/localization'
-import { BirthConsultationBlock } from './blocks/Form/BirthConsultation/BirthConsultationBlock'
 import { ParentIdentificationBlock } from './blocks/Form/ParentIdentification/ParentIdentificationBlock'
 import { SecondParentBlock } from './blocks/Form/Cidadao/SecondParent/SecondParentBlock'
 import { TextBoxBlock } from './blocks/Form/TextBox/TextBoxBlock'
@@ -202,7 +201,6 @@ export default buildConfig({
         SelectWithApiBlock,
         IdentificationDataBlock,
         LocationBlock,
-        BirthConsultationBlock,
         ParentIdentificationBlock,
         FlexRadioButtonGroupBlock,
         PriorWeddingChildrenDataBlock,

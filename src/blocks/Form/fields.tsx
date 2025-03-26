@@ -1,5 +1,4 @@
 import { BirthCertificateData } from './BirthCertificateData'
-import { BirthConsultation } from './BirthConsultation'
 import { DateOrYearPicker } from './DateOrYearPicker'
 import { Location } from './Location'
 import { Checkbox } from './Checkbox'
@@ -79,6 +78,5 @@ export const fields = {
   parentaddress: ParentAddress,
   identificationData: IdentificationData,
   group: Group,
-  birthconsultation: BirthConsultation,
   parentidentification: ParentIdentification,
 }
