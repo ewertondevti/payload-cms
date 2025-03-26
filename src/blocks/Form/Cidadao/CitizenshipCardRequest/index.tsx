@@ -62,7 +62,7 @@ export const CitizenshipCardRequest = ({
   }, [address, first, second])
 
   return nationalities.includes('Portugal') ? (
-    <div className="flex gap-64 flex-col">
+    <div className="flex flex-col gap-64">
       <h2 className="text-l-bold text-primary-900">Cartão de Cidadão</h2>
 
       <FlexRadioButtonGroup

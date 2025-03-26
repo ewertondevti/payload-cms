@@ -1250,6 +1250,16 @@ export interface Form {
                       blockName?: string | null;
                       blockType: 'secondParent';
                     }
+                  | {
+                      name: string;
+                      partnerDataRef: {
+                        first: string;
+                        second: string;
+                      };
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'weddingData';
+                    }
                 )[]
               | null;
             id?: string | null;
@@ -1462,6 +1472,16 @@ export interface Form {
             id?: string | null;
             blockName?: string | null;
             blockType: 'addressdata';
+          }
+        | {
+            name: string;
+            partnerDataRef: {
+              first: string;
+              second: string;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'weddingData';
           }
         | {
             id?: string | null;
@@ -3061,6 +3081,19 @@ export interface FormsSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
+                    weddingData?:
+                      | T
+                      | {
+                          name?: T;
+                          partnerDataRef?:
+                            | T
+                            | {
+                                first?: T;
+                                second?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
                   };
               id?: T;
               blockName?: T;
@@ -3325,6 +3358,19 @@ export interface FormsSelect<T extends boolean = true> {
               name?: T;
               title?: T;
               identificationType?: T;
+              id?: T;
+              blockName?: T;
+            };
+        weddingData?:
+          | T
+          | {
+              name?: T;
+              partnerDataRef?:
+                | T
+                | {
+                    first?: T;
+                    second?: T;
+                  };
               id?: T;
               blockName?: T;
             };

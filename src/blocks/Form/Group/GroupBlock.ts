@@ -30,6 +30,7 @@ import { FormSpaceBlock } from '../FormSpace/FormSpaceBlock'
 import { AddressDataBlock } from '../Address/AddressDataBlock'
 import { DatePickerBlock } from '../DatePicker/DatePickerBlock'
 import { RepresentativeCardBlock } from '../RepresentativeCard/RepresentativeCardBlock'
+import { WeddingDataBlock } from '../WeddingData/WeddingDataBlock'
 
 const name: Field = {
   name: 'name',
@@ -76,6 +77,7 @@ const arrayFields: Field = {
     CitizenshipCardRequestBlock,
     TwinBirthDataBlock,
     SecondParentBlock,
+    WeddingDataBlock,
   ],
   labels: { singular: 'Field', plural: 'Fields' },
 }
