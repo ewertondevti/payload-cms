@@ -1,5 +1,4 @@
 import { BirthCertificateData } from '../BirthCertificateData'
-import { BirthConsultation } from '../BirthConsultation'
 import { LocationField } from '../LocationField'
 import { Checkbox } from '../Checkbox'
 import { FlexRadioButtonGroup } from '../Cidadao/FlexRadioButtonGroup'
@@ -22,7 +21,6 @@ import { NumberInput } from '../NumberInput'
 import { ParentAddress } from '../Address/ParentAddress'
 import { ParentIdentification } from '../ParentIdentification'
 import { PhoneNumber } from '../PhoneNumber'
-import { PreLoadExample1 } from '../PreloadExample1'
 import { RadioButtons } from '../RadioButtonGroup'
 import { RequestorData } from '../RequestorData'
 import { Select } from '../Select'
@@ -69,7 +67,6 @@ export const fields = {
   weddingData: WeddingData,
   twinBirthData: TwinBirthData,
   secondParent: SecondParent,
-  preLoadExample1: PreLoadExample1,
   dateOrYearPicker: DateOrYearPicker,
   datePicker: DatePicker,
   locationField: LocationField,
@@ -78,6 +75,5 @@ export const fields = {
   formspace: FormSpace,
   parentaddress: ParentAddress,
   identificationData: IdentificationData,
-  birthconsultation: BirthConsultation,
   parentidentification: ParentIdentification,
 }

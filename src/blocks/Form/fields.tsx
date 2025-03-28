@@ -1,5 +1,4 @@
 import { BirthCertificateData } from './BirthCertificateData'
-import { BirthConsultation } from './BirthConsultation'
 import { DateOrYearPicker } from './DateOrYearPicker'
 import { LocationField } from './LocationField'
 import { Checkbox } from './Checkbox'
@@ -16,7 +15,6 @@ import { Nationality } from './Nationality'
 import { Nif } from './Nif'
 import { NumberInput } from './NumberInput'
 import { PhoneNumber } from './PhoneNumber'
-import { PreLoadExample1 } from './PreloadExample1'
 import { RadioButtons } from './RadioButtonGroup'
 import { RequestorData } from './RequestorData'
 import { Select } from './Select'
@@ -72,7 +70,6 @@ export const fields = {
   weddingData: WeddingData,
   twinBirthData: wrapBlock(TwinBirthData),
   secondParent: SecondParent,
-  preLoadExample1: PreLoadExample1,
   dateOrYearPicker: DateOrYearPicker,
   datePicker: DatePicker,
   locationField: LocationField,
@@ -81,6 +78,5 @@ export const fields = {
   parentaddress: ParentAddress,
   identificationData: IdentificationData,
   group: Group,
-  birthconsultation: BirthConsultation,
   parentidentification: ParentIdentification,
 }

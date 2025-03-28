@@ -50,7 +50,6 @@ import { IdentificationDataBlock } from './blocks/Form/IdentificationData/Identi
 import { NationalityBlock } from './blocks/Form/Nationality/NationalityBlock'
 import { NifBlock } from './blocks/Form/Nif/NifBlock'
 import { PhoneNumberBlock } from './blocks/Form/PhoneNumber/PhoneNumberBlock'
-import { PreLoadExample1Block } from './blocks/Form/PreloadExample1/PreLoadExample1'
 import { RadioButtonBlock } from './blocks/Form/RadioButtonGroup/RadioButtonGroupBlock'
 import { RequestorBlock } from './blocks/Form/RequestorData/RequestorDataBlock'
 import { SelectWithApiBlock } from './blocks/Form/SelectWithAPI/SelectWithApiBlock'
@@ -62,7 +61,6 @@ import { LifeCycles } from './collections/LifeCycles'
 import { Services } from './collections/Services'
 import { myRouteHandler } from './endpoints/my-route/route'
 import localization from './i18n/localization'
-import { BirthConsultationBlock } from './blocks/Form/BirthConsultation/BirthConsultationBlock'
 import { ParentIdentificationBlock } from './blocks/Form/ParentIdentification/ParentIdentificationBlock'
 import { SecondParentBlock } from './blocks/Form/Cidadao/SecondParent/SecondParentBlock'
 import { TextBoxBlock } from './blocks/Form/TextBox/TextBoxBlock'
@@ -194,7 +192,6 @@ export default buildConfig({
         SelectBlock,
         NationalityBlock,
         PhoneNumberBlock,
-        PreLoadExample1Block,
         DateOrYearPickerBlock,
         DatePickerBlock,
         TextAreaBlock,
@@ -203,8 +200,7 @@ export default buildConfig({
         TitleBlock,
         SelectWithApiBlock,
         IdentificationDataBlock,
-        LocationBlock: LocationFieldBlock,
-        BirthConsultationBlock,
+        LocationFieldBlock,
         ParentIdentificationBlock,
         FlexRadioButtonGroupBlock,
         PriorWeddingChildrenDataBlock,

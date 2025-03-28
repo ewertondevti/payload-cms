@@ -14,7 +14,7 @@ import { Title } from '../Form/Title'
 import { CertificatePreviewError } from './CertificatePreviewError'
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
+  'pdfjs-dist/build/pdf.worker.min.js',
   import.meta.url,
 ).toString()
 
@@ -68,7 +68,7 @@ export const CertificatePreviewCVC: FC<Props> = ({
           className="my-[0] text-[32px] leading-[48px]"
         />
 
-        {hasError && <CertificatePreviewError />}
+        {/* {hasError && <CertificatePreviewError />} */}
         {!hasError && <PdfViewer file={base64file} isLoading={!!visibility} />}
       </div>
     </LoaderDialogProvider>
