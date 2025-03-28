@@ -67,26 +67,13 @@ export const TextAreaBlock: Block = {
       ],
     },
     {
-      name: 'validation',
-      type: 'group',
-      label: 'Validation',
+      type: 'row',
       fields: [
-        {
-          type: 'row',
-          fields: [
-            {
-              name: 'minLength',
-              type: 'number',
-              label: 'Minimum Length',
-              defaultValue: 0,
-              admin: { width: '50%' },
-            },
-            { name: 'maxLength', type: 'number', label: 'Maximum Length', admin: { width: '50%' } },
-          ],
-        },
-        { name: 'pattern', type: 'text', label: 'Pattern (Regex)' },
+        { name: 'minLength', type: 'number', label: 'Minimum Length', defaultValue: 0 },
+        { name: 'maxLength', type: 'number', label: 'Maximum Length' },
       ],
     },
+    { name: 'pattern', type: 'text', label: 'Pattern (Regex)' },
   ],
   labels: { plural: 'Text Areas', singular: 'Text Area' },
 }
