@@ -820,11 +820,9 @@ export interface Form {
             disabled?: boolean | null;
             readOnly?: boolean | null;
             hideLabel?: boolean | null;
-            validation?: {
-              minLength?: number | null;
-              maxLength?: number | null;
-              pattern?: string | null;
-            };
+            minLength?: number | null;
+            maxLength?: number | null;
+            pattern?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'customtextarea';
@@ -839,11 +837,9 @@ export interface Form {
             disabled?: boolean | null;
             readOnly?: boolean | null;
             hideLabel?: boolean | null;
-            validation?: {
-              minLength?: number | null;
-              maxLength?: number | null;
-              pattern?: string | null;
-            };
+            minLength?: number | null;
+            maxLength?: number | null;
+            pattern?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'textBox';
@@ -1086,11 +1082,9 @@ export interface Form {
                       disabled?: boolean | null;
                       readOnly?: boolean | null;
                       hideLabel?: boolean | null;
-                      validation?: {
-                        minLength?: number | null;
-                        maxLength?: number | null;
-                        pattern?: string | null;
-                      };
+                      minLength?: number | null;
+                      maxLength?: number | null;
+                      pattern?: string | null;
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'customtextarea';
@@ -1105,11 +1099,9 @@ export interface Form {
                       disabled?: boolean | null;
                       readOnly?: boolean | null;
                       hideLabel?: boolean | null;
-                      validation?: {
-                        minLength?: number | null;
-                        maxLength?: number | null;
-                        pattern?: string | null;
-                      };
+                      minLength?: number | null;
+                      maxLength?: number | null;
+                      pattern?: string | null;
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'textBox';
@@ -1150,7 +1142,7 @@ export interface Form {
                       label: string;
                       id?: string | null;
                       blockName?: string | null;
-                      blockType: 'location';
+                      blockType: 'locationField';
                     }
                   | {
                       name: string;
@@ -1302,7 +1294,7 @@ export interface Form {
             label: string;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'location';
+            blockType: 'locationField';
           }
         | {
             title: string;
@@ -2595,13 +2587,9 @@ export interface FormsSelect<T extends boolean = true> {
               disabled?: T;
               readOnly?: T;
               hideLabel?: T;
-              validation?:
-                | T
-                | {
-                    minLength?: T;
-                    maxLength?: T;
-                    pattern?: T;
-                  };
+              minLength?: T;
+              maxLength?: T;
+              pattern?: T;
               id?: T;
               blockName?: T;
             };
@@ -2617,13 +2605,9 @@ export interface FormsSelect<T extends boolean = true> {
               disabled?: T;
               readOnly?: T;
               hideLabel?: T;
-              validation?:
-                | T
-                | {
-                    minLength?: T;
-                    maxLength?: T;
-                    pattern?: T;
-                  };
+              minLength?: T;
+              maxLength?: T;
+              pattern?: T;
               id?: T;
               blockName?: T;
             };
@@ -2878,13 +2862,9 @@ export interface FormsSelect<T extends boolean = true> {
                           disabled?: T;
                           readOnly?: T;
                           hideLabel?: T;
-                          validation?:
-                            | T
-                            | {
-                                minLength?: T;
-                                maxLength?: T;
-                                pattern?: T;
-                              };
+                          minLength?: T;
+                          maxLength?: T;
+                          pattern?: T;
                           id?: T;
                           blockName?: T;
                         };
@@ -2900,13 +2880,9 @@ export interface FormsSelect<T extends boolean = true> {
                           disabled?: T;
                           readOnly?: T;
                           hideLabel?: T;
-                          validation?:
-                            | T
-                            | {
-                                minLength?: T;
-                                maxLength?: T;
-                                pattern?: T;
-                              };
+                          minLength?: T;
+                          maxLength?: T;
+                          pattern?: T;
                           id?: T;
                           blockName?: T;
                         };
@@ -2944,7 +2920,7 @@ export interface FormsSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
-                    location?:
+                    locationField?:
                       | T
                       | {
                           name?: T;
@@ -3132,7 +3108,7 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        location?:
+        locationField?:
           | T
           | {
               name?: T;

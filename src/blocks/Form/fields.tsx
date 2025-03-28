@@ -1,7 +1,7 @@
 import { BirthCertificateData } from './BirthCertificateData'
 import { BirthConsultation } from './BirthConsultation'
 import { DateOrYearPicker } from './DateOrYearPicker'
-import { Location } from './Location'
+import { LocationField } from './LocationField'
 import { Checkbox } from './Checkbox'
 import { ContactData } from './ContactData'
 import { Country } from './Country'
@@ -23,7 +23,7 @@ import { Select } from './Select'
 import { SelectWithApi } from './SelectWithAPI'
 import { State } from './State'
 import { TextBox } from './TextBox'
-import { Textarea } from './Textarea'
+import { TextArea } from './TextArea'
 import { Title } from './Title'
 import { FlexRadioButtonGroup } from './Cidadao/FlexRadioButtonGroup'
 import { ParentIdentification } from './ParentIdentification'
@@ -52,7 +52,7 @@ export const fields = {
   select: Select,
   state: State,
   textBox: TextBox,
-  textarea: Textarea,
+  textarea: TextArea,
   nif: Nif,
   formspace: FormSpace,
   selectWithApi: SelectWithApi,
@@ -75,8 +75,8 @@ export const fields = {
   preLoadExample1: PreLoadExample1,
   dateOrYearPicker: DateOrYearPicker,
   datePicker: DatePicker,
-  location: Location,
-  customtextarea: Textarea,
+  locationField: LocationField,
+  customtextarea: TextArea,
   title: Title,
   parentaddress: ParentAddress,
   identificationData: IdentificationData,
