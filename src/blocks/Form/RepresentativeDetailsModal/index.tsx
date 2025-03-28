@@ -7,7 +7,6 @@ import { TextBox } from '../TextBox'
 import dayjs from 'dayjs'
 
 export type RepresentativeDetails = {
-  entryId: string
   professionalId: string
   name: string
   nif: string
@@ -32,9 +31,8 @@ export const RepresentativeDetailsModal: FC<RepresentativeDetailsModalProps> = (
   const { register } = form
   const { hide } = useModalContext()
   const handleSubmit = () => {
-    form.handleSubmit((data: Omit<RepresentativeDetails, 'entryId'>) => {
-      const entryId = prefilled?.entryId ?? dayjs().toISOString()
-      onSubmit && onSubmit({ entryId, ...data })
+    form.handleSubmit((data: RepresentativeDetails) => {
+      onSubmit && onSubmit(data)
       hide()
     })()
   }
@@ -42,8 +40,8 @@ export const RepresentativeDetailsModal: FC<RepresentativeDetailsModalProps> = (
   return (
     <form onSubmit={(e) => e.preventDefault()}>
       <FormProvider {...form}>
-        <div className="flex flex-col gap-64 w-full px-96">
-          <div className="flex flex-col gap-8 w-full">
+        <div className="flex w-full flex-col gap-64 px-96">
+          <div className="flex w-full flex-col gap-8">
             <h1 className="text-2xl-bold text-primary-900">
               Dados de identificação do representante
             </h1>
@@ -52,7 +50,7 @@ export const RepresentativeDetailsModal: FC<RepresentativeDetailsModalProps> = (
             </p>
           </div>
           <h2 className="text-l-bold text-primary-900">Dados de Identificação</h2>
-          <div className="gap-32 flex flex-wrap w-full">
+          <div className="flex w-full flex-wrap gap-32">
             <TextBox
               label="Nome completo"
               defaultValue={prefilled?.name}
@@ -107,7 +105,7 @@ export const RepresentativeDetailsModal: FC<RepresentativeDetailsModalProps> = (
             />
           </div>
           <ContactData name="contactData" {...{ register, errors }} defaults={prefilled} />
-          <div className="flex justify-between h-fill w-full">
+          <div className="h-fill flex w-full justify-between">
             <Button appearance="outline">Sair do pedido</Button>
             <Button onClick={handleSubmit}>Adicionar (serviço)</Button>
           </div>

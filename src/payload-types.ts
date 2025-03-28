@@ -778,12 +778,6 @@ export interface Form {
             blockType: 'phoneNumber';
           }
         | {
-            simulatePreload?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'preLoadExample1';
-          }
-        | {
             radioLabel: string;
             dateLabel: string;
             yearLabel: string;
@@ -1040,12 +1034,6 @@ export interface Form {
                       blockType: 'formspace';
                     }
                   | {
-                      simulatePreload?: boolean | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'preLoadExample1';
-                    }
-                  | {
                       radioLabel: string;
                       dateLabel: string;
                       yearLabel: string;
@@ -1295,18 +1283,6 @@ export interface Form {
             id?: string | null;
             blockName?: string | null;
             blockType: 'locationField';
-          }
-        | {
-            title: string;
-            subtitle?: string | null;
-            accessCodeTitle: string;
-            accessCode: {
-              label: string;
-              placeholder: string;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'birthconsultation';
           }
         | {
             firstName: {
@@ -2535,13 +2511,6 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        preLoadExample1?:
-          | T
-          | {
-              simulatePreload?: T;
-              id?: T;
-              blockName?: T;
-            };
         dateOrYearPicker?:
           | T
           | {
@@ -2807,13 +2776,6 @@ export interface FormsSelect<T extends boolean = true> {
                     formspace?:
                       | T
                       | {
-                          id?: T;
-                          blockName?: T;
-                        };
-                    preLoadExample1?:
-                      | T
-                      | {
-                          simulatePreload?: T;
                           id?: T;
                           blockName?: T;
                         };
@@ -3113,21 +3075,6 @@ export interface FormsSelect<T extends boolean = true> {
           | {
               name?: T;
               label?: T;
-              id?: T;
-              blockName?: T;
-            };
-        birthconsultation?:
-          | T
-          | {
-              title?: T;
-              subtitle?: T;
-              accessCodeTitle?: T;
-              accessCode?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                  };
               id?: T;
               blockName?: T;
             };
