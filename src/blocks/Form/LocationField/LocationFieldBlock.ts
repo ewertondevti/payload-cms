@@ -9,8 +9,8 @@ const name: Field = {
   defaultValue: '',
 }
 
-export const LocationBlock: Block = {
-  slug: 'location',
+export const LocationFieldBlock: Block = {
+  slug: 'locationField',
   fields: [
     name,
     {
