@@ -64,49 +64,48 @@ export const RepresentativeCard: FC<RepresentativeCardProps> = ({
           Adicionar
         </Button>
       </div>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHeaderCell>Nome</TableHeaderCell>
-            <TableHeaderCell>Nº da cédula</TableHeaderCell>
-          </TableRow>
-        </TableHeader>
-        <>
-          {!!representative && (
-            <TableBody>
-              <TableRow>
-                <TableCell headerLabel="Nome">{representative.name}</TableCell>
-                <TableCell headerLabel="Nº da cédula">
-                  <div className="flex items-center justify-between">
-                    <span>{representative.professionalId}</span>
-                    {!disabled && (
-                      <div className="flex">
-                        <Button
-                          appearance="link"
-                          hasIcon
-                          iconOnly
-                          leadingIcon="agora-solid-edit"
-                          leadingIconHover="agora-line-edit"
-                          onClick={editRepresentative}
-                        />
-                        <Button
-                          appearance="link"
-                          variant="danger"
-                          hasIcon
-                          iconOnly
-                          leadingIcon="agora-solid-trash"
-                          leadingIconHover="agora-line-trash"
-                          onClick={() => setRepresentative(undefined)}
-                        />
-                      </div>
-                    )}
-                  </div>
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          )}
-        </>
-      </Table>
+
+      {!!representative && (
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHeaderCell>Nome</TableHeaderCell>
+              <TableHeaderCell>Nº da cédula</TableHeaderCell>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell headerLabel="Nome">{representative.name}</TableCell>
+              <TableCell headerLabel="Nº da cédula">
+                <div className="flex items-center justify-between">
+                  <span>{representative.professionalId}</span>
+                  {!disabled && (
+                    <div className="flex">
+                      <Button
+                        appearance="link"
+                        hasIcon
+                        iconOnly
+                        leadingIcon="agora-solid-edit"
+                        leadingIconHover="agora-line-edit"
+                        onClick={editRepresentative}
+                      />
+                      <Button
+                        appearance="link"
+                        variant="danger"
+                        hasIcon
+                        iconOnly
+                        leadingIcon="agora-solid-trash"
+                        leadingIconHover="agora-line-trash"
+                        onClick={() => setRepresentative(undefined)}
+                      />
+                    </div>
+                  )}
+                </div>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      )}
     </div>
   )
 }
