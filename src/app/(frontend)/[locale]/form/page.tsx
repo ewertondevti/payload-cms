@@ -16,10 +16,10 @@ export default function SecureForm() {
   lastName: "",
   email: ""
  });
+
  const [error, setError] = useState<string | null>(null);
  const [isBot, setIsBot] = useState(false);
  const [isSubmitting, setIsSubmitting] = useState(false);
-
  const MOSPARO_PUBLIC_KEY = process.env.NEXT_PUBLIC_MOSPARO_PUBLIC_KEY;
  const MOSPARO_HOST = process.env.NEXT_PUBLIC_MOSPARO_HOST;
 
@@ -28,6 +28,7 @@ export default function SecureForm() {
    try {
     const res = await fetch("/api/get-submit-token");
     const data = await res.json();
+    console.log("Mosparo response", data);
     if (!res.ok) throw new Error(data.message || "Failed to get token");
     setSubmitToken(data.submitToken);
    } catch (err) {
@@ -71,8 +72,7 @@ export default function SecureForm() {
     })
    });
    const verificationData = await verification.json();
-   console.log(verificationData);
-
+   console.log("Verification response", verificationData);
    if (verificationData.spam) {
     setIsBot(true);
     throw new Error("Bot detected! Submission blocked.");
@@ -96,10 +96,7 @@ export default function SecureForm() {
    {isBot && <div className="bot-warning">🚨 Bot detected! Form blocked.</div>}
 
    <form onSubmit={handleSubmit}>
-    <MosparoValidator submitToken={submitToken} />
-    <input type="hidden" name="submitToken" value={submitToken} />
-    <input type="hidden" name="publicKey" value={MOSPARO_PUBLIC_KEY} />
-
+    {submitToken && <MosparoValidator submitToken={submitToken} />}
     <div className="form-group">
      <label htmlFor="firstName">First Name:</label>
      <input

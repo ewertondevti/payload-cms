@@ -6,7 +6,7 @@ import https from 'https'
 const MOSPARO_URL = process.env.MOSPARO_URL_API
 const MOSPARO_PUBLIC_KEY_TOKEN = process.env.NEXT_PUBLIC_MOSPARO_PUBLIC_KEY
 
-const httpsAgent = new https.Agent({ rejectUnauthorized: true })
+const httpsAgent = new https.Agent({ rejectUnauthorized: false })
 
 export async function POST() {
  try {

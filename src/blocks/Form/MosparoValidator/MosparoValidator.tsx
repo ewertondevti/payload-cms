@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 interface MosparoValidatorProps {
- submitToken: string;
+ submitToken: any;
 }
 
 const MosparoValidator: React.FC<MosparoValidatorProps> = ({ submitToken }) => {
@@ -9,6 +9,7 @@ const MosparoValidator: React.FC<MosparoValidatorProps> = ({ submitToken }) => {
   if (!document.querySelector('script[src*="mosparo-frontend.js"]')) {
    const script = document.createElement("script");
    script.src = `${process.env.NEXT_PUBLIC_MOSPARO_HOST}/build/mosparo-frontend.js`;
+
    script.async = true;
    document.body.appendChild(script);
   }
