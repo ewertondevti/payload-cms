@@ -4,9 +4,9 @@ import FormData from 'form-data'
 import https from 'https'
 
 const MOSPARO_URL = process.env.MOSPARO_URL_API
-const MOSPARO_PUBLIC_KEY_TOKEN = 'erNgKndOLlyfLpxb6lIuUYBJf5HslQkwYr98t5pPd-g'
+const MOSPARO_PUBLIC_KEY_TOKEN = process.env.NEXT_PUBLIC_MOSPARO_PUBLIC_KEY
 
-const httpsAgent = new https.Agent({ rejectUnauthorized: false })
+const httpsAgent = new https.Agent({ rejectUnauthorized: true })
 
 export async function POST() {
  try {

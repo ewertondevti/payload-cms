@@ -3,7 +3,7 @@ import fetch from 'node-fetch'
 import FormData from 'form-data'
 import https from 'https'
 
-const httpsAgent = new https.Agent({ rejectUnauthorized: false })
+const httpsAgent = new https.Agent({ rejectUnauthorized: true })
 
 const MOSPARO_URL = process.env.MOSPARO_URL_API
 
