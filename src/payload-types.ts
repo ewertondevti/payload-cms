@@ -778,12 +778,6 @@ export interface Form {
             blockType: 'phoneNumber';
           }
         | {
-            simulatePreload?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'preLoadExample1';
-          }
-        | {
             radioLabel: string;
             dateLabel: string;
             yearLabel: string;
@@ -820,11 +814,9 @@ export interface Form {
             disabled?: boolean | null;
             readOnly?: boolean | null;
             hideLabel?: boolean | null;
-            validation?: {
-              minLength?: number | null;
-              maxLength?: number | null;
-              pattern?: string | null;
-            };
+            minLength?: number | null;
+            maxLength?: number | null;
+            pattern?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'customtextarea';
@@ -839,11 +831,9 @@ export interface Form {
             disabled?: boolean | null;
             readOnly?: boolean | null;
             hideLabel?: boolean | null;
-            validation?: {
-              minLength?: number | null;
-              maxLength?: number | null;
-              pattern?: string | null;
-            };
+            minLength?: number | null;
+            maxLength?: number | null;
+            pattern?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'textBox';
@@ -1044,12 +1034,6 @@ export interface Form {
                       blockType: 'formspace';
                     }
                   | {
-                      simulatePreload?: boolean | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'preLoadExample1';
-                    }
-                  | {
                       radioLabel: string;
                       dateLabel: string;
                       yearLabel: string;
@@ -1086,11 +1070,9 @@ export interface Form {
                       disabled?: boolean | null;
                       readOnly?: boolean | null;
                       hideLabel?: boolean | null;
-                      validation?: {
-                        minLength?: number | null;
-                        maxLength?: number | null;
-                        pattern?: string | null;
-                      };
+                      minLength?: number | null;
+                      maxLength?: number | null;
+                      pattern?: string | null;
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'customtextarea';
@@ -1105,11 +1087,9 @@ export interface Form {
                       disabled?: boolean | null;
                       readOnly?: boolean | null;
                       hideLabel?: boolean | null;
-                      validation?: {
-                        minLength?: number | null;
-                        maxLength?: number | null;
-                        pattern?: string | null;
-                      };
+                      minLength?: number | null;
+                      maxLength?: number | null;
+                      pattern?: string | null;
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'textBox';
@@ -1150,7 +1130,7 @@ export interface Form {
                       label: string;
                       id?: string | null;
                       blockName?: string | null;
-                      blockType: 'location';
+                      blockType: 'locationField';
                     }
                   | {
                       name: string;
@@ -1302,19 +1282,7 @@ export interface Form {
             label: string;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'location';
-          }
-        | {
-            title: string;
-            subtitle?: string | null;
-            accessCodeTitle: string;
-            accessCode: {
-              label: string;
-              placeholder: string;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'birthconsultation';
+            blockType: 'locationField';
           }
         | {
             firstName: {
@@ -2543,13 +2511,6 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        preLoadExample1?:
-          | T
-          | {
-              simulatePreload?: T;
-              id?: T;
-              blockName?: T;
-            };
         dateOrYearPicker?:
           | T
           | {
@@ -2595,13 +2556,9 @@ export interface FormsSelect<T extends boolean = true> {
               disabled?: T;
               readOnly?: T;
               hideLabel?: T;
-              validation?:
-                | T
-                | {
-                    minLength?: T;
-                    maxLength?: T;
-                    pattern?: T;
-                  };
+              minLength?: T;
+              maxLength?: T;
+              pattern?: T;
               id?: T;
               blockName?: T;
             };
@@ -2617,13 +2574,9 @@ export interface FormsSelect<T extends boolean = true> {
               disabled?: T;
               readOnly?: T;
               hideLabel?: T;
-              validation?:
-                | T
-                | {
-                    minLength?: T;
-                    maxLength?: T;
-                    pattern?: T;
-                  };
+              minLength?: T;
+              maxLength?: T;
+              pattern?: T;
               id?: T;
               blockName?: T;
             };
@@ -2826,13 +2779,6 @@ export interface FormsSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
-                    preLoadExample1?:
-                      | T
-                      | {
-                          simulatePreload?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
                     dateOrYearPicker?:
                       | T
                       | {
@@ -2878,13 +2824,9 @@ export interface FormsSelect<T extends boolean = true> {
                           disabled?: T;
                           readOnly?: T;
                           hideLabel?: T;
-                          validation?:
-                            | T
-                            | {
-                                minLength?: T;
-                                maxLength?: T;
-                                pattern?: T;
-                              };
+                          minLength?: T;
+                          maxLength?: T;
+                          pattern?: T;
                           id?: T;
                           blockName?: T;
                         };
@@ -2900,13 +2842,9 @@ export interface FormsSelect<T extends boolean = true> {
                           disabled?: T;
                           readOnly?: T;
                           hideLabel?: T;
-                          validation?:
-                            | T
-                            | {
-                                minLength?: T;
-                                maxLength?: T;
-                                pattern?: T;
-                              };
+                          minLength?: T;
+                          maxLength?: T;
+                          pattern?: T;
                           id?: T;
                           blockName?: T;
                         };
@@ -2944,7 +2882,7 @@ export interface FormsSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
-                    location?:
+                    locationField?:
                       | T
                       | {
                           name?: T;
@@ -3132,26 +3070,11 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        location?:
+        locationField?:
           | T
           | {
               name?: T;
               label?: T;
-              id?: T;
-              blockName?: T;
-            };
-        birthconsultation?:
-          | T
-          | {
-              title?: T;
-              subtitle?: T;
-              accessCodeTitle?: T;
-              accessCode?:
-                | T
-                | {
-                    label?: T;
-                    placeholder?: T;
-                  };
               id?: T;
               blockName?: T;
             };

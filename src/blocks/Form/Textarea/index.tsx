@@ -1,45 +1,48 @@
 import { InputTextArea } from '@ama-pt/agora-design-system'
-import type { TextField } from '@payloadcms/plugin-form-builder/types'
 import React from 'react'
-import type { FieldErrorsImpl, UseFormReturn } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 import { Width } from '../Width'
 
-type TextAreaProps = { validation: { minLength?: number; maxLength?: number; pattern?: RegExp } }
+export type TextAreaProps = {
+  name: string
+  label: string
+  placeholder?: string
+  required?: boolean
+  width: number
+  pattern?: RegExp
+  errorMessage?: string
+  minLength?: number
+  maxLength?: number
+  rows?: number
+  defaultValue?: string
+}
 
-export const Textarea: React.FC<
-  TextField &
-    TextAreaProps &
-    UseFormReturn & { errors: Partial<FieldErrorsImpl<{ [x: string]: any }>>; rows?: number }
-> = ({
+export const TextArea: React.FC<TextAreaProps> = ({
   name,
   defaultValue,
-  errors,
-  label,
-  register,
-  required: requiredFromProps,
+  required,
   rows = 3,
   width,
-  validation: { minLength, maxLength, pattern },
+  minLength,
+  maxLength,
+  pattern,
   ...props
 }) => {
+  const { register, formState } = useFormContext()
   return (
     <Width width={width}>
-      
-
       <InputTextArea
         {...props}
         id={name}
-        defaultValue={defaultValue ?? ''}
-        label={label}
         rows={rows}
-        required={requiredFromProps}
+        required={required}
         hasFeedback={true}
         feedbackState="danger"
-        feedbackText={errors[name]?.message?.toString()}
-        hasError={errors[name] ? true : false}
+        feedbackText={formState.errors[name]?.message?.toString()}
+        hasError={formState.errors[name] ? true : false}
         {...register(name, {
-          required: requiredFromProps ? 'Campo de preenchimento obrigatório.' : false,
+          required: required ? 'Campo de preenchimento obrigatório.' : false,
           minLength,
           maxLength,
           pattern,

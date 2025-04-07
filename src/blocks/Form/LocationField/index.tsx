@@ -12,17 +12,13 @@ export type LocationProps = {
   label: string
 }
 
-export const Location: React.FC<
+export const LocationField: React.FC<
   LocationProps & UseFormReturn & { errors: FieldErrors<FieldValues> }
 > = ({ register, watch, required, errors, label, name, ...props }) => {
   const selectedCountry: string = watch(`${name}-country`)
   const isPtSelected = selectedCountry === 'Portugal'
 
-  const commonProps: SelectWithAPIProps = {
-    ...props,
-
-    register,
-    watch,
+  const commonProps: Partial<SelectWithAPIProps> = {
     width: 50,
     visibleCount: 5,
     searchable: true,
@@ -74,46 +70,15 @@ export const Location: React.FC<
       <div className="flex flex-wrap gap-[32px]">
         <SelectWithApi
           {...countryProps}
-          {...register(`${name}-country`, { required: true })}
-          onChange={undefined}
-          feedbackState="danger"
-          feedbackText={`Obrigatório preencher "${countryProps.label}"`}
           hasError={!!errors[`${name}-country`]}
           defaultValue="Portugal"
         />
 
-        {isPtSelected && (
-          <SelectWithApi
-            {...distritoProps}
-            {...register(`${name}-distrito`, { required: true })}
-            onChange={undefined}
-            feedbackState="danger"
-            feedbackText={`Obrigatório preencher "${distritoProps.label}"`}
-            hasError={!!errors['distrito']}
-          />
-        )}
+        {isPtSelected && <SelectWithApi {...distritoProps} hasError={!!errors['distrito']} />}
 
-        {isPtSelected && (
-          <SelectWithApi
-            {...concelhoProps}
-            {...register(`${name}-concelho`, { required: true })}
-            onChange={undefined}
-            feedbackState="danger"
-            feedbackText={`Obrigatório preencher "${concelhoProps.label}"`}
-            hasError={!!errors['concelho']}
-          />
-        )}
+        {isPtSelected && <SelectWithApi {...concelhoProps} hasError={!!errors['concelho']} />}
 
-        {isPtSelected && (
-          <SelectWithApi
-            {...freguesiaProps}
-            {...register(`${name}-freguesia`, { required: true })}
-            onChange={undefined}
-            feedbackState="danger"
-            feedbackText={`Obrigatório preencher "${freguesiaProps.label}"`}
-            hasError={!!errors['freguesia']}
-          />
-        )}
+        {isPtSelected && <SelectWithApi {...freguesiaProps} hasError={!!errors['freguesia']} />}
 
         {!isPtSelected && (
           <Width width={50}>

@@ -37,7 +37,7 @@ import { searchFields } from '@/search/fieldOverrides'
 import { fileURLToPath } from 'url'
 import { BirthCertificateBlock } from './blocks/Form/BirthCertificateData/BirthCertificateDataBlock'
 import { DateOrYearPickerBlock } from './blocks/Form/DateOrYearPicker/DateOrYearPickerBlock'
-import { LocationBlock } from './blocks/Form/Location/LocationBlock'
+import { LocationFieldBlock } from './blocks/Form/LocationField/LocationFieldBlock'
 import { ContactBlock } from './blocks/Form/ContactData/ContactDataBlock'
 import { CustomTextfieldBlock } from './blocks/Form/CostumTextfield/CustomTextfieldBlock'
 import { CustomMessageBlock } from './blocks/Form/CustomMessage/CustomMessageBlock'
@@ -53,7 +53,7 @@ import { PhoneNumberBlock } from './blocks/Form/PhoneNumber/PhoneNumberBlock'
 import { RadioButtonBlock } from './blocks/Form/RadioButtonGroup/RadioButtonGroupBlock'
 import { RequestorBlock } from './blocks/Form/RequestorData/RequestorDataBlock'
 import { SelectWithApiBlock } from './blocks/Form/SelectWithAPI/SelectWithApiBlock'
-import { TextAreaBlock } from './blocks/Form/Textarea/TextAreaBlock'
+import { TextAreaBlock } from './blocks/Form/TextArea/TextAreaBlock'
 import { TitleBlock } from './blocks/Form/Title/TitleBlock'
 import { FlexRadioButtonGroupBlock } from './blocks/Form/Cidadao/FlexRadioButtonGroup/FlexRadioButtonGroupBlock'
 import { Areas } from './collections/Areas'
@@ -200,7 +200,7 @@ export default buildConfig({
         TitleBlock,
         SelectWithApiBlock,
         IdentificationDataBlock,
-        LocationBlock,
+        LocationFieldBlock,
         ParentIdentificationBlock,
         FlexRadioButtonGroupBlock,
         PriorWeddingChildrenDataBlock,
