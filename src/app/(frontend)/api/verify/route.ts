@@ -1,7 +1,11 @@
 import { PayloadBody } from '@/models/api'
+import axios from 'axios'
 import crypto from 'crypto'
-import type { NextApiRequest, NextApiResponse } from 'next'
+import https from 'https'
+import type { NextApiResponse } from 'next'
 import { NextRequest, NextResponse } from 'next/server'
+
+const httpsAgent = new https.Agent({ rejectUnauthorized: false })
 
 /**
  * Calcula o hash SHA-256 de uma string
@@ -34,7 +38,7 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
   const MOSPARO_URL = process.env.MOSPARO_URL_API
 
   try {
-    const { submitToken, validationToken, formData } = await req.json() as PayloadBody
+    const { submitToken, validationToken, formData } = (await req.json()) as PayloadBody
 
     // 1. Extrair tokens Mosparo
 
@@ -96,33 +100,19 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
     console.log('[MosparoVerify] Generated auth header:', authString)
 
     // 11. Fazer requisição para API Mosparo
-    const response = await fetch(`${MOSPARO_URL}${apiEndpoint}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Basic ${authHeader}`, // Formato correto para Basic Auth
-      },
-      body: JSON.stringify(requestData),
-    })
-
-    const responseData = await response.json()
-    console.log('[MosparoVerify] Received submitToken:', submitToken)
-    console.log('[MosparoVerify] Received validationToken:', validationToken)
-    console.log('[MosparoVerify] Response:', responseData) // Log para depuração
+    const { data } = await axios.post(`${MOSPARO_URL}${apiEndpoint}`, requestData, { httpsAgent })
 
     // 12. Verificar resposta
-    if (response.ok) {
+    if (data) {
       const isValid =
-        responseData.valid &&
-        responseData.verificationSignature === verificationSignature &&
-        responseData.verifiedFields
+        data.valid && data.verificationSignature === verificationSignature && data.verifiedFields
 
       if (isValid) {
         // Verificação bem-sucedida
         return NextResponse.json({
           valid: true,
           message: 'Form validation successful',
-          details: responseData,
+          details: data,
         })
       } else {
         // Falha na verificação (possível spam)
@@ -130,7 +120,7 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
           {
             valid: false,
             message: 'Form validation failed. Possible spam or manipulation.',
-            details: responseData,
+            details: data,
           },
           { status: 400 },
         )
@@ -141,7 +131,7 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
         {
           error: true,
           message: 'Mosparo API error',
-          details: responseData,
+          details: data,
         },
         { status: 400 },
       )
