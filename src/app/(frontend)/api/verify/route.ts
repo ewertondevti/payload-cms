@@ -154,7 +154,7 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
         error: true,
         message: err.message || 'Internal server error',
       },
-      { status: this.handleErrorResponse ? this.handleErrorResponse(err).status : 500 },
+      { status: 500 },
     )
   }
 }
