@@ -8,6 +8,7 @@ import '@ama-pt/agora-design-system/artifacts/dist/tailwind.css'
 import './globals.css'
 
 import ClientLoaderWrapper from '@/components/ClientLoadWrapper'
+import ClientModalWrapper from '@/components/ClientModalWrapper'
 import ClientToastWrapper from '@/components/ClientToasterWrapper'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
@@ -21,7 +22,9 @@ import { getMessages, setRequestLocale } from 'next-intl/server'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import { TypedLocale } from 'payload'
-import ClientModalWrapper from '@/components/ClientModalWrapper'
+import { initOtel } from '../../../../../art-cvt-react-common/src/otel'
+
+initOtel({ local: true })
 
 type Args = {
   children: React.ReactNode
@@ -56,6 +59,8 @@ export default async function RootLayout({ children, params }: Args) {
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
       <body>
+        {/* <TelemetryProvider local /> */}
+
         <Providers>
           <NextIntlClientProvider messages={messages}>
             <ClientLoaderWrapper>
