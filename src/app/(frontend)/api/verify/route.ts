@@ -1,7 +1,7 @@
 import { PayloadBody } from '@/models/api'
 import crypto from 'crypto'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 /**
  * Calcula o hash SHA-256 de uma string
@@ -28,15 +28,14 @@ function hmacSHA256(value: string, key: string): string {
 /**
  * Handler principal para verificação de formulários com Mosparo
  */
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest, res: NextApiResponse) {
   const MOSPARO_PUBLIC_KEY = process.env.MOSPARO_PUBLIC_KEY
   const MOSPARO_PRIVATE_KEY = process.env.MOSPARO_PRIVATE_KEY
   const MOSPARO_URL = process.env.MOSPARO_URL_API
 
   try {
-    const { submitToken, validationToken, formData } = req.body as PayloadBody
+    const { submitToken, validationToken, formData } = await req.json() as PayloadBody
 
-    console.log('[MosparoVerify] Received formData:', formData)
     // 1. Extrair tokens Mosparo
 
     if (!submitToken || !validationToken || !formData) {

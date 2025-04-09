@@ -164,38 +164,27 @@ export const FormBlock: React.FC<
             verifiedFormData,
           })
 
-          // 2b) Se houver dados de verificação avançada, chama /api/verify
-          if (validationSignature && formSignature && verifiedFormData) {
-            console.log('[FormBlock] Doing advanced verification with /api/verify...')
+          const payload: PayloadBody = {
+            validationToken: mosparoResult.data.validationToken,
+            submitToken,
+            formData: data,
+          }
+          const verifyRes = await fetch('/api/verify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          })
 
-            const payload: PayloadBody = {
-              validationToken: mosparoResult.data.validationToken,
-              submitToken,
-              formData: data,
-            }
+          const verifyJson = await verifyRes.json()
+          console.log('[FormBlock] /api/verify response =>', verifyJson)
 
-            const verifyRes = await fetch('/api/verify', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload),
-            })
-
-            const verifyJson = await verifyRes.json()
-            console.log('[FormBlock] /api/verify response =>', verifyJson)
-
-            if (!verifyJson.valid) {
-              clearTimeout(loadingTimerID)
-              setIsLoading(false)
-              setError({ message: 'Verification failed: Data may have been manipulated.' })
-              return
-            }
-          } else {
-            console.warn(
-              "[FormBlock] Skipping advanced verification because we don't have the signatures or hashed formData",
-            )
+          if (!verifyJson.valid) {
+            clearTimeout(loadingTimerID)
+            setIsLoading(false)
+            setError({ message: 'Verification failed: Data may have been manipulated.' })
+            return
           }
 
-          // 2c) Envio da submissão para o Payload CMS (ou backend configurado)
           console.log('[FormBlock] Submitting data to Payload => /api/form-submissions')
           const req = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/form-submissions`, {
             body: JSON.stringify({
