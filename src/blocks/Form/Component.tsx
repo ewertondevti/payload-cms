@@ -1,37 +1,38 @@
-"use client";
+'use client'
 
-import type { Form as FormType } from "@payloadcms/plugin-form-builder/types";
-import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
-import React, { useCallback, useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import RichText from "@/components/RichText";
-import { Button } from "@/components/ui/button";
-import { buildInitialFormState } from "./buildInitialFormState";
-import { fields } from "./fields";
-import MosparoValidator from "./MosparoValidator/MosparoValidator";
+import RichText from '@/components/RichText'
+import { Button } from '@/components/ui/button'
+import { PayloadBody, ValidationFormResponse } from '@/models/api'
+import type { Form as FormType } from '@payloadcms/plugin-form-builder/types'
+import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
+import React, { useCallback, useEffect, useState } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { buildInitialFormState } from './buildInitialFormState'
+import { fields } from './fields'
+import MosparoValidator from './MosparoValidator/MosparoValidator'
 
-export type Value = unknown;
+export type Value = unknown
 export interface Property {
-  [key: string]: Value;
+  [key: string]: Value
 }
 export interface Data {
-  [key: string]: Property | Property[];
+  [key: string]: Property | Property[]
 }
 export type FormBlockType = {
-  blockName?: string;
-  blockType?: "formBlock";
-  enableIntro: boolean;
-  form: FormType;
-  introContent?: { [k: string]: unknown }[];
-};
+  blockName?: string
+  blockType?: 'formBlock'
+  enableIntro: boolean
+  form: FormType
+  introContent?: { [k: string]: unknown }[]
+}
 
 export const FormBlock: React.FC<
   {
-    id?: string;
-    stepIndex: number;
-    onSubmitOverride?: (data: Data) => void;
-    showSubmitButton: boolean;
+    id?: string
+    stepIndex: number
+    onSubmitOverride?: (data: Data) => void
+    showSubmitButton: boolean
   } & FormBlockType
 > = (props) => {
   const {
@@ -42,80 +43,80 @@ export const FormBlock: React.FC<
     onSubmitOverride,
     showSubmitButton = true,
     stepIndex,
-  } = props;
+  } = props
 
   const formMethods = useForm({
     defaultValues: buildInitialFormState(formFromProps?.fields),
-  });
+  })
   const {
     control,
     formState: { errors },
     handleSubmit,
     register,
-  } = formMethods;
+  } = formMethods
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
-  const [error, setError] = useState<{ message: string; status?: string } | undefined>();
-  const [submitToken, setSubmitToken] = useState<string | null>(null);
-  const [validationSignature, setValidationSignature] = useState<string | null>(null);
-  const [formSignature, setFormSignature] = useState<string | null>(null);
-  const [verifiedFormData, setVerifiedFormData] = useState<Record<string, string> | null>(null);
+  const [isLoading, setIsLoading] = useState(false)
+  const [hasSubmitted, setHasSubmitted] = useState<boolean>(false)
+  const [error, setError] = useState<{ message: string; status?: string } | undefined>()
+  const [submitToken, setSubmitToken] = useState<string | null>(null)
+  const [validationSignature, setValidationSignature] = useState<string | null>(null)
+  const [formSignature, setFormSignature] = useState<string | null>(null)
+  const [verifiedFormData, setVerifiedFormData] = useState<Record<string, string> | null>(null)
 
-  const router = useRouter();
-  const t = useTranslations();
+  const router = useRouter()
+  const t = useTranslations()
 
   // 1. Carregar o SUBMIT TOKEN
   useEffect(() => {
     const fetchSubmitToken = async () => {
-      console.log("[FormBlock] Starting fetch for submit token from /api/send-token...");
+      console.log('[FormBlock] Starting fetch for submit token from /api/send-token...')
       try {
-        const response = await fetch("/api/send-token", { method: "POST" });
-        const data = await response.json();
-        console.log("[FormBlock] /api/send-token response:", data);
+        const response = await fetch('/api/send-token', { method: 'POST' })
+        const data = await response.json()
+        console.log('[FormBlock] /api/send-token response:', data)
 
         if (data.submitToken) {
-          setSubmitToken(data.submitToken);
+          setSubmitToken(data.submitToken)
         } else {
-          setError({ message: "Fail to get the token" });
+          setError({ message: 'Fail to get the token' })
         }
       } catch (err) {
-        console.error("[FormBlock] Error fetching token:", err);
-        setError({ message: "Fail to get the token" });
+        console.error('[FormBlock] Error fetching token:', err)
+        setError({ message: 'Fail to get the token' })
       }
-    };
-    fetchSubmitToken();
-  }, []);
+    }
+    fetchSubmitToken()
+  }, [])
 
   // 2. Definir lógica de onSubmit
-  let onSubmit;
+  let onSubmit
   if (onSubmitOverride) {
     // Se houver callback custom para onSubmit
     onSubmit = useCallback(
       (data: Data) => {
-        console.log("[FormBlock] onSubmitOverride called, data =>", data);
+        console.log('[FormBlock] onSubmitOverride called, data =>', data)
         if (!hasSubmitted) {
-          onSubmitOverride(data);
+          onSubmitOverride(data)
         }
-        setIsLoading(false);
-        setHasSubmitted(false);
-        setError(undefined);
+        setIsLoading(false)
+        setHasSubmitted(false)
+        setError(undefined)
       },
-      [onSubmitOverride, hasSubmitted]
-    );
+      [onSubmitOverride, hasSubmitted],
+    )
   } else {
     // Fluxo normal do onSubmit
     onSubmit = useCallback(
       async (data: Data) => {
-        console.log("[FormBlock] onSubmit called, data =>", data);
-        setError(undefined);
-        let loadingTimerID: ReturnType<typeof setTimeout> | undefined;
+        console.log('[FormBlock] onSubmit called, data =>', data)
+        setError(undefined)
+        let loadingTimerID: ReturnType<typeof setTimeout> | undefined
 
         try {
           if (!submitToken) {
-            console.warn("[FormBlock] No submitToken found, cannot proceed.");
-            setError({ message: "Token de submissão ausente ou inválido" });
-            return;
+            console.warn('[FormBlock] No submitToken found, cannot proceed.')
+            setError({ message: 'Token de submissão ausente ou inválido' })
+            return
           }
 
           // Mapeia os dados para o formato esperado pelo Payload CMS:
@@ -123,18 +124,18 @@ export const FormBlock: React.FC<
           const dataToSend = Object.entries(data).map(([field, value]) => ({
             field, // Certifique-se de que este valor bate com o identificador definido no seu formulário Payload
             value,
-          }));
+          }))
 
-          console.log("[FormBlock] dataToSend =>", dataToSend);
+          console.log('[FormBlock] dataToSend =>', dataToSend)
 
           // Dispara isLoading depois de 1 segundo
-          loadingTimerID = setTimeout(() => setIsLoading(true), 1000);
+          loadingTimerID = setTimeout(() => setIsLoading(true), 1000)
 
           // 2a) Chamando /api/get-submit-token para o modo "check-form-data"
-          console.log("[FormBlock] Calling /api/get-submit-token with check-form-data...");
-          const mosparoResponse = await fetch("/api/get-submit-token", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+          console.log('[FormBlock] Calling /api/get-submit-token with check-form-data...')
+          const mosparoResponse = await fetch('/api/get-submit-token', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               publicKey: process.env.NEXT_PUBLIC_MOSPARO_PUBLIC_KEY,
               submitToken,
@@ -143,94 +144,97 @@ export const FormBlock: React.FC<
                 ignoredFields: [],
               },
             }),
-          });
+          })
 
-          console.log("[FormBlock] Mosparo fetch =>", mosparoResponse);
-          const mosparoResult = await mosparoResponse.json();
-          console.log("[FormBlock] Mosparo result =>", mosparoResult);
+          console.log('[FormBlock] Mosparo fetch =>', mosparoResponse)
+          const mosparoResult: ValidationFormResponse = await mosparoResponse.json()
+          console.log('[FormBlock] Mosparo result =>', mosparoResult)
 
-          if (!mosparoResult || mosparoResult.error || !mosparoResult.valid) {
-            clearTimeout(loadingTimerID);
-            setIsLoading(false);
-            setError({ message: "Mosparo validation error (check-form-data)" });
-            return;
+          if (!mosparoResult || !mosparoResult.valid) {
+            clearTimeout(loadingTimerID)
+            setIsLoading(false)
+            setError({ message: 'Mosparo validation error (check-form-data)' })
+            return
           }
 
           // Log para depuração dos estados de verificação
-          console.log("[FormBlock] Checking advanced verification states =>", {
+          console.log('[FormBlock] Checking advanced verification states =>', {
             validationSignature,
             formSignature,
             verifiedFormData,
-          });
+          })
 
           // 2b) Se houver dados de verificação avançada, chama /api/verify
           if (validationSignature && formSignature && verifiedFormData) {
-            console.log("[FormBlock] Doing advanced verification with /api/verify...");
-            const verifyRes = await fetch("/api/verify", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                submitToken,
-                validationSignature,
-                formSignature,
-                formData: dataToSend,
-              }),
-            });
-            const verifyJson = await verifyRes.json();
-            console.log("[FormBlock] /api/verify response =>", verifyJson);
+            console.log('[FormBlock] Doing advanced verification with /api/verify...')
+
+            const payload: PayloadBody = {
+              validationToken: mosparoResult.data.validationToken,
+              submitToken,
+              formData: data,
+            }
+
+            const verifyRes = await fetch('/api/verify', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            })
+
+            const verifyJson = await verifyRes.json()
+            console.log('[FormBlock] /api/verify response =>', verifyJson)
 
             if (!verifyJson.valid) {
-              clearTimeout(loadingTimerID);
-              setIsLoading(false);
-              setError({ message: "Verification failed: Data may have been manipulated." });
-              return;
+              clearTimeout(loadingTimerID)
+              setIsLoading(false)
+              setError({ message: 'Verification failed: Data may have been manipulated.' })
+              return
             }
           } else {
             console.warn(
-              "[FormBlock] Skipping advanced verification because we don't have the signatures or hashed formData"
-            );
+              "[FormBlock] Skipping advanced verification because we don't have the signatures or hashed formData",
+            )
           }
 
           // 2c) Envio da submissão para o Payload CMS (ou backend configurado)
-          console.log("[FormBlock] Submitting data to Payload => /api/form-submissions");
+          console.log('[FormBlock] Submitting data to Payload => /api/form-submissions')
           const req = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/form-submissions`, {
             body: JSON.stringify({
               form: formID,
               submissionData: dataToSend,
             }),
-            headers: { "Content-Type": "application/json" },
-            method: "POST",
-          });
+            headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+          })
 
-          const res = await req.json();
-          clearTimeout(loadingTimerID);
+          const res = await req.json()
+          clearTimeout(loadingTimerID)
 
           if (req.status >= 400) {
-            setIsLoading(false);
+            setIsLoading(false)
             setError({
-              message: res.errors?.[0]?.message || "Internal Server Error",
+              message: res.errors?.[0]?.message || 'Internal Server Error',
               status: String(req.status),
-            });
-            return;
+            })
+            return
           }
 
-          setIsLoading(false);
-          setHasSubmitted(true);
-          console.log("[FormBlock] Form submission success =>", res);
+          setIsLoading(false)
+          setHasSubmitted(true)
+          console.log('[FormBlock] Form submission success =>', res)
 
           // Se houver redirect no campo de confirmação
-          if (confirmationType === "redirect" && redirect) {
-            const { url } = redirect;
+          if (confirmationType === 'redirect' && redirect) {
+            const { url } = redirect
             if (url) {
-              console.log("[FormBlock] Redirecting to =>", url);
-              router.push(url);
+              console.log('[FormBlock] Redirecting to =>', url)
+              router.push(url)
             }
           }
         } catch (err) {
-          console.warn("[FormBlock] Error in submission process =>", err);
-          clearTimeout(loadingTimerID);
-          setIsLoading(false);
-          setError({ message: "Something is wrong with the request." });
+          console.warn('[FormBlock] Error in submission process =>', err)
+          clearTimeout(loadingTimerID)
+          setIsLoading(false)
+          setError({ message: 'Something is wrong with the request.' })
         }
       },
       [
@@ -242,11 +246,11 @@ export const FormBlock: React.FC<
         validationSignature,
         formSignature,
         verifiedFormData,
-      ]
-    );
+      ],
+    )
   }
 
-  if (!formFromProps?.fields?.length) return null;
+  if (!formFromProps?.fields?.length) return null
 
   return (
     <div className="container">
@@ -254,11 +258,11 @@ export const FormBlock: React.FC<
         {enableIntro && introContent && !hasSubmitted && (
           <RichText className="mb-8" content={introContent} enableGutter={false} />
         )}
-        {isLoading && !hasSubmitted && <p>{t("loading")}</p>}
+        {isLoading && !hasSubmitted && <p>{t('loading')}</p>}
 
         {error && (
-          <div style={{ color: "red", marginBottom: "1rem" }}>
-            {`${error.status || "500"}: ${error.message || ""}`}
+          <div style={{ color: 'red', marginBottom: '1rem' }}>
+            {`${error.status || '500'}: ${error.message || ''}`}
           </div>
         )}
 
@@ -266,15 +270,15 @@ export const FormBlock: React.FC<
           <MosparoValidator
             submitToken={submitToken}
             onVerified={(detail) => {
-              setValidationSignature(detail.validationSignature);
-              setFormSignature(detail.formSignature);
-              setVerifiedFormData(detail.formData);
+              setValidationSignature(detail.validationSignature)
+              setFormSignature(detail.formSignature)
+              setVerifiedFormData(detail.formData)
             }}
           />
 
-          <div className="flex flex-col gap-64 w-[800px]">
+          <div className="flex w-[800px] flex-col gap-64">
             {formFromProps.fields.map((field, index) => {
-              const FieldComponent = fields?.[field.blockType] as React.FC<any> | undefined;
+              const FieldComponent = fields?.[field.blockType] as React.FC<any> | undefined
               if (FieldComponent) {
                 return (
                   <div className="last:mb-0" key={`${index}_${stepIndex}`}>
@@ -287,20 +291,19 @@ export const FormBlock: React.FC<
                       register={register}
                     />
                   </div>
-                );
+                )
               }
-              return null;
+              return null
             })}
           </div>
 
-
           {showSubmitButton && (
             <Button form={formID} type="submit" variant="default">
-              {submitButtonLabel || "Enviar"}
+              {submitButtonLabel || 'Enviar'}
             </Button>
           )}
         </form>
       </FormProvider>
     </div>
-  );
-};
+  )
+}
