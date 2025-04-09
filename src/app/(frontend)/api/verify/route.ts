@@ -40,20 +40,17 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
   try {
     const { submitToken, validationToken, formData } = (await req.json()) as PayloadBody
 
-    // 1. Extrair tokens Mosparo
-
     if (!submitToken || !validationToken || !formData) {
       throw new Error('Submit token, Validation token or Form Data is missing!')
     }
 
-    // 3. Gerar hashes SHA-256 para cada campo
     const hashedFormData: Record<string, string> = {}
 
     for (const key in formData) {
       hashedFormData[key] = sha256(formData[key])
     }
 
-    // 4. Ordenar campos por chave (ordem alfabética)
+    // 1. Ordenar campos por chave (ordem alfabética)
     const sortedKeys = Object.keys(hashedFormData).sort()
     const sortedFormData: Record<string, string> = {}
 
@@ -61,21 +58,19 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
       sortedFormData[key] = hashedFormData[key]
     }
 
-    // 5. Assinar dados do formulário
+    // 2. Assinar dados do formulário
     const jsonFormData = JSON.stringify(sortedFormData)
     const formDataSignature = hmacSHA256(jsonFormData, MOSPARO_PRIVATE_KEY || '')
 
-    // 6. Assinar token de validação
+    // 3. Assinar token de validação
     const validationSignature = hmacSHA256(validationToken, MOSPARO_PRIVATE_KEY || '')
-    console.log(validationSignature)
-    // 7. Gerar assinatura de verificação combinada
+    // 4. Gerar assinatura de verificação combinada
     const combinedSignatures = validationSignature + formDataSignature
-    console.log(combinedSignatures)
     const verificationSignature = hmacSHA256(combinedSignatures, MOSPARO_PRIVATE_KEY || '')
 
     // === CONFIGURAÇÃO DA REQUISIÇÃO À API MOSPARO ===
 
-    // 8. Preparar payload para API
+    // 5. Preparar payload para API
     const apiEndpoint = '/api/v1/verification/verify'
     const requestData = {
       submitToken,
@@ -84,25 +79,25 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
       formData: sortedFormData,
     }
 
-    // 9. Gerar assinatura HMAC para autenticação
+    // 6. Gerar assinatura HMAC para autenticação
     // Importante: De acordo com a documentação, o HMAC deve ser gerado a partir
     // do endpoint + dados do formulário serializados como JSON
     const hmacHash = hmacSHA256(
       apiEndpoint + JSON.stringify(sortedFormData), // Alterado para usar apenas sortedFormData conforme documentação
       MOSPARO_PRIVATE_KEY || '',
     )
-    console.log('[MosparoVerify] Generated HMAC hash:', hmacHash)
 
-    // 10. Construir header de autenticação
+    // 7. Construir header de autenticação
     const authString = `${MOSPARO_PUBLIC_KEY}:${hmacHash}`
     const authHeader = Buffer.from(authString).toString('base64')
-    console.log('[MosparoVerify] Generated auth header:', authHeader)
-    console.log('[MosparoVerify] Generated auth header:', authString)
 
-    // 11. Fazer requisição para API Mosparo
-    const { data } = await axios.post(`${MOSPARO_URL}${apiEndpoint}`, requestData, { httpsAgent })
+    // 8. Fazer requisição para API Mosparo
+    const { data } = await axios.post(`${MOSPARO_URL}${apiEndpoint}`, requestData, {
+      httpsAgent,
+      headers: { Authorization: `Basic ${authHeader}` },
+    })
 
-    // 12. Verificar resposta
+    // 9. Verificar resposta
     if (data) {
       const isValid =
         data.valid && data.verificationSignature === verificationSignature && data.verifiedFields
