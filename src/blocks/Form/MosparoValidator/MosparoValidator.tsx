@@ -14,94 +14,98 @@ const MosparoValidator: React.FC<MosparoValidatorProps> = ({
  const [eventAttached, setEventAttached] = useState(false);
 
  const MOSPARO_CONFIG = {
-  publicKey: process.env.NEXT_PUBLIC_MOSPARO_PUBLIC_KEY,
-  host: process.env.NEXT_PUBLIC_MOSPARO_HOST,
+  publicKey: "erNqkNdoL1yfLpxb6IlUUYBJf5Hs1QkwYr98t5pPd-g",
+  host: "mosparo.irn.internal",
  };
 
- // Load JS + CSS
+ // Injeção do script e do CSS do Mosparo
  useEffect(() => {
-  if (!MOSPARO_CONFIG.host) return;
-
-  // 1. JS
+  // Injetar JS se não estiver presente
   if (!document.querySelector('script[src*="mosparo-frontend.js"]')) {
-   console.log("[MosparoValidator] Injecting mosparo-frontend.js from:", MOSPARO_CONFIG.host);
+   console.log("[MosparoValidator] Injetando mosparo-frontend.js...");
    const script = document.createElement("script");
-   script.src = `${MOSPARO_CONFIG.host}/build/mosparo-frontend.js`;
+   script.src = "https://mosparo.irn.internal/build/mosparo-frontend.js";
    script.async = true;
    script.onload = () => {
-    console.log("[MosparoValidator] mosparo-frontend.js loaded");
+    console.log("[MosparoValidator] mosparo-frontend.js carregado");
     setIsScriptLoaded(true);
    };
    script.onerror = () => {
-    console.error("[MosparoValidator] Failed to load mosparo-frontend.js");
+    console.error("[MosparoValidator] Erro ao carregar mosparo-frontend.js");
    };
    document.body.appendChild(script);
   } else {
-   console.log("[MosparoValidator] mosparo-frontend.js already present");
+   console.log("[MosparoValidator] mosparo-frontend.js já está presente");
    setIsScriptLoaded(true);
   }
 
-  // 2. CSS
+  // Injetar o CSS se não estiver presente
   if (!document.querySelector('link[href*="mosparo"]')) {
    const link = document.createElement("link");
-   link.href = `${MOSPARO_CONFIG.host}/resources/f88fbf2f-d7e5-4c66-9811-6029a091be99.css`;
+   link.href = "https://mosparo.irn.internal/resources/f88fbf2f-d7e5-4c66-9811-6029a091be99.css";
    link.rel = "stylesheet";
+   console.log("[MosparoValidator] Injetando o CSS do Mosparo");
    document.head.appendChild(link);
   }
- }, [MOSPARO_CONFIG.host]);
+ }, []);
 
- // Event Listener
+ // Adicionar o listener para o evento de verificação
  useEffect(() => {
   const handleMosparoVerified = (e: any) => {
-   console.log("✅ [MosparoValidator] mosparoVerified event received =>", e.detail);
+   console.log("✅ [MosparoValidator] Evento 'mosparoVerified' recebido =>", e.detail);
    if (onVerified) onVerified(e.detail);
   };
 
   const element = mosparoRef.current;
   if (element && !eventAttached) {
-   console.log("[MosparoValidator] Attaching event listener...");
+   console.log("[MosparoValidator] Anexando listener do evento 'mosparoVerified'...");
    element.addEventListener("mosparoVerified", handleMosparoVerified as EventListener);
    setEventAttached(true);
   }
 
   return () => {
    if (element && eventAttached) {
-    console.log("[MosparoValidator] Removing event listener...");
+    console.log("[MosparoValidator] Removendo listener do evento 'mosparoVerified'...");
     element.removeEventListener("mosparoVerified", handleMosparoVerified as EventListener);
    }
   };
- }, [onVerified, eventAttached, mosparoRef.current]); // Added mosparoRef.current to dependency array
+ }, [onVerified, eventAttached]);
 
+ // Verificação de token e configuração
  if (!MOSPARO_CONFIG.publicKey || !MOSPARO_CONFIG.host) {
-  console.error("[MosparoValidator] ❌ Missing configuration");
-  return <p style={{ color: "red" }}>Mosparo config missing</p>;
+  console.error("[MosparoValidator] ❌ Configuração do Mosparo ausente");
+  return <p style={{ color: "red" }}>Configuração do Mosparo ausente</p>;
  }
 
  if (!submitToken) {
-  console.warn("[MosparoValidator] ❌ No submitToken passed");
-  return <p style={{ color: "orange" }}>Waiting for token...</p>;
+  console.warn("[MosparoValidator] ❌ Aguardando o submitToken...");
+  return <p style={{ color: "orange" }}>Aguardando o token...</p>;
  }
 
- // Final Render
+ // Renderização do componente do Mosparo
  return (
   <>
-   {process.env.NODE_ENV === "development" && (
-    <div style={{ fontSize: 12, color: "gray", marginBottom: 8 }}>
-     <p>🔒 Mosparo Debug:</p>
-     <ul>
-      <li>JS Loaded: {isScriptLoaded ? "✅" : "❌"}</li>
-      <li>Token: {submitToken.slice(0, 10)}...</li>
-      <li>Listener: {eventAttached ? "✅" : "❌"}</li>
-     </ul>
-    </div>
-   )}
-   {React.createElement("mosparo", {
-    ref: mosparoRef,
-    "project-id": MOSPARO_CONFIG.publicKey,
-    host: MOSPARO_CONFIG.host,
-    "submit-token": submitToken,
-    mode: "async",
-   })}
+   {/* Container opcional para ajudar na estilização ou centralizar o box */}
+   <div id="mosparo-container">
+    {React.createElement("mosparo", {
+     ref: mosparoRef,
+     "project-id": MOSPARO_CONFIG.publicKey,
+     host: MOSPARO_CONFIG.host,
+     "submit-token": submitToken,
+     mode: "async",
+    })}
+   </div>
+   {/* Debug opcional: descomente para informações em desenvolvimento */}
+   {/*
+      <div style={{ fontSize: 12, color: "gray", marginTop: 8 }}>
+        <p>🔒 Debug do Mosparo:</p>
+        <ul>
+          <li>JS Carregado: {isScriptLoaded ? "✅" : "❌"}</li>
+          <li>Token: {submitToken.slice(0, 10)}...</li>
+          <li>Listener: {eventAttached ? "✅" : "❌"}</li>
+        </ul>
+      </div>
+      */}
   </>
  );
 };

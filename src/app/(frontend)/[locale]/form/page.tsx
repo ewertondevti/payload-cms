@@ -1,228 +1,166 @@
 "use client";
 
-import MosparoValidator from "@/blocks/Form/MosparoValidator/MosparoValidator";
-import { useState, useEffect, FormEvent, ChangeEvent } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
-interface FormData {
- firstName: string;
- lastName: string;
- email: string;
+declare global {
+ interface Window {
+  mosparo?: any;
+ }
 }
 
-// Dados retornados pelo evento "mosparoVerified"
-interface MosparoVerifiedPayload {
- submitToken: string;
- validationSignature: string;
- formSignature: string;
- formData: Record<string, string>;
-}
-
-export default function SecureForm() {
- const [submitToken, setSubmitToken] = useState("");
- const [formData, setFormData] = useState<FormData>({
-  firstName: "",
-  lastName: "",
-  email: ""
- });
-
- const [error, setError] = useState<string | null>(null);
- const [isBot, setIsBot] = useState(false);
+const ContactForm = () => {
+ const formRef = useRef<HTMLFormElement>(null);
+ const mosparoBoxRef = useRef<HTMLDivElement>(null);
  const [isSubmitting, setIsSubmitting] = useState(false);
- const [submitSuccess, setSubmitSuccess] = useState(false);
+ const [submitError, setSubmitError] = useState<string | null>(null);
 
- // Para a verificação oficial
- const [validationSignature, setValidationSignature] = useState<string | null>(null);
- const [formSignature, setFormSignature] = useState<string | null>(null);
- const [verifiedFormData, setVerifiedFormData] = useState<Record<string, string> | null>(null);
-
- const MOSPARO_PUBLIC_KEY = process.env.NEXT_PUBLIC_MOSPARO_PUBLIC_KEY;
- const MOSPARO_HOST = process.env.NEXT_PUBLIC_MOSPARO_HOST;
-
- // 1) Carrega o SUBMIT TOKEN
  useEffect(() => {
-  async function fetchToken() {
-   try {
-    const res = await fetch("/api/mosparo", {
-     method: "POST",
-     headers: { "Content-Type": "application/json" },
-     body: JSON.stringify({
-      action: "request-submit-token" // Especifica a ação para o endpoint
-     })
-    });
+  // Hardcoded Mosparo values (instead of using environment variables)
+  const mosparoHost = "https://mosparo.irn.internal";  // Using the MOSPARO_URL from .env
+  const mosparoUUID = "f88fbf2f-d7e5-4c66-9811-6029a091be99";
+  const mosparoPublicKey = "erNgKndOLlyfLpxb6lIuUYBJf5HslQkwYr98t5pPd-g";
 
-    const data = await res.json();
-    console.log("Mosparo [request-submit-token] response", data);
+  // Create and append the CSS link
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = `${mosparoHost}/resources/${mosparoUUID}.css`;
+  document.head.appendChild(link);
 
-    if (!res.ok) throw new Error(data.errorMessage || "Failed to get token");
-    if (data.submitToken) {
-     setSubmitToken(data.submitToken);
-    } else {
-     throw new Error("No submitToken in response");
+  // Create and append the script
+  const script = document.createElement('script');
+  script.src = `${mosparoHost}/build/mosparo-frontend.js`;
+  script.defer = true;
+  document.body.appendChild(script);
+
+  // Initialize Mosparo after script loads
+  script.onload = () => {
+   if (window.mosparo && mosparoBoxRef.current) {
+    try {
+     new window.mosparo(
+      'mosparo-box',
+      mosparoHost,
+      mosparoUUID,
+      mosparoPublicKey,
+      { loadCssResource: true }
+     );
+    } catch (error) {
+     console.error('Failed to initialize Mosparo:', error);
     }
-   } catch (err) {
-    setError(err instanceof Error ? err.message : "Failed to connect to Mosparo");
    }
-  }
+  };
 
-  // Se as variáveis de ambiente estiverem OK
-  if (MOSPARO_PUBLIC_KEY && MOSPARO_HOST) {
-   fetchToken();
-  } else {
-   setError("Mosparo configuration is missing");
-  }
- }, [MOSPARO_PUBLIC_KEY, MOSPARO_HOST]);
+  // Cleanup function
+  return () => {
+   if (link.parentNode) {
+    document.head.removeChild(link);
+   }
+   if (script.parentNode) {
+    document.body.removeChild(script);
+   }
+  };
+ }, []);
 
- // Captura mudanças nos inputs
- const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-  setFormData(prev => ({
-   ...prev,
-   [e.target.name]: e.target.value
-  }));
- };
-
- // 2) SUBMISSÃO do formulário
- const handleSubmit = async (e: FormEvent) => {
-  e.preventDefault();
-  setError(null);
+ const handleSubmit = async (event: React.FormEvent) => {
+  event.preventDefault();
   setIsSubmitting(true);
-  setSubmitSuccess(false);
+  setSubmitError(null);
 
   try {
-   // 2a) Checagem simples: verificação inicial do form
-   const verification = await fetch("/api/mosparo", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-     action: "check-form-data", // Especifica a ação para o endpoint
-     submitToken,
-     publicKey: MOSPARO_PUBLIC_KEY,
-     formData: {
-      fields: [
-       // Use os mesmos nomes de campo que Mosparo espera
-       { name: "firstName", value: formData.firstName },
-       { name: "lastName", value: formData.lastName },
-       { name: "email", value: formData.email }
-      ]
-     }
-    })
-   });
+   // You would typically send your form data to an API endpoint here
+   // const formData = new FormData(formRef.current!);
+   // const response = await fetch('/api/contact', {
+   //   method: 'POST',
+   //   body: formData,
+   // });
 
-   const verificationData = await verification.json();
-   console.log("Check-form-data response", verificationData);
+   console.log("Form submitted successfully");
 
-   if (verificationData.error) {
-    throw new Error(verificationData.errorMessage || "Error checking form data");
+   // Clear the form
+   if (formRef.current) {
+    formRef.current.reset();
    }
-
-   if (!verificationData.valid || verificationData.spam) {
-    // Se spam === true, paramos aqui
-    setIsBot(true);
-    throw new Error("Bot detected! Submission blocked by check-form-data.");
-   }
-
-   // 2b) Verificação Oficial: verificação avançada (opcional mas recomendada)
-   if (!validationSignature || !formSignature || !verifiedFormData) {
-    console.log("Skipping advanced verification because we don't have the signatures or hashed formData");
-   } else {
-    const verifyRes = await fetch("/api/mosparo", {
-     method: "POST",
-     headers: { "Content-Type": "application/json" },
-     body: JSON.stringify({
-      action: "verify", // Especifica a ação para o endpoint
-      submitToken,
-      validationSignature,
-      formSignature,
-      formData: verifiedFormData
-     })
-    });
-
-    const verifyJson = await verifyRes.json();
-    console.log("Verification [official] response", verifyJson);
-
-    if (!verifyRes.ok || verifyJson.error || !verifyJson.valid) {
-     // Se "valid" for false ou erro
-     throw new Error(verifyJson.errorMessage || "Mosparo advanced verification error");
-    }
-   }
-
-   // Se chegou aqui, tudo está OK!
-   setSubmitSuccess(true);
-   setFormData({ firstName: "", lastName: "", email: "" });
-
-  } catch (err) {
-   setError(err instanceof Error ? err.message : "Submission error");
+  } catch (error) {
+   console.error("Error submitting form:", error);
+   setSubmitError("There was an error submitting your form. Please try again.");
   } finally {
    setIsSubmitting(false);
   }
  };
 
- // 3) Monta o JSX
  return (
-  <div className="secure-form">
-   <h2>Secure Form</h2>
-
-   {error && <div className="error-message">{error}</div>}
-   {isBot && <div className="bot-warning">🚨 Bot detected! Form blocked.</div>}
-   {submitSuccess && <div className="success-message">✅ Form submitted successfully!</div>}
-
-   <form onSubmit={handleSubmit}>
-    {/* MosparoValidator com "submitToken" e callback onVerified */}
-    {submitToken && (
-     <MosparoValidator
-      submitToken={submitToken}
-      onVerified={(info: MosparoVerifiedPayload) => {
-       console.log("mosparoVerified payload =>", info);
-       setValidationSignature(info.validationSignature);
-       setFormSignature(info.formSignature);
-       setVerifiedFormData(info.formData);
-      }}
-     />
-    )}
-
-    <div className="form-group">
-     <label htmlFor="firstName">First Name:</label>
-     <input
-      id="firstName"
-      type="text"
-      name="firstName"
-      value={formData.firstName}
-      onChange={handleChange}
-      required
-     />
+  <div className="container py-4">
+   <h2 className="mb-4">Contact Us</h2>
+   {submitError && (
+    <div className="alert alert-danger" role="alert">
+     {submitError}
     </div>
-
-    <div className="form-group">
-     <label htmlFor="lastName">Last Name:</label>
-     <input
-      id="lastName"
-      type="text"
-      name="lastName"
-      value={formData.lastName}
-      onChange={handleChange}
-      required
-     />
+   )}
+   <form method="post" id="contact-form" onSubmit={handleSubmit} ref={formRef}>
+    <div className="row mb-3">
+     <label className="col-sm-3 col-form-label required" htmlFor="name">
+      Name
+     </label>
+     <div className="col-sm-9">
+      <input
+       type="text"
+       name="name"
+       id="name"
+       className="form-control"
+       required
+      />
+     </div>
     </div>
-
-    <div className="form-group">
-     <label htmlFor="email">Email:</label>
-     <input
-      id="email"
-      type="email"
-      name="email"
-      value={formData.email}
-      onChange={handleChange}
-      required
-     />
+    <div className="row mb-3">
+     <label className="col-sm-3 col-form-label required" htmlFor="emailAddress">
+      Email address
+     </label>
+     <div className="col-sm-9">
+      <input
+       type="email"
+       name="emailAddress"
+       id="emailAddress"
+       className="form-control"
+       required
+      />
+     </div>
     </div>
-
-    <button
-     type="submit"
-     disabled={isSubmitting || isBot}
-     aria-busy={isSubmitting}
-    >
-     {isSubmitting ? "Submitting..." : "Submit"}
-    </button>
+    <div className="row mb-3">
+     <label className="col-sm-3 col-form-label required" htmlFor="message">
+      Message
+     </label>
+     <div className="col-sm-9">
+      <textarea
+       className="form-control"
+       name="message"
+       id="message"
+       style={{ height: '200px' }}
+       required
+      ></textarea>
+     </div>
+    </div>
+    <div className="row mb-3">
+     <div className="col-sm-3"></div>
+     <div className="col-sm-9">
+      {/* Mosparo integration */}
+      <div id="mosparo-box" ref={mosparoBoxRef}></div>
+     </div>
+    </div>
+    <div className="row mb-3">
+     <div className="col-sm-3"></div>
+     <div className="col-sm-9">
+      <button
+       type="submit"
+       name="submitted"
+       className="btn btn-primary btn-lg"
+       disabled={isSubmitting}
+      >
+       {isSubmitting ? 'Submitting...' : 'Submit'}
+      </button>
+     </div>
+    </div>
    </form>
   </div>
  );
-}
+};
+
+export default ContactForm;

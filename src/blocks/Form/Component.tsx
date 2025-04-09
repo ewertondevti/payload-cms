@@ -61,10 +61,6 @@ export const FormBlock: React.FC<
   const [validationSignature, setValidationSignature] = useState<string | null>(null);
   const [formSignature, setFormSignature] = useState<string | null>(null);
   const [verifiedFormData, setVerifiedFormData] = useState<Record<string, string> | null>(null);
-  // Se você quiser a verificação avançada (HMAC / verification/verify), pode criar esses estados:
-  // const [validationSignature, setValidationSignature] = useState<string | null>(null);
-  // const [formSignature, setFormSignature] = useState<string | null>(null);
-  // const [verifiedFormData, setVerifiedFormData] = useState<any>(null);
 
   const router = useRouter();
   const t = useTranslations();
@@ -85,7 +81,7 @@ export const FormBlock: React.FC<
         }
       } catch (err) {
         console.error("[FormBlock] Error fetching token:", err);
-        setError({ message: "fail to get the token" });
+        setError({ message: "Fail to get the token" });
       }
     };
     fetchSubmitToken();
@@ -94,7 +90,7 @@ export const FormBlock: React.FC<
   // 2. Definir lógica de onSubmit
   let onSubmit;
   if (onSubmitOverride) {
-    // Se houver um callback custom de onSubmit
+    // Se houver callback custom para onSubmit
     onSubmit = useCallback(
       (data: Data) => {
         console.log("[FormBlock] onSubmitOverride called, data =>", data);
@@ -108,23 +104,25 @@ export const FormBlock: React.FC<
       [onSubmitOverride, hasSubmitted]
     );
   } else {
-    // Fluxo normal
+    // Fluxo normal do onSubmit
     onSubmit = useCallback(
       async (data: Data) => {
         console.log("[FormBlock] onSubmit called, data =>", data);
         setError(undefined);
         let loadingTimerID: ReturnType<typeof setTimeout> | undefined;
+
         try {
           if (!submitToken) {
             console.warn("[FormBlock] No submitToken found, cannot proceed.");
             setError({ message: "Token de submissão ausente ou inválido" });
             return;
           }
-          // Montar dataToSend
-          const dataToSend = Object.entries(data).map(([name, value]) => ({
-            name,
+
+          // Mapeia os dados para o formato esperado pelo Payload CMS:
+          // Cada item deve ter a propriedade "field" (identificador do campo) e "value".
+          const dataToSend = Object.entries(data).map(([field, value]) => ({
+            field, // Certifique-se de que este valor bate com o identificador definido no seu formulário Payload
             value,
-            fieldPath: name,
           }));
 
           console.log("[FormBlock] dataToSend =>", dataToSend);
@@ -132,7 +130,7 @@ export const FormBlock: React.FC<
           // Dispara isLoading depois de 1 segundo
           loadingTimerID = setTimeout(() => setIsLoading(true), 1000);
 
-          // 2a) Chamamos /api/get-submit-token (modo "check-form-data")
+          // 2a) Chamando /api/get-submit-token para o modo "check-form-data"
           console.log("[FormBlock] Calling /api/get-submit-token with check-form-data...");
           const mosparoResponse = await fetch("/api/get-submit-token", {
             method: "POST",
@@ -158,31 +156,42 @@ export const FormBlock: React.FC<
             return;
           }
 
-          // // 2b) Se você quisesse a verificação avançada, chamaria /api/verify aqui, ex:
-          // /*
-          // if (validationSignature && formSignature && verifiedFormData) {
-          //   console.log("[FormBlock] Doing advanced verification with /api/verify...");
-          //   const verifyRes = await fetch("/api/verify", {
-          //     method: "POST",
-          //     headers: { "Content-Type": "application/json" },
-          //     body: JSON.stringify({
-          //       submitToken,
-          //       validationSignature,
-          //       formSignature,
-          //       formData: verifiedFormData,
-          //     }),
-          //   });
-          //   const verifyJson = await verifyRes.json();
-          //   console.log("[FormBlock] /api/verify response =>", verifyJson);
-          //   if (!verifyJson.valid) {
-          //     throw new Error("Verification advanced error");
-          //   }
-          // } else {
-          //   console.log("[FormBlock] Skipping advanced verification because we don't have the signatures or hashed formData");
-          // }
-          // */
+          // Log para depuração dos estados de verificação
+          console.log("[FormBlock] Checking advanced verification states =>", {
+            validationSignature,
+            formSignature,
+            verifiedFormData,
+          });
 
-          // 2c) Enviar ao Payload (ou outro back)
+          // 2b) Se houver dados de verificação avançada, chama /api/verify
+          if (validationSignature && formSignature && verifiedFormData) {
+            console.log("[FormBlock] Doing advanced verification with /api/verify...");
+            const verifyRes = await fetch("/api/verify", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                submitToken,
+                validationSignature,
+                formSignature,
+                formData: dataToSend,
+              }),
+            });
+            const verifyJson = await verifyRes.json();
+            console.log("[FormBlock] /api/verify response =>", verifyJson);
+
+            if (!verifyJson.valid) {
+              clearTimeout(loadingTimerID);
+              setIsLoading(false);
+              setError({ message: "Verification failed: Data may have been manipulated." });
+              return;
+            }
+          } else {
+            console.warn(
+              "[FormBlock] Skipping advanced verification because we don't have the signatures or hashed formData"
+            );
+          }
+
+          // 2c) Envio da submissão para o Payload CMS (ou backend configurado)
           console.log("[FormBlock] Submitting data to Payload => /api/form-submissions");
           const req = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/form-submissions`, {
             body: JSON.stringify({
@@ -195,8 +204,6 @@ export const FormBlock: React.FC<
 
           const res = await req.json();
           clearTimeout(loadingTimerID);
-
-          console.log("[FormBlock] Payload response =>", res);
 
           if (req.status >= 400) {
             setIsLoading(false);
@@ -211,7 +218,7 @@ export const FormBlock: React.FC<
           setHasSubmitted(true);
           console.log("[FormBlock] Form submission success =>", res);
 
-          // Se houver redirect
+          // Se houver redirect no campo de confirmação
           if (confirmationType === "redirect" && redirect) {
             const { url } = redirect;
             if (url) {
@@ -232,14 +239,13 @@ export const FormBlock: React.FC<
         redirect,
         confirmationType,
         submitToken,
-        // validationSignature,
-        // formSignature,
-        // verifiedFormData,
+        validationSignature,
+        formSignature,
+        verifiedFormData,
       ]
     );
   }
 
-  // Se não houver fields
   if (!formFromProps?.fields?.length) return null;
 
   return (
@@ -257,12 +263,9 @@ export const FormBlock: React.FC<
         )}
 
         <form key="form" id={formID} onSubmit={handleSubmit(onSubmit)} noValidate>
-          {/* 3) MosparoValidator (no modo 'async') */}
           <MosparoValidator
             submitToken={submitToken}
             onVerified={(detail) => {
-              console.log("[FormBlock] mosparoVerified event =>", detail);
-              // Exemplo de como você pegaria a verificação avançada:
               setValidationSignature(detail.validationSignature);
               setFormSignature(detail.formSignature);
               setVerifiedFormData(detail.formData);
@@ -289,6 +292,7 @@ export const FormBlock: React.FC<
               return null;
             })}
           </div>
+
 
           {showSubmitButton && (
             <Button form={formID} type="submit" variant="default">

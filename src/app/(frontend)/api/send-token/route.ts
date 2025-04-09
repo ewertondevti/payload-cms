@@ -23,7 +23,7 @@ export async function POST() {
     ...formData.getHeaders(),
    },
   })
-
+  console.log('Response:', response)
   const responseText = await response.text()
   let data
   try {

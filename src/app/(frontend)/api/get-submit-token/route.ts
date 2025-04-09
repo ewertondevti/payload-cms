@@ -23,6 +23,7 @@ export async function POST(request: Request) {
       headers: { ...bodyFormData.getHeaders() }
     })
     const responseText = await response.text()
+    console.log(responseText)
     let data
     try {
       data = JSON.parse(responseText)
