@@ -39,23 +39,19 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
   try {
     const formData = await req.json()
 
-    let submitToken, validationToken
-
     // Suporta dois formatos: campos separados ou dentro do formData
     if (!formData['_mosparo_submitToken'] || !formData['_mosparo_validationToken']) {
       return NextResponse.json({ error: true, message: 'Mosparo tokens missing' }, { status: 400 })
     }
 
+    const submitToken = formData['_mosparo_submitToken']
+    const validationToken = formData['_mosparo_validationToken']
+
     // 2. Preparar dados do formulário (remover campos Mosparo e normalizar quebras de linha)
     const preparedFormData: Record<string, string> = {}
     for (const key in formData) {
       // Ignorar campos internos do Mosparo
-      if (
-        key.startsWith('_mosparo_') ||
-        key === 'submitToken' ||
-        key === 'validationSignature' ||
-        key === 'formSignature'
-      ) {
+      if (key.startsWith('_mosparo_')) {
         continue
       }
 
