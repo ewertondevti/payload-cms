@@ -81,7 +81,7 @@ export const FormBlock: React.FC<
     // Fluxo normal do onSubmit
     onSubmit = useCallback(
       async (data: Data, event: BaseSyntheticEvent) => {
-        const formEl = event.currentTarget as HTMLFormElement
+        const formEl = event.target || event.currentTarget
         const formData = new FormData(formEl)
 
         const payload: Record<string, any> = {}
