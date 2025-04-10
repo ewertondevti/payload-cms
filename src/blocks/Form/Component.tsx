@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import type { Form as FormType } from '@payloadcms/plugin-form-builder/types'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { BaseSyntheticEvent, useCallback, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { buildInitialFormState } from './buildInitialFormState'
 import { fields } from './fields'
@@ -57,34 +57,9 @@ export const FormBlock: React.FC<
   const [isLoading, setIsLoading] = useState(false)
   const [hasSubmitted, setHasSubmitted] = useState<boolean>(false)
   const [error, setError] = useState<{ message: string; status?: string } | undefined>()
-  const [submitToken, setSubmitToken] = useState<string | null>(null)
-  const [validationSignature, setValidationSignature] = useState<string | null>(null)
-  const [formSignature, setFormSignature] = useState<string | null>(null)
-  const [verifiedFormData, setVerifiedFormData] = useState<Record<string, string> | null>(null)
 
   const router = useRouter()
   const t = useTranslations()
-
-  useEffect(() => {
-    const fetchSubmitToken = async () => {
-      console.log('[FormBlock] Starting fetch for submit token from /api/send-token...')
-      try {
-        const response = await fetch('/api/send-token', { method: 'POST' })
-        const data = await response.json()
-        console.log('[FormBlock] /api/send-token response:', data)
-
-        if (data.submitToken) {
-          setSubmitToken(data.submitToken)
-        } else {
-          setError({ message: 'Fail to get the token' })
-        }
-      } catch (err) {
-        console.error('[FormBlock] Error fetching token:', err)
-        setError({ message: 'Fail to get the token' })
-      }
-    }
-    fetchSubmitToken()
-  }, [])
 
   // 2. Definir lógica de onSubmit
   let onSubmit
@@ -105,18 +80,21 @@ export const FormBlock: React.FC<
   } else {
     // Fluxo normal do onSubmit
     onSubmit = useCallback(
-      async (data: Data) => {
+      async (data: Data, event: BaseSyntheticEvent) => {
+        const formEl = event.currentTarget as HTMLFormElement
+        const formData = new FormData(formEl)
+
+        const payload: Record<string, any> = {}
+
+        formData.forEach((value, key) => {
+          payload[key] = value
+        })
+
         console.log('[FormBlock] onSubmit called, data =>', data)
         setError(undefined)
         let loadingTimerID: ReturnType<typeof setTimeout> | undefined
 
         try {
-          if (!submitToken) {
-            console.warn('[FormBlock] No submitToken found, cannot proceed.')
-            setError({ message: 'Token de submissão ausente ou inválido' })
-            return
-          }
-
           // Mapeia os dados para o formato esperado pelo Payload CMS:
           // Cada item deve ter a propriedade "field" (identificador do campo) e "value".
           const dataToSend = Object.entries(data).map(([field, value]) => ({
@@ -127,7 +105,7 @@ export const FormBlock: React.FC<
           const verifyRes = await fetch('/api/verify', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
+            body: JSON.stringify(payload),
           })
 
           const verifyJson = await verifyRes.json()
@@ -181,16 +159,7 @@ export const FormBlock: React.FC<
           setError({ message: 'Something is wrong with the request.' })
         }
       },
-      [
-        router,
-        formID,
-        redirect,
-        confirmationType,
-        submitToken,
-        validationSignature,
-        formSignature,
-        verifiedFormData,
-      ],
+      [router, formID, redirect, confirmationType],
     )
   }
 
