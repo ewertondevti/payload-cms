@@ -66,10 +66,6 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
       }
     }
 
-    if (!submitToken || !validationToken || !formData) {
-      throw new Error('Submit token, Validation token or Form Data is missing!')
-    }
-
     const hashedFormData: Record<string, string> = {}
 
     for (const key in formData) {
