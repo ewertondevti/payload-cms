@@ -1,8 +1,8 @@
 import axios from 'axios'
 import crypto from 'crypto'
 import https from 'https'
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { NextResponse } from 'next/server'
+import type { NextApiResponse } from 'next'
+import { NextRequest, NextResponse } from 'next/server'
 
 const httpsAgent = new https.Agent({ rejectUnauthorized: false })
 
@@ -31,18 +31,18 @@ function hmacSHA256(value: string, key: string): string {
 /**
  * Handler principal para verificação de formulários com Mosparo
  */
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest, res: NextApiResponse) {
   const MOSPARO_PUBLIC_KEY = process.env.MOSPARO_PUBLIC_KEY
   const MOSPARO_PRIVATE_KEY = process.env.MOSPARO_PRIVATE_KEY
   const MOSPARO_URL = process.env.MOSPARO_URL_API
 
   try {
-    const formData = req.body
+    const formData = await req.json()
 
     let submitToken, validationToken
 
     // Suporta dois formatos: campos separados ou dentro do formData
-    if (!formData['_mosparo_submitToken'] && !formData['_mosparo_validationToken']) {
+    if (!formData['_mosparo_submitToken'] || !formData['_mosparo_validationToken']) {
       return NextResponse.json({ error: true, message: 'Mosparo tokens missing' }, { status: 400 })
     }
 
