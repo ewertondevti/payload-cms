@@ -2,7 +2,6 @@
 
 import RichText from '@/components/RichText'
 import { Button } from '@/components/ui/button'
-import { PayloadBody, ValidationFormResponse } from '@/models/api'
 import type { Form as FormType } from '@payloadcms/plugin-form-builder/types'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
@@ -125,37 +124,6 @@ export const FormBlock: React.FC<
             value,
           }))
 
-          console.log('[FormBlock] dataToSend =>', dataToSend)
-
-          // Dispara isLoading depois de 1 segundo
-          loadingTimerID = setTimeout(() => setIsLoading(true), 1000)
-
-          // 2a) Chamando /api/get-submit-token para o modo "check-form-data"
-          console.log('[FormBlock] Calling /api/get-submit-token with check-form-data...')
-          const mosparoResponse = await fetch('/api/get-submit-token', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              publicKey: process.env.NEXT_PUBLIC_MOSPARO_PUBLIC_KEY,
-              submitToken,
-              formData: {
-                fields: dataToSend,
-                ignoredFields: [],
-              },
-            }),
-          })
-
-          console.log('[FormBlock] Mosparo fetch =>', mosparoResponse)
-          const mosparoResult: ValidationFormResponse = await mosparoResponse.json()
-          console.log('[FormBlock] Mosparo result =>', mosparoResult)
-
-          if (!mosparoResult || !mosparoResult.valid) {
-            clearTimeout(loadingTimerID)
-            setIsLoading(false)
-            setError({ message: 'Mosparo validation error (check-form-data)' })
-            return
-          }
-
           // Log para depuração dos estados de verificação
           console.log('[FormBlock] Checking advanced verification states =>', {
             validationSignature,
@@ -163,15 +131,10 @@ export const FormBlock: React.FC<
             verifiedFormData,
           })
 
-          const payload: PayloadBody = {
-            validationToken: mosparoResult.data.validationToken,
-            submitToken,
-            formData: data,
-          }
           const verifyRes = await fetch('/api/verify', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
+            body: JSON.stringify(data),
           })
 
           const verifyJson = await verifyRes.json()
