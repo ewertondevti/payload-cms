@@ -17,7 +17,21 @@ const MosparoValidator = () => {
           MOSPARO_CONFIG.host,
           MOSPARO_CONFIG.mosparoUUID,
           MOSPARO_CONFIG.publicKey,
-          { loadCssResource: true },
+          {
+            loadCssResource: false, // Já carregamos o CSS manualmente
+            language: 'pt_PT',
+            allowBrowserValidation: true,
+            submitOnValidation: false, // Desativa auto-submit do Mosparo
+            customMessages: {
+              pt_PT: {
+                label: 'Clique - Confirme que não é um robô.',
+                errorSpamDetected: 'A sua mensagem foi detetada como spam!',
+                errorLockedOut: 'Tentativas a mais. Tente mais tarde.',
+                accessibilityCheckingData:
+                  'A proteção contra spam está a verificar os seus dados. Por favor, aguarde.',
+              },
+            },
+          },
         )
       } catch (error) {
         console.error('Failed to initialize Mosparo:', error)

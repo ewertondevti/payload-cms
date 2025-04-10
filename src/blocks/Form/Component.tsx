@@ -124,15 +124,10 @@ export const FormBlock: React.FC<
             value,
           }))
 
-          const formData = new FormData()
-
-          Object.entries(data).forEach(([key, value]) => {
-            formData.append(key, String(value))
-          })
-
           const verifyRes = await fetch('/api/verify', {
             method: 'POST',
-            body: formData,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
           })
 
           const verifyJson = await verifyRes.json()
