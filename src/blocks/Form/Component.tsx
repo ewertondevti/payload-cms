@@ -124,17 +124,15 @@ export const FormBlock: React.FC<
             value,
           }))
 
-          // Log para depuração dos estados de verificação
-          console.log('[FormBlock] Checking advanced verification states =>', {
-            validationSignature,
-            formSignature,
-            verifiedFormData,
+          const formData = new FormData()
+
+          Object.entries(data).forEach(([key, value]) => {
+            formData.append(key, String(value))
           })
 
           const verifyRes = await fetch('/api/verify', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
+            body: formData,
           })
 
           const verifyJson = await verifyRes.json()
