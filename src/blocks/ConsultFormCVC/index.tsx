@@ -5,6 +5,7 @@ import { ChangeEvent, ClipboardEvent, FC } from 'react'
 import { FieldErrors, FieldValues, RegisterOptions, UseFormReturn } from 'react-hook-form'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
 import 'react-pdf/dist/esm/Page/TextLayer.css'
+import MosparoValidator from '../Form/MosparoValidator/MosparoValidator'
 import { Title } from '../Form/Title'
 
 export type ConsultFormCVCValues = {
@@ -78,7 +79,7 @@ export const ConsultFormCVC: FC<Props> = ({
   }
 
   return (
-    <div className="flex flex-col w-fit gap-64" data-testid="consult-preview">
+    <div className="flex w-fit flex-col gap-64" data-testid="consult-preview">
       <Title
         label={titlepage}
         sublabel={subtitlepage}
@@ -129,6 +130,8 @@ export const ConsultFormCVC: FC<Props> = ({
                 maxLength={4}
               />
             </div>
+
+            <MosparoValidator />
           </div>
         </div>
       </form>

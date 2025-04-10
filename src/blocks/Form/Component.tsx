@@ -66,7 +66,6 @@ export const FormBlock: React.FC<
   const router = useRouter()
   const t = useTranslations()
 
-  // 1. Carregar o SUBMIT TOKEN
   useEffect(() => {
     const fetchSubmitToken = async () => {
       console.log('[FormBlock] Starting fetch for submit token from /api/send-token...')
@@ -256,15 +255,6 @@ export const FormBlock: React.FC<
         )}
 
         <form key="form" id={formID} onSubmit={handleSubmit(onSubmit)} noValidate>
-          <MosparoValidator
-            submitToken={submitToken}
-            onVerified={(detail) => {
-              setValidationSignature(detail.validationSignature)
-              setFormSignature(detail.formSignature)
-              setVerifiedFormData(detail.formData)
-            }}
-          />
-
           <div className="flex w-[800px] flex-col gap-64">
             {formFromProps.fields.map((field, index) => {
               const FieldComponent = fields?.[field.blockType] as React.FC<any> | undefined
@@ -285,6 +275,8 @@ export const FormBlock: React.FC<
               return null
             })}
           </div>
+
+          <MosparoValidator />
 
           {showSubmitButton && (
             <Button form={formID} type="submit" variant="default">

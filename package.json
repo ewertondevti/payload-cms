@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
-    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev --experimental-https",
     "dev:prod": "cross-env NODE_OPTIONS=--no-deprecation rm -rf .next && yarn build && yarn start",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",

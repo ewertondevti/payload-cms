@@ -1,49 +1,31 @@
-import React, { useRef } from 'react'
+'use client'
 
-interface MosparoValidatorProps {
-  submitToken: string | null
-  onVerified?: (info: any) => void
-}
+import { useEffect } from 'react'
 
-const MosparoValidator: React.FC<MosparoValidatorProps> = ({ submitToken, onVerified }) => {
-  const mosparoRef = useRef<HTMLDivElement>(null)
-
+const MosparoValidator = () => {
   const MOSPARO_CONFIG = {
     publicKey: process.env.NEXT_PUBLIC_MOSPARO_PUBLIC_KEY,
     host: process.env.NEXT_PUBLIC_MOSPARO_HOST,
     mosparoUUID: process.env.NEXT_PUBLIC_MOSPARO_PROJECT_UUID,
   }
 
-  const onLoad = () => {
-    if (window.mosparo && mosparoRef.current) {
+  useEffect(() => {
+    if (window.mosparo) {
       try {
         new window.mosparo(
           'mosparo-box',
           MOSPARO_CONFIG.host,
           MOSPARO_CONFIG.mosparoUUID,
           MOSPARO_CONFIG.publicKey,
-          {
-            loadCssResource: true,
-          },
+          { loadCssResource: true },
         )
       } catch (error) {
         console.error('Failed to initialize Mosparo:', error)
       }
     }
-  }
+  }, [])
 
-  return (
-    <>
-      <script src={`${MOSPARO_CONFIG.host}/build/mosparo-frontend.js`} defer onLoad={onLoad} />
-
-      <link
-        rel="stylesheet"
-        href={`${MOSPARO_CONFIG.host}/resources/${MOSPARO_CONFIG.mosparoUUID}.css`}
-      />
-
-      <div id="mosparo-box" ref={mosparoRef} />
-    </>
-  )
+  return <div id="mosparo-box" />
 }
 
 export default MosparoValidator

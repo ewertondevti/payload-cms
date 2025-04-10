@@ -11,10 +11,9 @@ import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
 import 'react-pdf/dist/esm/Page/TextLayer.css'
 import { ConsultFormCVCValues } from '../ConsultFormCVC'
 import { Title } from '../Form/Title'
-import { CertificatePreviewError } from './CertificatePreviewError'
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.js',
+  'pdfjs-dist/build/pdf.worker.min.mjs',
   import.meta.url,
 ).toString()
 
@@ -61,7 +60,7 @@ export const CertificatePreviewCVC: FC<Props> = ({
 
   return (
     <LoaderDialogProvider>
-      <div className="flex flex-col w-fit gap-64" data-testid="consult-preview">
+      <div className="flex w-fit flex-col gap-64" data-testid="consult-preview">
         <Title
           label={titlepage}
           sublabel={subtitlepage}
