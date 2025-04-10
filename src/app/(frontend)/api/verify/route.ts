@@ -42,15 +42,7 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
     let submitToken, validationToken
 
     // Suporta dois formatos: campos separados ou dentro do formData
-    if (formData.mosparo_submitToken && formData.mosparo_validationToken) {
-      // Formato com prefixo _mosparo_
-      submitToken = formData.mosparo_submitToken
-      validationToken = formData.mosparo_validationToken
-    } else if (formData.submitToken && formData.validationSignature) {
-      // Formato com campos específicos (compatível com código_1)
-      submitToken = formData.submitToken
-      validationToken = formData.validationSignature
-    } else {
+    if (!formData['_mosparo_submitToken'] && !formData['_mosparo_validationToken']) {
       return NextResponse.json({ error: true, message: 'Mosparo tokens missing' }, { status: 400 })
     }
 
