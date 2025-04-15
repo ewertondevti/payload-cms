@@ -6,6 +6,7 @@
   "scripts": {
     "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "dev:debug": "cross-env NODE_OPTIONS='--inspect' next dev",
     "dev:prod": "cross-env NODE_OPTIONS=--no-deprecation rm -rf .next && yarn build && yarn start",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",

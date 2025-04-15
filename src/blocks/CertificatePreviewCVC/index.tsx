@@ -2,8 +2,8 @@
 
 import { PdfViewer } from '@/components/PdfViewer'
 import { addBase64Prefix } from '@/helpers/app'
-import { getCertificate } from '@/services/certificateServices'
 import { LoaderDialogProvider, useLoaderDialogContext } from '@ama-pt/agora-design-system'
+import axios from 'axios'
 import { FC, useEffect, useState } from 'react'
 import { UseFormReturn } from 'react-hook-form'
 import { pdfjs } from 'react-pdf'
@@ -11,10 +11,9 @@ import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
 import 'react-pdf/dist/esm/Page/TextLayer.css'
 import { ConsultFormCVCValues } from '../ConsultFormCVC'
 import { Title } from '../Form/Title'
-import { CertificatePreviewError } from './CertificatePreviewError'
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.js',
+  'pdfjs-dist/build/pdf.worker.min.mjs',
   import.meta.url,
 ).toString()
 
@@ -44,7 +43,7 @@ export const CertificatePreviewCVC: FC<Props> = ({
       const code = `${accessCode1}-${accessCode2}-${accessCode3}`
 
       try {
-        const res = await getCertificate(apiurl, code)
+        const res = await axios.get(`/api/cvc-consult/${code}`)
 
         setBase64file(addBase64Prefix(res.data.attachment.bytes, res.data.attachment.mimetype))
         setHasError(false)
@@ -61,7 +60,7 @@ export const CertificatePreviewCVC: FC<Props> = ({
 
   return (
     <LoaderDialogProvider>
-      <div className="flex flex-col w-fit gap-64" data-testid="consult-preview">
+      <div className="flex w-fit flex-col gap-64" data-testid="consult-preview">
         <Title
           label={titlepage}
           sublabel={subtitlepage}
