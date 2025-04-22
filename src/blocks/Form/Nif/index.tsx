@@ -1,87 +1,86 @@
-import type { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form'
+"use client";
 
-export type NifProps = UseFormReturn & {
-  errors: FieldErrors<FieldValues>
-  label?: string
-  placeholder?: string
-  name: string
-  required?: boolean
-  width?: number
+import React from "react";
+import type {
+  FieldErrorsImpl,
+  FieldValues,
+  UseFormRegister,
+} from "react-hook-form";
+import { InputText } from "@ama-pt/agora-design-system";
+
+export interface NifField {
+  defaultValue?: string;
+  label?: string;
+  name: string;
+  required?: boolean;
 }
 
-import React from 'react'
-
-import { InputText } from '@ama-pt/agora-design-system'
-import { Width } from '../Width'
-
-export const Nif: React.FC<NifProps> = ({
+export const Nif: React.FC<
+  NifField & {
+    errors: Partial<
+      FieldErrorsImpl<{
+        [x: string]: any;
+      }>
+    >;
+    register: UseFormRegister<FieldValues>;
+  }
+> = ({
   name,
-  placeholder,
+  defaultValue,
   errors,
   label,
   register,
-  required,
-  width,
-  // disabled
+  required: requiredFromProps,
 }) => {
-  return (
-    <Width width={width}>
-      {/* <Label htmlFor={name}>{label}</Label> */}
+    return (
       <InputText
-        placeholder={placeholder}
-        id="cvtNIF"
         label={label}
+        defaultValue={defaultValue}
+        id={name}
         type="text"
         hasFeedback={true}
         maxLength={9}
         hasError={errors[name] ? true : false}
         feedbackText={errors[name]?.message?.toString()}
-        required={required}
-        // disabled={disabled}
+        required={requiredFromProps}
         {...register(name, {
-          // required: requiredFromProps,
-          // pattern: { value: /^[0-9]{9}$/, message: 'NIF Inválido' },
-          // validate: (value, formValues) => value === '1'
-          required: required ? 'Campo de preenchimento obrigatório.' : false,
+          required: requiredFromProps
+            ? "Campo de preenchimento obrigatório."
+            : false,
           validate: {
-            isNif: (value) => {
-              var valido = false
-              var nif = value
+            length: (value: string) => {
+              if (value && value.length !== 9) {
+                return `"Número de Identificação Fiscal (NIF)" deve ter exatamente 9 dígitos.`;
+              }
+              return true;
+            },
+            isNif: (value: string) => {
+              if (!value) return true;
 
-              if (nif === '') {
-                return true
+              if (!/^[0-9]{9}$/.test(value)) {
+                return `"Número de Identificação Fiscal (NIF)" introduzido (${value}) é inválido.`;
               }
 
-              if (!/^[0-9]{9}$/.test(nif)) {
-                valido = false
-              }
-
-              // Converte o NIF para um array de números
-              const nifArray = nif.split('').map(Number)
-
-              // Calcula o dígito de controlo
-              const checkDigit = nifArray[8]
+              const nifArray = value.split("").map(Number);
+              const checkDigit = nifArray[8];
               const sum = nifArray
                 .slice(0, 8)
-                .reduce((acc, num, index) => acc + num * (9 - index), 0)
-              const calculatedCheckDigit = 11 - (sum % 11)
+                .reduce((acc, num, index) => acc + num * (9 - index), 0);
+              const calculatedCheckDigit = 11 - (sum % 11);
 
-              // Verifica o dígito de controlo
-              if (calculatedCheckDigit >= 10) {
-                valido = checkDigit === 0
-              } else {
-                valido = checkDigit === calculatedCheckDigit
+              const isValid =
+                calculatedCheckDigit >= 10
+                  ? checkDigit === 0
+                  : checkDigit === calculatedCheckDigit;
+
+              if (!isValid) {
+                return `"Número de Identificação Fiscal (NIF)" introduzido (${value}) é inválido.`;
               }
 
-              if (valido === false) {
-                return 'NIF Inválido'
-              }
-
-              return true
+              return true;
             },
           },
         })}
       />
-    </Width>
-  )
-}
+    );
+  };

@@ -3,7 +3,6 @@ import type { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-f
 import { InputPhone } from '@ama-pt/agora-design-system'
 import { Width } from '../Width'
 
-
 export interface PhoneNumberProps {
   label?: string
   name: string
@@ -51,8 +50,19 @@ export const PhoneNumber: React.FC<
           hasError={errors[name] ? true : false}
           feedbackState={'danger'}
           feedbackText={errors[name]?.message?.toString()}
+          maxLength={20}
           defaultISO="PT"
-          {...register(name, { required: required ? 'Campo de preenchimento obrigatório.' : false })}
+          {...register(name, {
+            required: required ? 'Campo de preenchimento obrigatório.' : false,
+            minLength: {
+              value: 9,
+              message: 'O número deve ter no mínimo 9 dígitos.'
+            },
+            pattern: {
+              value: /^[0-9]+$/,
+              message: 'Apenas números são permitidos.'
+            }
+          })}
         />
       </Width>
     )
