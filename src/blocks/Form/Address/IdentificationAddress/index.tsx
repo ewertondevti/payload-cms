@@ -1,168 +1,108 @@
-import { Select } from '@/blocks/Form/Select'
-import { TextField } from '@/components/ui/textfield'
-import { InputTextArea } from '@ama-pt/agora-design-system'
-import React, { useEffect, useState } from 'react'
-import type { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form'
-import { useFormContext } from 'react-hook-form'
-import { countryOptions } from '../../Country/options'
-
+import React, { ChangeEvent, useState } from "react";
+import { SelectWithApi } from "../../SelectWithAPI";
+import { TextBox } from "../../TextBox";
+import { Search } from "../../Search";
+import api from "@/utilities/api";
 
 export interface AddressProps {
- name?: string
+ name?: string;
 }
 
-export const IdentificationAddress: React.FC<
- AddressProps & {
-  errors: Partial<
-   FieldErrorsImpl<{
-    [x: string]: any
-   }>
-  >
-  register: UseFormRegister<FieldValues>
- }
-> = ({ name, errors, register }) => {
- const { setValue } = useFormContext()
- const [selectedCountry, setSelectedCountry] = useState<string>('PT')
+export const IdentificationAddress: React.FC<AddressProps> = ({ name }) => {
+ const [selectedCountry, setSelectedCountry] = useState<string>("Portugal");
 
  return (
-  <div>
-   <Select
-    id={'cvtResidencia'}
-    name={'cvtResidencia'}
-    value={selectedCountry}
-    defaultValue="PT"
-    type="text"
-    label="Residência"
-    options={countryOptions}
-    placeholder="Selecione uma opção"
-    visibleCount={5}
-    searchable
-    hideSectionNames
-    searchInputPlaceholder="Pesquisar país"
-    dropdownAriaLabel="Lista de países"
-    searchNoResultsText="Não foram encontrados resultados."
-    onChange={setSelectedCountry}
-   />
-   <br />
-   {selectedCountry === 'PT' ? (
+  <div className="flex flex-wrap gap-32 w-full">
+   <div className="w-full">
+    <SelectWithApi
+     id={"cvtResidencia"}
+     name={"cvtResidencia"}
+     defaultValue="Portugal"
+     type="text"
+     label="Residência"
+     apidomain={api.COUNTRIES}
+     placeholder="Selecione uma opção"
+     searchable
+     hideSectionNames
+     searchInputPlaceholder="Pesquisar país"
+     dropdownAriaLabel="Lista de países"
+     searchNoResultsText="Não foram encontrados resultados."
+     onChange={setSelectedCountry}
+     width={50}
+    />
+   </div>
+   {selectedCountry === "Portugal" ? (
     <>
-     <div className="grid grid-cols-2 gap-4">
-      <TextField
-       id={'cvtCodPostal'}
-       hasError={errors['cvtCodPostal'] ? true : false}
-       label="Código Postal"
-       placeholder="Indique o código postal"
-       required
-       hasFeedback={true}
-       feedbackState={'danger'}
-       feedbackText={errors['cvtCodPostal']?.message?.toString()}
-       validation={{
-        pattern: {
-         value: /^\d{4}-?\d{3}$/,
-         message: 'Código postal inválido',
-        },
-       }}
-       register={register}
-      />
-
-      <TextField
-       id={'cvtLocalidade'}
-       label="Localidade"
-       placeholder="Indique a localidade"
-       required
-       hasFeedback={true}
-       hasError={errors['cvtLocalidade'] ? true : false}
-       feedbackState={'danger'}
-       feedbackText={errors['cvtLocalidade']?.message?.toString()}
-       validation={{
-        pattern: {
-         value: /^[\p{L}\s'-]+$/u,
-         message: 'Localidade inválida',
-        },
-       }}
-       register={register}
-      />
-     </div>
-     <br />
-     <TextField
-      id={'cvtMorada'}
-      label="Morada"
-      placeholder="Nome de rua ou avenida"
+     <Search
+      name={"cvtCodPostal"}
+      label="Código Postal"
+      placeholder="0000-000"
       required
-      hasFeedback={true}
-      feedbackState={'danger'}
-      feedbackText={errors['cvtMorada']?.message?.toString()}
-      validation={{
-       pattern: {
-        value: /^[\p{L}\d\s'-]+$/u,
-        message: 'Morada inválida',
-       },
+      pattern={{
+       value: /^(?:\d{4}|\d{4}-\d{3})$/,
+       message:
+        '"Código Postal" tem que ter no mínimo 4 caracteres ou 4+3 caracteres',
       }}
-      hasError={errors['cvtMorada'] ? true : false}
-      register={register}
+      type="number"
+      width={50}
+      maxLength={8}
+      format={(value: string) => {
+       if (/^\d{4}-$/.test(value)) return value; // Permitir escrita explícita do hífen
+       const digitsOnly = value.replace(/[^\d]+/g, "");
+       if (digitsOnly.length > 4) {
+        return digitsOnly.slice(0, 4) + "-" + digitsOnly.slice(4);
+       } else {
+        return digitsOnly;
+       }
+      }}
      />
-     <br />
-     <div className="grid grid-cols-3 gap-4">
-      <TextField
-       id={'cvtNumero-lote'}
-       label="Número / Lote"
-       placeholder="Indique o número ou lote"
-       hasFeedback={true}
-       feedbackState={'danger'}
-       feedbackText={errors['cvtNumero-lote']?.message?.toString()}
-       validation={{
-        pattern: {
-         value: /^[\d\w\s]+$/,
-         message: 'Lote inválido',
-        },
-       }}
-       hasError={errors['cvtNumero-lote'] ? true : false}
-       register={register}
-      />
-      <TextField
-       id={'cvtAndar'}
-       label="Andar"
-       placeholder="Indique o andar"
-       hasFeedback={true}
-       feedbackState={'danger'}
-       feedbackText={errors['cvtAndar']?.message?.toString()}
-       hasError={errors['cvtAndar'] ? true : false}
-       validation={{
-        pattern: {
-         value: /^[\w\d]+$/,
-         message: 'Andar inválido',
-        },
-       }}
-       register={register}
-      />
-      <TextField
-       id={'cvtPorta'}
-       label="Porta"
-       placeholder="Indique o nº, letra ou lado"
-       hasFeedback={true}
-       feedbackState={'danger'}
-       feedbackText={errors['cvtPorta']?.message?.toString()}
-       validation={{
-        pattern: {
-         value: /^[\w\d]+$/,
-         message: 'Porta inválida',
-        },
-       }}
-       hasError={errors['cvtPorta'] ? true : false}
-       register={register}
+
+     <TextBox
+      name={"cvtLocalidade"}
+      label="Localidade"
+      placeholder="Indique a localidade"
+      required
+      width={50}
+     />
+
+     <div className="w-full">
+      <TextBox
+       name={"cvtMorada"}
+       label="Morada"
+       placeholder="Nome de rua ou avenida"
+       required
+       width={100}
       />
      </div>
+     <TextBox
+      name={"cvtNumero-lote"}
+      label="Número / Lote"
+      placeholder="Indique o número ou lote"
+      width={33}
+      required
+     />
+     <TextBox
+      name={"cvtAndar"}
+      label="Andar"
+      placeholder="Indique o andar"
+      width={33}
+     />
+     <TextBox
+      name={"cvtPorta"}
+      label="Porta"
+      placeholder="Indique o nº, letra ou lado"
+      width={33}
+     />
     </>
    ) : (
-    <InputTextArea
-     id={'cvtEstrangeira'}
+    <TextBox
+     name={"cvtEstrangeira"}
      label="Morada"
      placeholder="Indique a morada"
-     hasError={errors['cvtEstrangeira'] ? true : false}
      required
-     {...register('cvtEstrangeira')}
+     width={100}
     />
    )}
   </div>
- )
-}
+ );
+};
